@@ -1,0 +1,9 @@
+<h1><%= @client.first_name %> <%= @client.last_name %></h1>	
+
+<p><b>Email: </b><%= @client.email %></p>
+<p><b>Phone number: </b><%= @client.phone_number %></p>
+<p><b>Address: </b><%= @client.street_number %> <%= @client.street_name %><br/>
+				  	 <%= @client.city %>, <%=@client.province %><br/>
+				  	 <%= @client.postal_code %></p>
+
+<%= link_to("Back to Clients", clients_path) %>

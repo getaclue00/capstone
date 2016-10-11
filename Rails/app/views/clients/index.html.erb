@@ -1,0 +1,10 @@
+<h1>Clients</h1>
+
+<h5>Total number of clients <%= @clients_array.size %></h5>
+
+<% @clients_array.each do |client|%>
+	<p> <%= client.first_name %> <%= client.last_name %></p>
+
+<%= link_to("View Client", client_path(client)) %>
+<% end %>
+

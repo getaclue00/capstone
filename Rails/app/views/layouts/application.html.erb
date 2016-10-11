@@ -3,12 +3,21 @@
   <head>
     <title>Detailing</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'%>
   </head>
 
   <body>
-    <%= yield %>
+  	<div class="header">R&ADetailing
+  	</div>
+
+  	<div class="nav">
+      <%= link_to("Home", home_path) %>
+  		<%= link_to("Manage Clients", clients_path) %>
+  	</div>
+
+  	<div class="content">
+    	<%= yield %>
+    </div>
   </body>
 </html>
