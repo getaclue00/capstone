@@ -1,8 +1,8 @@
 /*Style for the navigation bar*/
 
-.container-fluid {
+.navbar {
   /*background-color: #e3e3e3;*/
-  background-color: black;
+  background-color: black !important;
 }
 
 .navbar-brand {
@@ -49,7 +49,7 @@
 }
 
 .menu li:hover {
-  height: 55px;
+  height: 50px;
   background-color: #EE2C2C;
 }
 

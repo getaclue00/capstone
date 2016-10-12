@@ -1,1 +1,26 @@
-{{outlet}}
+<div class='admin-info'>
+  <h3 class="account-info-title">My Account Information</h3>
+  <form class="my-information" {{action 'save' on="submit"}}>
+    <label for="username">
+      <span>Username*</span>
+      {{input value=username placeholder="admin@admin.com"}}
+    </label>
+    <label for="password">
+      <span>Password <span class="required">*</span></span>
+      {{input value=password placeholder="***********"}}
+    </label>
+    <label for="first_name">
+      <span>First Name <span class="required">*</span></span>
+      {{input value=first_name placeholder="Stephany"}}
+    </label>
+    <label for="last_name">
+      <span>Last Name <span class="required">*</span></span>
+      {{input value=last_name placeholder="Oliver"}}
+    </label>
+    <label for="phone">
+      <span>Phone <span class="required">*</span></span>
+      {{input value=phone placeholder="613-786-8634"}}
+    </label>
+    <span><button type="submit" class ="btn btn-primary button-color">Save</button></span>
+  </form>
+</div>
