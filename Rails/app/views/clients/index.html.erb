@@ -1,10 +1,16 @@
 <h1>Clients</h1>
 
+<div>
+	<%= link_to("New Client", new_client_path) %>
+</div>
+
 <h5>Total number of clients <%= @clients_array.size %></h5>
 
 <% @clients_array.each do |client|%>
 	<p> <%= client.first_name %> <%= client.last_name %></p>
 
-<%= link_to("View Client", client_path(client)) %>
+<%= link_to("View Client", client_path(client)) %> 
+<%= link_to("Edit Client", edit_client_path(client)) %>
+<%= link_to("Delete Client", client_path(client), data: {method: "delete"})%>
 <% end %>
 
