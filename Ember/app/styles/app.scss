@@ -1,8 +1,9 @@
-@import "admin-nav-menu";
-@import "admin-info";
+@import "administrator-styles/admin-nav-menu";
+@import "administrator-styles/admin-info";
 @import "bootstrap";
-@import "manage-clients";
-@import "manage-services";
+@import "administrator-styles/manage-clients";
+@import "administrator-styles/manage-services";
+@import "administrator-styles/manage-employees";
 
 // Styling placed in this folder relates to styles present on multiple pages
 .container{

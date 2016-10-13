@@ -1,0 +1,36 @@
+.employees-table th h1 {
+  font-weight: bold;
+  font-size: 12px;
+  text-align: left;
+  color: #fffaef;
+}
+
+.employees-table {
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  padding-right: 15px;
+  border-radius: 15px;
+}
+
+.employees-table td, .employees-table th {
+  padding: 2% 2% 2% 2%;
+}
+
+.employees-table tr:nth-child(odd) {
+  background-color: #959595;
+}
+
+.employees-table tr:nth-child(even) {
+  background-color: #e3e3e3;
+}
+
+.employees-table th {
+  background-color: #d30b07;
+}
+
+.employees-table tr:hover {
+ background-color: #36454f;
+ color: #fffaef;
+}
+
