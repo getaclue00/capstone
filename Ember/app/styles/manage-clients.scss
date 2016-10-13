@@ -1,0 +1,36 @@
+.clients-table th h1 {
+  font-weight: bold;
+  font-size: 12px;
+  text-align: left;
+  color: #fffaef;
+}
+
+.clients-table {
+  text-align: left;
+  overflow: hidden;
+  width: 100%;
+  padding-right: 15px;
+  border-radius: 15px;
+}
+
+.clients-table td, .clients-table th {
+  padding: 2% 2% 2% 2%;
+}
+
+.clients-table tr:nth-child(odd) {
+  background-color: #959595;
+}
+
+.clients-table tr:nth-child(even) {
+  background-color: #e3e3e3;
+}
+
+.clients-table th {
+  background-color: #d30b07;
+}
+
+.clients-table tr:hover {
+ background-color: #36454f;
+ color: #fffaef;
+}
+
