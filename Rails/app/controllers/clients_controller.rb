@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
 		 if(@client.save)
 		 	#send a new request to redirect to client created
 		 	redirect_to "/clients/#{@client.id}"
-		 	#@client since new srequests dont have access to variables
+		 	#@client since new requests dont have access to variables
 		 	#above equivalent to 
 		 	#redirect_to "/clients/"+@client.id.to_s
 		 else

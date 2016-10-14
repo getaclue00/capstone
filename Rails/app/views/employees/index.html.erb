@@ -1,0 +1,16 @@
+<h1>Employees</h1>
+
+<div>
+	<%= link_to("New Employee", new_employee_path) %>
+</div>
+
+<h5>Total number of employees <%= @employees_array.size %></h5>
+
+<% @employees_array.each do |employee| %>
+
+	<p><%= employee.first_name %> <%= employee.last_name %> </p>
+	<%= link_to("View Employee", employee_path(employee)) %>
+	<%= link_to("Edit Employee", edit_employee_path(employee)) %>
+	<%= link_to("Delete Employee", employee_path(employee), data: {method: "delete"}) %>
+
+<%end%>

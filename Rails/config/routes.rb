@@ -3,10 +3,15 @@ Rails.application.routes.draw do
 
   root "pages#home" #setting default page to home
   get "/home" => "pages#home"
-  #post "/clients/" => "clients#create"
-  #get "/clients/:id/edit" => "clients#edit"
-  #patch "/clients/:id" =>"clients#update"
+
+  # get "/employees/new" => "employees#new"
+  # post "/employees/" => "employees#create"
+  # get "/employees/:id/edit" => "employees#edit"
+  # patch "/employees/:id" =>"employees#update"
+  # get "/employees" => "employees#index"
+  # get "/employees/:id" => "employees#show", as: :employee
 
   #creating the RESTful resources
   resources :clients
+  resources :employees
 end
