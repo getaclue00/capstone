@@ -1,0 +1,28 @@
+@import "administrator-styles/admin-nav-menu";
+@import "administrator-styles/admin-info";
+@import "bootstrap";
+@import "administrator-styles/manage-clients";
+@import "administrator-styles/manage-services";
+@import "administrator-styles/manage-employees";
+
+// Styling placed in this folder relates to styles present on multiple pages
+.container{
+  padding-top: 65px;
+}
+
+.page-title {
+  padding-top: 70px;
+  text-align:center;
+  color: #959595;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 45px;
+  font-weight: 300;
+  line-height: 58px;
+  margin: 0 0 58px;
+}
+
+// Buttons to edit, add or delete things as admin
+.managing {
+  background-color: #EE2C2C !important;
+  border-color: black !important;
+}
