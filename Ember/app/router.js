@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('services');
   this.route('clients');
   this.route('employees');
+  this.route('login');
 });
 
 export default Router;

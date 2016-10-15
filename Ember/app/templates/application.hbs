@@ -25,7 +25,11 @@
         <li>{{#link-to 'booking-history' class='nav-list-item'}}Booking History{{/link-to}}</li>
         <li>{{#link-to 'my-calendar' class='nav-list-item'}}My Calendar{{/link-to}}</li>
         <li>{{#link-to 'my-account' class='nav-list-item'}}My Account{{/link-to}}</li>
-        <li><a href="#" class='nav-list-item'>Logout</a></li>
+        {{#if session.isAuthenticated}}
+          <li><a {{action 'invalidateSession'}} class='nav-list-item'>Logout</a></li>
+        {{else}}
+          <li>{{#link-to 'login' class='nav-list-item'}}Login{{/link-to}}</li>
+        {{/if}}
       </ul>
     </div>
   </div>
