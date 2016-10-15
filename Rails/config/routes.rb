@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   #creating the RESTful resources
   resources :clients
   resources :employees
+  resources :cars
+  #resources :services
+  #resources :appointments
 end
