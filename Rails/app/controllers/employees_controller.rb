@@ -48,7 +48,7 @@ class EmployeesController < ApplicationController
 	private
 
 	def employee_sanitized_params
-		params.require(:employee).permit(:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :isAdmin, :startDate)
+		params.require(:employee).permit(:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :is_admin, :startDate)
 	end
 
 end

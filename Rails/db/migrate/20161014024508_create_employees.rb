@@ -11,7 +11,7 @@ class CreateEmployees < ActiveRecord::Migration[5.0]
       t.string :province
       t.string :postal_code
       t.date :start_date
-      t.boolean :isAdmin
+      t.boolean :is_admin
 
       t.timestamps
     end

@@ -11,7 +11,7 @@ one:
   province: MyString
   postal_code: MyString
   start_date: 2016-10-14
-  isAdmin: false
+  is_admin: false
 
 two:
   last_name: MyString
@@ -24,4 +24,4 @@ two:
   province: MyString
   postal_code: MyString
   start_date: 2016-10-14
-  isAdmin: false
+  is_admin: false
