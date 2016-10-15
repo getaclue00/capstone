@@ -14,7 +14,9 @@ class EmployeesController < ApplicationController
 
 	def create
 		@employee=Employee.new(employee_sanitized_params)
-		if(employee.save)
+		@employee.start_date = Date.new(params[:employee]["start_date(1i)"].to_i,params[:employee]["start_date(2i)"].to_i,params[:employee]["start_date(3i)"].to_i)
+
+		if(@employee.save)
 			redirect_to("/employees/#{@employee.id}")
 		else
 			render ("new")
@@ -27,6 +29,7 @@ class EmployeesController < ApplicationController
 
 	def update
 		employee=Employee.find params[:id]
+		employee.start_date = Date.new(params[:employee]["start_date(1i)"].to_i,params[:employee]["start_date(2i)"].to_i,params[:employee]["start_date(3i)"].to_i)
 	
 		if(employee.update(employee_sanitized_params))
 			redirect_to("/employees/#{employee.id}")
