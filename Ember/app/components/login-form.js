@@ -18,6 +18,6 @@ export default Ember.Component.extend({
        .catch((reason) => {
          this.set('errorMessage', reason.error || reason);
        });
-   },
+   }
  }
 });
