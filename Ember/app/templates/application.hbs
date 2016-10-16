@@ -1,6 +1,34 @@
 {{!-- Layout for Administrator's Navigation Menu --}}
 {{!--TODO Fix toggle, currently does not close--}}
-<nav class="navbar navbar-default navbar-fixed-top menu">
+<nav class="navbar navbar-fixed-top navbar-light bg-faded">
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+    &#9776;
+  </button>
+  <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+    {{#link-to 'admin-home' class="navbar-brand"}}
+      <img src="assets/images/logo.png" class='logo' width="150px" height="55px">
+    {{/link-to}}
+    <ul class="nav navbar-nav">
+      {{#if session.isAuthenticated}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+          <div class="dropdown-menu">
+            {{#link-to 'services' class="dropdown-item"}}Services{{/link-to}}
+            {{#link-to 'clients' class="dropdown-item"}}Clients{{/link-to}}
+            {{#link-to 'employees' class="dropdown-item"}}Employees{{/link-to}}
+          </div>
+        </li>
+        <li class="nav-item">{{#link-to 'booking-history' class='nav-link'}}Booking History{{/link-to}}</li>
+        <li class="nav-item">{{#link-to 'my-calendar' class='nav-link'}}My Calendar{{/link-to}}</li>
+        <li class="nav-item">{{#link-to 'my-account' class='nav-link'}}My Account{{/link-to}}</li>
+        <li class="nav-item"><button type="button" class="btn btn-outline-danger" {{action 'invalidateSession'}}>Logout</button></li>
+      {{else}}
+        <li class="nav-item">{{#link-to 'login' class='nav-link'}}Login{{/link-to}}</li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+{{!-- <nav class="navbar navbar-default navbar-fixed-top menu">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,7 +61,7 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> --}}
 
 <div class='container'>
   {{outlet}}
