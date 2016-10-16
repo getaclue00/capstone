@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
 
   actions: {
     invalidateSession() {
-      console.error("Not implemented in controllers/application");
+      this.get("session").invalidate();
     }
   }
 });

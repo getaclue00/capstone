@@ -1,9 +1,8 @@
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Controller.extend({
-  actions: {
-    authenticate() {
-      console.error("Not implemented yet");
-    }
-  }
+  ajax: service(),
+  session: service()
 });

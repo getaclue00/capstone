@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include ActionController::MimeResponds
   before_action :authenticate_user_from_token!
-  protect_from_forgery with: :exception
+  protect_from_forgery unless: -> { request.format.json? }
 
   # as per https://gist.github.com/josevalim/fb706b1e933ef01e4fb6
   # This is temporary, I will rewrite it to focus on headers instead
