@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     sessions: 'sessions'
   }
   get "users", to: 'users#index', constraints: { format: /(json|html)/ }
+  get "users/:id", to: 'users#show', constraints: { format: /(json|html)/ }
   get "session/csrf", to: "session#csrf"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

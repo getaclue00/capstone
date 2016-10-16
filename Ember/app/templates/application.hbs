@@ -26,6 +26,10 @@
         <li>{{#link-to 'my-calendar' class='nav-list-item'}}My Calendar{{/link-to}}</li>
         <li>{{#link-to 'my-account' class='nav-list-item'}}My Account{{/link-to}}</li>
         {{#if session.isAuthenticated}}
+          {{#if currentUser.user}}
+            <li><a class='nav-list-item'>{{session.data.authenticated.token}}</a></li>
+            <li><a class='nav-list-item'>{{session.data.authenticated.user_id}}</a></li>
+          {{/if}}
           <li><a {{action 'invalidateSession'}} class='nav-list-item'>Logout</a></li>
         {{else}}
           <li>{{#link-to 'login' class='nav-list-item'}}Login{{/link-to}}</li>
