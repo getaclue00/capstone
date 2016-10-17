@@ -5,8 +5,8 @@ const { RSVP: { Promise }, isEmpty, run, $: jQuery, assign: emberAssign, merge }
 const assign = emberAssign || merge;
 
 export default DeviseAuthenticator.extend({
-  serverTokenEndpoint: 'http://localhost:3000/users/sign_in',
-  serverTokenLogoutEndPoint: 'http://localhost:3000/users/sign_out',
+  serverTokenEndpoint: '/users/sign_in',
+  serverTokenLogoutEndPoint: '/users/sign_out',
 
   invalidate() {
     return new Promise((resolve, reject) => {
