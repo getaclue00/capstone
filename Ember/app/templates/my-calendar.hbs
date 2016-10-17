@@ -1,1 +1,18 @@
-{{outlet}}
+<div style="margin-top:71px">
+  <div class="row">
+    <div class="col-md-4 offset-md-8">
+      Change Calendar View:
+      <div class="btn-group">
+        <button onclick={{action "changeView" "month"}} class="btn btn-outline-primary btn-sm">Month</button>
+        <button onclick={{action "changeView" "agendaWeek"}} class="btn btn-outline-primary btn-sm">Week</button>
+        <button onclick={{action "changeView" "agendaDay"}} class="btn btn-outline-primary btn-sm">Day</button>
+      </div>
+    </div>
+  </div>
+  {{full-calendar
+    events=model
+    viewName=viewName
+    businessHours=businessHours
+    eventClick=(action 'handleCalendarEventClick')
+  }}
+</div>
