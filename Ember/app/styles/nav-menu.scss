@@ -1,33 +1,28 @@
 /*Style for the navigation bar*/
 
+.navbar-toggler {
+  padding-top: 10px;
+  color: #fffaef;
+  border: #fffaef;
+  border-style: solid;
+  border-width: thin;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
 .navbar {
-  /*background-color: #e3e3e3;*/
-  background-color: black !important;
+  background-color: black;
 }
 
-.navbar-brand {
-  margin: 0px !important;
-  color: #e3e3e3 !important;
-  /*border-bottom: #959595;*/
-  border-bottom: #e3e3e3;
-  border-bottom-style: solid;
-}
-
-.navbar-brand:hover {
-  color: #EE2C2C !important;
-  border-bottom: #F08080;
-  border-bottom-style: solid;
-}
-
-.nav-list-item{
+.nav-list-item {
   color:#e3e3e3 !important;
 }
-.nav-list-item:hover{
-  color:#fffaef !important;
+.nav-list-item:hover {
+  color:#fffaef ;
 }
 
 .logo{
-  float: left;
+  float: right;
 }
 
 .menu {
@@ -48,8 +43,8 @@
   font-weight: normal;
 }
 
-.menu li:hover {
-  height: 50px;
+.menu .nav-item:hover {
+  padding: 2px;
   background-color: #EE2C2C;
 }
 
@@ -85,10 +80,6 @@
   display: none;
 }
 
-.sub-menu:hover{
-  display : block;
-}
-
 .sub-menu li {
   display:block;
 }
@@ -102,13 +93,11 @@
   height:40px;
 }
 
-.sub-menu li a:hover, .sub-menu .current-item a {
-  height: 40px;
-  background:#fffaef;
+.dropdown-item.active {
+  background-color: #EE2C2C;
 }
 
-.menu li:hover > a, .menu .current-item > a {
-  height: 40px;
-  text-decoration:none;
+.dropdown-item:hover, .dropdown-item.active:hover{
+  background-color: #fffaef;
   color: #EE2C2C;
 }
