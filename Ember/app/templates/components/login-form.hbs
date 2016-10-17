@@ -1,5 +1,6 @@
 <form class="form-signin" {{action 'authenticate' on='submit'}}>
   <h2 class="form-signin-heading">Please sign in</h2>
+  <br>
   <label for="inputEmail" class="sr-only">Email address</label>
   {{input value=model.email id="inputEmail" class="form-control" placeholder="Email address" required=true autofocus=true}}
   <label for="inputPassword" class="sr-only">Password</label>
@@ -9,5 +10,5 @@
       {{input type="checkbox" checked=model.remember_me}} Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block login-button" type="submit">Sign in</button>
 </form>
