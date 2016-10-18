@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 2.3.1
+before_script:
+  - rake db:test:prepare
+script:
+  - bundle exec rspec
+services:
+  - postgresql
