@@ -1,10 +1,11 @@
 language: ruby
 rvm:
   - 2.3.1
-before_script:
+before_install:
   - cd Rails
-  - rake db:test:prepare
-script:
-  - bundle exec rspec
+# before_script:
+#   - rake db:test:prepare
+# script:
+#   - bundle exec rspec
 services:
   - postgresql
