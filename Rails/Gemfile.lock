@@ -202,7 +202,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   byebug
-  factory_girl_rails
+  factory_girl_rails (~> 4.7)
   jquery-rails
   listen (~> 3.0.5)
   pg

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015165925) do
+ActiveRecord::Schema.define(version: 20161020022141) do
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "day"
+    t.integer  "month"
+    t.integer  "year"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cars", force: :cascade do |t|
     t.string   "make"
@@ -50,6 +61,16 @@ ActiveRecord::Schema.define(version: 20161015165925) do
     t.boolean  "is_admin"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price_small"
+    t.decimal  "price_large"
+    t.decimal  "duration"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end
