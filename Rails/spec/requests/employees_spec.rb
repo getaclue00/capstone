@@ -15,6 +15,7 @@ describe "Employees API" do
       expect(response.status).to eq 200
 
       body = JSON.parse(response.body)
+      puts body
       employees = body.map { |m| m["first_name"] }
 
       expect(employees).to match_array(["Omar",

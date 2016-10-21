@@ -1,9 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
-  #needed to configure the serializer
-  #response format will be transformed into format conforming JSON API specification.
-  ActiveModelSerializers.config.adapter = :json_api
   
   # Code is not reloaded between requests.
   config.cache_classes = true
