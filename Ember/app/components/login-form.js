@@ -1,8 +1,5 @@
 import Ember from 'ember';
 
-const { RSVP: { Promise }, isEmpty, run, $: jQuery, assign: emberAssign, merge } = Ember;
-const assign = emberAssign || merge;
-
 const { service } = Ember.inject;
 
 export default Ember.Component.extend({

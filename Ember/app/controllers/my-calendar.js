@@ -16,6 +16,12 @@ export default Ember.Controller.extend({
     },
 
     handleCalendarEventClick(calEvent, jsEvent, view) {
+      console.log("calEvent: ");
+      console.log(calEvent);
+      console.log("jsEvent: ");
+      console.log(jsEvent);
+      console.log("view: ");
+      console.log(view);
       console.error("handleCalendarEventClick - Not implemented");
     }
   }
