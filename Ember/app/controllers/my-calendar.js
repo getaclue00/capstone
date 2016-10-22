@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
     start: '10:00', // a start time (10am in this example)
     end: '18:00', // an end time (6pm in this example)
   },
+  newAppointmentDate: '',
 
   actions: {
     changeView(view){
@@ -23,6 +24,18 @@ export default Ember.Controller.extend({
       console.log("view: ");
       console.log(view);
       console.error("handleCalendarEventClick - Not implemented");
+    },
+
+    handleCalendarDayClick(date, jsEvent, view) {
+      console.log('Clicked on: ' + date.format());
+
+      this.set('newAppointmentDate', date.format());
+
+      console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+      console.log('Current view: ' + view.name);
+
+      Ember.$('#myModal').modal('show');
     }
   }
 });
