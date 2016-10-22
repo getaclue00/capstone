@@ -8,7 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         user_type: 'employee'
       }
     }).catch((error) => {
-      console.error("Error in routes/employee");
+      console.error("Error in routes/employee: " + error);
     });
   }
 });
