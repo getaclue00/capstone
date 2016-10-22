@@ -2,23 +2,30 @@ class EmployeesController < ApplicationController
 
 	def index
 		employees_array=Employee.all
-		render json: employees_array, status: 200
+		if employees_array && !employees_array.empty?
+      		render json: employees_array, status: :ok
+    	else
+      		render json: { error: 'No employees exist' }, 	status: :bad_request
+    	end
 	end
 
 	def show
-		employee=Employee.find params[:id]
-		render json: employee, status: 200
+		begin 
+			employee=Employee.find params[:id]
+			render json: employee, status: :ok
+		rescue ActiveRecord::RecordNotFound => e
+			render json: { error: 'This employee does not exist' }, status: :not_found
+		end
 	end
 
 	def create
 		@employee=Employee.new(employee_sanitized_params)
 		#@employee.start_date = Date.new(params[:employee]["start_date(1i)"].to_i,params[:employee]["start_date(2i)"].to_i,params[:employee]["start_date(3i)"].to_i)
-
 		if(@employee.save)
 			#location specifies where to find created resource
 			render json: @employee, status: :created, location: @employee
 		else
-			render nothing: true, status: :bad_request
+			render json: { error: 'Employee creation failed'}, status: :bad_request
 		end
 	end
 
@@ -29,14 +36,14 @@ class EmployeesController < ApplicationController
 		if(employee.update(employee_sanitized_params))
 			render json: employee, status: :created, location: employee
 		else
-			render nothing: true, status: :bad_request
+			render json: { error: 'Employee update failed'}, status: :bad_request
 		end
 	end
 
 	def destroy
 		employee=Employee.find params[:id]
 		employee.destroy
-		render nothing: true, status: 200
+		render nothing: true, status: :ok
 	end
 
 	private
