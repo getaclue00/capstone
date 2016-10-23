@@ -1,0 +1,36 @@
+.my-calendar{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.my-calendar-title {
+  text-align: center;
+  font-size: 6vw;
+  font-weight: 300;
+  margin-bottom: 8%;
+  border-bottom: 1px solid black;
+}
+
+.my-calendar-view {
+  float: right;
+  margin-left: 0;
+  width: inherit;
+}
+
+.view-button {
+  color: #959595;
+  border-color: #959595;
+}
+
+.view-button:hover{
+  background: #EE2C2C;
+  border-color: #EE2C2C;
+}
+
+.fc-left h2 {
+  font-size: 5vw;
+}
+
+.fc-nonbusiness {
+  background-color: #787878;
+}
