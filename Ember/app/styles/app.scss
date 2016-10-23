@@ -1,10 +1,12 @@
 @import "bootstrap";
-@import "nav-menu";
+
 @import "administrator-styles/admin-info";
+@import "administrator-styles/booking-history";
 @import "administrator-styles/manage-clients";
 @import "administrator-styles/manage-services";
 @import "administrator-styles/manage-employees";
 @import "login";
+@import "nav-menu";
 
 // Styling placed in this folder relates to styles present on multiple pages
 .container{
@@ -12,18 +14,22 @@
 }
 
 .page-title {
-  padding-top: 70px;
+  padding-top: 50px;
+  padding-bottom: 20px;
   text-align:center;
-  color: #959595;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 45px;
+  font-size: 6vw;
+  color: #959595;
   font-weight: 300;
   line-height: 58px;
-  margin: 0 0 58px;
 }
 
 // Buttons to edit, add or delete things as admin
 .managing {
   background-color: #EE2C2C !important;
   border-color: black !important;
+}
+
+.buttons {
+  text-align: center;
 }
