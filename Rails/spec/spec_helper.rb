@@ -19,17 +19,17 @@ require 'factory_girl_rails'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
    # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
 
   #needed for spec_helper to fing Factory girl
-  #config.include FactoryGirl::Syntax::Methods //this is already included in support/factory_girl.rb
   FactoryGirl.definition_file_paths = [File.expand_path('../factories', __FILE__)]
-  #FactoryGirl.factories.clear #trying to resolve the duplicate factory error
-  #FactoryGirl.find_definitions
-
  
+  # rspec-expectations config goes here. You can use an alternate
+  # assertion/expectation library such as wrong or the stdlib/minitest
+  # assertions if you prefer.
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
@@ -107,10 +107,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 
-
-# config.before(:all) do
-#   FactoryGirl.reload
-# end
 end
-
 
