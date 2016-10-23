@@ -1,29 +1,5 @@
 require 'spec_helper'
 require 'rails_helper' #needed to find the models
-# spec/requests/employees_spec.rb
-# describe "Employees API" do
-#   describe "GET /employees" do
-#     it "returns all the employees" do
-#       FactoryGirl.create :employee, first_name: "Omar"
-#       FactoryGirl.create :employee, first_name: "Jana"
-
-#       #get method takes three arguments: a path, a set of HTTP parameters, and any additional headers
-#       #to be included in the request. In the case here, we aren’t sending any parameters with our request.
-#       #We do, however, need to specify the Accept header to indicate that we want JSON back from the server.
-#       get "/employees", {}, { "Accept" => "application/json" }
-
-#       expect(response.status).to eq 200
-
-#       body = JSON.parse(response.body)
-#       puts body
-#       employees = body.map { |m| m["first_name"] }
-
-#       expect(employees).to match_array(["Omar",
-#                                            "Jana"])
-#     end
-#   end
-# end
-#get rid of the above
 
 RSpec.describe EmployeesController, :type => :controller do
    include Devise::Test::ControllerHelpers
@@ -33,7 +9,6 @@ describe "Employees API" do
   describe "GET #index" do
     it "returns a successful response" do
       employee = FactoryGirl.create :employee
-      # get "/employees", format: :json
       get :index 
       expect(response).to have_http_status(:ok)
 	end
@@ -41,7 +16,6 @@ describe "Employees API" do
 	it "returns all employees" do
 		#creating 5 employees and maing sure all are returned
       FactoryGirl.create_list(:employee,5)
-      # get "/employees", format: :json
       get :index
       parsed_response = JSON.parse(response.body)
       puts parsed_response
@@ -52,11 +26,9 @@ describe "Employees API" do
   describe "GET #show" do
     it "returns a successful response" do
       employee = FactoryGirl.create :employee
-       # get "/employees", format: :json
        get :index
       parsed_response = JSON.parse(response.body)
       id = parsed_response["data"][0]["id"]
-      # get "/employees/#{id}"
       get :show, id: id
       expect(response).to have_http_status(:ok)
 	end
@@ -64,11 +36,9 @@ describe "Employees API" do
 	it "returns employee with correct attribute values" do
 		#creating an employee and making sure attributes properly set
       FactoryGirl.create :employee
-      # get "/employees", format: :json
       get :index
       parsed_response = JSON.parse(response.body)
       id = parsed_response["data"][0]["id"]
-      # get "/employees/#{id}"
       get :show, id: id
       parsed_response = JSON.parse(response.body)
 
@@ -87,7 +57,6 @@ describe "Employees API" do
 	end
 
 	it "returns an error if the employee does not exist" do
-  		# get "/employees/0", format: :json
       get :show, id: 0
 		  expect(response).to be_not_found
 
@@ -108,8 +77,6 @@ describe "Employees API" do
 
 	  # # Create a serialization based on the configured adapter
 	  # @serialization = ActiveModelSerializers::Adapter.create(@serializer)
-
-      # post "/employees", payload
       post :create, payload
       expect(response).to have_http_status(:created)
 
