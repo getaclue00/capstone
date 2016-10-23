@@ -4,58 +4,46 @@ class ClientsController < ApplicationController
 	#render is implicit for all actions since name of action and view are the same
 
 	def index
-		#all calls a method on db to return all clients
-		@clients_array = Client.all
+		clients_array=Client.all
+		if clients_array && !clients_array.empty?
+      		render json: clients_array, status: :ok
+    	else
+      		render json: { error: 'No clients exist' }, status: :bad_request
+    	end
 	end
 
 	def show
-		#getting dynamic route from params hash
-		@client=Client.find params[:id]	
-	end
-
-	def new
-		@client=Client.new
+		begin 
+			client=Client.find params[:id]
+			render json: client, status: :ok
+		rescue ActiveRecord::RecordNotFound => e
+			render json: { error: 'This client does not exist' }, status: :not_found
+		end
 	end
 
 	def create
-		#client hash obtained as payload with the POST request send by the form_builder
-		#use Strong parameters in mass assignments using new
-		@client=Client.new (client_sanitized_params)
-
-		 if(@client.save)
-		 	#send a new request to redirect to client created
-		 	redirect_to "/clients/#{@client.id}"
-		 	#@client since new requests dont have access to variables
-		 	#above equivalent to 
-		 	#redirect_to "/clients/"+@client.id.to_s
-		 else
-		 	#bring up a new form again
-		 	render ("new")
-		 end
-	end
-
-	def edit
-		@client = Client.find(params[:id])
+		@client=Client.new(client_sanitized_params)
+		if(@client.save)
+			#location specifies where to find created resource
+			render json: @client, status: :created, location: @client
+		else
+			render json: { error: 'Client creation failed'}, status: :bad_request
+		end
 	end
 
 	def update
-		client = Client.find(params[:id])
-	
-		#.update updates the object in memory and calls .save to the db as well and return boolean depending on if it is successful
-		if client.update(client_sanitized_params)
-			#redirecting to updated client
-			redirect_to "/clients/#{client.id}" 		
+		client=Client.find params[:id]
+		if(client.update(client_sanitized_params))
+			render json: client, status: :created, location: client
 		else
-			#since the edit form requires access to the client to populate the form fields
-			@client=client
-			render("edit")
+			render json: { error: 'Client update failed'}, status: :bad_request
 		end
 	end
 
 	def destroy
-		client=Client.find(params[:id])
+		client=Client.find params[:id]
 		client.destroy
-		redirect_to "/clients"
+		render nothing: true, status: :ok
 	end
 
 
@@ -63,8 +51,11 @@ class ClientsController < ApplicationController
 	private 
 
 		def client_sanitized_params
-			params.require(:client).permit(:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code)
-		end
-
-
+		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
+		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
+		# whereas the "safe" version simply returns an empty hash.
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code] )
+	end
 end
+
+  

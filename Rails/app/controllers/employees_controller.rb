@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
 		if employees_array && !employees_array.empty?
       		render json: employees_array, status: :ok
     	else
-      		render json: { error: 'No employees exist' }, 	status: :bad_request
+      		render json: { error: 'No employees exist' }, status: :bad_request
     	end
 	end
 
