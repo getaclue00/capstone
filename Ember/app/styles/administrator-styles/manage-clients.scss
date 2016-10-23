@@ -1,20 +1,25 @@
 .clients-table th h1 {
   font-weight: bold;
-  font-size: 12px;
-  text-align: left;
+  font-size: 1.5vw;
+  text-align: center;
   color: #fffaef;
 }
 
 .clients-table {
-  text-align: left;
+  text-align: center;
   overflow: hidden;
   width: 100%;
   padding-right: 15px;
   border-radius: 15px;
+  font-size: 1vw;
 }
 
-.clients-table td, .clients-table th {
-  padding: 2% 2% 2% 2%;
+.clients-table th {
+  padding: 1.5%;
+}
+
+.clients-table td {
+  padding: 1% 0% 1% 0%;
 }
 
 .clients-table tr:nth-child(odd) {
