@@ -9,7 +9,7 @@ FactoryGirl.define do
     city "Ottawa"
     province "Ontario"
     postal_code "H7H 5U5"
-    start_date 2013-10-22
+    start_date "2013-10-22"
     is_admin true
   end
 
