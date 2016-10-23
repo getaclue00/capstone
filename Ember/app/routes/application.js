@@ -22,7 +22,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
 //Used to toggle the nav bar closed when nav-item is clicked
 $(document).on('click','.collapse.in',function(e) {
-  if( $(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown' ) ) {
-      $(this).collapse('hide');
-  }
+  if($(e.target).is('a') && ( $(e.target).attr('class') !== 'dropdown' ) ) {
+     $(this).collapse('hide');
 });
