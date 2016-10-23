@@ -9,7 +9,11 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('admin-home');
   this.route('booking-history');
-  this.route('my-calendar');
+  this.route('my-calendar', function() {
+    this.route('appointments', function() {
+      this.route('new');
+    });
+  });
   this.route('my-account');
   this.route('services');
   this.route('clients');

@@ -35,7 +35,8 @@ export default Ember.Controller.extend({
 
       console.log('Current view: ' + view.name);
 
-      Ember.$('#myModal').modal('show');
+      // Ember.$('#myModal').modal('show');
+      this.transitionToRoute('my-calendar.appointments.new');
     }
   }
 });
