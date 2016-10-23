@@ -1,4 +1,6 @@
-def index
+class CarsController < ApplicationController
+
+	def index
 		cars_array=Car.all
 		if cars_array && !cars_array.empty?
       		render json: cars_array, status: :ok
@@ -19,8 +21,7 @@ def index
 	def create
 		@car=Car.new(car_sanitized_params)
 		if(@car.save)
-			#location specifies where to find created resource
-			render json: @car, status: :created, location: @car
+			render json: @car, status: :created
 		else
 			render json: { error: 'Car creation failed'}, status: :bad_request
 		end
@@ -29,7 +30,7 @@ def index
 	def update
 		car=Car.find params[:id]
 		if(car.update(car_sanitized_params))
-			render json: car, status: :created, location: car
+			render json: car, status: :ok
 		else
 			render json: { error: 'Car update failed'}, status: :bad_request
 		end
@@ -38,7 +39,7 @@ def index
 	def destroy
 		car=Car.find params[:id]
 		car.destroy
-		render nothing: true, status: :ok
+		head :no_content
 	end
 
 

@@ -1,5 +1,8 @@
 class EmployeesController < ApplicationController
 
+	#actions
+	#render is implicit for all actions since name of action and view are the same
+
 	def index
 		employees_array=Employee.all
 		if employees_array && !employees_array.empty?
@@ -20,10 +23,8 @@ class EmployeesController < ApplicationController
 
 	def create
 		@employee=Employee.new(employee_sanitized_params)
-		#@employee.start_date = Date.new(params[:employee]["start_date(1i)"].to_i,params[:employee]["start_date(2i)"].to_i,params[:employee]["start_date(3i)"].to_i)
 		if(@employee.save)
-			#location specifies where to find created resource
-			render json: @employee, status: :created, location: @employee
+			render json: @employee, status: :created
 		else
 			render json: { error: 'Employee creation failed'}, status: :bad_request
 		end
@@ -31,10 +32,8 @@ class EmployeesController < ApplicationController
 
 	def update
 		employee=Employee.find params[:id]
-		#employee.start_date = Date.new(params[:employee]["start_date(1i)"].to_i,params[:employee]["start_date(2i)"].to_i,params[:employee]["start_date(3i)"].to_i)
-	
 		if(employee.update(employee_sanitized_params))
-			render json: employee, status: :created, location: employee
+			render json: employee, status: :ok
 		else
 			render json: { error: 'Employee update failed'}, status: :bad_request
 		end
@@ -43,16 +42,19 @@ class EmployeesController < ApplicationController
 	def destroy
 		employee=Employee.find params[:id]
 		employee.destroy
-		render nothing: true, status: :ok
+		head :no_content
 	end
 
-	private
 
-	def employee_sanitized_params
+	#anything beneath the key word private is private
+	private 
+
+		def employee_sanitized_params
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :is_admin, :start_date] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :is_admin] )
 	end
-
 end
+
+  

@@ -1,4 +1,5 @@
-def index
+class AppointmentsController < ApplicationController
+	def index
 		appointments_array=Appointment.all
 		if appointments_array && !appointments_array.empty?
       		render json: appointments_array, status: :ok
@@ -19,8 +20,7 @@ def index
 	def create
 		@appointment=Appointmnet.new(appointment_sanitized_params)
 		if(@appointment.save)
-			#location specifies where to find created resource
-			render json: @appointment, status: :created, location: @appointment
+			render json: @appointment, status: :created
 		else
 			render json: { error: 'Appointment creation failed'}, status: :bad_request
 		end
@@ -29,7 +29,7 @@ def index
 	def update
 		appointment=Appointment.find params[:id]
 		if(appointment.update(appointment_sanitized_params))
-			render json: appointment, status: :created, location: appointment
+			render json: appointment, status: :ok
 		else
 			render json: { error: 'Appointment update failed'}, status: :bad_request
 		end
@@ -38,7 +38,7 @@ def index
 	def destroy
 		appointment=Appointment.find params[:id]
 		appointment.destroy
-		render nothing: true, status: :ok
+		head :no_content
 	end
 
 

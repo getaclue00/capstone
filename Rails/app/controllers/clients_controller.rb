@@ -1,5 +1,4 @@
 class ClientsController < ApplicationController
-
 	#actions
 	#render is implicit for all actions since name of action and view are the same
 
@@ -24,8 +23,7 @@ class ClientsController < ApplicationController
 	def create
 		@client=Client.new(client_sanitized_params)
 		if(@client.save)
-			#location specifies where to find created resource
-			render json: @client, status: :created, location: @client
+			render json: @client, status: :created
 		else
 			render json: { error: 'Client creation failed'}, status: :bad_request
 		end
@@ -34,7 +32,7 @@ class ClientsController < ApplicationController
 	def update
 		client=Client.find params[:id]
 		if(client.update(client_sanitized_params))
-			render json: client, status: :created, location: client
+			render json: client, status: :ok
 		else
 			render json: { error: 'Client update failed'}, status: :bad_request
 		end
@@ -43,7 +41,7 @@ class ClientsController < ApplicationController
 	def destroy
 		client=Client.find params[:id]
 		client.destroy
-		render nothing: true, status: :ok
+		head :no_content
 	end
 
 

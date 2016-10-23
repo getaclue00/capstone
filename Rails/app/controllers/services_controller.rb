@@ -1,4 +1,5 @@
-def index
+class ServicesController < ApplicationController
+	def index
 		services_array=Service.all
 		if services_array && !servicess_array.empty?
       		render json: services_array, status: :ok
@@ -19,8 +20,7 @@ def index
 	def create
 		@service=Service.new(service_sanitized_params)
 		if(@service.save)
-			#location specifies where to find created resource
-			render json: @service, status: :created, location: @service
+			render json: @service, status: :created
 		else
 			render json: { error: 'Service creation failed'}, status: :bad_request
 		end
@@ -29,7 +29,7 @@ def index
 	def update
 		service=Service.find params[:id]
 		if(service.update(service_sanitized_params))
-			render json: service, status: :created, location: service
+			render json: service, status: :ok
 		else
 			render json: { error: 'Service update failed'}, status: :bad_request
 		end
@@ -38,7 +38,7 @@ def index
 	def destroy
 		service=Service.find params[:id]
 		service.destroy
-		render nothing: true, status: :ok
+		head :no_content #used when we are not sending back content
 	end
 
 
