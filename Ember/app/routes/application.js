@@ -24,4 +24,5 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 $(document).on('click','.collapse.in',function(e) {
   if($(e.target).is('a') && ( $(e.target).attr('class') !== 'dropdown' ) ) {
      $(this).collapse('hide');
+   }
 });
