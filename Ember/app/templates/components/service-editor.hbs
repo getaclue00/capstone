@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="form-group row">
+    <label for="service-name" class="col-xs-4 col-form-label">Serivce Name</label>
+    <div class="col-xs-8">
+      {{input class="form-control" value=model.name id="service-name"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="service-duration" class="col-xs-4 col-form-label">Duration</label>
+    <div class="col-xs-8">
+      {{input type="number-minutes" class="form-control" value=model.duration id="service-duration"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="service-price-sm-vehicle" class="col-xs-4 col-form-label">Price for Small Vehicle</label>
+    <div class="col-xs-8">
+      {{input type="dollar-amount" class="form-control" id="service-price-sm-vehicle" value=model.price_sm_car}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="service-price-lrg-vehicle" class="col-xs-4 col-form-label">Appointment End</label>
+    <div class="col-xs-8">
+      {{input type="dollar-amount" class="form-control" id="service-price-lrg-vehicle" value=model.price_lrg_car}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="service-description" class="col-xs-4 col-form-label">Description</label>
+    <div class="col-xs-8">
+      {{textarea class="form-control" id="service-description" value=model.description rows=3}}
+    </div>
+  </div>
+</div>

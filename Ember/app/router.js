@@ -11,7 +11,10 @@ Router.map(function() {
   this.route('booking-history');
   this.route('my-calendar');
   this.route('my-account');
-  this.route('services');
+  this.route('services', function() {
+    this.route('new');
+    this.route('show');
+  });
   this.route('clients');
   this.route('employees');
   this.route('login');
