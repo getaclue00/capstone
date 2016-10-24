@@ -8,3 +8,7 @@
 
 User.create({email: 'test@test.com', password: 'password', first_name: 'Tester', last_name: 'Testing', admin: true, employee: true})
 User.create({email: 'batman@batman.com', password: 'password', first_name: 'Bruce', last_name: 'Wayne', admin: false, employee: true})
+
+Appointment.create({title: 'Batman Appointment'})
+Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.'})
+Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.'})

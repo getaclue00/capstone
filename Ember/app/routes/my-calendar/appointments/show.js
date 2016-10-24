@@ -5,7 +5,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model(params) {
     console.warn(`params are not implemented yet, appointments_id: ${params.appointments_id}`);
-    return this.get('store').createRecord('appointment');
+    return this.get('store').findRecord('appointment', params.appointments_id);
   },
 
   actions: {
