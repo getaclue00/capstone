@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('my-calendar', function() {
     this.route('appointments', function() {
       this.route('new');
+      this.route('show', { path: "/:appointments_id" });
     });
   });
   this.route('my-account');

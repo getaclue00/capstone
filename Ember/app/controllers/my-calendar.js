@@ -24,6 +24,7 @@ export default Ember.Controller.extend({
       console.log("view: ");
       console.log(view);
       console.error("handleCalendarEventClick - Not implemented");
+      this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
 
     handleCalendarDayClick(date, jsEvent, view) {

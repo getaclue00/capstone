@@ -3,28 +3,27 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 let events = Ember.A([{
     id: 1,
-    url: '/appointments/1',
-    color: 'purple',
+    color: '#AB00FF',
+    textColor: '#FFFFFF',
     title: 'Event 1',
     start: '2016-10-17T07:08:08',
     end: '2016-10-18T09:08:08'
   }, {
     id: 2,
-    url: '/appointments/2',
-    color: 'pink',
+    color: '#AB00FF',
+    textColor: '#FFFFFF',
     title: 'Meeting',
     start: '2016-10-17T18:00:00',
     end: '2016-10-17T19:00:00'
   }, {
     id: 3,
-    url: '/appointments/3',
-    color: 'green',
+    color: '#AB00FF',
+    textColor: '#FFFFFF',
     title: 'Event 3',
     start: '2016-10-19T18:00:00',
     end: '2016-10-19T19:00:00'
   }, {
     id: 4,
-    url: '/appointments/4',
     color: 'yellow',
     textColor: 'black',
     title: 'Event 4',
