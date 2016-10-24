@@ -2,8 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    handleAddNewService(jsEvent) {
-      console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+    handleAddNewService() {
       this.transitionToRoute('services.new');
     }
   }
