@@ -1,0 +1,37 @@
+<nav class="navbar navbar-fixed-top navbar-light bg-faded menu">
+  <div class="container-fluid" >
+    <div class="navbar-header">
+      <img src="assets/images/logo.png" class='logo' width="150px" height="55px">
+      <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation" style='color: white'>
+      &#9776;
+      </button>
+    </div>
+    <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
+      <ul class="nav navbar-nav">
+        {{#if session.isAuthenticated}}
+        <li class="nav-item">
+          {{#link-to 'admin-home' class="nav-link nav-list-item"}}Home {{/link-to}}
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-list-item dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manage</a>
+          <ul class="dropdown-menu">
+            <li>{{#link-to 'services' class="dropdown-item"}}Services{{/link-to}}</li>
+            <li>
+              {{#link-to 'clients' class="dropdown-item"}}Clients{{/link-to}}
+            </li>
+            <li>
+              {{#link-to 'employees' class="dropdown-item"}}Employees{{/link-to}}
+            </li>
+            </ul>
+        </li>
+        <li class="nav-item">{{#link-to 'booking-history' class='nav-link nav-list-item'}}Booking History{{/link-to}}</li>
+        <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}My Calendar{{/link-to}}</li>
+        <li class="nav-item">{{#link-to 'my-account' class='nav-link nav-list-item'}}My Account{{/link-to}}</li>
+        <li class="nav-item"><button type="button" class="btn btn-outline-danger nav-list-item" {{action 'invalidateSession'}}>Logout</button></li>
+      {{else}}
+        <li class="nav-item">{{#link-to 'login' class='nav-link nav-list-item'}}Login{{/link-to}}</li>
+      {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
