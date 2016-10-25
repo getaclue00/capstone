@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020022141) do
+ActiveRecord::Schema.define(version: 20161024024703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,17 +37,20 @@ ActiveRecord::Schema.define(version: 20161020022141) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "email"
-    t.string   "phone_number"
-    t.integer  "street_number"
-    t.string   "street_name"
-    t.string   "city"
-    t.string   "province"
-    t.string   "postal_code"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "last_name",     limit: 30
+    t.string   "first_name",    limit: 30
+    t.string   "email",         limit: 30, null: false
+    t.string   "phone_number",  limit: 12, null: false
+    t.integer  "street_number",            null: false
+    t.string   "street_name",   limit: 30, null: false
+    t.string   "city",          limit: 30
+    t.string   "province",      limit: 30
+    t.string   "postal_code",   limit: 7,  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "car_id"
+    t.index ["car_id"], name: "index_clients_on_car_id", using: :btree
+    t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
@@ -103,4 +106,5 @@ ActiveRecord::Schema.define(version: 20161020022141) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "clients", "cars"
 end
