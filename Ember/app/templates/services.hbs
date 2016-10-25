@@ -12,7 +12,7 @@
     </thead>
     <tbody class="service-table-body">
       {{#each model as |service|}}
-        <tr class="service-table-row">
+        <tr class="service-table-row" onclick={{action "handleEditService" service }}>
           <td>
             <strong>{{service.name}}</strong>
           </td>

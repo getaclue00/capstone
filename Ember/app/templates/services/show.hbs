@@ -1,1 +1,24 @@
-{{outlet}}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'goBackToListOfServices'}}>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" {{action 'deleteService'}}>Delete</button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          {{
+            service-editor
+            model=model
+          }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToListOfServices'}}>Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" {{action 'updateService'}}>Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

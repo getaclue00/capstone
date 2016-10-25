@@ -11,10 +11,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     goBackToListOfServices() {
       this.transitionTo('services');
     },
+
     submitService() {
       var newService = this.get('currentModel');
       newService.save();
-      this.transitionTo('services');
+      this.transitionToRoute('services');
       window.location.reload(true);
     }
   }

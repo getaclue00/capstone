@@ -13,7 +13,7 @@ Router.map(function() {
   this.route('my-account');
   this.route('services', function() {
     this.route('new');
-    this.route('show');
+    this.route('show', { path: "/:services_id" });
   });
   this.route('clients');
   this.route('employees');
