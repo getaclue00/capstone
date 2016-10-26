@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-
+import Ember from 'ember';
 // Stub for session service
 const sessionStub = Ember.Service.extend({
   isAuthenticated: true,
@@ -58,7 +58,7 @@ test('it renders administrator\' s navigation bar', function(assert) {
   // Name of main nav menu links
   assert.equal(this.$('.nav-list-item')[0].text, 'Home', 'Navigation option is Home');
   assert.equal(this.$('.nav-list-item')[1].text, 'Manage', 'Navigation option is Manage');
-  assert.equal(this.$('.nav-list-item')[2].text, 'Appointment History', 'Navigation option is Appointment History'); //Will fail until Rename booking to appointment branch is merged
+  assert.equal(this.$('.nav-list-item')[2].text, 'Appointment History', 'Navigation option is Appointment History');
   assert.equal(this.$('.nav-list-item')[3].text, 'My Calendar', 'Navigation option is My Calendar');
   assert.equal(this.$('.nav-list-item')[4].text, 'My Account', 'Navigation option is My Account');
   assert.equal(this.$('.nav-list-item')[5].firstChild.nodeValue, 'Logout', 'Navigation option is Logout');
