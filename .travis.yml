@@ -9,3 +9,7 @@ script:
   - bundle exec rspec
 services:
   - postgresql
+# safelist
+branches:
+  only:
+  - master
