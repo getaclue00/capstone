@@ -1,21 +1,21 @@
-.booking-history-title {
+.appointment-history-title {
   padding-top: 50px;
   padding-bottom: 20px;
   text-align:center;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 6vw;
+  font-size: 5vw;
   font-weight: 400;
   line-height: 58px;
 }
 
-.booking-history-table th h1 {
+.appointment-history-table th h1 {
   font-weight: bold;
   font-size: 1.5vw;
   text-align: center;
   color: #fffaef;
 }
 
-.booking-history-table {
+.appointment-history-table {
   text-align: center;
   overflow: hidden;
   width: 100%;
@@ -24,30 +24,30 @@
   font-size: 1vw;
 }
 
-.booking-history-table th {
+.appointment-history-table th {
   padding: 2% 2% 0% 0%;
 }
 
-.booking-history-table td {
+.appointment-history-table td {
   padding-right: 2%;
 }
 
-.booking-history-table tr:nth-child(odd) {
+.appointment-history-table tr:nth-child(odd) {
   background-color: #fff;
 }
 
-.booking-history-table tr:nth-child(even) {
+.appointment-history-table tr:nth-child(even) {
   background-color: #e3e3e3;
 }
 
-.booking-history-table th {
+.appointment-history-table th {
   background-color: #d30b07;
 }
 
-.booking-history-table td:last-child {
+.appointment-history-table td:last-child {
   border-bottom-right-radius: 10px;
 }
 
-.booking-history-table td:first-child {
+.appointment-history-table td:first-child {
   border-bottom-left-radius: 10px;
 }
