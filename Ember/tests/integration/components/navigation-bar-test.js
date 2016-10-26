@@ -14,7 +14,7 @@ const sessionStub = Ember.Service.extend({
 const currentUserStub = Ember.Service.extend({
   user: {
     admin: true,
-    employee: true
+    verified: true
   },
 
   getUser() {
@@ -48,11 +48,24 @@ test('it renders administrator\' s navigation bar', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.login();
-  debugger;
-  assert.expect(2);
-  this.render(hbs`{{navigation-bar}}`);
+  assert.expect(11);
+  this.render(hbs`{{navigation-bar session=this.session currentUser=currentUser }}`);
 
-  assert.equal(this.$('.nav-item').length, 6, 'should be only 6 clickable link');
-  assert.equal(this.$('.nav-list-item').text(), 'Login', 'start times should match');
+  // Number of clickable links
+  assert.equal(this.$('.nav-item').length, 6, 'should be only 6 clickable link in main menu');
+  assert.equal(this.$('.dropdown-item').length, 3, 'should be only 3 clickable link in sub menu');
+
+  // Name of main nav menu links
+  assert.equal(this.$('.nav-list-item')[0].text, 'Home', 'Navigation option is Home');
+  assert.equal(this.$('.nav-list-item')[1].text, 'Manage', 'Navigation option is Manage');
+  assert.equal(this.$('.nav-list-item')[2].text, 'Appointment History', 'Navigation option is Appointment History'); //Will fail until Rename booking to appointment branch is merged
+  assert.equal(this.$('.nav-list-item')[3].text, 'My Calendar', 'Navigation option is My Calendar');
+  assert.equal(this.$('.nav-list-item')[4].text, 'My Account', 'Navigation option is My Account');
+  assert.equal(this.$('.nav-list-item')[5].firstChild.nodeValue, 'Logout', 'Navigation option is Logout');
+
+  // Name of sub nav menu links
+  assert.equal(this.$('.dropdown-item')[0].text, 'Services', 'Navigation option is Services');
+  assert.equal(this.$('.dropdown-item')[1].text, 'Clients', 'Navigation option is Clients');
+  assert.equal(this.$('.dropdown-item')[2].text, 'Employees', 'Navigation option is Employees');
 });
 
