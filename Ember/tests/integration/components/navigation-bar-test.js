@@ -14,7 +14,7 @@ const sessionStub = Ember.Service.extend({
 const currentUserStub = Ember.Service.extend({
   user: {
     admin: true,
-    verified: true
+    employee: true
   },
 
   getUser() {
