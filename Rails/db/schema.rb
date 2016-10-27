@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025041953) do
+ActiveRecord::Schema.define(version: 20161027040342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20161025041953) do
     t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "car_id",     null: false
+    t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
   end
 
   create_table "cars", force: :cascade do |t|
@@ -106,5 +108,6 @@ ActiveRecord::Schema.define(version: 20161025041953) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "appointments", "cars"
   add_foreign_key "cars", "clients"
 end
