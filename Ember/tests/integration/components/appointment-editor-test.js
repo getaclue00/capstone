@@ -23,10 +23,6 @@ const appointmentStub = Ember.Object.extend({
     return this.get('end');
   },
 
-  getUrl() {
-    return this.get('url');
-  },
-
   getNotes() {
     return this.get('notes');
   }
@@ -58,7 +54,6 @@ test('it renders a view with a model', function(assert) {
     title: 'New Appointment Test',
     start: '2016-10-23T09:10',
     end: '2016-11-23T09:10',
-    url: '/url-not-set',
     notes: 'some notes'
   });
 
