@@ -21,8 +21,8 @@ install:
   - bundle install
   - cd ../Ember/
   - npm install
-  - ember --version
   - bower install
+  - ember --version
   - cd ..
 
 script:
@@ -41,5 +41,5 @@ cache:
 # safelist
 branches:
   only:
-  - master
+  # - master
   - appt_resource
