@@ -19,6 +19,25 @@ export default Ember.Controller.extend({
       appointment.destroyRecord()
         .then(transitionToPost)
         .catch(failure);
+    },
+
+    saveAppointment() {
+      var self = this;
+      let appointment = this.get('model');
+
+      function transitionToPost() {
+        Ember.$('#myModal').modal('hide');
+        self.transitionToRoute('my-calendar');
+      }
+
+      function failure(error) {
+        // handle the error
+        throw error.message;
+      }
+
+      appointment.save()
+        .then(transitionToPost)
+        .catch(failure);
     }
   }
 });
