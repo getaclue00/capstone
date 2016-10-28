@@ -16,15 +16,15 @@ ActiveRecord::Schema.define(version: 20161027040342) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "day"
-    t.integer  "month"
-    t.integer  "year"
+    t.integer  "day",                                       null: false
+    t.integer  "month",                                     null: false
+    t.integer  "year",                                      null: false
     t.time     "start_time"
     t.time     "end_time"
-    t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "car_id",     null: false
+    t.string   "status",     limit: 30, default: "pending", null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "car_id",                                    null: false
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
   end
 

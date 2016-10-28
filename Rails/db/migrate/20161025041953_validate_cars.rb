@@ -1,7 +1,6 @@
 class ValidateCars < ActiveRecord::Migration[5.0]
   def up
-  	#non of the fields can be left empty
-
+    #note that there are additional checks in the model
   	change_column :cars, :make, :string, :limit => 30
     change_column_null :cars, :make, false
 
