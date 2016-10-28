@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
 	def index
 		services_array=Service.all
-		if services_array && !servicess_array.empty?
+		if services_array && !services_array.empty?
       		render json: services_array, status: :ok
     	else
       		render json: { error: 'No services exist' }, status: :bad_request
