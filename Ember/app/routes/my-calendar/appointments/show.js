@@ -4,8 +4,8 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model(params) {
-    console.warn(`params are not implemented yet, appointments_id: ${params.appointments_id}`);
-    return this.get('store').findRecord('appointment', params.appointments_id);
+    let id = params.appointments_id;
+    return this.get('store').findRecord('appointment', id);
   },
 
   actions: {
@@ -15,10 +15,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     markAppointmentAsCompleted() {
       console.warn('markAppointmentAsCompleted is not implemented');
-    },
-
-    deleteAppointment() {
-      console.warn('deleteAppointment is not implemented');
     }
   }
 });
