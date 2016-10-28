@@ -21,6 +21,8 @@ install:
   - bundle install
   - cd ../Ember/
   - npm install
+  - ember --version
+  - bower install
   - cd ..
 
 script:
@@ -31,8 +33,10 @@ script:
   - ember test
 
 cache:
+  bundler: true
   directories:
     - Ember/node_modules
+    - Ember/bower_components
 
 # safelist
 branches:
