@@ -8,5 +8,5 @@ export default Model.extend({
   title:      attr('string', { defaultValue: 'New Appointment' }),
   start:      attr('isodate'),
   end:        attr('isodate'),
-  notes:      attr('string')
+  notes:      attr('string', { defaultValue: '' })
 });
