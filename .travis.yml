@@ -39,7 +39,7 @@ cache:
     - Ember/bower_components
 
 # safelist
-branches:
-  only:
-  # - master
-  - appt_resource
+# branches:
+#   only:
+#   - master
+#   - appt_resource

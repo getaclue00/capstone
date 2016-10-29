@@ -13,7 +13,7 @@ class AppointmentsController < ApplicationController
 			appointment=Appointment.find params[:id]
 			render json: appointment, status: :ok
 		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No appointments exist' }, status: :not_found
+			render json: { error: 'This appointment does not exist' }, status: :not_found
 		end
 	end
 

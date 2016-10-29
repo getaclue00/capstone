@@ -35,7 +35,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('No appointments exist')
+        expect(result['error']).to eq('This appointment does not exist')
         expect(response).to have_http_status(:not_found)
       end
     end
