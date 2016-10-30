@@ -3,25 +3,14 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
-  model(service) {
-    console.warn('params are not implemented yet, service_id: ${params.service_id}');
-    return this.get('store').findRecord('service', service.id);
+  model(params) {
+    let id = params.services_id;
+    return this.get('store').findRecord('service', id);
   },
 
   actions: {
     goBackToListOfServices() {
       this.transitionTo('services');
-    },
-
-    deleteService() {
-      var service = this.controller.get('model');
-      console.log(service);
-      service.destroyRecord().then(function() {
-        this.transitionTo('services');
-      }, function(error) {
-        console.error(error);
-      });
-      window.location.reload(true);
     },
 
     updateService() {
