@@ -18,7 +18,7 @@ class AppointmentsController < ApplicationController
 	end
 
 	def create
-		@appointment=Appointmnet.new(appointment_sanitized_params)
+		@appointment=Appointment.new(appointment_sanitized_params)
 		if(@appointment.save)
 			render json: @appointment, status: :created
 		else
@@ -51,6 +51,7 @@ class AppointmentsController < ApplicationController
 		# whereas the "safe" version simply returns an empty hash.
 		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:day, :month, :year, :start_time, :end_time, :status] )
 	end
+
 end
 
   

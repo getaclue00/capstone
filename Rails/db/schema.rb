@@ -10,23 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028033706) do
+ActiveRecord::Schema.define(version: 20161030160023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "day",                                       null: false
-    t.integer  "month",                                     null: false
-    t.integer  "year",                                      null: false
+    t.integer  "day",                                        null: false
+    t.integer  "month",                                      null: false
+    t.integer  "year",                                       null: false
     t.time     "start_time"
     t.time     "end_time"
-    t.string   "status",     limit: 30, default: "pending", null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "car_id",                                    null: false
-    t.integer  "service_id",                                null: false
+    t.string   "status",      limit: 30, default: "pending", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "car_id",                                     null: false
+    t.integer  "service_id",                                 null: false
+    t.integer  "employee_id"
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
+    t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
     t.index ["service_id"], name: "index_appointments_on_service_id", using: :btree
   end
 
@@ -58,19 +60,20 @@ ActiveRecord::Schema.define(version: 20161028033706) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "email"
-    t.string   "phone_number"
-    t.integer  "street_number"
-    t.string   "street_name"
-    t.string   "city"
-    t.string   "province"
-    t.string   "postal_code"
-    t.date     "start_date"
-    t.boolean  "is_admin"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "last_name",     limit: 30
+    t.string   "first_name",    limit: 30
+    t.string   "email",         limit: 30,                        null: false
+    t.string   "phone_number",  limit: 12,                        null: false
+    t.integer  "street_number",                                   null: false
+    t.string   "street_name",   limit: 30,                        null: false
+    t.string   "city",          limit: 30
+    t.string   "province",      limit: 30
+    t.string   "postal_code",   limit: 7,                         null: false
+    t.date     "start_date",               default: '2016-10-30', null: false
+    t.boolean  "is_admin",                 default: false,        null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
   end
 
   create_table "services", force: :cascade do |t|
@@ -111,6 +114,7 @@ ActiveRecord::Schema.define(version: 20161028033706) do
   end
 
   add_foreign_key "appointments", "cars"
+  add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
   add_foreign_key "cars", "clients"
 end
