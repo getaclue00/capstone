@@ -11,23 +11,42 @@ export default Ember.Controller.extend({
   },
   newAppointmentDate: '',
 
+  events: Ember.computed('model.[]', function() {
+    // Unfortunately, we need to do this conversion, until we can figure out why the model is not displayed without this conversion...
+
+    let events = [];
+
+    this.get('store').findAll('appointment').then((items) => {
+      items.forEach((item) => {
+        events.pushObject({
+          id    : item.get('id'),
+          title : item.get('title'),
+          start : item.get('start'),
+          end   : item.get('end'),
+          color : item.get('color'),
+          textColor: item.get('textColor')
+        });
+      });
+    });
+
+    return events;
+  }),
+
   actions: {
     changeView(view){
       this.set('viewName', view);
     },
 
     handleCalendarEventClick(calEvent, jsEvent, view) {
-      console.log("calEvent: ");
-      console.log(calEvent);
-      console.log("jsEvent: ");
-      console.log(jsEvent);
-      console.log("view: ");
-      console.log(view);
-      console.error("handleCalendarEventClick - Not implemented");
+      console.log("calEvent: ", calEvent);
+      console.log("jsEvent: ", jsEvent);
+      console.log("view: ", view);
+      // console.error("handleCalendarEventClick - Not implemented");
+      this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
 
     handleCalendarDayClick(date, jsEvent, view) {
-      console.log('Clicked on: ' + date.format());
+      // console.log('Clicked on: ' + date.format());
 
       this.set('newAppointmentDate', date.format());
 
@@ -35,7 +54,8 @@ export default Ember.Controller.extend({
 
       console.log('Current view: ' + view.name);
 
-      Ember.$('#myModal').modal('show');
+      // Ember.$('#myModal').modal('show');
+      this.transitionToRoute('my-calendar.appointments.new');
     }
   }
 });

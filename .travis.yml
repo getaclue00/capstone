@@ -1,15 +1,45 @@
-language: ruby
-rvm:
-  - 2.3.1
-before_install:
-  - cd Rails
-before_script:
-  - bundle exec rake db:test:prepare
-script:
-  - bundle exec rspec
+sudo: required
+dist: trusty
+
 services:
   - postgresql
+
+language: ruby
+
+rvm:
+  - 2.3.1
+
+node_js:
+  - "6"
+
+before_install:
+  - gem install bundler --no-rdoc --no-ri
+  - npm install -g bower phantomjs-prebuilt
+
+install:
+  - cd Rails
+  - bundle install
+  - cd ../Ember/
+  - npm install
+  - bower install
+  - ember --version
+  - cd ..
+
+script:
+  - cd Rails
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec
+  - cd ../Ember/
+  - ember test
+
+cache:
+  bundler: true
+  directories:
+    - Ember/node_modules
+    - Ember/bower_components
+
 # safelist
-branches:
-  only:
-  - master
+# branches:
+#   only:
+#   - master
+#   - appt_resource

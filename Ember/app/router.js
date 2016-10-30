@@ -8,8 +8,12 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('admin-home');
-  this.route('booking-history');
-  this.route('my-calendar');
+  this.route('my-calendar', function() {
+    this.route('appointments', function() {
+      this.route('new');
+      this.route('show', { path: "/:appointments_id" });
+    });
+  });
   this.route('my-account');
   this.route('services', function() {
     this.route('new');
@@ -18,6 +22,7 @@ Router.map(function() {
   this.route('clients');
   this.route('employees');
   this.route('login');
+  this.route('appointment-history');
 });
 
 export default Router;

@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024011122) do
+ActiveRecord::Schema.define(version: 20161026010918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "day"
-    t.integer  "month"
-    t.integer  "year"
-    t.time     "start_time"
-    t.time     "end_time"
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "color",      default: "#AB00FF",             null: false
+    t.string   "text_color", default: "#FFFFFF",             null: false
+    t.string   "title",      default: "New Appointment",     null: false
+    t.datetime "start",      default: '2016-10-23 09:10:00', null: false
+    t.datetime "end",        default: '2016-12-31 09:10:00', null: false
+    t.text     "notes",      default: "",                    null: false
   end
 
   create_table "cars", force: :cascade do |t|
