@@ -9,5 +9,8 @@
 User.create({email: 'test@test.com', password: 'password', first_name: 'Tester', last_name: 'Testing', admin: true, employee: true})
 User.create({email: 'batman@batman.com', password: 'password', first_name: 'Bruce', last_name: 'Wayne', admin: false, employee: true})
 
-#used in appointments table to reference a deleted employee and cannot be deleted if referenced by appointments
+#used in appointments table to reference a deleted employee/car/service and cannot be deleted if referenced by appointments
 Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFUALT', postal_code: 'A0A 0A0'})
+Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFUALT', postal_code: 'A0A 0A0'})
+Car.create({ id: '0', make: 'DEFAULT', model: 'DEFAULT', size: 'small', interior: 'DEFAULT', colour: 'DEFAULT', client_id: '0'})
+Service.create({id: '0', name: 'DEFAULT'})
