@@ -37,7 +37,8 @@ class AppointmentsController < ApplicationController
 
 	def destroy
 		appointment=Appointment.find params[:id]
-		appointment.destroy
+		appointment.status="deleted"
+		appointment.save
 		head :no_content
 	end
 
