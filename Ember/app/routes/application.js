@@ -1,10 +1,21 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
+const { $ } = Ember;
 const { service } = Ember.inject;
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
+
+  renderTemplate(controller, model) {
+    this._super(controller, model);
+    //Used to toggle the nav bar closed when nav-item is clicked
+    $(document).on('click','.collapse.in',function(e) {
+      if($(e.target).is('a') && ( $(e.target).attr('class') !== 'dropdown' ) ) {
+         $(this).collapse('hide');
+       }
+    });
+  },
 
   beforeModel() {
     return this._loadCurrentUser();
@@ -18,11 +29,4 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   _loadCurrentUser() {
     return this.get('currentUser').load();
   }
-});
-
-//Used to toggle the nav bar closed when nav-item is clicked
-$(document).on('click','.collapse.in',function(e) {
-  if($(e.target).is('a') && ( $(e.target).attr('class') !== 'dropdown' ) ) {
-     $(this).collapse('hide');
-   }
 });
