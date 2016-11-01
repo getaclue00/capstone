@@ -1,7 +1,7 @@
-<div class="table-responsive" style="overflow-x:auto;">
+<div class="table-responsive">
   <h3 class="page-title">Manage Employees</h3>
   <table class="table table-hover employees-table">
-    <thead class="thead-inverse ">
+    <thead class="thead-inverse">
       <tr>
         <th><h1>Employee ID</h1></th>
         <th><h1>Last Name</h1></th>
@@ -9,6 +9,8 @@
         <th><h1>Email</h1></th>
         {{!-- <th>Address</th> --}}
         <th><h1>Phone</h1></th>
+        <th><h1>Start Date</h1></th>
+        <th><h1> </h1></th>
       </tr>
     </thead>
     <tbody>
@@ -18,16 +20,34 @@
             {{employee.id}}
           </td>
           <td>
-            {{employee.last_name}}
+            {{employee.lastName}}
           </td>
           <td>
-            {{employee.first_name}}
+            {{employee.firstName}}
           </td>
           <td>
             {{employee.email}}
           </td>
           <td>
-            {{employee.phone}}
+            {{employee.phoneNumber}}
+          </td>
+          <td>
+            {{employee.startDate}}
+          </td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="user-control-{{employee.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                &#9776;
+              </button>
+              <div class="dropdown-menu" aria-labelledby="user-control-{{employee.id}}">
+                <button type="submit" class="dropdown-item">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="submit" class="dropdown-item">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </div>
+            </div>
           </td>
         </tr>
       {{/each}}
@@ -38,11 +58,5 @@
      {{#link-to 'employees.new' class="btn btn-primary managing" }}
       <span class="glyphicon glyphicon-plus"></span>
      {{/link-to}}
-    <button type="submit" class="btn btn-primary managing">
-      <span class="glyphicon glyphicon-pencil"></span>
-    </button>
-    <button type="submit" class="btn btn-primary managing">
-      <span class="glyphicon glyphicon-minus"></span>
-    </button>
   </div>
 </div>
