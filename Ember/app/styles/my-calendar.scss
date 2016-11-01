@@ -23,8 +23,8 @@
 }
 
 .view-button:hover{
-  background: #EE2C2C;
-  border-color: #EE2C2C;
+  background: #FF6666;
+  border-color: #FF6666;
 }
 
 .fc-left h2 {
@@ -33,4 +33,24 @@
 
 .fc-nonbusiness {
   background-color: #787878;
+}
+
+.view-button:focus, .view-button.focus {
+  color: #fff;
+  background-color: #EE2C2C;
+  border-color: #EE2C2C;
+}
+.view-button:active, .view-button.active,
+.open > .view-button.dropdown-toggle {
+  color: #fff;
+  background-color: #EE2C2C;
+  border-color: #EE2C2C;
+}
+.view-button:active:hover, .view-button:active:focus, .view-button:active.focus, .view-button.active:hover, .view-button.active:focus, .view-button.active.focus,
+.open > .view-button.dropdown-toggle:hover,
+.open > .view-button.dropdown-toggle:focus,
+.open > .view-button.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #EE2C2C;
+  border-color: #EE2C2C;
 }
