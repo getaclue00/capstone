@@ -1,3 +1,9 @@
 FactoryGirl.define do
-#to be completed  
+  factory :appointment do
+    color "#AB00FF"
+    text_color "#FFFFFF"
+    title "New Appointment"
+    start '2016-10-23 09:10:00'
+    notes ""
+  end
 end
