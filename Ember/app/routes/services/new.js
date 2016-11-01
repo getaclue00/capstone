@@ -7,15 +7,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   actions: {
+
+    willTransition() {
+      let model = this.controller.get('model');
+      model.rollbackAttributes();
+    },
+
     goBackToListOfServices() {
       this.transitionTo('services');
     },
-
-    submitService() {
-      var newService = this.get('currentModel');
-      newService.save();
-      this.transitionToRoute('services');
-      window.location.reload(true);
-    }
   }
 });

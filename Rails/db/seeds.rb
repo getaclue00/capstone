@@ -12,3 +12,8 @@ User.create({email: 'batman@batman.com', password: 'password', first_name: 'Bruc
 Appointment.create({title: 'Batman Appointment'})
 Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.'})
 Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.'})
+
+Service.create({name: 'Engine Degreasing', price_small: '99', price_large: '99', duration: '90', description: '...'})
+Service.create({name: 'Platinum', price_small: '159', price_large: '179', duration: '150', description: '...'})
+Service.create({name: 'Silver', price_small: '90', price_large: '79', duration: '99', description: '...'})
+Service.create({name: 'Shampoo for Tough Stains and Spills', price_small: '100', price_large: '130', duration: '90', description: '...'})
