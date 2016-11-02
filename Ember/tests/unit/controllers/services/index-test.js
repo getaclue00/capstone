@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:my-calendar/appointments/new', 'Unit | Controller | my calendar/appointments/new', {
+moduleFor('controller:services/index', 'Unit | Controller | services/index', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

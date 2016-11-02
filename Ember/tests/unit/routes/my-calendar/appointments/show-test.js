@@ -1,12 +1,11 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 
-moduleFor('route:my-calendar/appointments/show', 'Unit | Route | my calendar/appointments/show', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+moduleFor('controller:my-calendar/appointments/show', 'Unit | Controller | my calendar/appointments/show', {
 });
 
-test('#deleteService transitions to services', function(assert) {
+test('#deleteAppointment transitionsTo my-calendar', function(assert) {
+  // let controller = this.subject();
   let controller = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
@@ -16,16 +15,17 @@ test('#deleteService transitions to services', function(assert) {
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'services');
+        assert.equal(route, 'my-calendar');
       }
   });
 
-  controller.send('deleteService');
+  controller.send('deleteAppointment');
 
   assert.ok(controller);
 });
 
-test('#deleteService will NOT transition to services', function(assert) {
+test('#deleteAppointment will NOT transitionsTo my-calendar', function(assert) {
+  // let controller = this.subject();
   let controller = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
@@ -35,15 +35,19 @@ test('#deleteService will NOT transition to services', function(assert) {
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'services');
+        assert.equal(route, 'my-calendar');
       }
   });
 
-  assert.throws(controller.send('destroyRecord'), "throws with just a message, not using the 'expected' argument");
+  // controller.send('deleteAppointment');
 
+  assert.throws(controller.send('deleteAppointment'), "throws with just a message, not using the 'expected' argument");
+
+  // assert.ok(controller);
 });
 
-test('#saveService transitions to services', function(assert) {
+test('#saveAppointment transitionsTo my-calendar', function(assert) {
+  // let controller = this.subject();
   let controller = this.subject({
       model: Ember.Object.create({
         save() {
@@ -53,16 +57,17 @@ test('#saveService transitions to services', function(assert) {
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'services');
+        assert.equal(route, 'my-calendar');
       }
   });
 
-  controller.send('saveService');
+  controller.send('saveAppointment');
 
   assert.ok(controller);
 });
 
-test('#saveService will NOT transition to service', function(assert) {
+test('#saveAppointment will NOT transitionsTo my-calendar', function(assert) {
+  // let controller = this.subject();
   let controller = this.subject({
       model: Ember.Object.create({
         save() {
@@ -72,11 +77,13 @@ test('#saveService will NOT transition to service', function(assert) {
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'service');
+        assert.equal(route, 'my-calendar');
       }
   });
 
-  assert.throws(controller.send('saveService'), "throws with just a message, not using the 'expected' argument");
+  // controller.send('deleteAppointment');
 
+  assert.throws(controller.send('saveAppointment'), "throws with just a message, not using the 'expected' argument");
+
+  // assert.ok(controller);
 });
-

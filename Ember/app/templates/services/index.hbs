@@ -1,0 +1,59 @@
+<div class="manage-services" style="overflow-x:auto;">
+  <h3 class="page-title">Manage Services</h3>
+  <table class="service-table">
+    <thead>
+      <tr>
+        <th><h1>List of Services</h1></th>
+        <th><h1>Duration</h1></th>
+        <th><h1>Price for Small Vehicle</h1></th>
+        <th><h1>Price for Large Vehicle</h1></th>
+        <th><h1>Description</h1></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="service-table-body">
+      {{#each model as |service|}}
+        <tr class="service-table-row">
+          <td>
+            <strong>{{service.name}}</strong>
+          </td>
+          <td>
+            {{service.duration}}
+          </td>
+          <td>
+            {{service.price_small}}
+          </td>
+          <td>
+            {{service.price_large}}
+          </td>
+          <td>
+            {{service.description}}
+          </td>
+
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="user-control-{{service.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                &#9776;
+              </button>
+              <div class="dropdown-menu" aria-labelledby="user-control-{{service.id}}">
+                <button type="submit" class="dropdown-item" onclick={{action "handleEditService" service}}>
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="submit" class="dropdown-item" onclick={{action "deleteService" service }}>
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br>
+  <div class="buttons">
+    <button onclick={{action "handleAddNewService"}} class="btn btn-primary managing">
+      <span class="glyphicon glyphicon-plus"></span> <span>Add New Service</span>
+    </button>
+  </div>
+  {{outlet}}
+</div>
