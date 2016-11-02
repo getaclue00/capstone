@@ -1,6 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  assignedEmployee: undefined,
+  assignedEmployeeStatement: Ember.computed('assignedEmployee', function() {
+    if(Ember.isEmpty(this.get('assignedEmployee'))){
+      return 'Unassigned';
+    } else {
+      return this.get('assignedEmployee.fullName');
+    }
+  }),
+
   actions: {
     saveAppointment() {
       let appointment = this.get('model');
@@ -19,6 +28,12 @@ export default Ember.Controller.extend({
       }
 
       appointment.save().then(transitionToPost).catch(failure);
+    },
+
+    assignedEmployee(employee) {
+      if(!Ember.isEmpty(employee)){
+        this.set('assignedEmployee', employee);
+      }
     }
   }
 });

@@ -1,6 +1,7 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
-const { Model, attr } = DS;
+const { Model, attr, hasMany } = DS;
 
 export default Model.extend({
   lastName:     attr('string'),
@@ -12,5 +13,9 @@ export default Model.extend({
   city:         attr('string'),
   province:     attr('string'),
   postalCode:   attr('string'),
-  startDate:    attr('isodate')
+  startDate:    attr('isodate'),
+  appointments: hasMany('appointment', { async: true }),
+  fullName: Ember.computed('lastName', 'firstName', function(){
+    return `${this.get('firstName')} ${this.get('lastName')}`;
+  })
 });
