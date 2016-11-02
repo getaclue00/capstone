@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
 
   actions: {
     saveAppointment() {
-      let appointment = this.get('model');
+      let appointment = this.get('appointment');
 
       var self = this;
 
@@ -32,6 +32,8 @@ export default Ember.Controller.extend({
 
     assignedEmployee(employee) {
       if(!Ember.isEmpty(employee)){
+        let model = this.get('appointment');
+        model.set('employee', employee);
         this.set('assignedEmployee', employee);
       }
     }
