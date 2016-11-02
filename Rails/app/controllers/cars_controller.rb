@@ -30,6 +30,8 @@ class CarsController < ApplicationController
 	      render json: { error: 'Car creation failed.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e
+	      render json: { error: 'Car associations not respected. Check your data.'}, status: :bad_request
 		end
 	end
 
@@ -44,7 +46,7 @@ class CarsController < ApplicationController
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	        render json: { error: 'Car update failed'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
-				render json: { error: 'No cars exist' }, status: :not_found
+				render json: { error: 'No such car exists' }, status: :not_found
 		end
 	end
 
@@ -54,7 +56,7 @@ class CarsController < ApplicationController
 			car.destroy
 			head :no_content
 		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No cars exist' }, status: :not_found
+			render json: { error: 'No such car exists' }, status: :not_found
 		end
 	end
 

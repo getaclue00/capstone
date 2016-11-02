@@ -1,6 +1,7 @@
 class ValidateServices < ActiveRecord::Migration[5.0]
   def up
   	
+  	change_column :services, :name, :string, :limit => 30
  	change_column_null :services, :name, false
 
  	#prices and duration and description can be null
@@ -14,6 +15,7 @@ class ValidateServices < ActiveRecord::Migration[5.0]
   end
   
   def down
+  	change_column :services, :name, :string, :limit => nil
  	change_column_null :services, :name, true
 
  	change_column :services, :price_small, :decimal, :precision => nil, :scale => nil 

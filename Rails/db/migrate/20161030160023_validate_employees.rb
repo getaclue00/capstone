@@ -4,8 +4,10 @@ class ValidateEmployees < ActiveRecord::Migration[5.0]
 
   	#city and province are not required for now
   	change_column :employees, :last_name, :string, :limit => 30
+    change_column_null :employees, :last_name, false
 
   	change_column :employees, :first_name, :string, :limit => 30
+    change_column_null :employees, :first_name, false
 
  	change_column :employees, :email, :string, :limit => 30
  	change_column_null :employees, :email, false
@@ -36,8 +38,10 @@ class ValidateEmployees < ActiveRecord::Migration[5.0]
   
   def down
   	change_column :employees, :last_name, :string, :limit => nil
+    change_column_null :employees, :last_name, true
 
   	change_column :employees, :first_name, :string, :limit => nil
+    change_column_null :employees, :first_name, true
 
   	change_column :employees, :email, :string, :limit => nil
   	change_column_null :employees, :email, true

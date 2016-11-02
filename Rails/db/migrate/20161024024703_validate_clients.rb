@@ -4,8 +4,10 @@ class ValidateClients < ActiveRecord::Migration[5.0]
 
   	#city and province are not required for now
   	change_column :clients, :last_name, :string, :limit => 30
+    change_column_null :clients, :last_name, true
 
   	change_column :clients, :first_name, :string, :limit => 30
+    change_column_null :clients, :first_name, true
 
  	  change_column :clients, :email, :string, :limit => 30
  	  change_column_null :clients, :email, false
@@ -30,8 +32,10 @@ class ValidateClients < ActiveRecord::Migration[5.0]
   
   def down
   	change_column :clients, :last_name, :string, :limit => nil
+    change_column_null :clients, :last_name, true
 
   	change_column :clients, :first_name, :string, :limit => nil
+    change_column_null :clients, :first_name, true
 
   	change_column :clients, :email, :string, :limit => nil
   	change_column_null :clients, :email, true

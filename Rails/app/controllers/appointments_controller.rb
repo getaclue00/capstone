@@ -29,6 +29,8 @@ class AppointmentsController < ApplicationController
 	      render json: { error: 'Appointment creation failed.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e
+	      render json: { error: 'Appointment associations not respected. Check your data.'}, status: :bad_request
 		end
 	end
 
@@ -43,7 +45,7 @@ class AppointmentsController < ApplicationController
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	        render json: { error: 'Appointment update failed'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
-				render json: { error: 'No appointments exist' }, status: :not_found
+				render json: { error: 'No such appointment exists' }, status: :not_found
 		end
 	end
 
@@ -54,7 +56,7 @@ class AppointmentsController < ApplicationController
 			appointment.save
 			head :no_content
 		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No appointments exist' }, status: :not_found
+			render json: { error: 'No such appointment exists' }, status: :not_found
 		end
 	end
 
@@ -66,7 +68,7 @@ class AppointmentsController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status] )
+		puts ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :car, :service, :employee] )
 	end
 
 end

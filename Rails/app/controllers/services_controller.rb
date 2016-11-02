@@ -43,7 +43,7 @@ class ServicesController < ApplicationController
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	        render json: { error: 'Service update failed'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
-				render json: { error: 'No services exist' }, status: :not_found
+				render json: { error: 'No such service exists' }, status: :not_found
 		end
 	end
 
@@ -53,7 +53,7 @@ class ServicesController < ApplicationController
 			service.destroy
 			head :no_content #used when we are not sending back content
 		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No services exist' }, status: :not_found
+			render json: { error: 'No such service exists' }, status: :not_found
 		end
 	end
 

@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	        render json: { error: 'Client update failed'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
-				render json: { error: 'No clients exist' }, status: :not_found
+				render json: { error: 'No such client exists' }, status: :not_found
 		end
 	end
 
@@ -56,7 +56,7 @@ class ClientsController < ApplicationController
 			client.destroy
 			head :no_content
 		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No clients exist' }, status: :not_found
+			render json: { error: 'No such client exists' }, status: :not_found
 		end
 	end
 

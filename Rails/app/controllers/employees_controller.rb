@@ -47,7 +47,7 @@ class EmployeesController < ApplicationController
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	        render json: { error: 'Employee update failed'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
-				render json: { error: 'No employees exist' }, status: :not_found
+				render json: { error: 'No such employee exists' }, status: :not_found
 		end
 	end
 
@@ -57,7 +57,7 @@ class EmployeesController < ApplicationController
 			employee.destroy
 			head :no_content
 		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No employees exist' }, status: :not_found
+			render json: { error: 'No such employee exists' }, status: :not_found
 		end
 	end
 

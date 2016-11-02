@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161030160023) do
+ActiveRecord::Schema.define(version: 20161102024748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20161030160023) do
   create_table "clients", force: :cascade do |t|
     t.string   "last_name",     limit: 30
     t.string   "first_name",    limit: 30
-    t.string   "email",         limit: 30, null: false
+    t.text     "email",                    null: false
     t.string   "phone_number",  limit: 12, null: false
     t.integer  "street_number",            null: false
     t.string   "street_name",   limit: 30, null: false
@@ -61,16 +61,16 @@ ActiveRecord::Schema.define(version: 20161030160023) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "last_name",     limit: 30
-    t.string   "first_name",    limit: 30
-    t.string   "email",         limit: 30,                        null: false
+    t.string   "last_name",     limit: 30,                        null: false
+    t.string   "first_name",    limit: 30,                        null: false
+    t.text     "email",                                           null: false
     t.string   "phone_number",  limit: 12,                        null: false
     t.integer  "street_number",                                   null: false
     t.string   "street_name",   limit: 30,                        null: false
     t.string   "city",          limit: 30
     t.string   "province",      limit: 30
     t.string   "postal_code",   limit: 7,                         null: false
-    t.date     "start_date",               default: '2016-10-31', null: false
+    t.date     "start_date",               default: '2016-11-02', null: false
     t.boolean  "is_admin",                 default: false,        null: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -78,13 +78,13 @@ ActiveRecord::Schema.define(version: 20161030160023) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",                                 null: false
-    t.decimal  "price_small", precision: 10, scale: 2
-    t.decimal  "price_large", precision: 10, scale: 2
-    t.decimal  "duration",    precision: 10, scale: 2
+    t.string   "name",        limit: 30,                          null: false
+    t.decimal  "price_small",            precision: 10, scale: 2
+    t.decimal  "price_large",            precision: 10, scale: 2
+    t.decimal  "duration",               precision: 10, scale: 2
     t.text     "description"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "users", force: :cascade do |t|
