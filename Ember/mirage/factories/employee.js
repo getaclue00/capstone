@@ -10,5 +10,9 @@ export default Factory.extend({
   city:         faker.address.city,
   province:     faker.address.state,
   postalCode:   faker.address.zipCode,
-  startDate:    faker.date.past
+  startDate:    faker.date.past,
+
+  afterCreate(employee, server) {
+    server.create('appointment', { employee });
+  }
 });
