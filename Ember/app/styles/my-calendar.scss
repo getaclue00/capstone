@@ -35,6 +35,11 @@
   background-color: #787878;
 }
 
+.fc-content:hover {
+  cursor: pointer;
+  cursor: hand;
+}
+
 .view-button:focus, .view-button.focus {
   color: #fff;
   background-color: #EE2C2C;
