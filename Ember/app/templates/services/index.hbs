@@ -9,48 +9,43 @@
         <th><h1>Price for Large Vehicle</h1></th>
         <th><h1>Description</h1></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody class="service-table-body">
       {{#each model as |service|}}
         <tr class="service-table-row">
-          <td>
+          <td class="service-column">
             <strong>{{service.name}}</strong>
           </td>
-          <td>
+          <td class="service-column">
             {{service.duration}}
           </td>
-          <td>
+          <td class="service-column">
             {{service.price_small}}
           </td>
-          <td>
+          <td class="service-column">
             {{service.price_large}}
           </td>
-          <td>
+          <td class="service-column">
             {{service.description}}
           </td>
-
-          <td>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="user-control-{{service.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                &#9776;
-              </button>
-              <div class="dropdown-menu" aria-labelledby="user-control-{{service.id}}">
-                <button type="submit" class="dropdown-item" onclick={{action "handleEditService" service}}>
-                  <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button type="submit" class="dropdown-item" onclick={{action "deleteService" service }}>
-                  <span class="glyphicon glyphicon-minus"></span>
-                </button>
-              </div>
-            </div>
+          <td class='service-operation'>
+            <button type="submit" class="dropdown-item" onclick={{action "handleEditService" service}}>
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </td>
+          <td class='service-operation'>
+            <button type="submit" class="dropdown-item" onclick={{action "deleteService" service }}>
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
           </td>
         </tr>
       {{/each}}
     </tbody>
   </table>
   <br>
-  <div class="buttons">
+  <div class="buttons service-button">
     <button onclick={{action "handleAddNewService"}} class="btn btn-primary managing">
       <span class="glyphicon glyphicon-plus"></span> <span>Add New Service</span>
     </button>
