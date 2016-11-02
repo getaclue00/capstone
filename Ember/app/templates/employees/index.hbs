@@ -40,10 +40,10 @@
                 &#9776;
               </button>
               <div class="dropdown-menu" aria-labelledby="user-control-{{employee.id}}">
-                <button type="submit" class="dropdown-item">
+                {{#link-to 'employees.show' employee.id class="dropdown-item"}}
                   <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button type="submit" class="dropdown-item">
+                {{/link-to}}
+                <button {{action 'deleteEmployee' employee }} class="dropdown-item">
                   <span class="glyphicon glyphicon-minus"></span>
                 </button>
               </div>

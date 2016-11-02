@@ -31,6 +31,31 @@ export default function() {
       return schema.employees.create(params);
     }
   });
+
+  this.get('/employees/:id', (schema, request) => {
+    let id = request.params.id;
+
+    return schema.employees.find(id);
+  });
+
+  this.patch('/employees/:id', function (schema, request) {
+    let id = request.params.id;
+    let employee = schema.employees.find(id);
+    if (request.requestBody){
+      let newData = this.normalizedRequestAttrs();
+      employee.update(newData);
+      return new Mirage.Response(204);
+    }
+    // return schema.employees.find(id);
+  });
+
+  this.del('/employees/:id', function (schema, request) {
+    let id = request.params.id;
+    let employee = schema.employees.find(id);
+
+    employee.destroy();
+  });
+
   // this.get('/employees', (schema, request) => {
   //   debugger;
   //   return schema.employees.all();
