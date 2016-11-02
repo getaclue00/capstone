@@ -1,0 +1,62 @@
+.my-calendar{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.my-calendar-title {
+  text-align: center;
+  font-size: 6vw;
+  font-weight: 300;
+  margin-bottom: 8%;
+  border-bottom: 1px solid black;
+}
+
+.my-calendar-view {
+  float: right;
+  margin-left: 0;
+  width: inherit;
+}
+
+.view-button {
+  color: #959595;
+  border-color: #959595;
+}
+
+.view-button:hover{
+  background: #FF6666;
+  border-color: #FF6666;
+}
+
+.fc-left h2 {
+  font-size: 5vw;
+}
+
+.fc-nonbusiness {
+  background-color: #787878;
+}
+
+.fc-event-container:hover {
+  cursor: pointer;
+  cursor: hand;
+  opacity: 0.5;
+}
+
+.view-button:focus, .view-button.focus {
+  color: #fff;
+  background-color: #EE2C2C;
+  border-color: #EE2C2C;
+}
+.view-button:active, .view-button.active,
+.open > .view-button.dropdown-toggle {
+  color: #fff;
+  background-color: #EE2C2C;
+  border-color: #EE2C2C;
+}
+.view-button:active:hover, .view-button:active:focus, .view-button:active.focus, .view-button.active:hover, .view-button.active:focus, .view-button.active.focus,
+.open > .view-button.dropdown-toggle:hover,
+.open > .view-button.dropdown-toggle:focus,
+.open > .view-button.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #EE2C2C;
+  border-color: #EE2C2C;
+}
