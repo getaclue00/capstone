@@ -17,8 +17,8 @@ export default function() {
   // THESE WORK ALREADY --- no need to mock these
   this.passthrough('/users/');
   this.passthrough('/users/:id');
-  this.passthrough('/appointments/');
-  this.passthrough('/appointments/:id');
+  // this.passthrough('/appointments/');
+  // this.passthrough('/appointments/:id');
 
   this.get('/employees', (schema) => {
     return schema.employees.all();
@@ -52,6 +52,38 @@ export default function() {
   this.del('/employees/:id', function (schema, request) {
     let id = request.params.id;
     let employee = schema.employees.find(id);
+
+    employee.destroy();
+  });
+
+  this.get('/appointments', (schema) => {
+    return schema.appointments.all();
+  });
+  this.post('/appointments', (schema, request) => {
+    var params = JSON.parse(request.requestBody);
+    return schema.appointments.create(params);
+  });
+
+  this.get('/appointments/:id', (schema, request) => {
+    let id = request.params.id;
+
+    return schema.appointments.find(id);
+  });
+
+  this.patch('/appointments/:id', function (schema, request) {
+    let id = request.params.id;
+    let employee = schema.appointments.find(id);
+    if (request.requestBody){
+      let newData = this.normalizedRequestAttrs();
+      employee.update(newData);
+      return new Mirage.Response(204);
+    }
+    // return schema.appointments.find(id);
+  });
+
+  this.del('/appointments/:id', function (schema, request) {
+    let id = request.params.id;
+    let employee = schema.appointments.find(id);
 
     employee.destroy();
   });
