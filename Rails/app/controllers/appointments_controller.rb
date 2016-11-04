@@ -52,8 +52,9 @@ class AppointmentsController < ApplicationController
 	def destroy
 	    begin
 			appointment=Appointment.find params[:id]
-			appointment.status="deleted"
-			appointment.save
+			# appointment.status="deleted"
+			# appointment.save
+			appointment.destroy
 			head :no_content
 		rescue ActiveRecord::RecordNotFound => e
 			render json: { error: 'No such appointment exists' }, status: :not_found
