@@ -14,11 +14,11 @@ class ModifyAppointmentsTable < ActiveRecord::Migration[5.0]
   end
 
   def down
-    add_column :appointments, :day
-    add_column :appointments, :month
-    add_column :appointments, :year
-    add_column :appointments, :start_time
-    add_column :appointments, :end_time
+    add_column :appointments, :day, :integer
+    add_column :appointments, :month, :integer
+    add_column :appointments, :year, :integer
+    add_column :appointments, :start_time, :time
+    add_column :appointments, :end_time, :time
     remove_column :appointments, :color, :string
     remove_column :appointments, :text_color, :string
     remove_column :appointments, :title, :string

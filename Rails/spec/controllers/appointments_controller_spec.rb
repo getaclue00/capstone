@@ -45,7 +45,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         get :show, params: { id: appointment.id }
 
-        puts result = JSON.parse(response.body)
+        result = JSON.parse(response.body)
 
         expect(result['data']['id'].to_i).to eq(appointment.id)
         expect(response).to have_http_status(:ok)

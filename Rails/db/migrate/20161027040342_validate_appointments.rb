@@ -18,7 +18,7 @@ class ValidateAppointments < ActiveRecord::Migration[5.0]
   change_column_null :appointments, :end, false
 
   #status may be: pending, completed, deleted (the appointment should not be deleted from db)
- 	change_column :appointments, :status, :string, :limit => 30, default: 'pending'
+ 	change_column :appointments, :status, :string, default: 'pending'
  	change_column_null :appointments, :status, false
   end
   
@@ -38,7 +38,7 @@ class ValidateAppointments < ActiveRecord::Migration[5.0]
   change_column :appointments, :end, :datetime, default: nil
   change_column_null :appointments, :end, true
 
- 	change_column :appointments, :status, :string, limit: nil, default: nil
+ 	change_column :appointments, :status, :string, default: nil
  	change_column_null :appointments, :status, true
   end
 end

@@ -5,7 +5,6 @@ FactoryGirl.define do
 	    size "small"
 	    interior "carInterior"
 	    colour "carColour"
-	    client_id "1"
 	    association(:client)
   	end 
 end
