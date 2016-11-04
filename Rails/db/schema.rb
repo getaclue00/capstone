@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20161102024748) do
     t.datetime "start",       default: '2016-10-23 09:10:00', null: false
     t.datetime "end",         default: '2016-12-31 09:10:00', null: false
     t.text     "notes"
-    t.integer  "car_id",                                      null: false
-    t.integer  "service_id",                                  null: false
+    t.integer  "car_id"
+    t.integer  "service_id"
     t.integer  "employee_id"
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
     t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
