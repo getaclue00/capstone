@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   create_table "clients", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
-    t.text     "email",                    null: false
+    t.string   "email",                    null: false
     t.string   "phone_number",  limit: 12, null: false
     t.integer  "street_number",            null: false
     t.string   "street_name",              null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   create_table "employees", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
-    t.text     "email"
+    t.string   "email"
     t.string   "phone_number",  limit: 12
     t.integer  "street_number"
     t.string   "street_name"
