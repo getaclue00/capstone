@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102024748) do
+ActiveRecord::Schema.define(version: 20161105170323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20161102024748) do
     t.string   "colour",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "client_id",  null: false
+    t.integer  "client_id"
     t.index ["client_id"], name: "index_cars_on_client_id", using: :btree
   end
 
@@ -61,30 +61,34 @@ ActiveRecord::Schema.define(version: 20161102024748) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "last_name",                                       null: false
-    t.string   "first_name",                                      null: false
-    t.text     "email",                                           null: false
-    t.string   "phone_number",  limit: 12,                        null: false
-    t.integer  "street_number",                                   null: false
-    t.string   "street_name",                                     null: false
+    t.string   "last_name"
+    t.string   "first_name"
+    t.text     "email"
+    t.string   "phone_number",  limit: 12
+    t.integer  "street_number"
+    t.string   "street_name"
     t.string   "city"
     t.string   "province"
-    t.string   "postal_code",   limit: 7,                         null: false
-    t.date     "start_date",               default: '2016-11-04', null: false
-    t.boolean  "is_admin",                 default: false,        null: false
+    t.string   "postal_code",   limit: 7
+    t.date     "start_date",               default: '2016-11-05'
+    t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.date     "end_date"
+    t.text     "notes"
     t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",                                 null: false
+    t.string   "name",                                                null: false
     t.decimal  "price_small", precision: 10, scale: 2
     t.decimal  "price_large", precision: 10, scale: 2
     t.decimal  "duration",    precision: 10, scale: 2
     t.text     "description"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.boolean  "active",                               default: true, null: false
+    t.boolean  "displayable",                          default: true, null: false
   end
 
   create_table "users", force: :cascade do |t|
