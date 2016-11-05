@@ -1,5 +1,7 @@
 class CreateEmployees < ActiveRecord::Migration[5.0]
   def change
+    #The default primary key for all Active Record models is id. 
+    #The timestamps macro adds two columns, created_at and updated_at.
     create_table :employees do |t|
       t.string :last_name
       t.string :first_name
