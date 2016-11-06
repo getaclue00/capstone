@@ -18,27 +18,43 @@ class ServicesController < ApplicationController
 	end
 
 	def create
-		@service=Service.new(service_sanitized_params)
-		if(@service.save)
-			render json: @service, status: :created
-		else
-			render json: { error: 'Service creation failed'}, status: :bad_request
+		begin
+	        service=Service.new(service_sanitized_params)
+	        if service.save!
+	  			render json: service, status: :created
+	  		else
+	  			render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	      render json: { error: 'Service creation failed.'}, status: :bad_request
+	    rescue ActiveRecord::StatementInvalid => e
+	      render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
 	def update
-		service=Service.find params[:id]
-		if(service.update(service_sanitized_params))
-			render json: service, status: :ok
-		else
-			render json: { error: 'Service update failed'}, status: :bad_request
+		begin
+			service=Service.find params[:id]
+	        if service.update!(service_sanitized_params)
+	  			render json: service, status: :ok
+	  		else
+	  			render json: { error: 'Service update failed'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	        render json: { error: 'Service update failed'}, status: :bad_request
+		rescue ActiveRecord::RecordNotFound => e
+				render json: { error: 'No such service exists' }, status: :not_found
 		end
 	end
 
 	def destroy
-		service=Service.find params[:id]
-		service.destroy
-		head :no_content #used when we are not sending back content
+		begin
+			service=Service.find params[:id]
+			service.destroy
+			head :no_content #used when we are not sending back content
+		rescue ActiveRecord::RecordNotFound => e
+			render json: { error: 'No such service exists' }, status: :not_found
+		end
 	end
 
 
