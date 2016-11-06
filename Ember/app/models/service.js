@@ -1,9 +1,13 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  name: DS.attr('string', { defaultValue: '' }),
-  duration: DS.attr('number', { defaultValue: '60.00' }),
-  price_small: DS.attr('number', { defaultValue: '100.00' }),
-  price_large: DS.attr('number', { defaultValue: '120.00' }),
-  description: DS.attr('string', { defaultValue: '...' }),
+const { attr, Model } = DS;
+
+export default Model.extend({
+  name:         attr('string', { defaultValue: '' }),
+  duration:     attr('number', { defaultValue: '60.00' }),
+  price_small:  attr('number', { defaultValue: '100.00' }),
+  price_large:  attr('number', { defaultValue: '120.00' }),
+  description:  attr('string', { defaultValue: '...' }),
+  active:       attr('boolean', { defaultValue: false }),
+  displayable:  attr('boolean', { defaultValue: false }),
 });

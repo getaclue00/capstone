@@ -7,7 +7,8 @@
         <th><h1>Duration</h1></th>
         <th><h1>Price for Small Vehicle</h1></th>
         <th><h1>Price for Large Vehicle</h1></th>
-        <th><h1>Description</h1></th>
+        <th><h1>Active</h1></th>
+        <th><h1>Displayable</h1></th>
         <th></th>
         <th></th>
       </tr>
@@ -28,7 +29,10 @@
             {{service.price_large}}
           </td>
           <td class="service-column">
-            {{service.description}}
+            {{service.active}}
+          </td>
+          <td class="service-column">
+            {{service.displayable}}
           </td>
           <td class='service-operation'>
             <button type="submit" class="dropdown-item" onclick={{action "handleEditService" service}}>
