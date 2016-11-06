@@ -83,7 +83,9 @@ RSpec.describe ServicesController, :type => :controller do
                 "price_small":120.0,
                 "price_large":250.0,
                 "duration":1.5,
-                "description":"This is a description"
+                "description":"This is a description",
+                "active":"false",
+                "displayable":"false"
               },
               "type":"services"
               }
@@ -94,7 +96,7 @@ RSpec.describe ServicesController, :type => :controller do
 
         post :create, params: {data: params['data']}
 
-        puts result = JSON.parse(response.body)
+        result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
       end
@@ -109,7 +111,9 @@ RSpec.describe ServicesController, :type => :controller do
                 "price_small":"f",
                 "price_large":250.0,
                 "duration":1.5,
-                "description":"This is a description"
+                "description":"This is a description",
+                "active":"false",
+                "displayable":"false"
               },
               "type":"services"
               }
@@ -118,8 +122,7 @@ RSpec.describe ServicesController, :type => :controller do
         params = JSON.parse(data.to_json)
 
         post :create, params: {data: params['data']}
-
-        puts result = JSON.parse(response.body)
+        result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:bad_request)
         expect(result['error']).to eq('Service creation failed. Check your data.')
