@@ -10,7 +10,9 @@ FactoryGirl.define do
     province "Ontario"
     postal_code "H7H 5U5"
     start_date "2013-10-22"
+    end_date "2015-11-19"
     is_admin true
+    notes "This is a note"
   
     factory :employee_with_appointment do
     after(:create) do |employee|

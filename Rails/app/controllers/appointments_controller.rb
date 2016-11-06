@@ -20,6 +20,9 @@ class AppointmentsController < ApplicationController
 	def create
 	    begin
 	        appointment=Appointment.new(appointment_sanitized_params)
+	        puts"appointment sanitized params is"
+	        puts appointment_sanitized_params
+	        puts json: appointment
 	        if appointment.save!
 	  			render json: appointment, status: :created
 	  		else
@@ -69,7 +72,7 @@ class AppointmentsController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :car, :service, :employee] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :service, :car, :employee] )
 	end
 
 end
