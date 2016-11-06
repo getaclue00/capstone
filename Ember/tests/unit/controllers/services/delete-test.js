@@ -1,15 +1,15 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 
-moduleFor('controller:services/show', 'Unit | Controller | services/show', {
+moduleFor('controller:services/delete', 'Unit | Controller | services/delete', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
 
-test('#saveService transitions to services', function(assert) {
+test('#deleteService remains on services page following a deletion', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
-        save() {
+        destroyRecord() {
           return new Ember.RSVP.Promise(function(resolve) {
             resolve(true);
           });
@@ -19,26 +19,24 @@ test('#saveService transitions to services', function(assert) {
         assert.equal(route, 'services');
       }
   });
-
-  controller.send('updateService');
+  controller.send('deleteService');
 
   assert.ok(controller);
 });
 
-test('#saveService will NOT transition to service', function(assert) {
+test('#deleteService remains on services page following a failed deletion', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
-        save() {
+        destroyRecord() {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not destroy a record' });
           });
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'service');
+        assert.equal(route, 'services');
       }
   });
-
-  assert.throws(controller.send('updateService'), "throws with just a message, not using the 'expected' argument");
+  assert.throws(controller.send('deleteService'), "throws with just a message, not using the 'expected' argument");
 
 });

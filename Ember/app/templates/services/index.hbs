@@ -20,13 +20,13 @@
             <strong>{{service.name}}</strong>
           </td>
           <td class="service-column">
-            {{service.duration}}
+            {{service.duration}}min
           </td>
           <td class="service-column">
-            {{service.price_small}}
+            ${{service.price_small}}
           </td>
           <td class="service-column">
-            {{service.price_large}}
+            ${{service.price_large}}
           </td>
           <td class="service-column">
             {{service.active}}
@@ -40,7 +40,7 @@
             </button>
           </td>
           <td class='service-operation'>
-            <button type="submit" class="dropdown-item" onclick={{action "deleteService" service }}>
+            <button type="submit" class="dropdown-item" onclick={{action "handleDeleteService" service }}>
               <span class="glyphicon glyphicon-minus"></span>
             </button>
           </td>

@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('services', function() {
     this.route('new');
     this.route('show', { path: "/:services_id" });
+    this.route('delete', { path: "/delete/:services_id" });
   });
   this.route('clients');
   this.route('employees');

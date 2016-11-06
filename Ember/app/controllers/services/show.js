@@ -7,25 +7,6 @@ export default Ember.Controller.extend({
       this.transitionToRoute('services');
     },
 
-    deleteService() {
-      var self = this;
-      let service = this.get('model');
-
-      function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
-        self.transitionToRoute('services');
-      }
-
-      function failure(error) {
-        // handle the error
-        throw error.message;
-      }
-
-      service.destroyRecord()
-        .then(transitionToPost)
-        .catch(failure);
-    },
-
     updateService() {
       var self = this;
 
