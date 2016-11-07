@@ -14,13 +14,13 @@
       </tr>
     </thead>
     <tbody class="service-table-body">
-      {{#each model as |service|}}
+      {{#each sortedServices as |service|}}
         <tr class="service-table-row">
           <td class="service-column">
             <strong>{{service.name}}</strong>
           </td>
           <td class="service-column">
-            {{service.duration}}min
+            {{service.duration}} min
           </td>
           <td class="service-column">
             ${{service.price_small}}
