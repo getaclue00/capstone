@@ -1,0 +1,21 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Delete Service</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          {{
+            confirmation-modal
+            model=model
+          }}
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align: center">
+        <button type="button" class="btn btn-primary delete-service" data-dismiss="modal" style="background-color: red" {{action 'deleteService'}}>Yes</button>
+        <button type="button" class="btn btn-secondary delete-service" data-dismiss="modal" {{action 'goBackToListOfServices'}}>No</button>
+      </div>
+    </div>
+  </div>
+</div>

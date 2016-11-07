@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   end
 
   create_table "employees", force: :cascade do |t|
+
     t.string   "last_name",     limit: 30
     t.string   "first_name",    limit: 30
     t.text     "email",                                           null: false
