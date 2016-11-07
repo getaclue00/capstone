@@ -1,7 +1,10 @@
+// This is the controller for the new page of services
+
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
+    // Action for saving a new service
     saveService() {
       let service = this.get('model');
 
