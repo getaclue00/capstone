@@ -11,5 +11,5 @@ export default Model.extend({
   description:  attr('string', { defaultValue: '...' }),
   active:       attr('boolean', { defaultValue: false }),
   displayable:  attr('boolean', { defaultValue: false }),
-  appointments: hasMany('appointment', { async: true }),
+  appointments: hasMany('appointment', { async: true })
 });

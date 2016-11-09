@@ -5,6 +5,19 @@
       {{input class="form-control" value=model.title id="appointment-title"}}
     </div>
   </div>
+  <div class="btn-group appointment-button-div">
+    <label for="service" class="col-xs-4 col-form-label">Service</label>
+    <div class="col-xs-8">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     {{selectedServiceStatement}}
+      </button>
+      <div class="dropdown-menu">
+        {{#each services as |service|}}
+          <button class="dropdown-item" {{action 'selectService' service model}}>{{service.name}}</button>
+        {{/each}}
+      </div>
+    </div>
+  </div>
   <div class="form-group row">
     <label for="appointment-background-color" class="col-xs-4 col-form-label">Background Color</label>
     <div class="col-xs-8">
@@ -29,18 +42,6 @@
     <div class="col-xs-8">
       {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.end}}
       <small>Temp: {{model.end}}</small>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="service" class="col-xs-4 col-form-label">Service</label>
-    <div class="col-xs-8">
-      {{#x-select action='selectService' id="service-select" value=model.service}}
-        {{#each services as |service|}}
-          {{#x-option value=service.id}}
-            {{service.name}}
-          {{/x-option}}
-        {{/each}}
-      {{/x-select}}
     </div>
   </div>
   <div class="form-group row">
