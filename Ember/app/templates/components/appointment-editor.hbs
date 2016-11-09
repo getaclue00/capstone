@@ -32,6 +32,18 @@
     </div>
   </div>
   <div class="form-group row">
+    <label for="service-active" class="col-xs-4 col-form-label">Service</label>
+    <div class="col-xs-8">
+      {{#x-select action='selectService' id="service-select"}}
+        {{#each services as |service|}}
+          {{#x-option value=service.id}}
+            {{service.name}}
+          {{/x-option}}
+        {{/each}}
+      {{/x-select}}
+    </div>
+  </div>
+  <div class="form-group row">
     <label for="appointment-notes" class="col-xs-4 col-form-label">Notes</label>
     <div class="col-xs-8">
       {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}

@@ -11,11 +11,11 @@ export default Ember.Component.extend({
   actions: {
 
     // Used to change the selected value for service's displayable attribute
-    selectDisplayable(value, component) {
+    selectDisplayable(value) {
       this.set('model.displayable', value);
     },
     // Used to change the selected value for service's active attribute
-    selectActive(value, component) {
+    selectActive(value) {
       this.set('model.active', value);
     }
   }

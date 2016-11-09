@@ -1,6 +1,7 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
-const { attr, Model } = DS;
+const { Model, attr, hasMany } = DS;
 
 export default Model.extend({
   name:         attr('string', { defaultValue: '' }),
@@ -10,4 +11,5 @@ export default Model.extend({
   description:  attr('string', { defaultValue: '...' }),
   active:       attr('boolean', { defaultValue: false }),
   displayable:  attr('boolean', { defaultValue: false }),
+  appointments: hasMany('appointment', { async: true }),
 });
