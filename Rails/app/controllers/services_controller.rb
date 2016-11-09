@@ -39,10 +39,10 @@ class ServicesController < ApplicationController
 	        	#this calls the ServiceSerializer
 	  			render json: service, status: :ok
 	  		else
-	  			render json: { error: 'Service update failed'}, status: :bad_request
+	  			render json: { error: 'Service update failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Service update failed'}, status: :bad_request
+	        render json: { error: 'Service update failed.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such service exists' }, status: :not_found
 		end

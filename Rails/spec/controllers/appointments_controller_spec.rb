@@ -94,12 +94,12 @@ RSpec.describe AppointmentsController, :type => :controller do
    #              "status":"pending"
    #            },
    #            "type":"appointments"
-   #            },
-   #             "relationships": {
-   #              "service":{"data":{"id": service.id,"type":"services"}},
-   #              "car":{"data":{"id": car.id,"type":"cars"}},
-   #              "employee":{"data":{"id": employee.id,"type":"employees"}}  
    #            }
+   #            #  "relationships": {
+   #            #   "service":{"data":{"id": service.id,"type":"services"}},
+   #            #   "car":{"data":{"id": car.id,"type":"cars"}},
+   #            #   "employee":{"data":{"id": employee.id,"type":"employees"}}  
+   #            # }
    #          }
 
    #      params = JSON.parse(data.to_json)

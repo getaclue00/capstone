@@ -81,7 +81,7 @@ RSpec.describe EmployeesController, :type => :controller do
     end
 
     context 'when the data is there' do
-      it 'returns a succesful response' do
+      it 'returns a successful response' do
         data = {
           "data": {
               "attributes": {
@@ -180,7 +180,7 @@ RSpec.describe EmployeesController, :type => :controller do
         patch :update, params: { id: employee.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Employee update failed')
+        expect(result['error']).to eq('Employee update failed.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -230,6 +230,40 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(response).to have_http_status(:ok)
       end
     end
+
+        context 'when the employee exists and the incorrect params were sent' do
+      it "responds successfully" do
+        employee = FactoryGirl.create :employee_with_appointment
+        employee.last_name = "testing"
+        employee.first_name = "test"
+        employee.email = "test@yahoo.com"
+        # employee.phone_number = "000"
+        employee.street_number = "pp"
+        employee.street_name = "Albert Street"
+        employee.city = "Ottawa"
+        employee.province = "Ontario"
+        # employee.postal_code = "J2"
+        employee.start_date = "jj"
+        employee.end_date = "20"
+        employee.is_admin = false
+        employee.notes = "test note"
+
+        # Create a serializer instance
+        serializer = EmployeeSerializer.new(employee)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+       
+        patch :update, params: {id: employee.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['error']).to eq("Employee update failed. Check your data.")
+
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
   end
 
   describe 'DELETE Employees#destroy' do
@@ -267,4 +301,4 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
   end
- end
+end

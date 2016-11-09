@@ -162,7 +162,7 @@ RSpec.describe ServicesController, :type => :controller do
         patch :update, params: { id: service.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Service update failed')
+        expect(result['error']).to eq('Service update failed.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -201,6 +201,11 @@ RSpec.describe ServicesController, :type => :controller do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    #no test to updating with invalid attributes
+    #invalid attributes passed to an update dont result in failures, they si,ply result in 0 values being assigned
+
+      
   end
 
   describe 'DELETE Services#destroy' do
