@@ -15,9 +15,9 @@ FactoryGirl.define do
     notes "This is a note"
   
     factory :employee_with_appointment do
-    after(:create) do |employee|
-      create(:appointment, employee: employee)
+        after(:create) do |employee|
+            create(:appointment, employee: employee)
+        end
     end
-  end
   end
 end

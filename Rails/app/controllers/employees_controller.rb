@@ -33,6 +33,8 @@ class EmployeesController < ApplicationController
 	      render json: { error: 'Employee creation failed.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
@@ -69,7 +71,7 @@ class EmployeesController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :is_admin] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :end_date, :is_admin, :notes] )
 	end
 end
 

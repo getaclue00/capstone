@@ -53,9 +53,9 @@ RSpec.describe ServicesController, :type => :controller do
         attr = result["data"]["attributes"];
         
         expect(attr["name"]).to eq("serviceA")
-        expect(attr["price_small"]).to eq("120.0")
-        expect(attr["price_large"]).to eq("250.0")
-        expect(attr["duration"]).to eq("2.0")
+        expect(attr["price_small"].to_f).to eq(120.0)
+        expect(attr["price_large"].to_f).to eq(250.0)
+        expect(attr["duration"].to_f).to eq(2.0)
         expect(attr["description"]).to eq("This is a description")
         expect(attr["active"]).to eq(true)
         expect(attr["displayable"]).to eq(false)
@@ -159,7 +159,7 @@ RSpec.describe ServicesController, :type => :controller do
       it "responds with a bad request" do
         service = FactoryGirl.create :service_with_appointment
 
-        patch :update, params: { id: service }
+        patch :update, params: { id: service.id }
 
         result = JSON.parse(response.body)
         expect(result['error']).to eq('Service update failed')
