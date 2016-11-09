@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     saveAppointment() {
-      let appointment = this.get('model');
+      let appointment = this.get('appointment');
 
       var self = this;
 
@@ -19,6 +19,6 @@ export default Ember.Controller.extend({
       }
 
       appointment.save().then(transitionToPost).catch(failure);
-    }
+    },
   }
 });
