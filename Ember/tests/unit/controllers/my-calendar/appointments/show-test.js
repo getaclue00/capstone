@@ -49,7 +49,7 @@ test('#deleteAppointment will NOT transitionsTo my-calendar', function(assert) {
 test('#saveAppointment transitionsTo my-calendar', function(assert) {
   // let controller = this.subject();
   let controller = this.subject({
-      model: Ember.Object.create({
+      appointment: Ember.Object.create({
         save() {
           return new Ember.RSVP.Promise(function(resolve) {
             resolve(true);
@@ -69,7 +69,7 @@ test('#saveAppointment transitionsTo my-calendar', function(assert) {
 test('#saveAppointment will NOT transitionsTo my-calendar', function(assert) {
   // let controller = this.subject();
   let controller = this.subject({
-      model: Ember.Object.create({
+      appointment: Ember.Object.create({
         save() {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not destroy a record' });
