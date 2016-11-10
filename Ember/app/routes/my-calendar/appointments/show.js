@@ -11,6 +11,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
 
+  setupController(controller, models) {
+    controller.setProperties(models);
+  },
+
   actions: {
     goBackToCalendar() {
       this.transitionTo('my-calendar');

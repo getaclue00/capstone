@@ -9,7 +9,11 @@
     <label for="service" class="col-xs-4 col-form-label">Service</label>
     <div class="col-xs-8">
       <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-     {{selectedServiceStatement}}
+      {{#if model.service.name}}
+        {{model.service.name}}
+      {{else}}
+        {{selectedServiceStatement}}
+      {{/if}}
       </button>
       <div class="dropdown-menu">
         {{#each services as |service|}}
