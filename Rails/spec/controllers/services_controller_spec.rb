@@ -42,6 +42,7 @@ RSpec.describe ServicesController, :type => :controller do
     context 'when the service exists' do
       it 'returns the service data' do
         service = FactoryGirl.create :service_with_appointment
+        appointment_id = service.appointments[0].id
 
         get :show, params: { id: service.id }
 
@@ -59,6 +60,10 @@ RSpec.describe ServicesController, :type => :controller do
         expect(attr["description"]).to eq("This is a description")
         expect(attr["active"]).to eq(true)
         expect(attr["displayable"]).to eq(false)
+        #VERIFYING EMPLOYEE POINTS TO OBJECTS
+        expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
+        #VERIFYING THAT OBJECTS POINT TO EMPLOYEE
+        expect(Appointment.find(appointment_id).service.id).to eq (service.id)
       end
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe CarsController, :type => :controller do
 
     context 'when there are cars' do
       it "returns with a successful response and the cars" do
-        FactoryGirl.create_list(:car, 5)
+        FactoryGirl.create_list(:car_with_appointment, 5)
         get :index
         result = JSON.parse(response.body)
         expect(result['data'].length).to eq(5)
@@ -41,8 +41,9 @@ RSpec.describe CarsController, :type => :controller do
 
     context 'when the car exists' do
       it 'returns the car data' do
-        car = FactoryGirl.create :car
+        car = FactoryGirl.create :car_with_appointment
         client_id = car.client.id
+        appointment_id = car.appointments[0].id
         
 
         get :show, params: { id: car.id }
@@ -61,8 +62,10 @@ RSpec.describe CarsController, :type => :controller do
         expect(attr["colour"]).to eq("carColour")
         #VERIFYING CAR POINTS TO OBJECTS
         expect(result["data"]["relationships"]["client"]["data"]["id"].to_i).to eq(client_id)
+        expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
         #VERIFYING THAT OBJECTS POINT TO CAR
         expect(Client.find(client_id).cars[0].id).to eq (car.id)
+        expect(Appointment.find(appointment_id).car.id).to eq (car.id)
       end
     end
   end
@@ -168,7 +171,7 @@ RSpec.describe CarsController, :type => :controller do
     context 'when no such car exists' do
       it 'returns an error' do
 
-        car = FactoryGirl.create :car
+        car = FactoryGirl.create :car_with_appointment
         car.make = "Updated make"
 
         # Create a serializer instance
@@ -189,7 +192,7 @@ RSpec.describe CarsController, :type => :controller do
 
     context 'when the car exists and the update had no params sent' do
       it "responds with a bad request" do
-        car = FactoryGirl.create :car
+        car = FactoryGirl.create :car_with_appointment
 
         patch :update, params: { id: car.id }
 
@@ -201,7 +204,7 @@ RSpec.describe CarsController, :type => :controller do
 
     context 'when the car exists and the correct params were sent' do
       it "responds successfully" do
-        car = FactoryGirl.create :car
+        car = FactoryGirl.create :car_with_appointment
         client = FactoryGirl.create :client
         car.make = "Updated make"
         car.model = "Updated model"
@@ -239,7 +242,7 @@ RSpec.describe CarsController, :type => :controller do
 
     context 'when the car exists and the incorrect params were sent' do
       it "responds successfully" do
-        car = FactoryGirl.create :car
+        car = FactoryGirl.create :car_with_appointment
         car.make = "Updated make"
         car.model = "Updated model"
         car.size = "jj"
@@ -261,6 +264,8 @@ RSpec.describe CarsController, :type => :controller do
         expect(response).to have_http_status(:bad_request)
       end
     end
+
+    #NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
  
    end
 
@@ -275,13 +280,27 @@ RSpec.describe CarsController, :type => :controller do
       end
     end
 
-    context 'when the car exists' do
+    context 'when the car exists and has no appointments' do
       it 'should delete it' do
         car = FactoryGirl.create :car
 
         delete :destroy, params: { id: car.id }
 
         expect(response).to have_http_status(:no_content)
+      end
+    end
+
+    context 'when the car exists and has appointments' do
+      it 'should delete it' do
+        FactoryGirl.create :car, :id => 0 #needed for FK constraints when handling associated appointments
+        car = FactoryGirl.create :car_with_appointment
+        appt_id = car.appointments[0].id
+
+        delete :destroy, params: { id: car.id }
+
+        expect(response).to have_http_status(:no_content)
+        #validate that associated appointments service id set to 0
+        expect(Appointment.find(appt_id).car_id).to eq (0)
       end
     end
   end

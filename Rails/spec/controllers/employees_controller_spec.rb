@@ -42,6 +42,7 @@ RSpec.describe EmployeesController, :type => :controller do
     context 'when the employee exists' do
       it 'returns the employee data' do
         employee = FactoryGirl.create :employee_with_appointment
+        appointment_id = employee.appointments[0].id
 
         get :show, params: { id: employee.id }
 
@@ -64,6 +65,10 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(attr["end_date"]).to eq("2015-11-19")
         expect(attr["is_admin"]).to eq(true)
         expect(attr["notes"]).to eq("This is a note")
+        #VERIFYING EMPLOYEE POINTS TO OBJECTS
+        expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
+        #VERIFYING THAT OBJECTS POINT TO EMPLOYEE
+        expect(Appointment.find(appointment_id).employee.id).to eq (employee.id)
       end
     end
   end

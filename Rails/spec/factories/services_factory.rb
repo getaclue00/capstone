@@ -13,5 +13,5 @@ FactoryGirl.define do
       create(:appointment, service: service)
     end
   end
-end
+  end
 end
