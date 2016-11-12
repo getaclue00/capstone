@@ -80,7 +80,7 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
 
-    context 'when the data is there' do
+    context 'when the data is there and is correct' do
       it 'returns a successful response' do
         data = {
           "data": {
@@ -107,8 +107,6 @@ RSpec.describe EmployeesController, :type => :controller do
         params = JSON.parse(data.to_json)
 
         post :create, params: {data: params['data']}
-
-        result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
       end
@@ -231,21 +229,21 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
 
-        context 'when the employee exists and the incorrect params were sent' do
+    context 'when the employee exists and the incorrect params were sent' do
       it "responds successfully" do
         employee = FactoryGirl.create :employee_with_appointment
         employee.last_name = "testing"
         employee.first_name = "test"
         employee.email = "test@yahoo.com"
-        # employee.phone_number = "000"
+        employee.phone_number = "000"
         employee.street_number = "pp"
         employee.street_name = "Albert Street"
         employee.city = "Ottawa"
         employee.province = "Ontario"
-        # employee.postal_code = "J2"
+        employee.postal_code = "J2"
         employee.start_date = "jj"
-        employee.end_date = "20"
-        employee.is_admin = false
+        employee.end_date = "kk"
+        employee.is_admin = "hh"
         employee.notes = "test note"
 
         # Create a serializer instance

@@ -75,7 +75,7 @@ RSpec.describe ServicesController, :type => :controller do
       end
     end
 
-    context 'when the data is there' do
+    context 'when the data is there and is correct' do
       it 'returns a succesful response' do
         data = {
           "data": {
@@ -96,8 +96,6 @@ RSpec.describe ServicesController, :type => :controller do
         params = JSON.parse(data.to_json)
 
         post :create, params: {data: params['data']}
-
-        result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
       end
@@ -203,7 +201,7 @@ RSpec.describe ServicesController, :type => :controller do
     end
 
     #no test to updating with invalid attributes
-    #invalid attributes passed to an update dont result in failures, they si,ply result in 0 values being assigned
+    #invalid attributes passed to an update dont result in failures, they simply result in 0 values being assigned
 
       
   end

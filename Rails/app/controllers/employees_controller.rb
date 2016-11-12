@@ -31,7 +31,7 @@ class EmployeesController < ApplicationController
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	      render json: { error: 'Employee creation failed.'}, status: :bad_request
-	    rescue ActiveRecord::StatementInvalid => e
+	    rescue ActiveRecord::StatementInvalid => e #thrown when violations in migrations are violated
 	      render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
 	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
 	      render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
@@ -51,8 +51,6 @@ class EmployeesController < ApplicationController
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such employee exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
-	      render json: { error: 'Employee update failed. Check your data.'}, status: :bad_request
-	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Employee update failed. Check your data.'}, status: :bad_request
 		end
 	end
