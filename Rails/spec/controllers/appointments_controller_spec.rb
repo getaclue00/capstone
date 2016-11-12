@@ -95,7 +95,7 @@ RSpec.describe AppointmentsController, :type => :controller do
           "data": {
             "type": "appointments",
             "attributes": {
-              "color":"#AB00FF",
+                "color":"#AB00FF",
                 "text_color":"#FFFFFF",
                 "title":"New Appointment 123 5",
                 "start":"2016-11-08T00:00:00.000Z",
@@ -136,6 +136,39 @@ RSpec.describe AppointmentsController, :type => :controller do
               "type":"appointments"
               }
             }
+
+        params = JSON.parse(data.to_json)
+
+        post :create, params: {data: params['data']}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq('Appointment creation failed. Check your data.')
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    context 'when the data is there but FK constraint not respected' do
+      it 'returns a succesful response' do
+        data = {
+          "data": {
+            "type": "appointments",
+            "attributes": {
+                "color":"#AB00FF",
+                "text_color":"#FFFFFF",
+                "title":"New Appointment 123 5",
+                "start":"2016-11-08T00:00:00.000Z",
+                "end":"2016-11-08T00:00:00.000Z",
+                "notes":"test note",
+                "status":"pending"
+            },
+            "relationships": {
+              "service":{"data":{"type":"services", "id": 9}},
+              "car":{"data":{"type":"cars", "id": 9}},
+              "employee":{"data":{"type":"employees", "id": 9}}  
+            }
+          }
+        }
 
         params = JSON.parse(data.to_json)
 
@@ -258,10 +291,10 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         expect(response).to have_http_status(:bad_request)
       end
-    end  
+    end 
 
-
-   end
+    #NOTE THAT UPDATING THE APPOINMTMENT WITH A NON EXISTENT SERVICE/EMPLOYEE/CLIENT ID SETS THE FEILD TO NIL 
+  end
 
   describe 'DELETE Appointments#destroy' do
     context 'when there are no appointments by such an id' do

@@ -52,6 +52,7 @@ class AppointmentsController < ApplicationController
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request
 		end
+		#NOTE THAT UPDATING THE APPOINMTMENT WITH A NON EXISTENT SERVICE/EMPLOYEE/CLIENT ID SETS THE FEILD TO NIL
 	end
 
 	def destroy
