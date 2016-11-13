@@ -102,6 +102,8 @@ RSpec.describe ServicesController, :type => :controller do
 
         post :create, params: {data: params['data']}
 
+        result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:created)
       end
     end
