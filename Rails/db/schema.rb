@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "last_name"
-    t.string   "first_name"
+    t.string   "last_name",                null: false
+    t.string   "first_name",               null: false
     t.string   "email",                    null: false
     t.string   "phone_number",  limit: 12, null: false
     t.integer  "street_number",            null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20161105170323) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-10'
+    t.date     "start_date",               default: '2016-11-12'
     t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false

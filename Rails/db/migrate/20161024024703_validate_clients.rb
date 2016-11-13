@@ -3,9 +3,9 @@ class ValidateClients < ActiveRecord::Migration[5.0]
     # note that there are additional checks in the model
 
   	#city and province are not required for now
-    change_column_null :clients, :last_name, true
+    change_column_null :clients, :last_name, false
 
-    change_column_null :clients, :first_name, true
+    change_column_null :clients, :first_name, false
 
  	  change_column_null :clients, :email, false
  	  add_index :clients, :email, unique: true

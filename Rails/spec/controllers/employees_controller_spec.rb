@@ -122,7 +122,6 @@ RSpec.describe EmployeesController, :type => :controller do
         data = {
           "data": {
               "attributes": {
-                #name is mandatory
                 "last_name": "Radwan",
                 "first_name": "Nada",
                 "email": "test@test.com", #appended n to make it unique
@@ -191,19 +190,19 @@ RSpec.describe EmployeesController, :type => :controller do
     context 'when the employee exists and the correct params were sent' do
       it "responds successfully" do
         employee = FactoryGirl.create :employee_with_appointment
-        employee.last_name = "testing"
-        employee.first_name = "test"
-        employee.email = "test@yahoo.com"
-        employee.phone_number = "000-000-0000"
-        employee.street_number = 45
-        employee.street_name = "Albert Street"
-        employee.city = "Ottawa"
-        employee.province = "Ontario"
+        employee.last_name = "updated lastName"
+        employee.first_name = "updated firstName"
+        employee.email = "oo@yahoo.com"
+        employee.phone_number = "444-222-4567"
+        employee.street_number = 3
+        employee.street_name = "updated Street"
+        employee.city = "updated city"
+        employee.province = "updated province"
         employee.postal_code = "J2J 9Q9"
         employee.start_date = "2058-12-12"
         employee.end_date = "2060-11-11"
         employee.is_admin = false
-        employee.notes = "test note"
+        employee.notes = "updated note"
 
         # Create a serializer instance
         serializer = EmployeeSerializer.new(employee)
@@ -219,6 +218,7 @@ RSpec.describe EmployeesController, :type => :controller do
         attr = parsed_response['data']['attributes']      
         expect(attr["last_name"]).to eq(employee.last_name)
         expect(attr["first_name"]).to eq(employee.first_name)
+        expect(attr["email"]).to eq(employee.email)
         expect(attr["phone_number"]).to eq(employee.phone_number)
         expect(attr["street_number"].to_i).to eq(employee.street_number)
         expect(attr["street_name"]).to eq(employee.street_name)
@@ -240,12 +240,12 @@ RSpec.describe EmployeesController, :type => :controller do
         employee.last_name = "testing"
         employee.first_name = "test"
         employee.email = "test@yahoo.com"
-        employee.phone_number = "000"
+        employee.phone_number = "0"
         employee.street_number = "pp"
         employee.street_name = "Albert Street"
         employee.city = "Ottawa"
         employee.province = "Ontario"
-        employee.postal_code = "J2"
+        employee.postal_code = "J6"
         employee.start_date = "jj"
         employee.end_date = "kk"
         employee.is_admin = "hh"

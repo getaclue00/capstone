@@ -32,6 +32,8 @@ class ClientsController < ApplicationController
 	      render json: { error: 'Client creation failed.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
@@ -44,9 +46,11 @@ class ClientsController < ApplicationController
 	  			render json: { error: 'Client update failed'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Client update failed'}, status: :bad_request
+	        render json: { error: 'Client update failed.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such client exists' }, status: :not_found
+		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Client update failed. Check your data.'}, status: :bad_request
 		end
 	end
 
