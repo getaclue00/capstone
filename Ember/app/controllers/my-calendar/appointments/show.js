@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
         self.transitionToRoute('my-calendar');
       }
 
-      function failure(reason) {
+      function failure(error) {
         // handle the error
         throw error.message;
       }
