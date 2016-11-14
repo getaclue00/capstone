@@ -33,8 +33,7 @@ export default Ember.Controller.extend({
 
       function failure(reason) {
         // handle the error
-        console.error('There was an error saving an appointment: ');
-        console.error(reason);
+        throw error.message;
       }
 
       appointment.save()
