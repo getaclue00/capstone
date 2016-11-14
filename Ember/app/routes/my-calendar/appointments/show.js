@@ -7,7 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let id = params.appointments_id;
     return Ember.RSVP.hash({
       appointment: this.get('store').findRecord('appointment', id),
-      services: this.store.findAll('service')
+      services: this.get('store').findAll('service')
     });
   },
 

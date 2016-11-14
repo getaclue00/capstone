@@ -9,7 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
 
     willTransition() {
-      let model = this.controller.get('model');
+      let model = this.get('controller.model');
       model.rollbackAttributes();
     },
 

@@ -9,7 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         start: new Date(clickedDate),
         end: new Date(clickedDate)
       }),
-      services: this.store.findAll('service')
+      services: this.get('store').findAll('service')
     });
   },
 

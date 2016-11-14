@@ -19,6 +19,6 @@ export default Ember.Controller.extend({
       }
 
       appointment.save().then(transitionToPost).catch(failure);
-    },
+    }
   }
 });
