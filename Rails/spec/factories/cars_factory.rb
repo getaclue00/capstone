@@ -6,5 +6,11 @@ FactoryGirl.define do
 	    interior "carInterior"
 	    colour "carColour"
 	    association(:client)
+
+	factory :car_with_appointment do
+    	after(:create) do |car|
+      		create(:appointment, car: car)
+    	end
+  	end
   	end 
 end

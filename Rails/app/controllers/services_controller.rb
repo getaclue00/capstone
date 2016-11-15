@@ -36,12 +36,13 @@ class ServicesController < ApplicationController
 		begin
 			service=Service.find params[:id]
 	        if service.update!(service_sanitized_params)
+	        	#this calls the ServiceSerializer
 	  			render json: service, status: :ok
 	  		else
-	  			render json: { error: 'Service update failed'}, status: :bad_request
+	  			render json: { error: 'Service update failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Service update failed'}, status: :bad_request
+	        render json: { error: 'Service update failed.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such service exists' }, status: :not_found
 		end
@@ -65,6 +66,7 @@ class ServicesController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
+		#this changes from JSONAPI to json
 		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:name, :price_small, :price_large, :duration, :description, :active, :displayable] )
 	end
 end

@@ -28,10 +28,10 @@ class CarsController < ApplicationController
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	      render json: { error: 'Car creation failed.'}, status: :bad_request
-	    rescue ActiveRecord::StatementInvalid => e
+	    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected
 	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
 	    rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Car associations not respected. Check your data.'}, status: :bad_request
+	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
@@ -44,10 +44,13 @@ class CarsController < ApplicationController
 	  			render json: { error: 'Car update failed'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Car update failed'}, status: :bad_request
+	        render json: { error: 'Car update failed.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such car exists' }, status: :not_found
+		rescue ActiveRecord::RecordInvalid => e
+	      render json: { error: 'Car update failed. Check your data.'}, status: :bad_request
 		end
+		#NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
 	end
 
 	def destroy
@@ -68,7 +71,7 @@ class CarsController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:make, :model, :size, :interior, :colour] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:make, :model, :size, :interior, :colour, :client] )
 	end
 end
 

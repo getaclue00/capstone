@@ -12,7 +12,7 @@ class Car < ApplicationRecord
     def get_associated_objects
         apts_array = Car.find(self[:id]).appointment_ids
 	    for i in 0.. apts_array.size-1
-	        Appointment.update!(apts_array[i], :car_id => '0')
+	        Appointment.update(apts_array[i], :car_id => '0')
 	    end 
     end
 end
