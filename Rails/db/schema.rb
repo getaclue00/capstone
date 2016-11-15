@@ -16,17 +16,17 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "status",      limit: 30, default: "pending",             null: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
-    t.string   "color",                  default: "#AB00FF",             null: false
-    t.string   "text_color",             default: "#FFFFFF",             null: false
-    t.string   "title",                  default: "New Appointment",     null: false
-    t.datetime "start",                  default: '2016-10-23 09:10:00', null: false
-    t.datetime "end",                    default: '2016-12-31 09:10:00', null: false
+    t.string   "status",      default: "pending",             null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "color",       default: "#AB00FF",             null: false
+    t.string   "text_color",  default: "#FFFFFF",             null: false
+    t.string   "title",       default: "New Appointment",     null: false
+    t.datetime "start",       default: '2016-10-23 09:10:00', null: false
+    t.datetime "end",         default: '2016-12-31 09:10:00', null: false
     t.text     "notes"
-    t.integer  "car_id",                                                 null: false
-    t.integer  "service_id",                                             null: false
+    t.integer  "car_id"
+    t.integer  "service_id"
     t.integer  "employee_id"
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
     t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
@@ -34,14 +34,14 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   end
 
   create_table "cars", force: :cascade do |t|
-    t.string   "make",       limit: 30, null: false
-    t.string   "model",      limit: 30, null: false
-    t.string   "size",       limit: 30, null: false
-    t.string   "interior",   limit: 30, null: false
-    t.string   "colour",     limit: 30, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "client_id",             null: false
+    t.string   "make",       null: false
+    t.string   "model",      null: false
+    t.string   "size",       null: false
+    t.string   "interior",   null: false
+    t.string   "colour",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "client_id"
     t.index ["client_id"], name: "index_cars_on_client_id", using: :btree
   end
 
@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 20161105170323) do
     t.string   "email",                    null: false
     t.string   "phone_number",  limit: 12, null: false
     t.integer  "street_number",            null: false
-    t.string   "street_name",   limit: 30, null: false
-    t.string   "city",          limit: 30
-    t.string   "province",      limit: 30
+    t.string   "street_name",              null: false
+    t.string   "city"
+    t.string   "province"
     t.string   "postal_code",   limit: 7,  null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20161105170323) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-12'
+    t.date     "start_date",               default: '2016-11-15'
     t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
