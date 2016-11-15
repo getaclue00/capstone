@@ -13,7 +13,7 @@ class Employee < ActiveRecord::Base
     def get_associated_objects
         apts_array = Employee.find(self[:id]).appointment_ids 
         for i in 0.. apts_array.size-1
-            Appointment.update!(apts_array[i], :employee_id => '0')
+            Appointment.update(apts_array[i], :employee_id => '0')
         end
     end
 end

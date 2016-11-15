@@ -7,6 +7,8 @@ FactoryGirl.define do
 	  	street_number "45"
 	  	street_name "test"
 	  	postal_code "A0A 0A0"
+	  	city "Ottawa"
+	  	province "Ontario"
 
 	factory :client_with_car do
     	after(:create) do |client|
