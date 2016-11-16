@@ -22,8 +22,9 @@ export default Ember.Controller.extend({
     },
 
     saveAppointment() {
+      let appointment = this.get('appointment');
+
       var self = this;
-      let appointment = this.get('model');
 
       function transitionToPost() {
         Ember.$('#myModal').modal('hide');
@@ -36,8 +37,8 @@ export default Ember.Controller.extend({
       }
 
       appointment.save()
-        .then(transitionToPost)
-        .catch(failure);
+       .then(transitionToPost)
+       .catch(failure);
     }
   }
 });

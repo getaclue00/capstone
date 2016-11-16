@@ -6,7 +6,7 @@
 }
 
 .service-table {
-  text-align: left;
+  text-align: center;
   overflow: hidden;
   width: 100%;
   padding-right: 15px;
@@ -14,8 +14,21 @@
   font-size: 1vw;
 }
 
-.service-table td, .service-table th {
+.service-column, .service-table th {
   padding: 2% 2% 2% 2%;
+}
+
+.service-operation {
+  padding: 2% 1%;
+}
+
+.service-operation > button > span {
+  color: #d30b07;
+}
+
+.service-operation:hover {
+  background-color: #fffaef;
+  color: #EE2C2C;
 }
 
 .service-table tr:nth-child(odd) {
@@ -35,3 +48,12 @@
  color: #fffaef;
 }
 
+.service-toggle-menu {
+  padding: 20%;
+  font-size: 1.5vw;
+}
+
+.delete-service {
+  padding: 2.5% 7.5%;
+  margin: 0% 10%;
+}

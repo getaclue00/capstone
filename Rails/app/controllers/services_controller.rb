@@ -9,7 +9,7 @@ class ServicesController < ApplicationController
 	end
 
 	def show
-		begin 
+		begin
 			service=Service.find params[:id]
 			render json: service, status: :ok
 		rescue ActiveRecord::RecordNotFound => e
@@ -60,10 +60,10 @@ class ServicesController < ApplicationController
 
 
 	#anything beneath the key word private is private
-	private 
+	private
 
 		def service_sanitized_params
-		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
+		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
 		#this changes from JSONAPI to json
@@ -71,4 +71,4 @@ class ServicesController < ApplicationController
 	end
 end
 
-  
+

@@ -1,0 +1,66 @@
+<div class="manage-services" style="overflow-x:auto;">
+  <h3 class="page-title">Manage Services</h3>
+  <table class="service-table">
+    <thead>
+      <tr>
+        <th><h1>List of Services</h1></th>
+        <th><h1>Duration</h1></th>
+        <th><h1>Price for Small Vehicle</h1></th>
+        <th><h1>Price for Large Vehicle</h1></th>
+        <th><h1>Active</h1></th>
+        <th><h1>Displayable</h1></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="service-table-body">
+      {{#each sortedServices as |service|}}
+        <tr class="service-table-row">
+          <td class="service-column">
+            <strong>{{service.name}}</strong>
+          </td>
+          <td class="service-column">
+            {{service.duration}} min
+          </td>
+          <td class="service-column">
+            ${{service.price_small}}
+          </td>
+          <td class="service-column">
+            ${{service.price_large}}
+          </td>
+          <td class="service-column">
+            {{#if service.active}}
+              Yes
+            {{else}}
+              No
+            {{/if}}
+          </td>
+          <td class="service-column">
+            {{#if service.displayable}}
+              Yes
+            {{else}}
+              No
+            {{/if}}
+          </td>
+          <td class='service-operation'>
+            <button type="submit" class="dropdown-item" onclick={{action "handleEditService" service}}>
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </td>
+          <td class='service-operation'>
+            <button type="submit" class="dropdown-item" onclick={{action "handleDeleteService" service }}>
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br>
+  <div class="buttons service-button">
+    <button onclick={{action "handleAddNewService"}} class="managing">
+      <span class="glyphicon glyphicon-plus"></span> <span>Add New Service</span>
+    </button>
+  </div>
+  {{outlet}}
+</div>
