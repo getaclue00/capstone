@@ -22,27 +22,47 @@ class EmployeesController < ApplicationController
 	end
 
 	def create
-		@employee=Employee.new(employee_sanitized_params)
-		if(@employee.save)
-			render json: @employee, status: :created
-		else
-			render json: { error: 'Employee creation failed'}, status: :bad_request
+		begin
+	        employee=Employee.new(employee_sanitized_params)
+	        if employee.save!
+	  			render json: employee, status: :created
+	  		else
+	  			render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	      render json: { error: 'Employee creation failed.'}, status: :bad_request
+	    rescue ActiveRecord::StatementInvalid => e #thrown when violations in migrations are violated
+	      render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
 	def update
-		employee=Employee.find params[:id]
-		if(employee.update(employee_sanitized_params))
-			render json: employee, status: :ok
-		else
-			render json: { error: 'Employee update failed'}, status: :bad_request
+		begin
+			employee=Employee.find params[:id]
+	        if employee.update!(employee_sanitized_params)
+	  			render json: employee, status: :ok
+	  		else
+	  			render json: { error: 'Employee update failed. Check your data.'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	        render json: { error: 'Employee update failed.'}, status: :bad_request
+		rescue ActiveRecord::RecordNotFound => e
+				render json: { error: 'No such employee exists' }, status: :not_found
+		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Employee update failed. Check your data.'}, status: :bad_request
 		end
 	end
 
 	def destroy
-		employee=Employee.find params[:id]
-		employee.destroy
-		head :no_content
+		begin
+			employee=Employee.find params[:id]
+			employee.destroy
+			head :no_content
+		rescue ActiveRecord::RecordNotFound => e
+			render json: { error: 'No such employee exists' }, status: :not_found
+		end
 	end
 
 
@@ -53,7 +73,7 @@ class EmployeesController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :is_admin] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :end_date, :is_admin, :notes] )
 	end
 end
 

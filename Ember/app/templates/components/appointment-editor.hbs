@@ -5,6 +5,23 @@
       {{input class="form-control" value=model.title id="appointment-title"}}
     </div>
   </div>
+  <div class="form-group row appointment-button-div">
+    <label for="service" class="col-xs-4 col-form-label">Service</label>
+    <div class="col-xs-8 appointment-button">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{#if model.service.name}}
+        {{model.service.name}}
+      {{else}}
+        None
+      {{/if}}
+      </button>
+      <div class="dropdown-menu">
+        {{#each services as |service|}}
+          <button class="dropdown-item" {{action 'selectService' service model}}>{{service.name}}</button>
+        {{/each}}
+      </div>
+    </div>
+  </div>
   <div class="form-group row">
     <label for="appointment-background-color" class="col-xs-4 col-form-label">Background Color</label>
     <div class="col-xs-8">

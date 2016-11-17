@@ -10,71 +10,85 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026010918) do
+ActiveRecord::Schema.define(version: 20161105170323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "status"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "color",      default: "#AB00FF",             null: false
-    t.string   "text_color", default: "#FFFFFF",             null: false
-    t.string   "title",      default: "New Appointment",     null: false
-    t.datetime "start",      default: '2016-10-23 09:10:00', null: false
-    t.datetime "end",        default: '2016-12-31 09:10:00', null: false
-    t.text     "notes",      default: "",                    null: false
+    t.string   "status",      default: "pending",             null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "color",       default: "#AB00FF",             null: false
+    t.string   "text_color",  default: "#FFFFFF",             null: false
+    t.string   "title",       default: "New Appointment",     null: false
+    t.datetime "start",       default: '2016-10-23 09:10:00', null: false
+    t.datetime "end",         default: '2016-12-31 09:10:00', null: false
+    t.text     "notes"
+    t.integer  "car_id"
+    t.integer  "service_id"
+    t.integer  "employee_id"
+    t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
+    t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
+    t.index ["service_id"], name: "index_appointments_on_service_id", using: :btree
   end
 
   create_table "cars", force: :cascade do |t|
-    t.string   "make"
-    t.string   "model"
-    t.string   "size"
-    t.string   "interior"
-    t.string   "colour"
+    t.string   "make",       null: false
+    t.string   "model",      null: false
+    t.string   "size",       null: false
+    t.string   "interior",   null: false
+    t.string   "colour",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "client_id"
+    t.index ["client_id"], name: "index_cars_on_client_id", using: :btree
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "email"
-    t.string   "phone_number"
-    t.integer  "street_number"
-    t.string   "street_name"
+    t.string   "last_name",                null: false
+    t.string   "first_name",               null: false
+    t.string   "email",                    null: false
+    t.string   "phone_number",  limit: 12, null: false
+    t.integer  "street_number",            null: false
+    t.string   "street_name",              null: false
     t.string   "city"
     t.string   "province"
-    t.string   "postal_code"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "postal_code",   limit: 7,  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
     t.string   "email"
-    t.string   "phone_number"
+    t.string   "phone_number",  limit: 12
     t.integer  "street_number"
     t.string   "street_name"
     t.string   "city"
     t.string   "province"
-    t.string   "postal_code"
-    t.date     "start_date"
-    t.boolean  "is_admin"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "postal_code",   limit: 7
+    t.date     "start_date",               default: '2016-11-15'
+    t.boolean  "is_admin",                 default: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.date     "end_date"
+    t.text     "notes"
+    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "name"
-    t.decimal  "price_small"
-    t.decimal  "price_large"
-    t.decimal  "duration"
+    t.string   "name",                                                 null: false
+    t.decimal  "price_small", precision: 10, scale: 2
+    t.decimal  "price_large", precision: 10, scale: 2
+    t.decimal  "duration",    precision: 10, scale: 2
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.boolean  "active",                               default: false, null: false
+    t.boolean  "displayable",                          default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -104,4 +118,8 @@ ActiveRecord::Schema.define(version: 20161026010918) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "appointments", "cars"
+  add_foreign_key "appointments", "employees"
+  add_foreign_key "appointments", "services"
+  add_foreign_key "cars", "clients"
 end

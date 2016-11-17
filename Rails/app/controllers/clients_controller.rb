@@ -21,27 +21,47 @@ class ClientsController < ApplicationController
 	end
 
 	def create
-		@client=Client.new(client_sanitized_params)
-		if(@client.save)
-			render json: @client, status: :created
-		else
-			render json: { error: 'Client creation failed'}, status: :bad_request
+		begin
+	        client=Client.new(client_sanitized_params)
+	        if client.save!
+	  			render json: client, status: :created
+	  		else
+	  			render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	      render json: { error: 'Client creation failed.'}, status: :bad_request
+	    rescue ActiveRecord::StatementInvalid => e
+	      render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
 	def update
-		client=Client.find params[:id]
-		if(client.update(client_sanitized_params))
-			render json: client, status: :ok
-		else
-			render json: { error: 'Client update failed'}, status: :bad_request
+		begin
+			client=Client.find params[:id]
+	        if client.update!(client_sanitized_params)
+	  			render json: client, status: :ok
+	  		else
+	  			render json: { error: 'Client update failed'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	        render json: { error: 'Client update failed.'}, status: :bad_request
+		rescue ActiveRecord::RecordNotFound => e
+				render json: { error: 'No such client exists' }, status: :not_found
+		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	      render json: { error: 'Client update failed. Check your data.'}, status: :bad_request
 		end
 	end
 
 	def destroy
-		client=Client.find params[:id]
-		client.destroy
-		head :no_content
+		begin
+			client=Client.find params[:id]
+			client.destroy
+			head :no_content
+		rescue ActiveRecord::RecordNotFound => e
+			render json: { error: 'No such client exists' }, status: :not_found
+		end
 	end
 
 

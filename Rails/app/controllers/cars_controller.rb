@@ -19,27 +19,48 @@ class CarsController < ApplicationController
 	end
 
 	def create
-		@car=Car.new(car_sanitized_params)
-		if(@car.save)
-			render json: @car, status: :created
-		else
-			render json: { error: 'Car creation failed'}, status: :bad_request
+		begin
+	        car=Car.new(car_sanitized_params)
+	        if car.save!
+	  			render json: car, status: :created
+	  		else
+	  			render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	      render json: { error: 'Car creation failed.'}, status: :bad_request
+	    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected
+	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::RecordInvalid => e
+	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
 		end
 	end
 
 	def update
-		car=Car.find params[:id]
-		if(car.update(car_sanitized_params))
-			render json: car, status: :ok
-		else
-			render json: { error: 'Car update failed'}, status: :bad_request
+		begin
+			car=Car.find params[:id]
+	        if car.update!(car_sanitized_params)
+	  			render json: car, status: :ok
+	  		else
+	  			render json: { error: 'Car update failed'}, status: :bad_request
+	  		end
+	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+	        render json: { error: 'Car update failed.'}, status: :bad_request
+		rescue ActiveRecord::RecordNotFound => e
+				render json: { error: 'No such car exists' }, status: :not_found
+		rescue ActiveRecord::RecordInvalid => e
+	      render json: { error: 'Car update failed. Check your data.'}, status: :bad_request
 		end
+		#NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
 	end
 
 	def destroy
-		car=Car.find params[:id]
-		car.destroy
-		head :no_content
+		begin
+			car=Car.find params[:id]
+			car.destroy
+			head :no_content
+		rescue ActiveRecord::RecordNotFound => e
+			render json: { error: 'No such car exists' }, status: :not_found
+		end
 	end
 
 
@@ -50,7 +71,7 @@ class CarsController < ApplicationController
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:make, :model, :size, :interior, :colour] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:make, :model, :size, :interior, :colour, :client] )
 	end
 end
 
