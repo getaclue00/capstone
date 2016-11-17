@@ -1,4 +1,4 @@
-import Mirage from 'ember-cli-mirage';
+// import Mirage from 'ember-cli-mirage';
 
 export default function() {
 
@@ -17,76 +17,80 @@ export default function() {
   // THESE WORK ALREADY --- no need to mock these
   this.passthrough('/users/');
   this.passthrough('/users/:id');
-  // this.passthrough('/appointments/');
-  // this.passthrough('/appointments/:id');
+  this.passthrough('/services/');
+  this.passthrough('/services/:id');
+  this.passthrough('/employees/');
+  this.passthrough('/employees/:id');
+  this.passthrough('/appointments/');
+  this.passthrough('/appointments/:id');
 
-  this.get('/employees', (schema) => {
-    return schema.employees.all();
-  });
-  this.post('/employees', (schema, request) => {
-    var params = JSON.parse(request.requestBody);
-    if (!params.data.attributes.last_name || !params.data.attributes.first_name) {
-      return new Mirage.Response(422, {some: 'header'}, {errors: {title: ['cannot be blank']}});
-    } else {
-      return schema.employees.create(params);
-    }
-  });
+  // this.get('/employees', (schema) => {
+  //   return schema.employees.all();
+  // });
+  // this.post('/employees', (schema, request) => {
+  //   var params = JSON.parse(request.requestBody);
+  //   if (!params.data.attributes.last_name || !params.data.attributes.first_name) {
+  //     return new Mirage.Response(422, {some: 'header'}, {errors: {title: ['cannot be blank']}});
+  //   } else {
+  //     return schema.employees.create(params);
+  //   }
+  // });
+  //
+  // this.get('/employees/:id', (schema, request) => {
+  //   let id = request.params.id;
+  //
+  //   return schema.employees.find(id);
+  // });
+  //
+  // this.patch('/employees/:id', function (schema, request) {
+  //   let id = request.params.id;
+  //   let employee = schema.employees.find(id);
+  //   if (request.requestBody){
+  //     let newData = this.normalizedRequestAttrs();
+  //     employee.update(newData);
+  //     return new Mirage.Response(204);
+  //   }
+  //   // return schema.employees.find(id);
+  // });
+  //
+  // this.del('/employees/:id', function (schema, request) {
+  //   let id = request.params.id;
+  //   let employee = schema.employees.find(id);
+  //
+  //   employee.destroy();
+  // });
 
-  this.get('/employees/:id', (schema, request) => {
-    let id = request.params.id;
-
-    return schema.employees.find(id);
-  });
-
-  this.patch('/employees/:id', function (schema, request) {
-    let id = request.params.id;
-    let employee = schema.employees.find(id);
-    if (request.requestBody){
-      let newData = this.normalizedRequestAttrs();
-      employee.update(newData);
-      return new Mirage.Response(204);
-    }
-    // return schema.employees.find(id);
-  });
-
-  this.del('/employees/:id', function (schema, request) {
-    let id = request.params.id;
-    let employee = schema.employees.find(id);
-
-    employee.destroy();
-  });
-
-  this.get('/appointments', (schema) => {
-    return schema.appointments.all();
-  });
-  this.post('/appointments', (schema, request) => {
-    var params = JSON.parse(request.requestBody);
-    return schema.appointments.create(params);
-  });
-
-  this.get('/appointments/:id', (schema, request) => {
-    let id = request.params.id;
-
-    return schema.appointments.find(id);
-  });
-
-  this.patch('/appointments/:id', function (schema, request) {
-    let id = request.params.id;
-    let employee = schema.appointments.find(id);
-    if (request.requestBody){
-      let newData = this.normalizedRequestAttrs();
-      employee.update(newData);
-      return new Mirage.Response(204);
-    }
-    // return schema.appointments.find(id);
-  });
-
-  this.del('/appointments/:id', function (schema, request) {
-    let id = request.params.id;
-    let employee = schema.appointments.find(id);
-
-    employee.destroy();
-  });
+  // this.get('/appointments', (schema) => {
+  //   return schema.appointments.all();
+  // });
+  // this.post('/appointments', (schema, request) => {
+  //   var params = JSON.parse(request.requestBody);
+  //   return schema.appointments.create(params);
+  // });
+  //
+  // this.get('/appointments/:id', (schema, request) => {
+  //   let id = request.params.id;
+  //
+  //   return schema.appointments.find(id);
+  // });
+  //
+  // this.patch('/appointments/:id', function (schema, request) {
+  //   let id = request.params.id;
+  //   let employee = schema.appointments.find(id);
+  //   if (request.requestBody){
+  //     let newData = this.normalizedRequestAttrs();
+  //     employee.update(newData);
+  //     return new Mirage.Response(204);
+  //   }
+  //   // return schema.appointments.find(id);
+  // });
+  //
+  // this.del('/appointments/:id', function (schema, request) {
+  //   let id = request.params.id;
+  //   let employee = schema.appointments.find(id);
+  //
+  //   employee.destroy();
+  // });
 
   // this.get('/employees', (schema, request) => {
   //   debugger;

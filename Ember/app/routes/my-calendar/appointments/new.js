@@ -21,8 +21,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     willTransition() {
-      let model = this.controller.get('appointment');
-      model.rollbackAttributes();
+      // check if any attributes have been changed
+      let appointment = this.get('controller.appointment');
+
+      if (appointment.get('hasDirtyAttributes')) {
+        // remove any changes since they would be commited via Save button
+        // this would be a good place to prompt user to see if they want to save the changes
+        appointment.rollbackAttributes();
+      }
     },
 
     goBackToCalendar() {
