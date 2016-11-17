@@ -9,3 +9,9 @@ test:
   encoding: utf8
   database: rad_testing
   pool: 5
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: rad_production
+  pool: 5

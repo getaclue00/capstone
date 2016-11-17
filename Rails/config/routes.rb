@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   resources :cars
   resources :services
   resources :appointments
+
+  # Wild card for production
+  get '*path' => redirect('/')
 end
