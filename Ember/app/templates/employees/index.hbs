@@ -10,7 +10,11 @@
         {{!-- <th>Address</th> --}}
         <th><h1>Phone</h1></th>
         <th><h1>Start Date</h1></th>
-        <th><h1> </h1></th>
+        <th><h1>End Date</h1></th>
+        <th><h1>Admin</h1></th>
+        <th><h1>Notes</h1></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -35,19 +39,23 @@
             {{employee.startDate}}
           </td>
           <td>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="user-control-{{employee.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                &#9776;
-              </button>
-              <div class="dropdown-menu" aria-labelledby="user-control-{{employee.id}}">
-                {{#link-to 'employees.show' employee.id class="dropdown-item"}}
-                  <span class="glyphicon glyphicon-pencil"></span>
-                {{/link-to}}
-                <button {{action 'deleteEmployee' employee }} class="dropdown-item">
-                  <span class="glyphicon glyphicon-minus"></span>
-                </button>
-              </div>
-            </div>
+            {{employee.endDate}}
+          </td>
+          <td>
+            {{employee.isAdmin}}
+          </td>
+          <td>
+            {{employee.notes}}
+          </td>
+          <td>
+            {{#link-to 'employees.show' employee.id class="dropdown-item"}}
+              <span class="glyphicon glyphicon-pencil"></span>
+            {{/link-to}}
+          </td>
+          <td>
+            <button {{action 'deleteEmployee' employee }} class="dropdown-item">
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
           </td>
         </tr>
       {{/each}}
@@ -56,7 +64,7 @@
   </table>
    <div class="buttons">
      {{#link-to 'employees.new' class="btn btn-primary managing" }}
-      <span class="glyphicon glyphicon-plus"></span>
+      <span class="glyphicon glyphicon-plus"></span> Add Employee
      {{/link-to}}
   </div>
 </div>

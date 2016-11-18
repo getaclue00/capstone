@@ -7,6 +7,12 @@ export default Ember.Component.extend({
   },
 
   willDestroyElement() {
+    let model = this.get('model');
+
+    if (model.get('hasDirtyAttributes')) {
+      model.rollbackAttributes();
+    }
+
     Ember.$('#employee-editor').modal('hide');
   }
 });

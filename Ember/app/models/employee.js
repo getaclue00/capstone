@@ -14,6 +14,9 @@ export default Model.extend({
   province:     attr('string'),
   postalCode:   attr('string'),
   startDate:    attr('isodate'),
+  endDate:      attr('isodate'),
+  isAdmin:      attr('boolean'),
+  notes:        attr('string'),
   appointments: hasMany('appointment', { async: true }),
   fullName: Ember.computed('lastName', 'firstName', function(){
     return `${this.get('firstName')} ${this.get('lastName')}`;
