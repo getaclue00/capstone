@@ -37,7 +37,8 @@ cd Rails
 git init
 git add .
 git commit -m "deploying"
-git push --set-upstream https://git.heroku.com/radetailing.git master -f
+git push heroku master -f
+# git push --set-upstream https://git.heroku.com/radetailing.git master -f
 rm -fr .git
 
 printMessage 4 "Cleaning"
