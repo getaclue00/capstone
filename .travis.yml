@@ -31,6 +31,7 @@ script:
   - bundle exec rspec
   - cd ../Ember/
   - ember test
+  - cd ..
 
 after_script:
   - wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
@@ -42,7 +43,7 @@ after_script:
   - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
   - heroku keys:clear
   - yes | heroku keys:add
-  - ./build.sh
+  - sh build
 
 cache:
   bundler: true
