@@ -31,7 +31,12 @@ script:
   - bundle exec rspec
   - cd ../Ember/
   - ember test
+  - cd ..
 
+# based on https://neilmiddleton.github.io/deploying-to-heroku-from-travis-ci/
+# https://blog.travis-ci.com/after_script_behavior_changes/
+# https://docs.travis-ci.com/user/environment-variables/
+# https://docs.travis-ci.com/user/customizing-the-build/
 after_success:
   - wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   - heroku --version
