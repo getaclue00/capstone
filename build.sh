@@ -37,7 +37,12 @@ cd Rails
 git init
 git add .
 git commit -m "deploying"
+# Travis Only
+git remote add heroku git@heroku.com:radetailing.git
+heroku keys:clear
+yes | heroku keys:add
 git push heroku master -f
+# uncomment this locally
 # git push --set-upstream https://git.heroku.com/radetailing.git master -f
 rm -fr .git
 

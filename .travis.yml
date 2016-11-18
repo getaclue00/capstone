@@ -31,19 +31,14 @@ script:
   - bundle exec rspec
   - cd ../Ember/
   - ember test
-  - echo $TRAVIS_BUILD_DIR
 
 after_success:
   - wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   - heroku --version
-  - git remote add heroku git@heroku.com:radetailing.git
   - echo "Host heroku.com" >> ~/.ssh/config
   - echo "   StrictHostKeyChecking no" >> ~/.ssh/config
   - echo "   CheckHostIP no" >> ~/.ssh/config
   - echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-  - heroku keys:clear
-  - yes | heroku keys:add
-  - echo $TRAVIS_BUILD_DIR
   - sh $TRAVIS_BUILD_DIR/build.sh
 
 cache:
