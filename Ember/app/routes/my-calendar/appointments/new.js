@@ -11,7 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         end: new Date(clickedDate)
       }),
       services: this.get('store').findAll('service'),
-      employees: this.store.findAll('employee')
+      employees: this.get('store').findAll('employee')
     });
   },
 
