@@ -2,20 +2,20 @@
 # Based on https://github.com/knomedia/ember-cli-rails/blob/master/build.sh
 # and https://blog.abuiles.com/blog/2014/05/21/deploying-ember-cli-and-rails-to-heroku/
 
-function printMessage {
+printMessage () {
   color=$(tput setaf $1)
   message=$2
   reset=$(tput sgr0)
-  echo -e "${color}${message}${reset}"
+  echo "${color}${message}${reset}"
 }
 
-function boldMessage {
+boldMessage () {
   color=$(tput setaf $1)
   message=$2
   reset=$(tput sgr0)
-  echo -e "${color}*************************************${reset}"
-  echo -e "${color}${message}${reset}"
-  echo -e "${color}*************************************${reset}"
+  echo "${color}*************************************${reset}"
+  echo "${color}${message}${reset}"
+  echo "${color}*************************************${reset}"
 }
 
 #echo -e "${color}Building Ember app${reset}"
