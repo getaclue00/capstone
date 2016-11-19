@@ -3,9 +3,14 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   type: "employee",
   actions: {
-    deleteEmployee(employee) {
+    deleteEmployee() {
+
+      var self = this;
+      let employee = this.get('model');
+
       function onSuccessful() {
         console.log('Successfully deleted');
+        transitionToPost();
       }
       function transitionToPost() {
         Ember.$('#myModal').modal('hide');
