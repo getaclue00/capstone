@@ -1,19 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  sortProperties: ['id:asc'],
+  sortedServices: Ember.computed.sort('model', 'sortProperties'),
+
   actions: {
-    deleteEmployee(employee) {
-      function onSuccessful() {
-        console.log('Successfully deleted');
-      }
 
-      function onError(error) {
-        throw error.message;
-      }
-
-      if (employee) {
-        employee.destroyRecord().then(onSuccessful).catch(onError);
-      }
+    handleDeleteEmployee(employee){
+      this.transitionToRoute('employees.delete', employee.id);
     }
   }
 });

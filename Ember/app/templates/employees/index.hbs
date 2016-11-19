@@ -44,7 +44,7 @@
             {{/link-to}}
           </td>
           <td class='employee-operation'>
-            <button {{action 'deleteEmployee' employee }} class="dropdown-item">
+            <button type="submit" class="dropdown-item" onclick={{action "handleDeleteEmployee" employee }}>
               <span class="glyphicon glyphicon-minus"></span>
             </button>
           </td>

@@ -1,4 +1,8 @@
 {{!-- Modal that will be used to confirm if user wants to procceed with operation --}}
-
-<h3>Delete the following service?</h3>
-<h3>{{model.name}}</h3>
+{{#if (eq type "service")}}
+  <h3>Delete the following {{type}}?</h3>
+  <h3 style="text-align: center">{{model.name}}</h3>
+{{else}}
+  <h3>Delete the following {{type}}?</h3>
+  <h3 style="text-align: center">{{model.fullName}}</h3>
+{{/if}}
