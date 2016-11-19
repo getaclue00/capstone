@@ -3,7 +3,14 @@ import Ember from 'ember';
 
 moduleForModel('appointment', 'Unit | Model | appointment', {
   // Specify the other units that are required for this test.
-  needs: ['model:service']
+  needs: ['model:service', 'model:employee']
+});
+
+test('should belong to an employee', function(assert) {
+  const Appointment = this.store().modelFor('appointment');
+  const relationship = Ember.get(Appointment, 'relationshipsByName').get('employee');
+
+  assert.equal(relationship.key, 'employee', 'has relationship with employee');
 });
 
 test('should belong to a service', function(assert) {

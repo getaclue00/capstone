@@ -21,7 +21,10 @@ Router.map(function() {
     this.route('delete', { path: "/delete/:services_id" });
   });
   this.route('clients');
-  this.route('employees');
+  this.route('employees', function() {
+    this.route('new');
+    this.route('show', { path: "/:employees_id" });
+  });
   this.route('login');
   this.route('appointment-history');
 });

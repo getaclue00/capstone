@@ -15,6 +15,7 @@ Service.create({id: '0', name: 'DEFAULT', active: false, displayable: false})
 Appointment.create({title: 'Batman Appointment', car_id: '0', service_id: '0'}) #employee_id can be null
 Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', car_id: '0', service_id: '0'})
 Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', car_id: '0', service_id: '0'})
+Appointment.create({title: 'Appointment With Employee, Car, and Service', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', car_id: 0, service_id: 0, employee_id: 0})
 
 User.create({email: 'test@test.com', password: 'password', first_name: 'Tester', last_name: 'Testing', admin: true, employee: true})
 User.create({email: 'batman@batman.com', password: 'password', first_name: 'Bruce', last_name: 'Wayne', admin: false, employee: true})

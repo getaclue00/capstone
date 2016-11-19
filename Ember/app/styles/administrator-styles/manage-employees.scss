@@ -6,11 +6,12 @@
 }
 
 .employees-table {
-  text-align: left;
+  text-align: center;
   overflow: hidden;
   width: 100%;
   padding-right: 15px;
   border-radius: 15px;
+  font-size: 1vw;
 }
 
 .employees-table td, .employees-table th {
@@ -33,4 +34,3 @@
  background-color: #36454f;
  color: #fffaef;
 }
-
