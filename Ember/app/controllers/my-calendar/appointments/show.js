@@ -1,10 +1,12 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { Controller, isEmpty } = Ember;
+
+export default Controller.extend({
   actions: {
     deleteAppointment() {
       var self = this;
-      let appointment = this.get('model');
+      let appointment = this.get('appointment');
 
       function transitionToPost() {
         Ember.$('#myModal').modal('hide');
@@ -39,6 +41,12 @@ export default Ember.Controller.extend({
       appointment.save()
        .then(transitionToPost)
        .catch(failure);
+    },
+
+    assignedEmployee(employee) {
+      if (!isEmpty(employee)) {
+        this.set('appointment.employee', employee);
+      }
     }
   }
 });
