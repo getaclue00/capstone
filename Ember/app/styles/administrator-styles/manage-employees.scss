@@ -14,8 +14,12 @@
   font-size: 1.5vw;
 }
 
-.employees-table td, .employees-table th {
-  padding: 2% 2% 2% 2%;
+.employees-table th {
+  padding: 2%;
+}
+
+.employees-table td {
+  padding: 0.5%;
 }
 
 .employees-table tr:nth-child(odd) {
