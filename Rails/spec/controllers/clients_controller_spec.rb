@@ -76,7 +76,7 @@ RSpec.describe ClientsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Client creation failed.')
+        expect(result['error']).to eq('Client creation failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -135,7 +135,8 @@ RSpec.describe ClientsController, :type => :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:bad_request)
-        expect(result['error']).to eq('Client creation failed. Check your data.')
+        expect(result['error']).to eq({"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
+)
         
       end
     end
@@ -221,7 +222,7 @@ RSpec.describe ClientsController, :type => :controller do
         client.last_name = "updated lastName"
         client.first_name = "updated firstName"
         client.email = "o@yahoo.com"
-        client.phone_number = "1"
+        client.phone_number = "111-1"
         client.street_number = 3
         client.street_name = "Updated Street"
         client.city = "Updated city"
@@ -238,7 +239,8 @@ RSpec.describe ClientsController, :type => :controller do
         patch :update, params: {id: client.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq("Client update failed. Check your data.")
+        expect(parsed_response['error']).to eq({"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
+)
 
         expect(response).to have_http_status(:bad_request)
       end
