@@ -77,7 +77,7 @@ RSpec.describe CarsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Car creation failed.')
+        expect(result['error']).to eq('Car creation failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -131,7 +131,8 @@ RSpec.describe CarsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Car creation failed. Check your data.')
+        expect(result['error']).to eq( {"size"=>["Please enter a valid size: small, van, truck, or large SUV"]}
+)
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -197,7 +198,7 @@ RSpec.describe CarsController, :type => :controller do
         patch :update, params: { id: car.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Car update failed.')
+        expect(result['error']).to eq('Car update failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -259,14 +260,15 @@ RSpec.describe CarsController, :type => :controller do
         patch :update, params: {id: car.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq("Car update failed. Check your data.")
+        expect(parsed_response['error']).to eq({"size"=>["Please enter a valid size: small, van, truck, or large SUV"]}
+)
 
         expect(response).to have_http_status(:bad_request)
       end
     end
 
     #NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
-    #just make it compuslory and error will be thrown
+    #just make it compuslory and error will be thrown and add a test for it :)
  
    end
 

@@ -27,11 +27,11 @@ class CarsController < ApplicationController
 	  			render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	      render json: { error: 'Car creation failed.'}, status: :bad_request
+	      render json: { error: 'Car creation failed. No parameters sent.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected
 	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
 	    rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Car creation failed. Check your data.'}, status: :bad_request
+	      render json: { error: car.errors.messages}, status: :bad_request
 		end
 	end
 
@@ -44,11 +44,11 @@ class CarsController < ApplicationController
 	  			render json: { error: 'Car update failed'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Car update failed.'}, status: :bad_request
+	        render json: { error: 'Car update failed. No parameters sent.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such car exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Car update failed. Check your data.'}, status: :bad_request
+	      render json: { error: car.errors.messages}, status: :bad_request
 		end
 		#NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
 		#just make it compuslory and error will be thrown
