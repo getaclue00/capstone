@@ -26,11 +26,11 @@ class AppointmentsController < ApplicationController
 	  			render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	      render json: { error: 'Appointment creation failed.'}, status: :bad_request
+	      render json: { error: 'Appointment creation failed. No parameters sent.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
 	    rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
+	      render json: { error: appointment.errors.messages}, status: :bad_request
 		end
 	end
 
@@ -43,7 +43,7 @@ class AppointmentsController < ApplicationController
 	  			render json: { error: 'Appointment update failed'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Appointment update failed.'}, status: :bad_request
+	        render json: { error: 'Appointment update failed. No parameters sent.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such appointment exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e

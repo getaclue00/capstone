@@ -81,7 +81,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Appointment creation failed.')
+        expect(result['error']).to eq('Appointment creation failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -176,7 +176,8 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Appointment creation failed. Check your data.')
+        expect(result['error']).to eq({"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"], "service"=>["must exist"], "employee"=>["must exist"]}
+)
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -209,7 +210,8 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Appointment creation failed. Check your data.')
+        expect(result['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"]}
+)
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -245,7 +247,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         patch :update, params: { id: appointment.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Appointment update failed.')
+        expect(result['error']).to eq('Appointment update failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -321,7 +323,8 @@ RSpec.describe AppointmentsController, :type => :controller do
         patch :update, params: {id: appointment.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq("Appointment update failed. Check your data.")
+        expect(parsed_response['error']).to eq( {"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"]}
+)
 
         expect(response).to have_http_status(:bad_request)
       end
@@ -351,7 +354,8 @@ RSpec.describe AppointmentsController, :type => :controller do
         patch :update, params: {id: appointment.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq("Appointment update failed. Check your data.")
+        expect(parsed_response['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"]}
+)
 
         expect(response).to have_http_status(:bad_request)
       end
