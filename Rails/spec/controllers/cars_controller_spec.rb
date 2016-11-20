@@ -266,6 +266,7 @@ RSpec.describe CarsController, :type => :controller do
     end
 
     #NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
+    #just make it compuslory and error will be thrown
  
    end
 

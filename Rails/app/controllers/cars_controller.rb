@@ -51,6 +51,7 @@ class CarsController < ApplicationController
 	      render json: { error: 'Car update failed. Check your data.'}, status: :bad_request
 		end
 		#NOTE THAT UPDATING THE CAR WITH A NON EXISTENT CLIENT ID SETS THE FEILD TO NIL
+		#just make it compuslory and error will be thrown
 	end
 
 	def destroy
