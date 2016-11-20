@@ -20,7 +20,6 @@ class AppointmentsController < ApplicationController
 	def create
 	    begin
 	        appointment=Appointment.new(appointment_sanitized_params)
-	 
 	        if appointment.save!
 	  			render json: appointment, status: :created
 	  		else
@@ -48,7 +47,7 @@ class AppointmentsController < ApplicationController
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such appointment exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request
+	      render json: { error: appointment.errors.messages}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	     	render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request	
 		end

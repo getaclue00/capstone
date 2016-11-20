@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20161119214930) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-19'
+    t.date     "start_date",               default: '2016-11-20'
     t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
