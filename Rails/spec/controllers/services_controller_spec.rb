@@ -75,7 +75,7 @@ RSpec.describe ServicesController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Service creation failed.')
+        expect(result['error']).to eq('Service creation failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -167,7 +167,7 @@ RSpec.describe ServicesController, :type => :controller do
         patch :update, params: { id: service.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Service update failed.')
+        expect(result['error']).to eq('Service update failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
