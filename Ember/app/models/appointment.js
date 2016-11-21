@@ -11,5 +11,15 @@ export default Model.extend({
   notes:      attr('string', { defaultValue: '' }),
   status:     attr('string', { defaultValue: 'pending' }),
   service:    belongsTo('service'),
-  employee:   belongsTo('employee')
+  employee:   belongsTo('employee'),
+
+  ready(){
+        if(!!this.get('employee')){
+                return;
+        }else{
+                let emp= this.store.getById('employee', 0);
+                this.set('appointment.employee', emp);
+        }
+  }
+
 });
