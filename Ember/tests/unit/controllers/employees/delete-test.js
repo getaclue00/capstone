@@ -1,15 +1,15 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 
-moduleFor('controller:employees/new', 'Unit | Controller | employees/new', {
+moduleFor('controller:employees/delete', 'Unit | Controller | employees/delete', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
 
-test('#saveEmployee transitions to employees', function(assert) {
+test('#deleteEmployee remains on deletion page following a deletion', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
-        save() {
+        destroyRecord() {
           return new Ember.RSVP.Promise(function(resolve) {
             resolve(true);
           });
@@ -19,26 +19,24 @@ test('#saveEmployee transitions to employees', function(assert) {
         assert.equal(route, 'employees');
       }
   });
-
-  controller.send('saveEmployee');
+  controller.send('deleteEmployee');
 
   assert.ok(controller);
 });
 
-test('#saveEmployee will NOT transition to employees', function(assert) {
+test('#deleteEmployee remains on employee page following a failed deletion', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
-        save() {
+        destroyRecord() {
           return new Ember.RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not destroy a record' });
           });
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'employees');
+        assert.equal(route, 'employee');
       }
   });
-
-  assert.throws(controller.send('saveEmployee'), "throws with just a message, not using the 'expected' argument");
+  assert.throws(controller.send('deleteEmployee'), "throws with just a message, not using the 'expected' argument");
 
 });
