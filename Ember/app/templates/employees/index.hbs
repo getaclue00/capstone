@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="manage-employees" style="overflow-x:auto;">
   <h3 class="page-title">Manage Employees</h3>
   <table class="employees-table">
     <thead>
@@ -17,45 +17,44 @@
     <tbody>
       {{#each model as |employee|}}
         <tr>
-          <td>
+          <td data-th="Employee ID" class="text-align-left">
             {{employee.id}}
           </td>
-          <td>
+          <td data-th="Full Name" class="text-align-left">
             {{employee.fullName}}
           </td>
-          <td>
+          <td data-th="Email">
             {{employee.email}}
           </td>
-          <td>
+          <td data-th="Phone">
             {{employee.phoneNumber}}
           </td>
-          <td>
+          <td data-th="Phone">
             {{employee.startDate}}
           </td>
-          <td>
+          <td data-th="End Date">
             {{employee.endDate}}
           </td>
-          <td>
+          <td data-th="Admin">
             {{employee.isAdmin}}
           </td>
-          <td class='employee-operation'>
+          <td class='employee-operation' style="text-align:center;">
             {{#link-to 'employees.show' employee.id class="dropdown-item"}}
-              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="glyphicon glyphicon-pencil" style="color:#d30b07;"></span>
             {{/link-to}}
           </td>
-          <td class='employee-operation'>
-            <button type="submit" class="dropdown-item" onclick={{action "handleDeleteEmployee" employee }}>
-              <span class="glyphicon glyphicon-minus"></span>
-            </button>
+          <td class='employee-operation' style="text-align:center;">
+            {{#link-to 'employees.delete' employee class="dropdown-item"}}
+              <span class="glyphicon glyphicon-minus" style="color:#d30b07;"></span>
+            {{/link-to}}
           </td>
         </tr>
       {{/each}}
     </tbody>
-    <br>
   </table>
-   <div class="buttons">
-     {{#link-to 'employees.new' class="btn btn-primary managing" }}
-      <span class="glyphicon glyphicon-plus"></span> Add Employee
-     {{/link-to}}
-  </div>
+</div>
+<div class="buttons">
+  {{#link-to 'employees.new' class="btn btn-primary managing" }}
+    <span class="glyphicon glyphicon-plus"></span> Add Employee
+  {{/link-to}}
 </div>
