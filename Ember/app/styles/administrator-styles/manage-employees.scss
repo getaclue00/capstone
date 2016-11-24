@@ -11,11 +11,15 @@
   width: 100%;
   padding-right: 15px;
   border-radius: 15px;
-  font-size: 1vw;
+  font-size: 1.5vw;
 }
 
-.employees-table td, .employees-table th {
-  padding: 2% 2% 2% 2%;
+.employees-table th {
+  padding: 2%;
+}
+
+.employees-table td {
+  padding: 0.5%;
 }
 
 .employees-table tr:nth-child(odd) {
@@ -33,4 +37,17 @@
 .employees-table tr:hover {
  background-color: #36454f;
  color: #fffaef;
+}
+
+.employee-operation {
+  padding: 2% 1%;
+}
+
+.employee-operation > button > span {
+  color: #d30b07;
+}
+
+.employee-operation:hover {
+  background-color: #fffaef;
+  color: #EE2C2C;
 }

@@ -24,6 +24,7 @@ Router.map(function() {
   this.route('employees', function() {
     this.route('new');
     this.route('show', { path: "/:employees_id" });
+    this.route('delete', { path: "/delete/:employees_id" });
   });
   this.route('login');
   this.route('appointment-history');
