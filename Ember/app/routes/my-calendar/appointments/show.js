@@ -33,7 +33,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     markAppointmentAsCompleted() {
       let appointment = this.get('controller.appointment');
       appointment.set('status', "completed");
-      saveAppointment();
     }
   }
 });
