@@ -31,7 +31,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     markAppointmentAsCompleted() {
-      console.warn('markAppointmentAsCompleted is not implemented');
+      let appointment = this.get('controller.appointment');
+      appointment.set('status', "completed");
+      saveAppointment();
     }
   }
 });
