@@ -14,9 +14,17 @@ export default Ember.Controller.extend({
     saveAppointment() {
       let appointment = this.get('appointment');
 
+      //setting employee to default if not set
       if(appointment.get('employee').get('id') === undefined){
-        console.log("we are hereeee");
-        appointment.set('employee', this.get('store').findRecord('employee', 0));
+
+        this.store.find('employee', 0).then((employee) => {
+          console.log(employee.get('lastName'));
+          appointment.set('employee', employee);
+          appointment.save().then(transitionToPost).catch(failure);
+        }); 
+
+      }else{
+        appointment.save().then(transitionToPost).catch(failure);
       }
 
       var self = this;
@@ -32,7 +40,6 @@ export default Ember.Controller.extend({
         console.error(reason);
       }
 
-      appointment.save().then(transitionToPost).catch(failure);
     },
 
     assignedEmployee(employee) {
