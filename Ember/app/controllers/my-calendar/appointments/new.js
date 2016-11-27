@@ -14,6 +14,11 @@ export default Ember.Controller.extend({
     saveAppointment() {
       let appointment = this.get('appointment');
 
+      if(appointment.get('employee').get('id') === undefined){
+        console.log("we are hereeee");
+        appointment.set('employee', this.get('store').findRecord('employee', 0));
+      }
+
       var self = this;
 
       function transitionToPost() {
