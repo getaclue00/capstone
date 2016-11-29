@@ -19,40 +19,47 @@ class AppointmentsController < ApplicationController
 
 	def create
 	    begin
-	        appointment=Appointment.new(appointment_sanitized_params)
-	 
+	    	sanitized_params = appointment_sanitized_params
+	    	#setting employee to default employee
+	    	if sanitized_params[:employee_id] == nil
+	    		sanitized_params[:employee_id] = 0
+	    	end
+	        appointment=Appointment.new(sanitized_params)
 	        if appointment.save!
 	  			render json: appointment, status: :created
 	  		else
 	  			render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	      render json: { error: 'Appointment creation failed.'}, status: :bad_request
+	      render json: { error: 'Appointment creation failed. No parameters sent.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
 	    rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
+	      render json: { error: appointment.errors.messages}, status: :bad_request
 		end
 	end
 
 	def update
 	    begin
 			appointment=Appointment.find params[:id]
-	        if appointment.update!(appointment_sanitized_params)
+			sanitized_params = appointment_sanitized_params
+			if sanitized_params[:employee_id] == nil
+	    		sanitized_params[:employee_id] = 0
+	    	end
+	        if appointment.update!(sanitized_params)
 	  			render json: appointment, status: :ok
 	  		else
 	  			render json: { error: 'Appointment update failed'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Appointment update failed.'}, status: :bad_request
+	        render json: { error: 'Appointment update failed. No parameters sent.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such appointment exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e
-	      render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request
+	      render json: { error: appointment.errors.messages}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
-	      render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request
+	     	render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request	
 		end
-		#NOTE THAT UPDATING THE APPOINMTMENT WITH A NON EXISTENT SERVICE/EMPLOYEE/CLIENT ID SETS THE FEILD TO NIL
 	end
 
 	def destroy

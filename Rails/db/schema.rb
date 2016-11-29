@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105170323) do
+ActiveRecord::Schema.define(version: 20161119214930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20161105170323) do
     t.datetime "end",         default: '2016-12-31 09:10:00', null: false
     t.text     "notes"
     t.integer  "car_id"
-    t.integer  "service_id"
-    t.integer  "employee_id"
+    t.integer  "service_id",                                  null: false
+    t.integer  "employee_id", default: 0,                     null: false
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
     t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
     t.index ["service_id"], name: "index_appointments_on_service_id", using: :btree
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20161105170323) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-17'
+    t.date     "start_date",               default: '2016-11-20'
     t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
