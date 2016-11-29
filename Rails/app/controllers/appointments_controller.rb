@@ -19,7 +19,12 @@ class AppointmentsController < ApplicationController
 
 	def create
 	    begin
-	        appointment=Appointment.new(appointment_sanitized_params)
+	    	sanitized_params = appointment_sanitized_params
+	    	#setting employee to default employee
+	    	if sanitized_params[:employee_id] == nil
+	    		sanitized_params[:employee_id] = 0
+	    	end
+	        appointment=Appointment.new(sanitized_params)
 	        if appointment.save!
 	  			render json: appointment, status: :created
 	  		else
@@ -37,7 +42,11 @@ class AppointmentsController < ApplicationController
 	def update
 	    begin
 			appointment=Appointment.find params[:id]
-	        if appointment.update!(appointment_sanitized_params)
+			sanitized_params = appointment_sanitized_params
+			if sanitized_params[:employee_id] == nil
+	    		sanitized_params[:employee_id] = 0
+	    	end
+	        if appointment.update!(sanitized_params)
 	  			render json: appointment, status: :ok
 	  		else
 	  			render json: { error: 'Appointment update failed'}, status: :bad_request
