@@ -12,14 +12,6 @@ export default Ember.Controller.extend({
 
     handleAddNewService() {
       this.transitionToRoute('services.new');
-    },
-
-    handleEditService(service){
-      this.transitionToRoute('services.show', service.id);
-    },
-
-    handleDeleteService(service){
-      this.transitionToRoute('services.delete', service.id);
     }
   }
 });

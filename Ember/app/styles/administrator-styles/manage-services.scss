@@ -5,15 +5,6 @@
   color: #fffaef;
 }
 
-.service-table {
-  text-align: center;
-  overflow: hidden;
-  width: 100%;
-  padding-right: 15px;
-  border-radius: 15px;
-  font-size: 1.25vw;
-}
-
 .service-column, .service-table th {
   padding: 2% 2% 2% 2%;
 }
@@ -32,11 +23,11 @@
 }
 
 .service-table tr:nth-child(odd) {
-  background-color: #959595;
+  background-color: #d3d3d3;
 }
 
 .service-table tr:nth-child(even) {
-  background-color: #e3e3e3;
+  background-color: #f6f6f6;
 }
 
 .service-table th {
@@ -56,4 +47,68 @@
 .delete-service {
   padding: 2.5% 7.5%;
   margin: 0% 10%;
+}
+
+$breakpoint-alpha: 660px;
+
+.service-table{
+
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+  padding-right: 15px;
+  font-size: 1.5vw;
+
+  @media (max-width: $breakpoint-alpha) {
+    text-align: left;
+    font-size: 2.75vw;
+
+    .service-operation {
+
+      border: 1px solid black;
+      background-image: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
+      background-image: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+      background-image: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
+    }
+  }
+
+  th {
+    display: none;
+  }
+
+  td {
+    display: block;
+
+    &:before {
+      text-align: left !important;
+      content: attr(data-th);
+      font-weight: bold;
+      width: 10em; //
+      display: inline-block;
+
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+
+  th, td {
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+
+    }
+
+  }
+
+}
+
+.service-table {
+  th, td {
+    margin: .5em 1em;
+  }
+  th, td:before {
+    text-align: left;
+    color: black;
+  }
 }
