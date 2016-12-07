@@ -80,7 +80,7 @@ RSpec.describe EmployeesController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Employee creation failed.')
+        expect(result['error']).to eq('Employee creation failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -147,7 +147,8 @@ RSpec.describe EmployeesController, :type => :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:bad_request)
-        expect(result['error']).to eq('Employee creation failed. Check your data.')
+        expect(result['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
+)
         
       end
     end
@@ -182,7 +183,7 @@ RSpec.describe EmployeesController, :type => :controller do
         patch :update, params: { id: employee.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Employee update failed.')
+        expect(result['error']).to eq('Employee update failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -261,7 +262,8 @@ RSpec.describe EmployeesController, :type => :controller do
         patch :update, params: {id: employee.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq("Employee update failed. Check your data.")
+        expect(parsed_response['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
+)
 
         expect(response).to have_http_status(:bad_request)
       end

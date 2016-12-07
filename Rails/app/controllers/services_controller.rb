@@ -26,7 +26,7 @@ class ServicesController < ApplicationController
 	  			render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	      render json: { error: 'Service creation failed.'}, status: :bad_request
+	      render json: { error: 'Service creation failed. No parameters sent.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
 		end
@@ -42,7 +42,7 @@ class ServicesController < ApplicationController
 	  			render json: { error: 'Service update failed. Check your data.'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Service update failed.'}, status: :bad_request
+	        render json: { error: 'Service update failed. No parameters sent.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such service exists' }, status: :not_found
 		end
