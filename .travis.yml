@@ -21,7 +21,7 @@ install:
   - bundle install
   - cd ../Ember/
   - npm install
-  - bower install
+  - bower install ember --save
   - ember --version
   - cd ..
 
