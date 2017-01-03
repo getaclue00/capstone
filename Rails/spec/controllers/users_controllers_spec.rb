@@ -94,7 +94,7 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to have_http_status(400)
 
         json = JSON.parse(response.body)
-        expect(json['error']).to eq("bad request")
+        expect(json['error']).to eq("No users exist")
       end
     end
   end
