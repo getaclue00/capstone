@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if users && !users.empty?
       render json: users, status: :ok
     else
-      render json: { error: 'bad request' }, 	status: :bad_request
+      render json: { error: 'No users exist' }, 	status: :bad_request
     end
   end
 
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if user
       render json: user, status: :ok
     else
-      render json: { error: 'this user does not exist' }, 	status: :not_found
+      render json: { error: 'This user does not exist' }, 	status: :not_found
     end
   end
 end
