@@ -19,5 +19,11 @@ FactoryGirl.define do
             create(:appointment, employee: employee)
         end
     end
+
+    factory :employee_with_user do
+        after(:create) do |employee|
+            create(:user, employee: employee)
+        end
+    end
   end
 end

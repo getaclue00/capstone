@@ -3,25 +3,28 @@ class UsersController < ApplicationController
     if params[:filter].present? && params[:filter][:user_type].present?
       user_type = params[:filter][:user_type]
       if user_type == "employee"
-        users = User.where(employee: true)
+        users_array = User.where(employee: true)
       end
     else
-      users = User.all
+      users_array = User.all
     end
 
-    if users && !users.empty?
-      render json: users, status: :ok
+    if users_array && !users_array.empty?
+      render json: users_array, status: :ok
     else
       render json: { error: 'No users exist' }, 	status: :bad_request
     end
   end
 
   def show
-    user = User.find_by_id(params[:id])
-    if user
+    begin 
+      user=User.find params[:id]
       render json: user, status: :ok
-    else
-      render json: { error: 'This user does not exist' }, 	status: :not_found
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: 'This user does not exist' }, status: :not_found
     end
   end
 end
+
+
+    

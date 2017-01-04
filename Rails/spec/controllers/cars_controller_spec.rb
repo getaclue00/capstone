@@ -121,7 +121,7 @@ RSpec.describe CarsController, :type => :controller do
                 "interior":"CarInterior",
                 "colour":"carColour"
               },
-              "type":"appointments"
+              "type":"cars"
               }
             }
 

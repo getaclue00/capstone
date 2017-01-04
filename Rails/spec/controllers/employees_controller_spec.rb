@@ -19,9 +19,10 @@ RSpec.describe EmployeesController, :type => :controller do
     context 'when there are employees' do
       it "returns with a successful response and the employees" do
         FactoryGirl.create_list(:employee_with_appointment, 5)
+        FactoryGirl.create_list(:employee_with_user, 5)
         get :index
         result = JSON.parse(response.body)
-        expect(result['data'].length).to eq(5)
+        expect(result['data'].length).to eq(10)
         expect(response).to have_http_status(:ok)
       end
     end
@@ -39,7 +40,7 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
 
-    context 'when the employee exists' do
+    context 'when the employee with appointment exists' do
       it 'returns the employee data' do
         employee = FactoryGirl.create :employee_with_appointment
         appointment_id = employee.appointments[0].id
@@ -69,6 +70,39 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
         #VERIFYING THAT OBJECTS POINT TO EMPLOYEE
         expect(Appointment.find(appointment_id).employee.id).to eq (employee.id)
+      end
+    end
+
+    context 'when the employee with user exists' do
+      it 'returns the employee data' do
+        employee = FactoryGirl.create :employee_with_user
+        user_id = employee.user.id
+
+        get :show, params: { id: employee.id }
+
+        result = JSON.parse(response.body)
+
+        expect(result['data']['id'].to_i).to eq(employee.id)
+        expect(response).to have_http_status(:ok)
+
+        attr = result["data"]["attributes"];
+        
+        expect(attr["last_name"]).to eq("Radwan")
+        expect(attr["first_name"]).to eq("Nada")
+        expect(attr["phone_number"]).to eq("345-468-3444")
+        expect(attr["street_number"].to_i).to eq(45)
+        expect(attr["street_name"]).to eq("Bank street")
+        expect(attr["city"]).to eq("Ottawa")
+        expect(attr["province"]).to eq("Ontario")
+        expect(attr["postal_code"]).to eq("H7H 5U5")
+        expect(attr["start_date"]).to eq("2013-10-22")
+        expect(attr["end_date"]).to eq("2015-11-19")
+        expect(attr["is_admin"]).to eq(true)
+        expect(attr["notes"]).to eq("This is a note")
+        #VERIFYING EMPLOYEE POINTS TO OBJECTS
+        expect(result["data"]["relationships"]["user"]["data"]["id"].to_i).to eq(user_id)
+        #VERIFYING THAT OBJECTS POINT TO EMPLOYEE
+        expect(User.find(user_id).employee.id).to eq (employee.id)
       end
     end
   end
@@ -104,7 +138,7 @@ RSpec.describe EmployeesController, :type => :controller do
                 "is_admin": true,
                 "notes": "This is a note"
               },
-              "type":"services"
+              "type":"employees"
               }
       
             }
@@ -136,7 +170,7 @@ RSpec.describe EmployeesController, :type => :controller do
                 "is_admin": "ee",
                 "notes": "This is a note"
               },
-              "type":"services"
+              "type":"employees"
               }
       
             }
@@ -282,7 +316,7 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
 
-    context 'when the employee exists and has no appointments' do
+    context 'when the employee exists and has no appointments or users' do
       it 'should delete it' do
         employee = FactoryGirl.create :employee
 
@@ -303,6 +337,24 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(response).to have_http_status(:no_content)
         #validate that associated appointments service id set to 0
         expect(Appointment.find(appt_id).employee_id).to eq (0)
+      end
+    end
+
+    context 'when the employee exists and has a user' do
+      it 'should delete it' do
+        employee = FactoryGirl.create :employee_with_user
+        user_id = employee.user.id
+
+        delete :destroy, params: { id: employee.id }
+
+        expect(response).to have_http_status(:no_content)
+        #validate that associated user is deleted
+        begin
+            User.find(user_id)
+            expect("user was not deleted").to eq("user was deleted")
+        rescue ActiveRecord::RecordNotFound => e
+            expect(0).to eq(0)
+        end
       end
     end
   end
