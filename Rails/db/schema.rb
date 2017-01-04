@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119214930) do
+ActiveRecord::Schema.define(version: 20170103205056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20161119214930) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-20'
+    t.date     "start_date",               default: '2017-01-03'
     t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -111,10 +111,12 @@ ActiveRecord::Schema.define(version: 20161119214930) do
     t.string   "telephone",              default: "",    null: false
     t.boolean  "client",                 default: false, null: false
     t.boolean  "employee",               default: false, null: false
+    t.integer  "employee_id",                            null: false
     t.index ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
     t.index ["client"], name: "index_users_on_client", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["employee"], name: "index_users_on_employee", using: :btree
+    t.index ["employee_id"], name: "index_users_on_employee_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -122,4 +124,5 @@ ActiveRecord::Schema.define(version: 20161119214930) do
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
   add_foreign_key "cars", "clients"
+  add_foreign_key "users", "employees"
 end

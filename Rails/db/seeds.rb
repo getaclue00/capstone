@@ -17,10 +17,13 @@ Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.
 Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', car_id: '0', service_id: '0'})
 Appointment.create({title: 'Appointment With Employee, Car, and Service', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', car_id: 0, service_id: 0, employee_id: 0})
 
-User.create({email: 'test@test.com', password: 'password', first_name: 'Tester', last_name: 'Testing', admin: true, employee: true})
-User.create({email: 'batman@batman.com', password: 'password', first_name: 'Bruce', last_name: 'Wayne', admin: false, employee: true})
+Employee.create({ id: '1', last_name: 'Testing', first_name: 'Tester', email: 'test@test.com', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFUALT', postal_code: 'A0A 0A0'})
+Employee.create({ id: '2', last_name: 'Wayne', first_name: 'Bruce', email: 'bat@batman.com', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFUALT', postal_code: 'A0A 0A0'})
+User.create({email: 'test@test.com', password: 'password', first_name: 'Tester', last_name: 'Testing', admin: true, employee_id: '1'})
+User.create({email: 'batman@batman.com', password: 'password', first_name: 'Bruce', last_name: 'Wayne', admin: false, employee_id: '2'})
 
 Service.create({name: 'Engine Degreasing', price_small: '99', price_large: '99', duration: '90', description: '...', active: true, displayable: true})
 Service.create({name: 'Platinum', price_small: '159', price_large: '179', duration: '150', description: '...', active: true, displayable: true})
 Service.create({name: 'Silver', price_small: '90', price_large: '79', duration: '99', description: '...', active: true, displayable: true})
 Service.create({name: 'Shampoo for Tough Stains and Spills', price_small: '100', price_large: '130', duration: '90', description: '...', active: true, displayable: true})
+

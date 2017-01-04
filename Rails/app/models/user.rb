@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   before_save :ensure_authentication_token
 
+  belongs_to :employee
+
   def ensure_authentication_token
     if authentication_token.blank?
      self.authentication_token = generate_authentication_token
