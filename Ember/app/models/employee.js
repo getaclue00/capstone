@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-const { Model, attr, hasMany } = DS;
+const { Model, attr, hasMany, belongsTo } = DS;
 
 export default Model.extend({
   lastName:     attr('string'),
@@ -18,6 +18,7 @@ export default Model.extend({
   isAdmin:      attr('boolean'),
   notes:        attr('string'),
   appointments: hasMany('appointment', { async: true }),
+  user:   belongsTo('user'),
   fullName: Ember.computed('lastName', 'firstName', function(){
     return `${this.get('firstName')} ${this.get('lastName')}`;
   })
