@@ -1,4 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :telephone, :admin, :employee, :client
+  attributes :id, :email, :admin
   belongs_to :employee
 end

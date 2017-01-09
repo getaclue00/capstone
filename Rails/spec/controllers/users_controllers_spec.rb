@@ -70,10 +70,10 @@ RSpec.describe UsersController, :type => :controller do
     context 'when acceptable filter and users are present' do
       it "returns with a successful response and the users" do
         FactoryGirl.create_list(:user, 5)
-        get :index, {:params => {:filter => {:user_type => 'employee'}}}
+        get :index, {:params => {:filter => {:user_type => 'admin'}}}
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('No users exist') # since employee is false by default 
-        expect(response).to have_http_status(400)
+        expect(result['data'].length).to eq(5)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -115,9 +115,6 @@ RSpec.describe UsersController, :type => :controller do
 
         attr = result["data"]["attributes"]
 
-        expect(attr["first_name"]).to eq("Tester")
-        expect(attr["last_name"]).to eq("Testing")
-        expect(attr["telephone"]).to eq("000-000-0000")
         expect(attr["admin"]).to eq(true)
         #VERIFYING USER POINTS TO EMPLOYEE
         expect(result["data"]["relationships"]["employee"]["data"]["id"].to_i).to eq(employee_id)

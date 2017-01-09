@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
   def index
+    # change logic to check for admin vs not where isAdmin is obtained from employee table
+
     if params[:filter].present? && params[:filter][:user_type].present?
       user_type = params[:filter][:user_type]
-      if user_type == "employee"
-        users_array = User.where(employee: true)
+      if user_type == "admin"
+        users_array = User.where(admin: true)
+      elsif user_type == "employee"
+          users_array = User.where(admin: false)
       end
     else
       users_array = User.all
