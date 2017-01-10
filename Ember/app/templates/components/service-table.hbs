@@ -1,56 +1,56 @@
-<table id="has-datatable" class="service-table table table-striped table-hover dt-responsive">
-    <thead>
-      <tr>
-        <th><h1>List of Services</h1></th>
-        <th><h1>Duration</h1></th>
-        <th><h1>Price for Small Vehicle</h1></th>
-        <th><h1>Price for Large Vehicle</h1></th>
-        <th><h1>Active</h1></th>
-        <th><h1>Displayable</h1></th>
-        <th></th>
-        <th></th>
+<table id="has-datatable" class="service-table dt-responsive">
+  <thead>
+    <tr>
+      <th><h1>List of Services</h1></th>
+      <th><h1>Duration</h1></th>
+      <th><h1>Price for Small Vehicle</h1></th>
+      <th><h1>Price for Large Vehicle</h1></th>
+      <th><h1>Active</h1></th>
+      <th><h1>Displayable</h1></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="service-table-body">
+    {{#each sortedServices as |service|}}
+      <tr class="service-table-row">
+        <td class="service-column" data-th="Name">
+          <strong>{{service.name}}</strong>
+        </td>
+        <td class="service-column" data-th="Duration">
+          {{service.duration}} min
+        </td>
+        <td class="service-column" data-th="Price for Small Car">
+          ${{service.price_small}}
+        </td>
+        <td class="service-column" data-th="Price for Large Car">
+          ${{service.price_large}}
+        </td>
+        <td class="service-column" data-th="Active">
+          {{#if service.active}}
+            Yes
+          {{else}}
+            No
+          {{/if}}
+        </td>
+        <td class="service-column" data-th="Displayable">
+          {{#if service.displayable}}
+            Yes
+          {{else}}
+            No
+          {{/if}}
+        </td>
+        <td class='service-operation' style="text-align:center;">
+          {{#link-to 'services.show' service.id class="dropdown-item"}}
+            <span class="glyphicon glyphicon-pencil" style="color:#d30b07;"></span>
+          {{/link-to}}
+        </td>
+        <td class='service-operation' style="text-align:center;">
+          {{#link-to 'services.delete' service class="dropdown-item"}}
+            <span class="glyphicon glyphicon-minus" style="color:#d30b07;"></span>
+          {{/link-to}}
+        </td>
       </tr>
-    </thead>
-    <tbody class="service-table-body">
-      {{#each sortedServices as |service|}}
-        <tr class="service-table-row">
-          <td class="service-column" data-th="Name">
-            <strong>{{service.name}}</strong>
-          </td>
-          <td class="service-column" data-th="Duration">
-            {{service.duration}} min
-          </td>
-          <td class="service-column" data-th="Price for Small Car">
-            ${{service.price_small}}
-          </td>
-          <td class="service-column" data-th="Price for Large Car">
-            ${{service.price_large}}
-          </td>
-          <td class="service-column" data-th="Active">
-            {{#if service.active}}
-              Yes
-            {{else}}
-              No
-            {{/if}}
-          </td>
-          <td class="service-column" data-th="Displayable">
-            {{#if service.displayable}}
-              Yes
-            {{else}}
-              No
-            {{/if}}
-          </td>
-          <td class='service-operation' style="text-align:center;">
-            {{#link-to 'services.show' service.id class="dropdown-item"}}
-              <span class="glyphicon glyphicon-pencil" style="color:#d30b07;"></span>
-            {{/link-to}}
-          </td>
-          <td class='service-operation' style="text-align:center;">
-            {{#link-to 'services.delete' service class="dropdown-item"}}
-              <span class="glyphicon glyphicon-minus" style="color:#d30b07;"></span>
-            {{/link-to}}
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+    {{/each}}
+  </tbody>
+</table>

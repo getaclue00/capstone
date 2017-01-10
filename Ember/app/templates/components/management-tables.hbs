@@ -1,0 +1,54 @@
+<table id="has-datatable" class="management-table" width="100%">
+    <thead>
+      <tr>
+        {{#each headers as |header|}}
+          <th><h1>{{header}}</h1></th>
+        {{/each}}
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="management-table-body">
+      {{#each sortedServices as |service|}}
+        <tr class="management-table-row">
+          <td class="management-column" data-th="Name">
+            <strong>{{service.name}}</strong>
+          </td>
+          <td class="management-column" data-th="Duration">
+            {{service.duration}} min
+          </td>
+          <td class="management-column" data-th="Price for Small Car">
+            ${{service.price_small}}
+          </td>
+          <td class="management-column" data-th="Price for Large Car">
+            ${{service.price_large}}
+          </td>
+          <td class="management-column" data-th="Active">
+            {{#if service.active}}
+              Yes
+            {{else}}
+              No
+            {{/if}}
+          </td>
+          <td class="management-column" data-th="Displayable">
+            {{#if service.displayable}}
+              Yes
+            {{else}}
+              No
+            {{/if}}
+          </td>
+          <td class="management-operation">
+            {{#link-to 'services.show' service.id}}
+              <span class="glyphicon glyphicon-pencil management-icon" style="color:#d30b07;"></span>
+            {{/link-to}}
+          </td>
+          <td class="management-operation">
+            {{#link-to 'services.delete' service}}
+              <span class="glyphicon glyphicon-minus management-icon" style="color:#d30b07;"></span>
+            {{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br />
