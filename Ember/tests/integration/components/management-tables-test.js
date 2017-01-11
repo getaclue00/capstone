@@ -12,6 +12,6 @@ test('it renders', function(assert) {
   this.render(hbs`{{management-tables}}`);
 
   assert.equal(this.$().text().trim(),
-    'Show 102550100 entriesSearch:' + '\n    ' + '\n      ' + '\n    ' + '\n    ' + '\n    ' +
-    'No data available in table'+ '\n' + '  Showing 0 to 0 of 0 entriesPreviousNext');
+    'Show 102550100 entriesSearch:' + '\n  ' + '\n    ' + '\n  ' + '\n  ' + '\n  ' +
+    'No data available in table'+ '\n' + 'Showing 0 to 0 of 0 entriesPreviousNext');
 });
