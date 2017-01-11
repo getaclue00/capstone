@@ -22,6 +22,7 @@ install:
   - cd ../Ember/
   - npm install
   - bower install
+  - npm install -g ember-cli
   - ember --version
   - cd ..
 

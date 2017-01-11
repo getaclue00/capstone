@@ -18,7 +18,6 @@ export default Ember.Controller.extend({
       if(appointment.get('employee').get('id') === undefined){
 
         this.store.find('employee', 0).then((employee) => {
-          console.log(employee.get('lastName'));
           appointment.set('employee', employee);
           appointment.save().then(transitionToPost).catch(failure);
         }); 
