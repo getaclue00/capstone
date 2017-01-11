@@ -8,7 +8,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	currentuser: service('current-user'),
 
 	model(){
-		// let id = _this.get('currentUser');
+		// return this.get('currentuser').user.id;
+
+		// let id = this.get('currentUser');
 
 		//loads model with every template render; therefore, attributes updated
 		return Ember.RSVP.hash({
