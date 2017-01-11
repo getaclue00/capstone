@@ -37,13 +37,13 @@
               No
             {{/if}}
           </td>
-          <td class="management-operation">
-            {{#link-to 'services.show' service.id}}
+          <td class='management-operation' style="text-align:center;">
+            {{#link-to 'services.show' service.id class="dropdown-item"}}
               <span class="glyphicon glyphicon-pencil management-icon" style="color:#d30b07;"></span>
             {{/link-to}}
           </td>
-          <td class="management-operation">
-            {{#link-to 'services.delete' service}}
+          <td class='management-operation' style="text-align:center;">
+            {{#link-to 'services.delete' service class="dropdown-item"}}
               <span class="glyphicon glyphicon-minus management-icon" style="color:#d30b07;"></span>
             {{/link-to}}
           </td>

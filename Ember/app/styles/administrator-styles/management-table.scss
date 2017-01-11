@@ -18,19 +18,6 @@ $breakpoint-alpha: 660px;
     color: #fffaef;
   }
 
-  .management-icon {
-    padding: 15% 40%;
-  }
-
-  .management-operation > button > span {
-    color: #d30b07;
-  }
-
-  .management-operation:hover {
-    background-color: #fffaef;
-    color: #EE2C2C;
-  }
-
   .dataTables_length {
     float: left;
   }
@@ -46,21 +33,6 @@ $breakpoint-alpha: 660px;
 
   text-align: left;
   font-size: 2.75vw;
-
-  .management-operation {
-    border: 1px solid black;
-    padding: 50%;
-    text-align: center;
-    background-image: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
-    background-image: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background-image: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
-  }
-
-  .management-operation:hover {
-    background-color: #fffaef;
-    color: #EE2C2C;
-  }
 
   th {
     display: none;
