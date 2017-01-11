@@ -3,23 +3,47 @@
   <form class="my-information" {{action 'save' on="submit"}}>
     <label for="username">
       <span>Username*</span>
-      {{input value=username placeholder="admin@admin.com"}}
+      {{input value=username value=model.email required="required" id="user-email"}}
     </label>
     <label for="password">
       <span>Password <span class="required">*</span></span>
-      {{input value=password placeholder="***********"}}
+      {{input value=password value=model.password required="required" id="user-password"}}
     </label>
     <label for="first_name">
       <span>First Name <span class="required">*</span></span>
-      {{input value=first_name placeholder="Stephany"}}
+      {{input value=first_name value=model.employee.firstName id="user-first-name"}}
     </label>
     <label for="last_name">
       <span>Last Name <span class="required">*</span></span>
-      {{input value=last_name placeholder="Oliver"}}
+      {{input value=last_name value=model.employee.lastName id="user-last-name"}}
     </label>
     <label for="phone">
       <span>Phone <span class="required">*</span></span>
-      {{input value=phone placeholder="613-786-8634"}}
+      {{input value=phone value=model.employee.phoneNumber id="user-phone-number" placeholder="Please use 000-000-0000 as format"}}
+    </label>
+    <label for="street_number">
+      <span>Street Number <span class="required">*</span></span>
+      {{input value=phone value=model.employee.streetNumber id="user-street-number"}}
+    </label>
+    <label for="street_name">
+      <span>Street Name <span class="required">*</span></span>
+      {{input value=phone value=model.employee.streetName id="user-street-name"}}
+    </label>
+    <label for="city">
+      <span>City <span class="required">*</span></span>
+      {{input value=phone value=model.employee.city id="user-city"}}
+    </label>
+    <label for="province">
+      <span>Province <span class="required">*</span></span>
+      {{input value=phone value=model.employee.province id="user-province"}}
+    </label>
+    <label for="postal_code">
+      <span>Postal Code <span class="required">*</span></span>
+      {{input value=phone value=model.employee.postalCode id="user-postal-code" placeholder="Please use K1K 1K1 as format"}}
+    </label>
+    <label for="start_date">
+      <span>Start Date </span>
+      {{model.employee.startDate}}
     </label>
     <span><button type="submit" class ="btn btn-primary button-color">Save</button></span>
   </form>
