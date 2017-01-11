@@ -11,14 +11,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{management-tables}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#management-tables}}
-      template block text
-    {{/management-tables}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(),
+    'Show 102550100 entriesSearch:' + '\n    ' + '\n      ' + '\n    ' + '\n    ' + '\n    ' +
+    'No data available in table'+ '\n' + '  Showing 0 to 0 of 0 entriesPreviousNext');
 });

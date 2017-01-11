@@ -16,16 +16,13 @@
             {{get m key}}
           </td>
           {{/each-in}}
-          <td class='management-operation'>
-            {{#link-to t (concat collection '.show') m class="management-icon"}}
-              <span class="glyphicon glyphicon-pencil" style="color:#d30b07;"></span>
+          {{#each-in operations as |key value|}}
+           <td class='management-operation'>
+            {{#link-to key  m.id class="management-icon"}}
+              <span class="glyphicon {{value}}" style="color:#d30b07;"></span>
             {{/link-to}}
-          </td>
-          <td class='management-operation'>
-            {{#link-to t (concat collection '.delete') m class="management-icon"}}
-              <span class="glyphicon glyphicon-minus" style="color:#d30b07;"></span>
-            {{/link-to}}
-          </td>
+           </td>
+          {{/each-in}}
         </tr>
       {{/each}}
     </tbody>
