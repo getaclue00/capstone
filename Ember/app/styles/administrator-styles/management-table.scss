@@ -10,6 +10,10 @@ $breakpoint-alpha: 660px;
     overflow: hidden;
     width: 100%;
     font-size: 1.5vw;
+
+    td:nth-child(1) {
+      font-weight: bold;
+    }
   }
   .management-table th h1 {
     font-weight: bold;
@@ -24,6 +28,11 @@ $breakpoint-alpha: 660px;
 
   .dataTables_filter {
     float: right;
+  }
+
+  .management-operation:hover {
+    background-color: #fffaef;
+    color: #EE2C2C;
   }
 }
 
@@ -49,11 +58,6 @@ $breakpoint-alpha: 660px;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
   }
 
-  .management-operation:hover {
-    background-color: #fffaef;
-    color: #EE2C2C;
-  }
-
   .management-icon {
     display: block;
     width: 100%;
@@ -75,7 +79,7 @@ $breakpoint-alpha: 660px;
     display: block;
 
     &:before {
-      text-align: left !important;
+      text-align: left;
       content: attr(data-th);
       font-weight: bold;
       width: 10em;
@@ -85,13 +89,6 @@ $breakpoint-alpha: 660px;
         display: none;
       }
     }
-  }
-  .dataTables_length {
-    float: left;
-  }
-
-  .dataTables_filter {
-    float: left;
   }
 }
 

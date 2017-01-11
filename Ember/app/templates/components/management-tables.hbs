@@ -9,41 +9,20 @@
       </tr>
     </thead>
     <tbody class="management-table-body">
-      {{#each sortedServices as |service|}}
+      {{#each model as |m|}}
         <tr class="management-table-row">
-          <td class="management-column" data-th="Name">
-            <strong>{{service.name}}</strong>
+          {{#each-in attributes as |key value|}}
+          <td class="management-column" data-th="{{value}}">
+            {{get m key}}
           </td>
-          <td class="management-column" data-th="Duration">
-            {{service.duration}} min
-          </td>
-          <td class="management-column" data-th="Price for Small Car">
-            ${{service.price_small}}
-          </td>
-          <td class="management-column" data-th="Price for Large Car">
-            ${{service.price_large}}
-          </td>
-          <td class="management-column" data-th="Active">
-            {{#if service.active}}
-              Yes
-            {{else}}
-              No
-            {{/if}}
-          </td>
-          <td class="management-column" data-th="Displayable">
-            {{#if service.displayable}}
-              Yes
-            {{else}}
-              No
-            {{/if}}
-          </td>
+          {{/each-in}}
           <td class='management-operation'>
-            {{#link-to 'services.show' service.id class="management-icon"}}
+            {{#link-to t (concat collection '.show') m class="management-icon"}}
               <span class="glyphicon glyphicon-pencil" style="color:#d30b07;"></span>
             {{/link-to}}
           </td>
           <td class='management-operation'>
-            {{#link-to 'services.delete' service class="management-icon"}}
+            {{#link-to t (concat collection '.delete') m class="management-icon"}}
               <span class="glyphicon glyphicon-minus" style="color:#d30b07;"></span>
             {{/link-to}}
           </td>

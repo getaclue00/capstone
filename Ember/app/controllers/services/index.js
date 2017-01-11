@@ -5,11 +5,12 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   // Put the services in ascending by their ID
-  sortProperties: ['id:asc'],
-  sortedServices: Ember.computed.sort('model', 'sortProperties'),
   headers: ["Name of Service", "Duration (minutes)", "Price for Small Vehicle ($)", "Price for Large Vehicle ($)",
             "Active", "Displayable"],
-  attributes: ["name", "duration", "price_small", "price_large", "active", "displayable"],
+  attributes: {"name": "Name of Service", "duration" : "Duration (minutes)", "price_small" : "Price for Small Vehicle ($)",
+               "price_large": "Price for Large Vehicle ($)", "active": "Active", "displayable": "Displayable"},
+
+  collection: 'service',
 
   actions: {
 
