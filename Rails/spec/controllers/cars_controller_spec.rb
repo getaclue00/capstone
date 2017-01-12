@@ -233,7 +233,7 @@ RSpec.describe CarsController, :type => :controller do
         expect(attr["interior"]).to eq(car.interior)
         expect(attr["colour"]).to eq(car.colour)
          #VERIFYING CAR POINTS TO OBJECTS
-        expect(parsed_response["data"]["relationships"]["client"]["data"]["id"].to_i).to eq(car.client.id)
+        expect(parsed_response["data"]["relationships"]["client"]["data"]["id"].to_i).to eq(car.client_id)
         #VERIFYING THAT OBJECTS POINT TO CAR
         expect(Client.find(car.client_id).cars[0].id).to eq (car.id)
 

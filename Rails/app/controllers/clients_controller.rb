@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
 	  			render json: { error: 'Client update failed'}, status: :bad_request
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	        render json: { error: 'Client update failed.'}, status: :bad_request
+	        render json: { error: 'Client update failed. No parameters sent.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such client exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
@@ -68,7 +68,7 @@ class ClientsController < ApplicationController
 	#anything beneath the key word private is private
 	private 
 
-		def client_sanitized_params
+	def client_sanitized_params
 		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
