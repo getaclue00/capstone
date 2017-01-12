@@ -125,4 +125,93 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
   end
+
+  describe 'PATCH User#update' do
+    context 'when no such user exists' do
+      it 'returns an error' do
+
+        user = FactoryGirl.create :user
+        user.password = "Updated password"
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: { id: 777, data: params['data']}
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('No such user exists')
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+
+    context 'when the user exists and the update had no params sent' do
+      it "responds with a bad request" do
+        user = FactoryGirl.create :user
+
+        patch :update, params: { id: user.id }
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('User update failed. No parameters sent.')
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    context 'when the user exists and the correct params were sent' do
+      it "responds successfully" do
+        user = FactoryGirl.create :user
+        user.email = "new@new.com"
+        user.password = "password"
+        user.admin = true
+        # we made it such that employee for a given user cannot be updated
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+       
+        patch :update, params: {id: user.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['data']['id'].to_i).to eq(user.id)
+        attr = parsed_response['data']['attributes']     
+        expect(attr["email"]).to eq(user.email)
+        expect(attr["password"]).to eq(nil) #we dont return password
+        expect(attr["admin"]).to eq(user.admin)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when the user exists and the incorrect params were sent' do
+      it "responds successfully" do
+        user = FactoryGirl.create :user
+        user.email = "new"
+        user.password = "dd"
+        user.admin = true
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+       
+        patch :update, params: {id: user.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+ 
+   end
+
+
 end

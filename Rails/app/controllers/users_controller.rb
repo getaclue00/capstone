@@ -28,7 +28,31 @@ class UsersController < ApplicationController
       render json: { error: 'This user does not exist' }, status: :not_found
     end
   end
-end
 
+  def update
+    begin
+      user=User.find params[:id]
+        if user.update!(user_sanitized_params)
+          render json: user, status: :ok
+        else
+          render json: { error: 'User update failed.'}, status: :bad_request
+        end
+    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+      render json: { error: 'User update failed. No parameters sent.'}, status: :bad_request
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: 'No such user exists' }, status: :not_found
+    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+      render json: { error: user.errors.messages}, status: :bad_request
+    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected
+      render json: { error: 'User update failed. Check your data.'}, status: :bad_request
+    end
+  end
+
+  private 
+
+  def user_sanitized_params
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password, :admin] )
+  end
+end
 
     
