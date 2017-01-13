@@ -1,0 +1,132 @@
+$breakpoint-alpha: 660px;
+
+//Styling for when on computer
+
+@media (min-width: $breakpoint-alpha) {
+
+  .management-table{
+
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    font-size: 1.5vw;
+
+    td:nth-child(1) {
+      font-weight: bold;
+    }
+  }
+  .management-table th h1 {
+    font-weight: bold;
+    font-size: 1.75vw;
+    text-align: center;
+    color: #fffaef;
+  }
+
+  .dataTables_length {
+    float: left;
+  }
+
+  .dataTables_filter {
+    float: right;
+  }
+
+  .management-operation:hover {
+    background-color: #fffaef;
+    color: #EE2C2C;
+  }
+}
+
+//Styling for when on mobile device
+
+@media (max-width: $breakpoint-alpha) {
+
+  text-align: left;
+  font-size: 2.75vw;
+
+  thead {
+    display: none;
+  }
+
+  .management-operation {
+    border: 1px solid black;
+    display: block;
+    padding: none;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
+    background-image: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+    background-image: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
+  }
+
+  .management-icon {
+    display: block;
+    width: 100%;
+    padding: 2.5% 0%;
+    clear: both;
+    font-weight: normal;
+    color: #373a3c;
+    text-align: inherit;
+    white-space: nowrap;
+    background: none;
+    border: 0;
+  }
+
+  th {
+    display: none;
+  }
+
+  .management-column {
+    display: block;
+
+    &:before {
+      text-align: left;
+      content: attr(data-th);
+      font-weight: bold;
+      width: 10em;
+      display: inline-block;
+
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Styling for both mobile and computer
+
+.management-column, .management-table th {
+  padding: 2% 2% 2% 2%;
+}
+
+.management-table tr:nth-child(odd) {
+  background-color: #d3d3d3;
+}
+
+.management-table tr:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.management-table th {
+  background-color: #d30b07;
+}
+
+.management-table tr:hover {
+ background-color: #36454f;
+ color: #fffaef;
+}
+
+.management-toggle-menu {
+  padding: 20%;
+  font-size: 1.5vw;
+}
+
+.management-table {
+  th, td {
+    margin: 1em 1em;
+  }
+  th, td:before {
+    text-align: left;
+    color: black;
+  }
+}
+
