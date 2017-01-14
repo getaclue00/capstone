@@ -1,5 +1,9 @@
 class AppointmentsController < ApplicationController
 	def index
+    # TODO:
+    # load the appointments based on the current week number
+    # thus, appointments need a weeknumber attribute
+    current_week = Time.now.strftime("%U").to_i
 		appointments_array=Appointment.all
 		if appointments_array && !appointments_array.empty?
       		render json: appointments_array, status: :ok
@@ -58,7 +62,7 @@ class AppointmentsController < ApplicationController
 		rescue ActiveRecord::RecordInvalid => e
 	      render json: { error: appointment.errors.messages}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
-	     	render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request	
+	     	render json: { error: 'Appointment update failed. Check your data.'}, status: :bad_request
 		end
 	end
 

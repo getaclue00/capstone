@@ -10,6 +10,7 @@ export default Model.extend({
   end:        attr('isodate'),
   notes:      attr('string', { defaultValue: '' }),
   status:     attr('string', { defaultValue: 'pending' }),
+  weekNumber: attr('number'),
   service:    belongsTo('service'),
   employee:   belongsTo('employee')
 });
