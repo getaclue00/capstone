@@ -10,8 +10,7 @@
     </div>
     <div class="week-view">
       {{full-calendar
-        header=false
-        events=events
+        events=computedEvents
         viewName=viewName2
         eventClick=(action 'handleCalendarEventClick')
       }}

@@ -20,53 +20,40 @@ export default Ember.Controller.extend({
     center: 'title',
     right:  'prev,next'
   },
-  calendarHeader2: {
-    left:   '',
-    center: '',
-    right:  ''
-  },
-  tempEvents: Ember.A([{
-    title: 'Event 1',
-    start: '2017-01-08T07:08:08',
-    end: '2017-01-08T09:08:08'
-  },{
-    title: 'Event 1',
-    start: '2017-01-09T07:08:08',
-    end: '2017-01-09T09:08:08'
-  },{
-    title: 'Event 1',
-    start: '2017-01-09T10:08:08',
-    end: '2017-01-09T12:08:08'
-  },{
-    title: 'Event 1',
-    start: '2017-01-12T07:08:08',
-    end: '2017-01-12T09:08:08'
-  },{
-    title: 'Event 2',
-    start: '2017-01-13T07:08:08',
-    end: '2017-01-13T09:08:08'
-  }, {
-    title: 'Event 3',
-    start: '2017-01-15T07:08:08',
-    end: '2017-01-15T09:08:08'
-  }
-  ]),
 
-  events: Ember.computed('model.[]', function() {
-    // Unfortunately, we need to do this conversion, until we can figure out why the model is not displayed without this conversion...
+  // events: Ember.computed('model.[]', function() {
+  //   // Unfortunately, we need to do this conversion, until we can figure out why the model is not displayed without this conversion...
+  //
+  //   let events = [];
+  //
+  //   this.get('store').findAll('appointment').then((items) => {
+  //     items.forEach((item) => {
+  //       events.pushObject({
+  //         id    : item.get('id'),
+  //         title : item.get('title'),
+  //         start : item.get('start'),
+  //         end   : item.get('end'),
+  //         color : item.get('color'),
+  //         textColor: item.get('textColor')
+  //       });
+  //     });
+  //   });
+  //
+  //   return events;
+  // }),
 
+  computedEvents: Ember.computed('model.[]', function() {
     let events = [];
+    let model = this.get('model');
 
-    this.get('store').findAll('appointment').then((items) => {
-      items.forEach((item) => {
-        events.pushObject({
-          id    : item.get('id'),
-          title : item.get('title'),
-          start : item.get('start'),
-          end   : item.get('end'),
-          color : item.get('color'),
-          textColor: item.get('textColor')
-        });
+    model.forEach(function(item) {
+      events.pushObject({
+        id    : item.get('id'),
+        title : 'Service',
+        start : item.get('start'),
+        end   : item.get('end'),
+        color : item.get('color'),
+        textColor: item.get('textColor')
       });
     });
 
@@ -78,25 +65,51 @@ export default Ember.Controller.extend({
       this.set('viewName', view);
     },
 
-    handleCalendarEventClick(calEvent, jsEvent, view) {
-      console.log("calEvent: ", calEvent);
-      console.log("jsEvent: ", jsEvent);
-      console.log("view: ", view);
-      // console.error("handleCalendarEventClick - Not implemented");
+    handleCalendarEventClick(calEvent) {
       this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
 
     handleCalendarDayClick(date) {
-      console.log('Clicked on: ' + date.format());
-    // //
-    // //   this.set('newAppointmentDate', date.format());
-    // //
-    // //   // console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-    // //
-    // //   // console.log('Current view: ' + view.name);
-    // //
-    // //   // Ember.$('#myModal').modal('show');
-    // //   // this.transitionToRoute('my-calendar.appointments.new');
+      var self = this;
+      let week = date.week();
+      let year = date.weekYear();
+
+      function successfulResponse(results) {
+        // TO REMOVE::::
+        // Current problem... we fetch the new week but the calendar listview does not change to the corresponding week... thus need to figure out how to change the week view without having the header there
+        // TO REMOVE::::
+        if (!Ember.isEmpty(results)) {
+          let events = [];
+
+          results.forEach(function(item) {
+            events.pushObject({
+              id    : item.get('id'),
+              start : item.get('start'),
+              end   : item.get('end'),
+              color : item.get('color'),
+              textColor: item.get('textColor')
+            });
+          });
+          self.get('model', undefined);
+          console.log('current model: ', self.get('model'));
+          self.set('model', results);
+          // console.log('current model: ', self.get('model'));
+          // debugger;
+          self.set('computedEvents', events);
+        } else {
+          self.set('computedEvents', []);
+        }
+      }
+
+      self.get('store').query('appointment', {
+        filter: {
+          week: week,
+          year: year
+        }
+      }).then(successfulResponse);
+
+      console.log('date: ', date);
+      console.log('week number: ', week);
     }
   }
 });

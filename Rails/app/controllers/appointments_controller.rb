@@ -3,13 +3,19 @@ class AppointmentsController < ApplicationController
     # TODO:
     # load the appointments based on the current week number
     # thus, appointments need a weeknumber attribute
-    current_week = Time.now.strftime("%U").to_i
-		appointments_array=Appointment.where('week_number = ?', current_week).all
+
+		if params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
+			appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
+		else
+			current_week = Time.now.strftime("%U").to_i
+			appointments_array=Appointment.where('week_number = ?', current_week).all
+		end
+
 		if appointments_array && !appointments_array.empty?
-      		render json: appointments_array, status: :ok
-    	else
-      		render json: appointments_array, status: :ok
-    	end
+				render json: appointments_array, status: :ok
+		else
+				render json: appointments_array, status: :ok
+		end
 	end
 
 	def show
