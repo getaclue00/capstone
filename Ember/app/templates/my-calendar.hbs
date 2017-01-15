@@ -5,16 +5,15 @@
         header=calendarHeader
         aspectRatio=1
         viewName=viewName
-        businessHours=businessHours
-        eventClick=(action 'handleCalendarEventClick')
         dayClick=(action 'handleCalendarDayClick')
       }}
     </div>
     <div class="week-view">
       {{full-calendar
         header=false
-        events=tempEvents
+        events=events
         viewName=viewName2
+        eventClick=(action 'handleCalendarEventClick')
       }}
     </div>
     {{outlet}}

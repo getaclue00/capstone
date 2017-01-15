@@ -11,6 +11,14 @@ export default Ember.Component.extend({
     selectService(service, model) {
       if(!Ember.isEmpty(service)){
         model.set('service', service);
+        this.set('serviceSelected', true);
+      }
+    },
+
+    resetService(model, service) {
+      if(!Ember.isEmpty(service)){
+        model.set('service', undefined);
+        this.set('serviceSelected', false);
       }
     }
   }

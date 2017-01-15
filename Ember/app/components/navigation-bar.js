@@ -19,6 +19,13 @@ export default Ember.Component.extend({
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("navbar-toggle-button-small-screen").style.display = "";
       document.body.style.backgroundColor = "";
+    },
+
+    handleAddNewAppointment() {
+      this.get('handleNewAppointment')();
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("navbar-toggle-button-small-screen").style.display = "";
+      document.body.style.backgroundColor = "";
     }
   }
 });

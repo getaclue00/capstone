@@ -34,22 +34,25 @@
     <aside id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick={{action 'closeNav'}}>&times;</a>
       <ul class="nav navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" style="
+    max-width: 200px;
+    width: 200px;
+">
           <span class="nav-list-item navbar-text">
             Add a new:
           </span>
         </li>
         <li class="nav-item">
-          <a class='nav-link nav-list-item'>&#x2b; Appointment</a>
+          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item' {{action 'handleAddNewAppointment'}}>&#x2b; Appointment</button>
         </li>
         <li class="nav-item">
-          <a class='nav-link nav-list-item'>&#x2b; Customer</a>
+          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Customer</button>
         </li>
         <li class="nav-item">
-          <a class='nav-link nav-list-item'>&#x2b; Staff Member</a>
+          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Staff Member</button>
         </li>
         <li class="nav-item">
-          <a class='nav-link nav-list-item'>&#x2b; Service</a>
+          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Service</button>
         </li>
       </ul>
     </aside>

@@ -1,56 +1,61 @@
 <div class="row">
-  <div class="form-group row">
+  {{!-- <div class="form-group row">
     <label for="appointment-title" class="col-xs-4 col-form-label">Appointment Title</label>
     <div class="col-xs-8">
       {{input class="form-control" value=model.title id="appointment-title"}}
     </div>
-  </div>
+  </div> --}}
   <div class="form-group row appointment-button-div">
-    <label for="service" class="col-xs-4 col-form-label">Service</label>
-    <div class="col-xs-8 appointment-button">
-      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <label for="service" class="col-xs-12 col-form-label">Service</label>
+    <div class="col-xs-12 appointment-button">
+      {{!-- <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{#if model.service.name}}
         {{model.service.name}}
       {{else}}
         None
       {{/if}}
-      </button>
-      <div class="dropdown-menu">
-        {{#each services as |service|}}
-          <button class="dropdown-item" {{action 'selectService' service model}}>{{service.name}}</button>
-        {{/each}}
-      </div>
+      </button> --}}
+      {{#unless serviceSelected}}
+        <div class="btn-group-vertical" style="max-width: 100%;">
+          {{#each services as |service|}}
+            <button class="btn btn-sm btn-outline-primary" {{action 'selectService' service model}} style="white-space: normal;">{{service.name}}</button>
+          {{/each}}
+        </div>
+      {{else}}
+        <button class="btn btn-sm btn-outline-primary" style="white-space: normal;">{{model.service.name}}</button>
+        <button class="btn btn-sm btn-outline-danger" {{action 'resetService' model model.service}} style="white-space: normal;"><span class="glyphicon glyphicon-pencil"></span></button>
+      {{/unless}}
     </div>
   </div>
-  <div class="form-group row">
+  {{!-- <div class="form-group row">
     <label for="appointment-background-color" class="col-xs-4 col-form-label">Background Color</label>
     <div class="col-xs-8">
       {{input type="color" class="form-control" value=model.color id="appointment-background-color"}}
     </div>
-  </div>
-  <div class="form-group row">
+  </div> --}}
+  {{!-- <div class="form-group row">
     <label for="appointment-text-color" class="col-xs-4 col-form-label">Text Color</label>
     <div class="col-xs-8">
       {{input type="color" class="form-control" value=model.textColor id="appointment-text-color"}}
     </div>
-  </div>
+  </div> --}}
   <div class="form-group row">
-    <label for="appointment-start-time" class="col-xs-4 col-form-label">Appointment Start</label>
-    <div class="col-xs-8">
+    <label for="appointment-start-time" class="col-xs-12 col-form-label">Appointment Start</label>
+    <div class="col-xs-12">
       {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.start}}
       <small>Temp: {{model.start}}</small>
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-end-time" class="col-xs-4 col-form-label">Appointment End</label>
-    <div class="col-xs-8">
+    <label for="appointment-end-time" class="col-xs-12 col-form-label">Appointment End</label>
+    <div class="col-xs-12">
       {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.end}}
       <small>Temp: {{model.end}}</small>
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-notes" class="col-xs-4 col-form-label">Notes</label>
-    <div class="col-xs-8">
+    <label for="appointment-notes" class="col-xs-12 col-form-label">Notes</label>
+    <div class="col-xs-12">
       {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
     </div>
   </div>

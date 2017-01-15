@@ -4,11 +4,11 @@ class AppointmentsController < ApplicationController
     # load the appointments based on the current week number
     # thus, appointments need a weeknumber attribute
     current_week = Time.now.strftime("%U").to_i
-		appointments_array=Appointment.all
+		appointments_array=Appointment.where('week_number = ?', current_week).all
 		if appointments_array && !appointments_array.empty?
       		render json: appointments_array, status: :ok
     	else
-      		render json: { error: 'No appointments exist' }, status: :bad_request
+      		render json: appointments_array, status: :ok
     	end
 	end
 
@@ -24,6 +24,7 @@ class AppointmentsController < ApplicationController
 	def create
 	    begin
 	    	sanitized_params = appointment_sanitized_params
+        sanitized_params[:week_number] = Date.parse(sanitized_params[:start]).strftime("%U").to_i
 	    	#setting employee to default employee
 	    	if sanitized_params[:employee_id] == nil
 	    		sanitized_params[:employee_id] = 0

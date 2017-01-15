@@ -130,6 +130,18 @@
     border-bottom: 0.07em solid;
     width: 100%;
   }
+
+  .navbar-nav .nav-item + .nav-item {
+    margin-left: 0em;
+  }
+
+  .btn-outline-primary {
+    border-color: transparent;
+  }
+
+  .nav-item:hover {
+    background-color: inherit;
+  }
 }
 
 /* When you mouse over the navigation links, change their color */

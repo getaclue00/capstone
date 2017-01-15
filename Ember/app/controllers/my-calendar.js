@@ -86,17 +86,17 @@ export default Ember.Controller.extend({
       this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
 
-    handleCalendarDayClick(date, jsEvent, view) {
-      // console.log('Clicked on: ' + date.format());
-
-      this.set('newAppointmentDate', date.format());
-
-      console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-      console.log('Current view: ' + view.name);
-
-      // Ember.$('#myModal').modal('show');
-      this.transitionToRoute('my-calendar.appointments.new');
+    handleCalendarDayClick(date) {
+      console.log('Clicked on: ' + date.format());
+    // //
+    // //   this.set('newAppointmentDate', date.format());
+    // //
+    // //   // console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+    // //
+    // //   // console.log('Current view: ' + view.name);
+    // //
+    // //   // Ember.$('#myModal').modal('show');
+    // //   // this.transitionToRoute('my-calendar.appointments.new');
     }
   }
 });
