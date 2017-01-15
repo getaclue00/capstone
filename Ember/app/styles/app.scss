@@ -10,9 +10,24 @@
 @import "my-calendar";
 @import "nav-menu";
 
+$break-small: 320px;
+$break-large: 1024px;
+
 // Styling placed in this folder relates to styles present on multiple pages
 .container{
-  padding-top: 65px;
+  @media (min-width: $break-small) {
+    padding-top: 3.5em;
+  }
+
+  @media (min-width: $break-large) {
+    padding-top: 65px;
+  }
+}
+
+body {
+  @media (min-width: $break-small) {
+    transition: background-color .5s;
+  }
 }
 
 .page-title {
