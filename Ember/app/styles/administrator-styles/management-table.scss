@@ -30,10 +30,21 @@ $breakpoint-alpha: 660px;
     float: right;
   }
 
+  .management-table tr:hover {
+    background-color: #36454f !important;
+    color: #fffaef;
+  }
+
   .management-operation:hover {
     background-color: #fffaef;
     color: #EE2C2C;
   }
+
+  .management-operation {
+    display: inline-block;
+    padding: 5px 35px;
+  }
+
 }
 
 //Styling for when on mobile device
@@ -49,25 +60,28 @@ $breakpoint-alpha: 660px;
 
   .management-operation {
     border: 1px solid black;
-    display: block;
-    padding: none;
+    display: inline-block;
+    margin: .05em;
+    padding: 10px;
+    float: right;
     text-align: center;
-    background-image: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
-    background-image: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background-image: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
+    background: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
+    background: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+    background: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
+  }
+
+  .management-operation:hover {
+    background: #36454f;
   }
 
   .management-icon {
-    width: 50%;
-    padding: 2.5% 0%;
-    clear: both;
+    padding: 10px 30px;
     font-weight: normal;
     color: #373a3c;
     text-align: inherit;
     white-space: nowrap;
     background: none;
-    border: 0;
   }
 
   th {
@@ -107,11 +121,6 @@ $breakpoint-alpha: 660px;
 
 .management-table th {
   background-color: #d30b07;
-}
-
-.management-table tr:hover {
- background-color: #36454f;
- color: #fffaef;
 }
 
 .management-toggle-menu {
