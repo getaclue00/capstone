@@ -59,8 +59,7 @@ $breakpoint-alpha: 660px;
   }
 
   .management-icon {
-    display: block;
-    width: 100%;
+    width: 50%;
     padding: 2.5% 0%;
     clear: both;
     font-weight: normal;
@@ -76,19 +75,19 @@ $breakpoint-alpha: 660px;
   }
 
   .management-column {
+    display: none;
+  }
+
+  tr td:nth-child(1) {
+    font-weight: bold;
     display: block;
+    margin: 0px 16px;
+  }
 
-    &:before {
-      text-align: left;
-      content: attr(data-th);
-      font-weight: bold;
-      width: 10em;
-      display: inline-block;
-
-      @media (min-width: $breakpoint-alpha) {
-        display: none;
-      }
-    }
+  tr td:nth-child(2) {
+    display: block;
+    font-size: 2vw;
+    margin: 0px 16px;
   }
 }
 
