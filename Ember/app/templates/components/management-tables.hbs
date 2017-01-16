@@ -11,7 +11,7 @@
     {{#each model as |m|}}
       <tr class="management-table-row">
         {{#each-in attributes as |key value|}}
-        <td class="management-column">
+        <td class="management-column" data-th="{{value}}">
           {{get m key}}
         </td>
         {{/each-in}}

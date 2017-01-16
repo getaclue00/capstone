@@ -4,12 +4,17 @@ $breakpoint-alpha: 660px;
 
 @media (min-width: $breakpoint-alpha) {
 
+  .management-div {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
   .management-table{
 
     text-align: center;
     overflow: hidden;
     width: 100%;
-    font-size: 1.5vw;
+    font-size: 1.25vw;
 
     td:nth-child(1) {
       font-weight: bold;
@@ -40,14 +45,11 @@ $breakpoint-alpha: 660px;
     color: #EE2C2C;
   }
 
-  .management-operation {
+ .management-operation {
     display: inline-block;
-    padding: 10px 35px;
-  }
-
-  .management-icon {
-    padding: 15px 35px;
-    white-space: nowrap;
+    margin: .1em;
+    padding: 8px;
+    text-align: center;
   }
 
 }
@@ -80,15 +82,6 @@ $breakpoint-alpha: 660px;
     background: #36454f;
   }
 
-  .management-icon {
-    padding: 10px 30px;
-    font-weight: normal;
-    color: #373a3c;
-    text-align: inherit;
-    white-space: nowrap;
-    background: none;
-  }
-
   th {
     display: none;
   }
@@ -99,8 +92,8 @@ $breakpoint-alpha: 660px;
   }
 
   tr td:nth-child(1) {
-    width: 75%;
-    font-size: 2.75vw;
+    width: 70%;
+    font-size: 3.5vw;
     font-weight: bold;
     display: block;
     margin: 0px 0px 0px 16px;;
@@ -108,13 +101,17 @@ $breakpoint-alpha: 660px;
 
   tr td:nth-child(2) {
     display: block;
-    font-size: 2vw;
+    font-size: 2.4vw;
     width: 75%;
-    margin: 0px 0px 0px 40px;
+    margin: 0px 0px 0px 16px;
+
+    &:before {
+      content: attr(data-th);
+    }
   }
 
   .management-buttons {
-    width: 55%;
+    width: 65%;
   }
 }
 
@@ -149,5 +146,10 @@ $breakpoint-alpha: 660px;
     text-align: left;
     color: black;
   }
+}
+
+.management-icon {
+  padding: 10px 30px;
+  white-space: nowrap;
 }
 
