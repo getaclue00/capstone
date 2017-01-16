@@ -4,10 +4,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 	model(){
-		return Ember.RSVP.hash({
-			user: this.get('store').find('user', this.get('session.data.authenticated.user_id')),
-	        employees: this.get('store').findAll('employee')
-    	});	
+		return this.get('store').find('user', this.get('session.data.authenticated.user_id'));
 	}
 
 });

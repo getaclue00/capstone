@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       render json: { error: 'No such user exists' }, status: :not_found
     rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
       render json: { error: user.errors.messages}, status: :bad_request
-    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected
+    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
       render json: { error: 'User update failed. Check your data.'}, status: :bad_request
     end
   end
