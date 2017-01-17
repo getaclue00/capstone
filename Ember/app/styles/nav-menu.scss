@@ -12,6 +12,7 @@
 
 .navbar {
   background-color: black;
+  padding: 0;
 }
 
 .nav-list-item {
@@ -31,10 +32,10 @@
   float: right;
 }
 
-.menu li {
-  margin:0px;
+.nav-item {
   list-style:none;
-  border-radius: 5px;
+  padding: 1%;
+  height: 55px;
 }
 
 .menu a {
@@ -44,7 +45,6 @@
 }
 
 .menu .nav-item:hover {
-  padding: 2px;
   background-color: #EE2C2C;
 }
 
