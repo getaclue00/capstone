@@ -6,7 +6,6 @@ const { Model, attr, hasMany, belongsTo } = DS;
 export default Model.extend({
   lastName:     attr('string'),
   firstName:    attr('string'),
-  email:        attr('string'),
   phoneNumber:  attr('string'),
   streetNumber: attr('number'),
   streetName:   attr('string'),
@@ -15,7 +14,6 @@ export default Model.extend({
   postalCode:   attr('string'),
   startDate:    attr('isodate'),
   endDate:      attr('isodate'),
-  isAdmin:      attr('boolean'),
   notes:        attr('string'),
   appointments: hasMany('appointment', { async: true }),
   user:   belongsTo('user'),
