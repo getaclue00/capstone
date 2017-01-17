@@ -16,8 +16,6 @@ export default Ember.Controller.extend({
 	     	 	e.save().then(onSuccessful).catch(onError);
 	      	});
 
-
-
 	    } 
 	}
 });
