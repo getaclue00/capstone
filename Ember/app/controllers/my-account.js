@@ -15,6 +15,9 @@ export default Ember.Controller.extend({
 		    this.get('model').get('employee').then((e) => {
 	     	 	e.save().then(onSuccessful).catch(onError);
 	      	});
+
+
+
 	    } 
 	}
 });

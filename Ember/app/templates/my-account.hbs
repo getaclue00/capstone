@@ -3,43 +3,43 @@
   <form class="my-information" {{action 'save' on="submit"}}>
     <label for="username">
       <span>Username*</span>
-      {{input value=username value=model.email required="required" id="user-email"}}
+      {{input type="email" value=model.email required="required" id="user-email"}}
     </label>
     <label for="password">
       <span>Password <span class="required">*</span></span>
-      {{input value=password value=model.password required="required" id="user-password"}}
+      {{input type="password" value=model.password required="required" id="user-password"}}
     </label>
     <label for="first_name">
       <span>First Name <span class="required">*</span></span>
-      {{input value=first_name value=model.employee.firstName id="user-first-name"}}
+      {{input value=model.employee.firstName id="user-first-name"}}
     </label>
     <label for="last_name">
       <span>Last Name <span class="required">*</span></span>
-      {{input value=last_name value=model.employee.lastName id="user-last-name"}}
+      {{input value=model.employee.lastName id="user-last-name"}}
     </label>
     <label for="phone">
       <span>Phone <span class="required">*</span></span>
-      {{input value=phone value=model.employee.phoneNumber id="user-phone-number"}}
+      {{input type="tel" value=model.employee.phoneNumber id="user-phone-number"}}
     </label>
     <label for="street_number">
       <span>Street Number <span class="required">*</span></span>
-      {{input value=phone value=model.employee.streetNumber id="user-street-number"}}
+      {{input type="number" value=model.employee.streetNumber id="user-street-number"}}
     </label>
     <label for="street_name">
       <span>Street Name <span class="required">*</span></span>
-      {{input value=phone value=model.employee.streetName id="user-street-name"}}
+      {{input value=model.employee.streetName id="user-street-name"}}
     </label>
     <label for="city">
       <span>City <span class="required">*</span></span>
-      {{input value=phone value=model.employee.city id="user-city"}}
+      {{input value=model.employee.city id="user-city"}}
     </label>
     <label for="province">
       <span>Province <span class="required">*</span></span>
-      {{input value=phone value=model.employee.province id="user-province"}}
+      {{input value=model.employee.province id="user-province"}}
     </label>
     <label for="postal_code">
       <span>Postal Code <span class="required">*</span></span>
-      {{input value=phone value=model.employee.postalCode id="user-postal-code"}}
+      {{input value=model.employee.postalCode id="user-postal-code"}}
     </label>
     <label for="start_date">
       <span>Start Date </span>
