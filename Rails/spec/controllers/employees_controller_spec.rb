@@ -64,7 +64,6 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(attr["postal_code"]).to eq("H7H 5U5")
         expect(attr["start_date"]).to eq("2013-10-22")
         expect(attr["end_date"]).to eq("2015-11-19")
-        expect(attr["is_admin"]).to eq(true)
         expect(attr["notes"]).to eq("This is a note")
         #VERIFYING EMPLOYEE POINTS TO OBJECTS
         expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
@@ -97,7 +96,6 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(attr["postal_code"]).to eq("H7H 5U5")
         expect(attr["start_date"]).to eq("2013-10-22")
         expect(attr["end_date"]).to eq("2015-11-19")
-        expect(attr["is_admin"]).to eq(true)
         expect(attr["notes"]).to eq("This is a note")
         #VERIFYING EMPLOYEE POINTS TO OBJECTS
         expect(result["data"]["relationships"]["user"]["data"]["id"].to_i).to eq(user_id)
@@ -126,7 +124,6 @@ RSpec.describe EmployeesController, :type => :controller do
               "attributes": {
                 "last_name": "Radwan",
                 "first_name": "Nada",
-                "email": "test@test.com", #appended n to make it unique
                 "phone_number": "345-468-3444",
                 "street_number": 45,
                 "street_name": "Bank street",
@@ -135,7 +132,6 @@ RSpec.describe EmployeesController, :type => :controller do
                 "postal_code": "H7H 5U5",
                 "start_date": "2013-10-22",
                 "end_date": "2015-11-19",
-                "is_admin": true,
                 "notes": "This is a note"
               },
               "type":"employees"
@@ -158,7 +154,6 @@ RSpec.describe EmployeesController, :type => :controller do
               "attributes": {
                 "last_name": "Radwan",
                 "first_name": "Nada",
-                "email": "test@test.com", #appended n to make it unique
                 "phone_number": "3459",
                 "street_number": "tt",
                 "street_name": "Bank street",
@@ -167,7 +162,6 @@ RSpec.describe EmployeesController, :type => :controller do
                 "postal_code": "H75",
                 "start_date": "2013",
                 "end_date": "aa",
-                "is_admin": "ee",
                 "notes": "This is a note"
               },
               "type":"employees"
@@ -227,7 +221,6 @@ RSpec.describe EmployeesController, :type => :controller do
         employee = FactoryGirl.create :employee_with_appointment
         employee.last_name = "updated lastName"
         employee.first_name = "updated firstName"
-        employee.email = "oo@yahoo.com"
         employee.phone_number = "444-222-4567"
         employee.street_number = 3
         employee.street_name = "updated Street"
@@ -236,7 +229,6 @@ RSpec.describe EmployeesController, :type => :controller do
         employee.postal_code = "J2J 9Q9"
         employee.start_date = "2058-12-12"
         employee.end_date = "2060-11-11"
-        employee.is_admin = false
         employee.notes = "updated note"
 
         # Create a serializer instance
@@ -253,7 +245,6 @@ RSpec.describe EmployeesController, :type => :controller do
         attr = parsed_response['data']['attributes']      
         expect(attr["last_name"]).to eq(employee.last_name)
         expect(attr["first_name"]).to eq(employee.first_name)
-        expect(attr["email"]).to eq(employee.email)
         expect(attr["phone_number"]).to eq(employee.phone_number)
         expect(attr["street_number"].to_i).to eq(employee.street_number)
         expect(attr["street_name"]).to eq(employee.street_name)
@@ -262,7 +253,6 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(attr["postal_code"]).to eq(employee.postal_code)
         expect(attr["start_date"]).to eq("2058-12-12")
         expect(attr["end_date"]).to eq("2060-11-11")
-        expect(attr["is_admin"]).to eq(employee.is_admin)
         expect(attr["notes"]).to eq(employee.notes)
 
         expect(response).to have_http_status(:ok)
@@ -274,7 +264,6 @@ RSpec.describe EmployeesController, :type => :controller do
         employee = FactoryGirl.create :employee_with_appointment
         employee.last_name = "testing"
         employee.first_name = "test"
-        employee.email = "test@yahoo.com"
         employee.phone_number = "0"
         employee.street_number = "pp"
         employee.street_name = "Albert Street"
@@ -283,7 +272,6 @@ RSpec.describe EmployeesController, :type => :controller do
         employee.postal_code = "J6"
         employee.start_date = "jj"
         employee.end_date = "kk"
-        employee.is_admin = "hh"
         employee.notes = "test note"
 
         # Create a serializer instance

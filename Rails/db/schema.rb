@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109155821) do
+ActiveRecord::Schema.define(version: 20170117151905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 20170109155821) do
   create_table "employees", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
-    t.string   "email"
     t.string   "phone_number",  limit: 12
     t.integer  "street_number"
     t.string   "street_name"
@@ -71,12 +70,10 @@ ActiveRecord::Schema.define(version: 20170109155821) do
     t.string   "province"
     t.string   "postal_code",   limit: 7
     t.date     "start_date",               default: '2017-01-09'
-    t.boolean  "is_admin",                 default: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
     t.text     "notes"
-    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
   end
 
   create_table "services", force: :cascade do |t|
