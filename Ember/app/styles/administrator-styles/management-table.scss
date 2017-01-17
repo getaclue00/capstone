@@ -145,15 +145,6 @@ $breakpoint-alpha: 660px;
     margin-top: 40px;
     text-align: center;
     text-shadow: 0 1px 1px #fff;
-}
-
-  h3:after {
-      content: attr(data-shadow-text);
-      color: rgba(0,0,0,.35);
-      text-shadow: none;
-      left: .0875em;
-      top: .0875em;
-      z-index: -1;
   }
 }
 
