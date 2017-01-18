@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { $, Controller, computed, isEmpty } = Ember;
+
+export default Controller.extend({
   // TO REMOVE::::
   // moment().format('W') ==> to get week number
   // TO REMOVE::::
@@ -42,7 +44,7 @@ export default Ember.Controller.extend({
   //   return events;
   // }),
 
-  computedEvents: Ember.computed('model.[]', function() {
+  computedEvents: computed('model.[]', function() {
     let events = [];
     let model = this.get('model');
 
@@ -61,10 +63,6 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    changeView(view){
-      this.set('viewName', view);
-    },
-
     handleCalendarEventClick(calEvent) {
       this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
@@ -78,7 +76,7 @@ export default Ember.Controller.extend({
         // TO REMOVE::::
         // Current problem... we fetch the new week but the calendar listview does not change to the corresponding week... thus need to figure out how to change the week view without having the header there
         // TO REMOVE::::
-        if (!Ember.isEmpty(results)) {
+        if (!isEmpty(results)) {
           let events = [];
 
           results.forEach(function(item) {
@@ -90,13 +88,14 @@ export default Ember.Controller.extend({
               textColor: item.get('textColor')
             });
           });
-          self.get('model', undefined);
-          console.log('current model: ', self.get('model'));
+          // self.get('model', undefined);
           self.set('model', results);
-          // console.log('current model: ', self.get('model'));
-          // debugger;
+          // $('.calendar-view .full-calendar').fullCalendar( 'gotoDate', date );
+          $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
           self.set('computedEvents', events);
         } else {
+          // $('.calendar-view .full-calendar').fullCalendar( 'gotoDate', date );
+          $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
           self.set('computedEvents', []);
         }
       }
