@@ -2,21 +2,12 @@
   background: url(images/login.jpg) center fixed;
   background-size: cover;
   font-size: 17px;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-weight: 300;
   margin: 0;
 
-  h1#title {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 300;
-    font-size: 3em;
-    color: white;
-    text-shadow: 0 0 10px rgba(0,0,0,0.8);
-    margin: 0 auto;
+  .top {
     padding-top: 110px;
-    max-width: 300px;
-    text-align: center;
-    position: relative;
   }
 
   h2 {
@@ -26,13 +17,13 @@
     line-height: 2.8em;
   }
 
-  .top {
+  .login-page {
     margin: 0;
     padding: 0;
     width: 100%;
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.9) 0%,rgba(0,0,0,0) 100%);
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 7%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.7) 0%,rgba(0,0,0,0) 100%);
   }
 
   .login-box {
