@@ -8,6 +8,11 @@
         dayClick=(action 'handleCalendarDayClick')
       }}
     </div>
+    {{#if computedTotal}}
+      <div class="total-cost-this-week">
+        Total revenue this week: {{computedTotal}}
+      </div>
+    {{/if}}
     <div class="week-view">
       {{full-calendar
         header=false
@@ -18,7 +23,4 @@
     </div>
     {{outlet}}
   </div>
-</div>
-<div class="total-cost-this-week">
-  Total cost this week: $99
 </div>

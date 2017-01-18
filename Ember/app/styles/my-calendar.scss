@@ -10,10 +10,19 @@ $break-large: 1024px;
     }
   }
 
+  .fc-scroller.fc-day-grid-container {
+    .selected-week {
+      @media (min-width: $break-small) {
+        background-color: #eeeeee;
+      }
+    }
+  }
+
   .fc-row.fc-week.fc-widget-content {
     @media (min-width: $break-small) {
       min-height:1em;
-      height: 2em !important;
+      // height: 2em !important;
+      max-height: 3em;
     }
   }
 

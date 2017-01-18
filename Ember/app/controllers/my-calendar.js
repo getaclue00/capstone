@@ -3,12 +3,24 @@ import Ember from 'ember';
 const { $, Controller, computed, isEmpty } = Ember;
 
 export default Controller.extend({
-  // TO REMOVE::::
-  // moment().format('W') ==> to get week number
-  // TO REMOVE::::
 
   viewName: 'month',
   viewName2: 'listWeek',
+
+  computedTotal: computed('model.[]', function() {
+    const model = this.get('model');
+    var sum = 0;
+    if(model) {
+      model.forEach(function(item) {
+        let price = item.get('service.price_small') || item.get('service.price_large');
+        sum += Number(price);
+      });
+      return `$${sum}`;
+    } else {
+      return undefined;
+    }
+  }),
+
   businessHours: {
     // days of week. an array of zero-based day of week integers (0=Sunday)
     dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
@@ -16,33 +28,12 @@ export default Controller.extend({
     start: '10:00', // a start time (10am in this example)
     end: '18:00', // an end time (6pm in this example)
   },
-  newAppointmentDate: '',
+
   calendarHeader: {
     left:   'today',
     center: 'title',
     right:  'prev,next'
   },
-
-  // events: Ember.computed('model.[]', function() {
-  //   // Unfortunately, we need to do this conversion, until we can figure out why the model is not displayed without this conversion...
-  //
-  //   let events = [];
-  //
-  //   this.get('store').findAll('appointment').then((items) => {
-  //     items.forEach((item) => {
-  //       events.pushObject({
-  //         id    : item.get('id'),
-  //         title : item.get('title'),
-  //         start : item.get('start'),
-  //         end   : item.get('end'),
-  //         color : item.get('color'),
-  //         textColor: item.get('textColor')
-  //       });
-  //     });
-  //   });
-  //
-  //   return events;
-  // }),
 
   computedEvents: computed('model.[]', function() {
     let events = [];
@@ -67,15 +58,20 @@ export default Controller.extend({
       this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
 
-    handleCalendarDayClick(date) {
+    handleCalendarDayClick(date, jsEvent) {
       var self = this;
       let week = date.week();
       let year = date.weekYear();
 
+      let el = $('.fc-scroller.fc-day-grid-container').find('.selected-week');
+
+      if (el) {
+        el.removeClass('selected-week');
+      }
+
+      $(jsEvent.target).closest('.fc-row.fc-week.fc-widget-content').find('.fc-bg').addClass('selected-week');
+
       function successfulResponse(results) {
-        // TO REMOVE::::
-        // Current problem... we fetch the new week but the calendar listview does not change to the corresponding week... thus need to figure out how to change the week view without having the header there
-        // TO REMOVE::::
         if (!isEmpty(results)) {
           let events = [];
 
@@ -88,13 +84,11 @@ export default Controller.extend({
               textColor: item.get('textColor')
             });
           });
-          // self.get('model', undefined);
           self.set('model', results);
-          // $('.calendar-view .full-calendar').fullCalendar( 'gotoDate', date );
           $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
           self.set('computedEvents', events);
         } else {
-          // $('.calendar-view .full-calendar').fullCalendar( 'gotoDate', date );
+          self.set('model', undefined);
           $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
           self.set('computedEvents', []);
         }
