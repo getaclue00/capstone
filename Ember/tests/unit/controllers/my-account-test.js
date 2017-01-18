@@ -6,21 +6,10 @@ moduleFor('controller:my-account', 'Unit | Controller | my account', {
   // needs: ['controller:foo']
 });
 
-// // Replace this with your real tests.
-// test('it exists', function(assert) {
-//   let controller = this.subject();
-//   assert.ok(controller);
-// });
-
 
 test('#saveAccountInfo does NOT transition away from my-account ', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
-        save() {
-          return new Ember.RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        },
         get() {
           return new Ember.RSVP.Promise(function(resolve) {
           	resolve (
@@ -32,7 +21,6 @@ test('#saveAccountInfo does NOT transition away from my-account ', function(asse
         			}
           		})
           	);
-            // resolve(true);
           });
         }
       }),
@@ -41,7 +29,27 @@ test('#saveAccountInfo does NOT transition away from my-account ', function(asse
       }
   });
 
-  controller.send('updateAccount');
+  controller.send('updateAccountInfo');
+
+  assert.ok(controller);
+});
+
+
+test('#saveLoginInfo does NOT transition away from my-account ', function(assert) {
+  let controller = this.subject({
+      model: Ember.Object.create({
+        save() {
+          return new Ember.RSVP.Promise(function(resolve) {
+            resolve(true);
+          });
+        }
+      }),
+      transitionToRoute(route) {
+        assert.equal(route, 'my-account');
+      }
+  });
+
+  controller.send('updateLoginInfo');
 
   assert.ok(controller);
 });

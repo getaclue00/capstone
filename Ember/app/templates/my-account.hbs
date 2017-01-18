@@ -1,14 +1,9 @@
+<div class="admin-container">
 <div class="admin-info">
-  <h3 class="page-title">My Account Information</h3>
+  <h3 class="page-title">Settings</h3>
+
   <form class="my-information" {{action 'save' on="submit"}}>
-    <label for="username">
-      <span>Username*</span>
-      {{input type="email" value=model.email required="required" id="user-email"}}
-    </label>
-    <label for="password">
-      <span>Password <span class="required">*</span></span>
-      {{input type="password" value=model.password required="required" id="user-password"}}
-    </label>
+    <h3 class="title">User Info</h3> 
     <label for="first_name">
       <span>First Name <span class="required">*</span></span>
       {{input value=model.employee.firstName id="user-first-name"}}
@@ -43,8 +38,26 @@
     </label>
     <label for="start_date">
       <span>Start Date </span>
-      {{model.employee.startDate}}
+      {{input value=model.employee.startDate id="user-start-date" readonly=true}}
     </label>
-    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccount'}}>Save</button></span>
+    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
   </form>
+
+  <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
+    <h3 class="title">Login Info</h3>
+      <label for="username">
+        <span>Username</span>
+        {{input value=model.email id="user-email" readonly=true}}
+      </label>
+      <label for="new-password">
+        <span>New Password <span class="required">*</span></span>
+        {{input type="password" value=model.password required="required" id="user-new-password"}}
+      </label>
+      <label for="confirm-password">
+        <span>Confirm Password <span class="required">*</span></span>
+        {{input type="password" value=model.confirm required="required" id="user-confirm-password"}}
+      </label>
+    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
+  </form>
+</div>
 </div>
