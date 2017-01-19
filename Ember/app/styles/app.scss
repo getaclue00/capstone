@@ -3,7 +3,6 @@
 @import "administrator-styles/admin-info";
 @import "administrator-styles/appointment-history";
 @import "administrator-styles/manage-clients";
-// @import "administrator-styles/manage-services";
 @import "administrator-styles/manage-employees";
 @import "administrator-styles/management-table";
 @import "login";
@@ -45,15 +44,16 @@ body {
 .managing {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
   border-color: black;
   color: #fffaef;
-  padding: 1%;
+  padding: 0.75em;
   font-size: 2vw;
   background-image: -webkit-linear-gradient(top, #d30b07 0%, #fe0101 100%);
   background-image:      -o-linear-gradient(top, #d30b07 0%, #fe0101 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#d30b07), to(#fe0101));
   background-image:         linear-gradient(to bottom, #d30b07 0%, #fe0101 100%);
+  border-radius: 5px;
 }
 
 .managing:hover{
