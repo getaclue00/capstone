@@ -4,12 +4,16 @@ $breakpoint-alpha: 660px;
 
 @media (min-width: $breakpoint-alpha) {
 
+  .management-div {
+    margin: 0 auto;
+  }
+
   .management-table{
 
     text-align: center;
     overflow: hidden;
     width: 100%;
-    font-size: 1.5vw;
+    font-size: 1.25vw;
 
     td:nth-child(1) {
       font-weight: bold;
@@ -30,10 +34,32 @@ $breakpoint-alpha: 660px;
     float: right;
   }
 
+  .management-table tr:hover {
+    background-color: #36454f !important;
+    color: #fffaef;
+  }
+
   .management-operation:hover {
     background-color: #fffaef;
     color: #EE2C2C;
   }
+
+ .management-operation {
+    display: inline-block;
+    margin: .1em;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .dataTables_wrapper {
+    max-width: 1000px;
+    padding-top: 2em;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+
 }
 
 //Styling for when on mobile device
@@ -49,26 +75,20 @@ $breakpoint-alpha: 660px;
 
   .management-operation {
     border: 1px solid black;
-    display: block;
-    padding: none;
+    display: inline-block;
+    margin: .1em;
+    padding: 8px;
+    float: right;
     text-align: center;
-    background-image: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
-    background-image: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background-image: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
+    background: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+    background: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
   }
 
-  .management-icon {
-    display: block;
-    width: 100%;
-    padding: 2.5% 0%;
-    clear: both;
-    font-weight: normal;
-    color: #373a3c;
-    text-align: inherit;
-    white-space: nowrap;
-    background: none;
-    border: 0;
+  .management-operation:hover {
+    background: #36454f;
   }
 
   th {
@@ -76,23 +96,58 @@ $breakpoint-alpha: 660px;
   }
 
   .management-column {
+    display: none;
+    margin: 0px;
+  }
+
+  tr td:nth-child(1) {
+    width: 70%;
+    font-size: 3.5vw;
+    font-weight: bold;
     display: block;
+    margin: 0px 0px 0px 16px;;
+  }
+
+  tr td:nth-child(2) {
+    display: block;
+    font-size: 2.4vw;
+    width: 75%;
+    margin: 0px 0px 0px 16px;
 
     &:before {
-      text-align: left;
       content: attr(data-th);
-      font-weight: bold;
-      width: 10em;
-      display: inline-block;
-
-      @media (min-width: $breakpoint-alpha) {
-        display: none;
-      }
     }
+  }
+
+  .management-buttons {
+    width: 65%;
   }
 }
 
 // Styling for both mobile and computer
+
+.management-title-div {
+
+    background-color: linear-gradient(to bottom, #d30b07 0%, #7a2828 80%);
+    background-image: -webkit-linear-gradient(top, #d30b07 0%, #7a2828 80%);
+    background-image: -o-linear-gradient(top, #d30b07 0%, #7a2828 80%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d30b07), to(#7a2828));
+
+  h3, h3:after {
+    font-weight: 400;
+    color: #fffaef;
+  }
+
+  h3 {
+    z-index: 100;
+    font-size: 2.8em;
+    line-height: 130px;
+    font-weight: normal;
+    margin-top: 50px;
+    text-align: center;
+    text-shadow: 0 1px 1px #fff;
+  }
+}
 
 .management-column, .management-table th {
   padding: 2% 2% 2% 2%;
@@ -110,11 +165,6 @@ $breakpoint-alpha: 660px;
   background-color: #d30b07;
 }
 
-.management-table tr:hover {
- background-color: #36454f;
- color: #fffaef;
-}
-
 .management-toggle-menu {
   padding: 20%;
   font-size: 1.5vw;
@@ -128,6 +178,11 @@ $breakpoint-alpha: 660px;
     text-align: left;
     color: black;
   }
+}
+
+.management-icon {
+  padding: 10px 30px;
+  white-space: nowrap;
 }
 
 table.dataTable thead .sorting {
