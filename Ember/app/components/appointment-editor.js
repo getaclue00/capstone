@@ -2,6 +2,15 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  serviceSelected: Ember.computed('model.service', function(){
+    let service = this.get('model.service');
+    if (service) {
+      return service;
+    } else {
+      return undefined;
+    }
+  }),
+
   didInsertElement() {
     this._super(...arguments);
     Ember.$('#myModal').modal('show');
