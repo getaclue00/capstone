@@ -5,7 +5,6 @@
         <th><h1>{{header}}</h1></th>
       {{/each}}
       <th></th>
-      <th></th>
     </tr>
   </thead>
   <tbody class="management-table-body">
@@ -16,14 +15,17 @@
           {{get m key}}
         </td>
         {{/each-in}}
+        <td class='management-buttons'>
         {{#each-in operations as |key value|}}
-         <td class='management-operation'>
+         <div class='management-operation'>
           {{#link-to key  m.id class="management-icon"}}
             <span class="glyphicon {{value}}" style="color:#d30b07;"></span>
           {{/link-to}}
-         </td>
+         </div>
         {{/each-in}}
+        </td>
       </tr>
+      <br />
     {{/each}}
   </tbody>
 </table>
