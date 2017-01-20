@@ -1,56 +1,52 @@
 <div class="row">
-  {{!-- <div class="form-group row">
-    <label for="appointment-title" class="col-xs-4 col-form-label">Appointment Title</label>
-    <div class="col-xs-8">
-      {{input class="form-control" value=model.title id="appointment-title"}}
-    </div>
-  </div> --}}
-  <div class="form-group row appointment-button-div">
-    <label for="service" class="col-xs-12 col-form-label">Service</label>
-    <div class="col-xs-12 appointment-button">
-      {{!-- <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{#if model.service.name}}
-        {{model.service.name}}
-      {{else}}
-        None
-      {{/if}}
-      </button> --}}
+  <div class="form-group row">
+    <label for="service" class="col-xs-12 col-form-label">Service:</label>
+    <div class="col-xs-12">
       {{#unless serviceSelected}}
-        <div class="btn-group-vertical" style="max-width: 100%;">
+        <div class="btn-group-vertical" style="width: 100%;">
           {{#each services as |service|}}
             <button class="btn btn-sm btn-outline-primary" {{action 'selectService' service model}} style="white-space: normal;">{{service.name}}</button>
           {{/each}}
         </div>
       {{else}}
-        <button class="btn btn-sm btn-outline-primary" style="white-space: normal;">{{model.service.name}}</button>
-        <button class="btn btn-sm btn-outline-danger" {{action 'resetService' model model.service}} style="white-space: normal;"><span class="glyphicon glyphicon-pencil"></span></button>
+        <div class="col-xs-10" style="padding-left: 0;">
+          <button class="btn btn-sm btn-outline-primary" style="white-space: normal; width: 100%;">{{model.service.name}}</button>
+        </div>
+        <div class="col-xs-2">
+          <button class="btn btn-sm btn-outline-danger" {{action 'resetService' model model.service}} style="white-space: normal;"><span class="glyphicon glyphicon-pencil"></span></button>
+        </div>
       {{/unless}}
     </div>
   </div>
-  {{!-- <div class="form-group row">
-    <label for="appointment-background-color" class="col-xs-4 col-form-label">Background Color</label>
-    <div class="col-xs-8">
-      {{input type="color" class="form-control" value=model.color id="appointment-background-color"}}
-    </div>
-  </div> --}}
-  {{!-- <div class="form-group row">
-    <label for="appointment-text-color" class="col-xs-4 col-form-label">Text Color</label>
-    <div class="col-xs-8">
-      {{input type="color" class="form-control" value=model.textColor id="appointment-text-color"}}
-    </div>
-  </div> --}}
   <div class="form-group row">
-    <label for="appointment-start-time" class="col-xs-12 col-form-label">Appointment Start</label>
+    <label for="service" class="col-xs-12 col-form-label">Staff:</label>
     <div class="col-xs-12">
-      {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.start}}
-      <small>Temp: {{model.start}}</small>
+      {{#unless employeeSelected}}
+        <div class="btn-group-vertical" style="width: 100%;">
+          {{#each listOfEmployess as |employee|}}
+            <button class="btn btn-sm btn-outline-primary" {{action 'selectEmployee' employee model}} style="white-space: normal;">{{employee.fullName}}</button>
+          {{/each}}
+        </div>
+      {{else}}
+      <div class="col-xs-10" style="padding-left: 0;">
+        <button class="btn btn-sm btn-outline-primary" style="white-space: normal; width: 100%;">{{model.employee.fullName}}</button>
+      </div>
+      <div class="col-xs-2">
+        <button class="btn btn-sm btn-outline-danger" {{action 'resetEmployee' model model.employee}} style="white-space: normal;"><span class="glyphicon glyphicon-pencil"></span></button>
+      </div>
+      {{/unless}}
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-end-time" class="col-xs-12 col-form-label">Appointment End</label>
+    <label for="appointment-start-time" class="col-xs-12 col-form-label">Starts</label>
+    <div class="col-xs-12">
+      {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.start}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="appointment-end-time" class="col-xs-12 col-form-label">Ends</label>
     <div class="col-xs-12">
       {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.end}}
-      <small>Temp: {{model.end}}</small>
     </div>
   </div>
   <div class="form-group row">

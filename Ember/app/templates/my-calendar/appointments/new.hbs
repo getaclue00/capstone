@@ -6,16 +6,6 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Add Appointment</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{assignedEmployeeStatement}}
-          </button>
-          <div class="dropdown-menu">
-            {{#each employees as |employee|}}
-              <button class="dropdown-item" {{action 'assignedEmployee' employee}}>{{employee.fullName}}</button>
-            {{/each}}
-          </div>
-        </div>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -23,6 +13,7 @@
             appointment-editor
             model=appointment
             services=services
+            listOfEmployess=employees
           }}
         </div>
       </div>
