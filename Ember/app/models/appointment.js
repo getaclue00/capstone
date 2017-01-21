@@ -6,6 +6,7 @@ export default Model.extend({
   color:      attr('string', { defaultValue: '#AB00FF' }),
   textColor:  attr('string', { defaultValue: '#FFFFFF' }),
   title:      attr('string', { defaultValue: 'New Appointment' }),
+  date:       attr('string'),
   start:      attr('isodate'),
   end:        attr('isodate'),
   notes:      attr('string', { defaultValue: '' }),

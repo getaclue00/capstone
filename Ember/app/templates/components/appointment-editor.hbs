@@ -1,46 +1,46 @@
 <div class="row">
   <div class="form-group row">
-    <label for="service" class="col-xs-12 col-form-label">Service:</label>
+    <label for="service" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Service:</label>
     <div class="col-xs-12">
-      {{#unless serviceSelected}}
-        <div class="btn-group-vertical" style="width: 100%;">
-          {{#each services as |service|}}
-            <button class="btn btn-sm btn-outline-primary" {{action 'selectService' service model}} style="white-space: normal;">{{service.name}}</button>
-          {{/each}}
-        </div>
-      {{else}}
-        <div class="col-xs-10" style="padding-left: 0;">
-          <button class="btn btn-sm btn-outline-primary" style="white-space: normal; width: 100%;">{{model.service.name}}</button>
-        </div>
-        <div class="col-xs-2">
-          <button class="btn btn-sm btn-outline-danger" {{action 'resetService' model model.service}} style="white-space: normal;"><span class="glyphicon glyphicon-pencil"></span></button>
-        </div>
-      {{/unless}}
+      {{#power-select
+        options=listOfServices
+        selected=aSelectedService
+        renderInPlace=true
+        searchField="name"
+        placeholder="Select a service"
+        onchange=(action "selectService")
+        as |service|
+      }}
+       {{service.name}}
+      {{/power-select}}
     </div>
   </div>
   <div class="form-group row">
-    <label for="service" class="col-xs-12 col-form-label">Staff:</label>
+    <label for="service" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Staff:</label>
     <div class="col-xs-12">
-      {{#unless employeeSelected}}
-        <div class="btn-group-vertical" style="width: 100%;">
-          {{#each listOfEmployess as |employee|}}
-            <button class="btn btn-sm btn-outline-primary" {{action 'selectEmployee' employee model}} style="white-space: normal;">{{employee.fullName}}</button>
-          {{/each}}
-        </div>
-      {{else}}
-      <div class="col-xs-10" style="padding-left: 0;">
-        <button class="btn btn-sm btn-outline-primary" style="white-space: normal; width: 100%;">{{model.employee.fullName}}</button>
-      </div>
-      <div class="col-xs-2">
-        <button class="btn btn-sm btn-outline-danger" {{action 'resetEmployee' model model.employee}} style="white-space: normal;"><span class="glyphicon glyphicon-pencil"></span></button>
-      </div>
-      {{/unless}}
+      {{#power-select
+        options=listOfEmployess
+        selected=aSelectedEmployee
+        renderInPlace=true
+        searchField="fullName"
+        placeholder="Select a staff member"
+        onchange=(action "selectEmployee")
+        as |employee|
+      }}
+       {{employee.fullName}}
+      {{/power-select}}
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-start-time" class="col-xs-12 col-form-label">Starts</label>
+    <label for="appointment-date" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Date:</label>
     <div class="col-xs-12">
-      {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.start}}
+      {{input type="date" class="form-control" id="appointment-date" value=model.date}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="appointment-start-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
+    <div class="col-xs-12">
+      {{input type="time" class="form-control" id="appointment-start-time" value=model.start}}
     </div>
   </div>
   <div class="form-group row">
