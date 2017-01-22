@@ -1,8 +1,9 @@
 import { moduleForModel, test } from 'ember-qunit';
+import Ember from 'ember';
 
 moduleForModel('user', 'Unit | Model | user', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:employee']
 });
 
 test('it exists', function(assert) {
@@ -10,3 +11,14 @@ test('it exists', function(assert) {
   // let store = this.store();
   assert.ok(!!model);
 });
+
+test('should belong to an employee', function (assert){
+	const User = this.store().modelFor('user');
+	const relationship = Ember.get(User, 'relationshipsByName').get('employee');
+
+	assert.equal(relationship.key, 'employee', 'has relationship with employee');
+	assert.equal(relationship.kind, 'belongsTo', 'kind of relationship is belongsTo');
+});
+
+
+

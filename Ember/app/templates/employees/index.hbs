@@ -5,11 +5,9 @@
       <tr>
         <th><h1>Employee ID</h1></th>
         <th><h1>Full Name</h1></th>
-        <th><h1>Email</h1></th>
         <th><h1>Phone</h1></th>
         <th><h1>Start Date</h1></th>
         <th><h1>End Date</h1></th>
-        <th><h1>Admin</h1></th>
         <th></th>
         <th></th>
       </tr>
@@ -24,9 +22,6 @@
             {{employee.fullName}}
           </td>
           <td>
-            {{employee.email}}
-          </td>
-          <td>
             {{employee.phoneNumber}}
           </td>
           <td>
@@ -34,9 +29,6 @@
           </td>
           <td>
             {{employee.endDate}}
-          </td>
-          <td>
-            {{employee.isAdmin}}
           </td>
           <td class='employee-operation'>
             {{#link-to 'employees.show' employee.id class="dropdown-item"}}

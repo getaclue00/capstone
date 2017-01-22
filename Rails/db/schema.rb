@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119214930) do
+ActiveRecord::Schema.define(version: 20170117151905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,20 +63,17 @@ ActiveRecord::Schema.define(version: 20161119214930) do
   create_table "employees", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
-    t.string   "email"
     t.string   "phone_number",  limit: 12
     t.integer  "street_number"
     t.string   "street_name"
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-20'
-    t.boolean  "is_admin",                 default: false
+    t.date     "start_date",               default: '2017-01-09'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
     t.text     "notes"
-    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
   end
 
   create_table "services", force: :cascade do |t|
@@ -106,15 +103,10 @@ ActiveRecord::Schema.define(version: 20161119214930) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "authentication_token",   default: "",    null: false
-    t.string   "first_name",             default: "",    null: false
-    t.string   "last_name",              default: "",    null: false
-    t.string   "telephone",              default: "",    null: false
-    t.boolean  "client",                 default: false, null: false
-    t.boolean  "employee",               default: false, null: false
+    t.integer  "employee_id",                            null: false
     t.index ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
-    t.index ["client"], name: "index_users_on_client", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["employee"], name: "index_users_on_employee", using: :btree
+    t.index ["employee_id"], name: "index_users_on_employee_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -122,4 +114,5 @@ ActiveRecord::Schema.define(version: 20161119214930) do
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
   add_foreign_key "cars", "clients"
+  add_foreign_key "users", "employees"
 end

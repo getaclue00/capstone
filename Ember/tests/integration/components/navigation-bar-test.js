@@ -60,7 +60,7 @@ test('it renders administrator\' s navigation bar', function(assert) {
   assert.equal(this.$('.nav-list-item')[1].text, 'Manage', 'Navigation option is Manage');
   assert.equal(this.$('.nav-list-item')[2].text, 'Appointment History', 'Navigation option is Appointment History');
   assert.equal(this.$('.nav-list-item')[3].text, 'My Calendar', 'Navigation option is My Calendar');
-  assert.equal(this.$('.nav-list-item')[4].text, 'My Account', 'Navigation option is My Account');
+  assert.equal(this.$('.nav-list-item')[4].text, 'Settings', 'Navigation option is Settings');
   assert.equal(this.$('.nav-list-item')[5].firstChild.nodeValue, 'Logout', 'Navigation option is Logout');
 
   // Name of sub nav menu links

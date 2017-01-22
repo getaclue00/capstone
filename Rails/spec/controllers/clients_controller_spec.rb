@@ -172,7 +172,7 @@ RSpec.describe ClientsController, :type => :controller do
         patch :update, params: { id: client.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Client update failed.')
+        expect(result['error']).to eq('Client update failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
