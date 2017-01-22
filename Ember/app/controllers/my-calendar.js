@@ -7,12 +7,12 @@ export default Controller.extend({
   viewName: 'month',
   viewName2: 'listWeek',
 
-  computedTotal: computed('model.[]', function() {
+  computedTotal: computed('model.@each.cost', function() {
     const model = this.get('model');
     var sum = 0;
     if(model) {
       model.forEach(function(item) {
-        let price = item.get('service.price_small') || item.get('service.price_large');
+        let price = item.get('cost');
         sum += Number(price);
       });
       return `$${sum}`;
@@ -35,7 +35,7 @@ export default Controller.extend({
     right:  'prev,next'
   },
 
-  computedEvents: computed('model.[]', function() {
+  computedEvents: computed('model.[]', 'model.@each.start', 'model.@each.end', function() {
     let events = [];
     let model = this.get('model');
 
