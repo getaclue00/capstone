@@ -20,7 +20,6 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
 	    },
 
 	    updateLoginInfo() {
-
 	    	function onSuccessful() {}
 
 		    function onError(error) {
