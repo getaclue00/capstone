@@ -4,9 +4,6 @@
     &#9776;
     </button>
     {{#if session.isAuthenticated}}
-      {{!-- <button class="navbar-toggler-right" type="button" data-toggle="collapse" data-target="#controlsBar" aria-controls="controlsBar" aria-expanded="false" aria-label="Toggle navigation" style='color: white; margin-left: 2%;'>
-      &#x2b;
-      </button> --}}
       <button {{action 'openNav'}} class="btn btn-lg btn-outline-primary" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mySidenav" style="color: white; margin-left: 2%; float:right;">
         <span class="glyphicon glyphicon-plus"></span>
       </button>
@@ -47,12 +44,6 @@
         </li>
         <li class="nav-item">
           <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Customer</button>
-        </li>
-        <li class="nav-item">
-          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Staff Member</button>
-        </li>
-        <li class="nav-item">
-          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Service</button>
         </li>
       </ul>
     </aside>

@@ -43,8 +43,8 @@ export default Controller.extend({
       events.pushObject({
         id    : item.get('id'),
         title : 'Service',
-        start : item.get('start'),
-        end   : item.get('end'),
+        start : item.get('formattedStart'),
+        end   : item.get('formattedEnd'),
         color : item.get('color'),
         textColor: item.get('textColor')
       });
@@ -78,8 +78,8 @@ export default Controller.extend({
           results.forEach(function(item) {
             events.pushObject({
               id    : item.get('id'),
-              start : item.get('start'),
-              end   : item.get('end'),
+              start : item.get('formattedStart'),
+              end   : item.get('formattedEnd'),
               color : item.get('color'),
               textColor: item.get('textColor')
             });

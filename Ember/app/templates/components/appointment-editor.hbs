@@ -32,25 +32,19 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-date" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Date:</label>
-    <div class="col-xs-12">
-      {{input type="date" class="form-control" id="appointment-date" value=model.date}}
-    </div>
-  </div>
-  <div class="form-group row">
     <label for="appointment-start-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
     <div class="col-xs-12">
-      {{input type="time" class="form-control" id="appointment-start-time" value=model.start}}
+      {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart}}
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-end-time" class="col-xs-12 col-form-label">Ends</label>
+    <label for="appointment-end-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Ends:</label>
     <div class="col-xs-12">
-      {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.end}}
+      {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
     </div>
   </div>
   <div class="form-group row">
-    <label for="appointment-notes" class="col-xs-12 col-form-label">Notes</label>
+    <label for="appointment-notes" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
     <div class="col-xs-12">
       {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
     </div>
