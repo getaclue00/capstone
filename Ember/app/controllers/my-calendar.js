@@ -100,9 +100,6 @@ export default Controller.extend({
           year: year
         }
       }).then(successfulResponse);
-
-      console.log('date: ', date);
-      console.log('week number: ', week);
     }
   }
 });

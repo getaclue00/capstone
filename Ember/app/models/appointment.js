@@ -12,6 +12,7 @@ export default Model.extend({
   title:      attr('string', { defaultValue: 'New Appointment' }),
   start:      attr('isodate'),
   end:        attr('isodate'),
+  cost:       attr('number'),
   notes:      attr('string', { defaultValue: '' }),
   status:     attr('string', { defaultValue: 'pending' }),
   weekNumber: attr('number'),
@@ -35,5 +36,25 @@ export default Model.extend({
       this.set('end', moment(value).format('YYYY-MM-DDTHH:mm'));
       return value;
     }
-  }),
+  })
+  // TODELETE LATER
+  // idea for cost calculation
+  // TODELETE LATER
+
+  // formattedCost: computed('cost', {
+  //   get() {
+  //     let appointmentCost = this.get('cost');
+  //     let result = appointmentCost || this.get('service.price_small');
+  //
+  //     if (appointmentCost === undefined) {
+  //       this.set('cost', result);
+  //     }
+  //
+  //     return result;
+  //   },
+  //   set(key, value) {
+  //     this.set('cost', value);
+  //     return value;
+  //   }
+  // })
 });

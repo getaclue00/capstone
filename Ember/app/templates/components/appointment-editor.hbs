@@ -11,7 +11,7 @@
         onchange=(action "selectService")
         as |service|
       }}
-       {{service.name}}
+       {{service.name}} - ${{service.price_small}} - ${{service.price_large}}
       {{/power-select}}
     </div>
   </div>
@@ -32,6 +32,15 @@
     </div>
   </div>
   {{#if wasServiceSelected}}
+    <div class="form-group row">
+      <label for="appointment-cost" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Cost:</label>
+      <div class="col-xs-12">
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          {{input type="number" pattern="\d*" class="form-control" id="appointment-cost" value=model.cost placeholder="Please enter the cost"}}
+        </div>
+      </div>
+    </div>
     <div class="form-group row">
       <label for="appointment-start-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
       <div class="col-xs-12">
