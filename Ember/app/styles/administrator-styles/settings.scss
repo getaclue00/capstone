@@ -59,11 +59,47 @@ $breakpoint-alpha: 768px;
     .settings-read-only {
       width: 100%;
       border: none;
-      margin-left: 20px;
+      margin-left: 25px;
+    }
+
+    .street-info-container {
+      width: 100%;
+
+      .street-number-label {
+        width: 25%;
+        float: left;
+      }
+
+      .street-name-label {
+        width: 70%;
+        float: right;
+      }
+    }
+
+    .settings-input-street-number {
+      width: 100%;
+      border-bottom: 1.5px dotted #d3d3d3;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+
+    }
+
+    .settings-input-street-name {
+      width: 100%;
+      border-bottom: 1.5px dotted #d3d3d3;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+
     }
 
     .setings-title {
       background-color: #DCDCDC;
+    }
+
+    #user-start-date {
+      font-size: small;
     }
   }
 

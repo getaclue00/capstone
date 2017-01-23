@@ -20,19 +20,21 @@
         </label>
         <label for="start_date">
           <p style="font-weight: 600">Start Date: </p>
-          {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only"}}
+          {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only" style="font-size: smaller"}}
         </label>
         <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
         </form>
       </div>
       <div class="tab-pane fade" id="account-address-setting">
         <form class="my-information" {{action 'save' on="submit"}}>
-        <label for="street_number">
-        {{input type="number" value=model.employee.streetNumber id="user-street-number" placeholder="Street Number" class="settings-input require"}}
-        </label>
-        <label for="street_name">
-        {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input"}}
-        </label>
+        <p class="street-info-container">
+          <label for="street_number" class="street-number-label">
+          {{input type="number" value=model.employee.streetNumber id="user-street-number" placeholder="Street Number" class="settings-input-street-number"}}
+          </label>
+          <label for="street_name" class="street-name-label">
+          {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input-street-name"}}
+          </label>
+        </p>
         <label for="city">
         {{input value=model.employee.city id="user-city" class="settings-input" placeholder="City"}}
         </label>
@@ -48,7 +50,7 @@
       <div class="tab-pane fade" id="account-login-setting">
         <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
         <label for="username">
-          <p style="font-weight: 600">Username</p>
+          <p style="font-weight: 600">Username:</p>
           {{input value=model.email id="user-email" class="settings-read-only" readonly=true}}
         </label>
         <div id="accordion" role="tablist" aria-multiselectable="true">
