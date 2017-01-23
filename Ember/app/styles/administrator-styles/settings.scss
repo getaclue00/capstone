@@ -1,0 +1,99 @@
+$breakpoint-alpha: 768px;
+
+//Styling for when on computer
+
+@media (min-width: $breakpoint-alpha) {
+
+
+}
+
+//Styling for when on mobile device
+
+@media (max-width: $breakpoint-alpha) {
+
+  .settings{
+    #account-detail-setting {
+      width: 95%;
+      margin:0 auto;
+    }
+
+    .nav {
+      background-color: #f9f9f9;
+      border: none;
+    }
+
+    .nav .nav-item .active {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid red;
+      background-color: #f9f9f9;
+      color: black;
+    }
+
+    .nav .nav-item a {
+      border-radius: 0px;
+      background-color: #f9f9f9;
+      color: #d3d3d3
+    }
+
+    .nav .nav-item a:hover {
+      border: none;
+    }
+
+    label {
+      text-align: left;
+    }
+
+    .settings-input {
+      width: 100%;
+      border-bottom: 1.5px dotted #d3d3d3;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+
+    }
+
+    .settings-read-only {
+      width: 100%;
+      border: none;
+    }
+  }
+
+}
+
+.settings-page {
+
+  margin-top: 70px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.nav > li {
+  position: relative;
+  display: block;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
