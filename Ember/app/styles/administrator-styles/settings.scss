@@ -12,9 +12,11 @@ $breakpoint-alpha: 768px;
 @media (max-width: $breakpoint-alpha) {
 
   .settings{
-    #account-detail-setting {
-      width: 95%;
-      margin:0 auto;
+    #account-detail-setting, #account-address-setting,
+     #account-login-setting {
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 20px;
     }
 
     .nav {
@@ -57,16 +59,22 @@ $breakpoint-alpha: 768px;
     .settings-read-only {
       width: 100%;
       border: none;
+      margin-left: 20px;
+    }
+
+    .setings-title {
+      background-color: #DCDCDC;
     }
   }
 
 }
 
-.settings-page {
+.setings-title {
 
-  margin-top: 70px;
+  padding: 80px 0px 20px 0px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 0px;
 }
 
 .nav-tabs {
