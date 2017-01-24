@@ -8,70 +8,101 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane fade in active" id="account-detail-setting">
-        <form class="my-information" {{action 'save' on="submit"}}>
-        <label for="first_name">
-        {{input value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input"}}
-        </label>
-        <label for="last_name">
-        {{input value=model.employee.lastName id="user-last-name" placeholder="Last Name" class="settings-input"}}
-        </label>
-        <label for="phone">
-        {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input"}}
-        </label>
-        <label for="start_date">
-          <p style="font-weight: 600">Start Date: </p>
-          {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only" style="font-size: smaller"}}
-        </label>
-        <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
-        </form>
-      </div>
-      <div class="tab-pane fade" id="account-address-setting">
-        <form class="my-information" {{action 'save' on="submit"}}>
-        <p class="street-info-container">
-          <label for="street_number" class="street-number-label">
-          {{input type="number" value=model.employee.streetNumber id="user-street-number" placeholder="Street Number" class="settings-input-street-number"}}
-          </label>
-          <label for="street_name" class="street-name-label">
-          {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input-street-name"}}
-          </label>
-        </p>
-        <label for="city">
-        {{input value=model.employee.city id="user-city" class="settings-input" placeholder="City"}}
-        </label>
-        <label for="province">
-        {{input value=model.employee.province id="user-province" class="settings-input" placeholder="Province"}}
-        </label>
-        <label for="postal_code">
-        {{input value=model.employee.postalCode id="user-postal-code" class="settings-input" placeholder="Postal Code"}}
-        </label>
-        <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
-        </form>
-      </div>
-      <div class="tab-pane fade" id="account-login-setting">
-        <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
-         <label for="username">
-          <span>Username: </span>
-          {{input value=model.email id="user-email" readonly=true class="settings-username" placeholder="Username"}}
-        </label>
-        <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-          <div>
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="accordion-title">
-              Change Password
+        <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="info-link">
+            <a data-toggle="collapse" data-parent="#accordion" href="#infoOne" aria-expanded="true" aria-controls="infoOne" class="accordion-title">
+              Details
             </a>
           </div>
-          <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+          <div id="infoOne" class="collapse show in" role="tabpanel" aria-labelledby="Details">
             <div class="card-block">
-              <label for="new-password">
-              <span>New Password</span>{{input type="password" value=model.password required="required" id="user-new-password" class="settings-input"}}
+              <form class="my-information" {{action 'save' on="submit"}}>
+              <label for="first_name">
+              {{input value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input"}}
               </label>
-              <label for="confirm-password">
-              <span>Confirm Password</span>{{input type="password" value=model.confirm required="required" id="user-confirm-password" class="settings-input"}}
+              <label for="last_name">
+              {{input value=model.employee.lastName id="user-last-name" placeholder="Last Name" class="settings-input"}}
               </label>
+              <label for="phone">
+              {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input"}}
+              </label>
+              <label for="start_date">
+                <p style="font-weight: 600">Start Date: </p>
+                {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only" style="font-size: smaller"}}
+              </label>
+              <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
+              </form>
             </div>
           </div>
         </div>
-        <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
-        </form>
+      </div>
+      <div class="tab-pane fade" id="account-address-setting">
+        <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="info-link">
+            <a data-toggle="collapse" data-parent="#accordion" href="#infoTwo" aria-expanded="true" aria-controls="infoTwo" class="accordion-title">
+              Address
+            </a>
+          </div>
+          <div id="infoTwo" class="collapse show in" role="tabpanel" aria-labelledby="Address">
+            <div class="card-block">
+              <form class="my-information" {{action 'save' on="submit"}}>
+              <p class="street-info-container">
+                <label for="street_number" class="street-number-label">
+                {{input type="number" value=model.employee.streetNumber id="user-street-number" placeholder="Street Number" class="settings-input-street-number"}}
+                </label>
+                <label for="street_name" class="street-name-label">
+                {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input-street-name"}}
+                </label>
+              </p>
+              <label for="city">
+              {{input value=model.employee.city id="user-city" class="settings-input" placeholder="City"}}
+              </label>
+              <label for="province">
+              {{input value=model.employee.province id="user-province" class="settings-input" placeholder="Province"}}
+              </label>
+              <label for="postal_code">
+              {{input value=model.employee.postalCode id="user-postal-code" class="settings-input" placeholder="Postal Code"}}
+              </label>
+              <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="account-login-setting">
+        <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="info-link">
+            <a data-toggle="collapse" data-parent="#accordion" href="#infoThree" aria-expanded="true" aria-controls="infoThree" class="accordion-title">
+              Login Information
+            </a>
+          </div>
+          <div id="infoThree" class="collapse show in" role="tabpanel" aria-labelledby="Login Information">
+            <div class="card-block">
+              <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
+                <label for="username">
+                  <span>Username: </span>
+                  {{input value=model.email id="user-email" readonly=true class="settings-username" placeholder="Username"}}
+                </label>
+                <div class="password-div">
+                  <div class="password-link">
+                    <p class="change-title">
+                      Change Password
+                    </p>
+                  </div>
+                  <div class="card-block">
+                    <label for="new-password">
+                      <span>New Password</span>{{input type="password" value=model.password required="required" id="user-new-password" class="settings-input"}}
+                    </label>
+                    <label for="confirm-password">
+                      <span>Confirm Password</span>{{input type="password" value=model.confirm required="required" id="user-confirm-password" class="settings-input"}}
+                    </label>
+                  </div>
+                </div>
+                <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
