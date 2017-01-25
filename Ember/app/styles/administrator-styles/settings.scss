@@ -3,73 +3,96 @@ $breakpoint-alpha: 768px;
 //Styling for when on computer
 
 @media (min-width: $breakpoint-alpha) {
+  .settings {
+    .nav-tabs {
+      display: none
+    }
 
-  .nav-tabs {
-    display: none
-  }
+    #account-detail-setting {
+      display: block;
+      opacity: 1;
+    }
 
-  #account-detail-setting {
-    display: block;
-    opacity: 1;
-  }
+    #account-address-setting {
+      display: block;
+      opacity: 1;
+      width: 50%;
+      float: left;
+    }
 
-  #account-address-setting {
-    display: block;
-    opacity: 1;
-    width: 50%;
-    float: left;
-  }
+    #account-login-setting {
+      display: block;
+      opacity: 1;
+      width: 50%;
+      float: left;
+    }
 
-  #account-login-setting {
-    display: block;
-    opacity: 1;
-    width: 50%;
-    float: left;
-  }
+    .tab-content {
+      margin: 0px 25px 0px 25px;
+    }
 
-  .tab-content {
-    margin: 0px 25px 0px 25px;
-  }
+    .account-info-accordion {
 
-  .password-accordion-link {
-    display: none;
-  }
-
-  .account-info-accordion {
-
-      background-color:#f9f9f9;
-      margin-bottom: 20px;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 17px;
+      background: #fff;
+      border: 1px solid #E6E9ED;
 
       .card-block {
-        // border: 1px solid #eee;
         border-top: 0px;
       }
 
-      .accordion-title {
-
-        background-color: #EE2C2C;
-        text-align:center;
-        font-weight:600;
-        padding: 1em;
-        display:block;
-        text-decoration:none;
-        color:#fff;
-        transition:background-color 0.5s ease-in-out;
-
-        &:before {
-          content: "+";
-          font-size:1.5em;
-          line-height:0.5em;
-          float: left;
-          transition: transform 0.3s ease-in-out;
-        }
-
-        &:hover {
-          background-color:darken(#EE2C2C, 10%);
-        }
+      .info-link {
+        border-bottom: 2px solid #E6E9ED;
+        padding: 1px 5px 6px;
+        margin-bottom: 10px;
       }
     }
 
+    .accordion-title {
+      margin: 5px 0 6px;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      color: purple;
+      font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+
+    &:before {
+        content: "+";
+        font-size: 1.5em;
+        line-height:0.5em;
+        float: right;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .button-line {
+      border-top: 2px solid #e5e5e5;
+      height: 1px;
+      margin: 20px 0;
+    }
+
+    .my-information {
+      padding: 0px;
+    }
+
+    .card-block {
+      padding: 0px;
+    }
+
+    .button-color {
+      margin-bottom: 20px;
+    }
+
+    .control-label {
+      text-align: right;
+    }
+  }
 }
 
 //Styling for when on mobile device
@@ -185,7 +208,7 @@ $breakpoint-alpha: 768px;
         border-top: 0px;
       }
 
-      .change-title {
+      .change-password-title {
 
         background-color: #EE2C2C;
         text-align:center;
@@ -210,6 +233,14 @@ $breakpoint-alpha: 768px;
     }
 
     .info-link {
+      display: none;
+    }
+
+    .account-input-title {
+      display: none;
+    }
+
+    .button-line {
       display: none;
     }
   }

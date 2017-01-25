@@ -17,20 +17,40 @@
           <div id="infoOne" class="collapse show in" role="tabpanel" aria-labelledby="Details">
             <div class="card-block">
               <form class="my-information" {{action 'save' on="submit"}}>
-              <label for="first_name">
-              {{input value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input"}}
-              </label>
-              <label for="last_name">
-              {{input value=model.employee.lastName id="user-last-name" placeholder="Last Name" class="settings-input"}}
-              </label>
-              <label for="phone">
-              {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input"}}
-              </label>
-              <label for="start_date">
-                <p style="font-weight: 600">Start Date: </p>
-                {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only" style="font-size: smaller"}}
-              </label>
-              <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
+                <div class="form-group row">
+                  <label for="first_name" class="control-label col-md-3 col-sm-3">
+                    <span class="account-input-title">First Name <span class="required">*</span></span>
+                  </label>
+                  <div class="col-md-7 col-sm-6">
+                    {{input value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input col-md-7 col-xs-12 form-control"}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="last_name" class="control-label col-md-3 col-sm-3">
+                    <span class="account-input-title">Last Name <span class="required">*</span></span>
+                  </label>
+                  <div class="col-md-7 col-sm-6">
+                    {{input value=model.employee.lastName id="user-last-name" placeholder="Last Name" class="settings-input col-md-7 col-xs-12 form-control"}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="phone" class="control-label col-md-3 col-sm-3">
+                    <span class="account-input-title">Phone Number <span class="required">*</span></span>
+                  </label>
+                  <div class="col-md-7 col-sm-6">
+                    {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input col-md-7 col-xs-12 form-control"}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="start_date" class="control-label col-md-3 col-sm-3">
+                    <span class="start-date-title">Start Date: </span>
+                  </label>
+                  <div class="col-md-7 col-sm-6">
+                    {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only col-md-7 form-control" style="font-size: smaller"}}
+                  </div>
+                </div>
+                <div class="button-line"></div>
+                <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
               </form>
             </div>
           </div>
@@ -85,7 +105,7 @@
                 </label>
                 <div class="password-div">
                   <div class="password-link">
-                    <p class="change-title">
+                    <p class="change-password-title">
                       Change Password
                     </p>
                   </div>
