@@ -1,0 +1,32 @@
+<form class="row">
+	  <div class="form-group row">
+	    <label for="user-email" class="col-xs-4 col-form-label">Username</label>
+	    <div class="col-xs-8">
+	      {{input class="form-control" value=model.email id="user-email" readonly=true}}
+	    </div>
+	  </div>
+	  <div class="form-group row">
+	    <label for="user-new-password" class="col-xs-4 col-form-label">New Password</label>
+	    <div class="col-xs-8">
+	      {{input class="form-control" type="password" value=model.password id="user-new-password"}}
+	    </div>
+	  </div>
+	  <div class="form-group row">
+	    <label for="user-confirm-password" class="col-xs-4 col-form-label">Confirm Password</label>
+	    <div class="col-xs-8">
+	      {{input class="form-control" type="password" value=model.confirm id="user-confirm-password"}}
+	    </div>
+	  </div>
+	  <div class="form-group row">
+	    <label for="user-admin" class="col-xs-4 col-form-label">Admin</label>
+	    <div class="col-xs-8">
+	      {{#x-select action='selectAdmin' id="admin-select" value=model.admin}}
+	        {{#each-in yesNoTranslationMap as |key value|}}
+	          {{#x-option value=value}}
+	            {{key}}
+	          {{/x-option}}
+	        {{/each-in}}
+	      {{/x-select}}
+	    </div>
+      </div>
+</form>

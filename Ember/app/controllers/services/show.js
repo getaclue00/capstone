@@ -3,10 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
 
-    closeModal() {
-      this.transitionToRoute('services');
-    },
-
     updateService() {
       var self = this;
 

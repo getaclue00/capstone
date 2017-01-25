@@ -8,6 +8,10 @@ export default Ember.Controller.extend({
 
     handleDeleteEmployee(employee){
       this.transitionToRoute('employees.delete', employee.id);
+    },
+
+    handleCreateAccount(){
+    	//call create in the controller for user new
     }
   }
 });

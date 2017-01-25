@@ -10,6 +10,7 @@
         <th><h1>End Date</h1></th>
         <th></th>
         <th></th>
+        <th><h1>User Account</h1></th>
       </tr>
     </thead>
     <tbody>
@@ -40,6 +41,20 @@
               <span class="glyphicon glyphicon-minus"></span>
             </button>
           </td>
+
+          <td class='employee-operation'>
+          {{#if employee.user}}
+            {{#link-to 'users.show' employee.user.id class="dropdown-item"}}
+              <span class="glyphicon glyphicon-user"></span>
+            {{/link-to}}
+          {{else}}
+            <button type="submit" class="dropdown-item" onclick={{action "handleCreateAccount" employee }}>
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          {{/if}}
+          </td>
+
+
         </tr>
       {{/each}}
     </tbody>

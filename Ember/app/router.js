@@ -28,6 +28,10 @@ Router.map(function() {
   });
   this.route('login');
   this.route('appointment-history');
+
+  this.route('users', function() {
+    this.route('show', { path: "/:users_id" });
+  });
 });
 
 export default Router;
