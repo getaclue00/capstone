@@ -28,8 +28,8 @@ install:
 
 script:
   - cd Rails
-  - RAILS_ENV=test bundle exec rake db:drop db:create db:migrate db:seed
-  - RAILS_ENV=test bundle exec rspec
+  - bundle exec rake db:drop db:create db:migrate db:seed
+  - bundle exec rspec
   - cd ../Ember/
   - ember test
 
