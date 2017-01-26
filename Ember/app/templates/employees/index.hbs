@@ -37,9 +37,9 @@
             {{/link-to}}
           </td>
           <td class='employee-operation'>
-            <button type="submit" class="dropdown-item" onclick={{action "handleDeleteEmployee" employee }}>
+            {{#link-to 'employees.delete' employee.id class="dropdown-item"}}
               <span class="glyphicon glyphicon-minus"></span>
-            </button>
+            {{/link-to}}
           </td>
 
           <td class='employee-operation'>
@@ -48,9 +48,9 @@
               <span class="glyphicon glyphicon-user"></span>
             {{/link-to}}
           {{else}}
-            <button type="submit" class="dropdown-item" onclick={{action "handleCreateAccount" employee }}>
+       
               <span class="glyphicon glyphicon-plus"></span>
-            </button>
+            
           {{/if}}
           </td>
 
