@@ -124,23 +124,35 @@
           <div id="infoThree" class="collapse show in" role="tabpanel" aria-labelledby="Login Information">
             <div class="card-block">
               <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
-                <label for="username">
-                  <span>Username: </span>
-                  {{input value=model.email id="user-email" readonly=true class="settings-username" placeholder="Username"}}
-                </label>
-                <div class="password-div">
-                  <div class="password-link">
+                <div class="form-group row col-md-12">
+                  <label for="username">
+                    <span>Username: </span>
+                    {{input value=model.email id="user-email" readonly=true class="settings-username settings-read-only" placeholder="Username"}}
+                  </label>
+                </div>
+                <div class="password-div col-md-12">
+                  <div>
                     <p class="change-password-title">
                       Change Password
                     </p>
                   </div>
-                  <div class="card-block">
-                    <label for="new-password">
-                      <span>New Password</span>{{input type="password" value=model.password required="required" id="user-new-password" class="settings-input"}}
+                  <div class="password-block col-md-12">
+                    <div class="form-group row col-md-12">
+                      <label for="new-password" class="col-md-4">
+                        <span>New Password</span>
+                      </label>
+                      <div class="col-md-8 col-sm-10 col-xs-10 col-centered">
+                        {{input type="password" value=model.password required="required" id="user-new-password" class="settings-input col-md-7 form-control"}}
+                      </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                    <label for="confirm-password" class="col-md-4">
+                      <span>Confirm Password</span>
                     </label>
-                    <label for="confirm-password">
-                      <span>Confirm Password</span>{{input type="password" value=model.confirm required="required" id="user-confirm-password" class="settings-input"}}
-                    </label>
+                      <div class="col-md-8 col-sm-10 col-xs-10 col-centered">
+                        {{input type="password" value=model.confirm required="required" id="user-confirm-password" class="settings-input col-md-7 form-control"}}
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>

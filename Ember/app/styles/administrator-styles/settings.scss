@@ -154,12 +154,6 @@ $breakpoint-alpha: 768px;
 
     }
 
-    .settings-read-only {
-      width: 100%;
-      border: none;
-      text-align: center;
-    }
-
     .settings-username {
       width: 60%;
       border: none;
@@ -199,40 +193,6 @@ $breakpoint-alpha: 768px;
       font-size: small;
     }
 
-    .password-div {
-
-      background-color:#f9f9f9;
-      margin-bottom: 20px;
-
-      .card-block {
-        border: 1px solid #eee;
-        border-top: 0px;
-      }
-
-      .change-password-title {
-
-        background-color: #EE2C2C;
-        text-align:center;
-        font-weight:600;
-        padding: 1em;
-        display:block;
-        text-decoration:none;
-        color:#fff;
-        transition:background-color 0.5s ease-in-out;
-
-        &:before {
-          font-size:1.5em;
-          line-height:0.5em;
-          float: left;
-          transition: transform 0.3s ease-in-out;
-        }
-
-        &:hover {
-          background-color:darken(#EE2C2C, 10%);
-        }
-      }
-    }
-
     .info-link {
       display: none;
     }
@@ -247,6 +207,11 @@ $breakpoint-alpha: 768px;
 
     .control-label{
       display: none;
+    }
+
+    .col-centered {
+      float: none;
+      margin: 0 auto;
     }
   }
 }
@@ -286,4 +251,33 @@ $breakpoint-alpha: 768px;
   position: relative;
   display: block;
   padding: 10px 15px;
+}
+
+.password-div {
+
+  margin-bottom: 20px;
+
+  .password-block {
+    border: 1px solid #eee;
+    border-top: 0px;
+    padding-top: 1.5em;
+    background-color:#f9f9f9;
+  }
+
+  .change-password-title {
+
+    background-color: #EE2C2C;
+    text-align:center;
+    font-weight:600;
+    padding: 1em 1em 1em 0em;
+    display:block;
+    margin: 0px;
+    text-decoration:none;
+    color:#fff;
+  }
+}
+
+.settings-read-only {
+  border: none;
+  text-align: center;
 }
