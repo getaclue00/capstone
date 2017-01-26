@@ -18,18 +18,18 @@
             <div class="card-block">
               <form class="my-information" {{action 'save' on="submit"}}>
                 <div class="form-group row">
-                  <label for="first_name" class="control-label col-md-3 col-sm-3">
+                  <label for="first_name" class="control-label col-md-3">
                     <span class="account-input-title">First Name <span class="required">*</span></span>
                   </label>
-                  <div class="col-md-7 col-sm-6">
+                  <div class="col-md-7 col-sm-12">
                     {{input value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input col-md-7 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="last_name" class="control-label col-md-3 col-sm-3">
+                  <label for="last_name" class="control-label col-md-3 col-sm-12">
                     <span class="account-input-title">Last Name <span class="required">*</span></span>
                   </label>
-                  <div class="col-md-7 col-sm-6">
+                  <div class="col-md-7 col-sm-12">
                     {{input value=model.employee.lastName id="user-last-name" placeholder="Last Name" class="settings-input col-md-7 col-xs-12 form-control"}}
                   </div>
                 </div>
@@ -37,15 +37,15 @@
                   <label for="phone" class="control-label col-md-3 col-sm-3">
                     <span class="account-input-title">Phone Number <span class="required">*</span></span>
                   </label>
-                  <div class="col-md-7 col-sm-6">
+                  <div class="col-md-7 col-sm-12">
                     {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input col-md-7 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="start_date" class="control-label col-md-3 col-sm-3">
+                  <label for="start_date" class="col-md-3">
                     <span class="start-date-title">Start Date: </span>
                   </label>
-                  <div class="col-md-7 col-sm-6">
+                  <div class="col-md-7 col-sm-12">
                     {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only col-md-7 form-control" style="font-size: smaller"}}
                   </div>
                 </div>
@@ -66,24 +66,49 @@
           <div id="infoTwo" class="collapse show in" role="tabpanel" aria-labelledby="Address">
             <div class="card-block">
               <form class="my-information" {{action 'save' on="submit"}}>
-              <p class="street-info-container">
-                <label for="street_number" class="street-number-label">
-                {{input type="number" value=model.employee.streetNumber id="user-street-number" placeholder="Street Number" class="settings-input-street-number"}}
-                </label>
-                <label for="street_name" class="street-name-label">
-                {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input-street-name"}}
-                </label>
-              </p>
-              <label for="city">
-              {{input value=model.employee.city id="user-city" class="settings-input" placeholder="City"}}
-              </label>
-              <label for="province">
-              {{input value=model.employee.province id="user-province" class="settings-input" placeholder="Province"}}
-              </label>
-              <label for="postal_code">
-              {{input value=model.employee.postalCode id="user-postal-code" class="settings-input" placeholder="Postal Code"}}
-              </label>
-              <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
+                <div class="street-info-container">
+                  <div class="form-group row col-md-12 settings-input-street-number">
+                    <label for="street_number" class="control-label col-md-4" style="padding-left: 0px;">
+                       <span class="account-input-title">Street Number <span class="required">*</span></span>
+                    </label>
+                    <div class="street-number-input col-md-8">
+                      {{input type="number" value=model.employee.streetNumber id="user-street-number" placeholder="Street Number" class="form-control settings-input"}}
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12 settings-input-street-name">
+                      <label for="street_name" class="control-label col-md-4" style="padding-left: 0px;">
+                        <span class="account-input-title"> Street Name <span class="required">*</span></span>
+                      </label>
+                      <div class="street-name-input col-md-8">
+                       {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input form-control"}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="city" class="control-label col-md-4" style="padding-left: 0px;">
+                      <span class="account-input-title">City <span class="required">*</span></span>
+                    </label>
+                    <div class="col-md-8 col-sm-12">
+                      {{input value=model.employee.city id="user-city" placeholder="City" class="settings-input form-control"}}
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="province" class="control-label col-md-4" style="padding-left: 0px;">
+                      <span class="account-input-title">Province <span class="required">*</span></span>
+                    </label>
+                    <div class="col-md-8">
+                      {{input value=model.employee.province id="user-province" class="settings-input form-control" placeholder="Province"}}
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="postal_code" class="control-label col-md-4" style="padding-left: 0px;">
+                      <span class="account-input-title">Postal Code <span class="required">*</span></span>
+                    </label>
+                    <div class="col-md-8">
+                      {{input value=model.employee.postalCode id="user-postal-code" class="settings-input form-control" placeholder="Postal Code"}}
+                    </div>
+                  </div>
+                <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
               </form>
             </div>
           </div>

@@ -16,15 +16,17 @@ $breakpoint-alpha: 768px;
     #account-address-setting {
       display: block;
       opacity: 1;
-      width: 50%;
+      width: 49%;
       float: left;
+      margin-right: 5px;
     }
 
     #account-login-setting {
       display: block;
       opacity: 1;
-      width: 50%;
-      float: left;
+      width: 49%;
+      margin: 0px 0px 0px 5px;
+      float: right;
     }
 
     .tab-content {
@@ -92,6 +94,11 @@ $breakpoint-alpha: 768px;
     .control-label {
       text-align: right;
     }
+
+    .account-input-title {
+      padding: 0px;
+      font-size: 0.9em;
+    }
   }
 }
 
@@ -158,36 +165,30 @@ $breakpoint-alpha: 768px;
       border: none;
     }
 
-    .street-info-container {
-      width: 100%;
+    .form-group {
+      padding: 0px;
+    }
 
-      .street-number-label {
-        width: 25%;
-        float: left;
-      }
+    .street-number-input {
+      padding-right: 0px;
+      margin-right: 2px;
+    }
 
-      .street-name-label {
-        width: 70%;
-        float: right;
-      }
+    .street-name-input {
+      padding-left: 0px;
     }
 
     .settings-input-street-number {
-      width: 100%;
-      border-bottom: 1.5px dotted #d3d3d3;
-      border-top: none;
-      border-left: none;
-      border-right: none;
+      width: 30%;
+      float: left;
+      padding: 0px;
 
     }
 
     .settings-input-street-name {
-      width: 100%;
-      border-bottom: 1.5px dotted #d3d3d3;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-
+      width: 75%;
+      float: right;
+      padding: 0px;
     }
 
     .setings-title {
@@ -241,6 +242,10 @@ $breakpoint-alpha: 768px;
     }
 
     .button-line {
+      display: none;
+    }
+
+    .control-label{
       display: none;
     }
   }
