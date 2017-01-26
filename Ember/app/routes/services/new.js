@@ -8,10 +8,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
 
-    willTransition() {
-      let model = this.get('controller.model');
-      model.rollbackAttributes();
-    },
+    //NOT NEEDED SINCE WILLDESTROYELEMENT WAS OVERRIDEN IN SERVICE-EDITOR COMPONENT
+    // willTransition() {
+    //   let model = this.get('controller.model');
+    //   model.rollbackAttributes();
+    // },
 
     goBackToListOfServices() {
       this.transitionTo('services');

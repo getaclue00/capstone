@@ -10,10 +10,13 @@
     attributes=attributes
     operations=operations
   }}
+
   <div class="buttons service-button">
-    <button onclick={{action "handleAddNewService"}} class="managing">
-      <span class="glyphicon glyphicon-plus"></span> <span>Add New Service</span>
-    </button>
+     {{#link-to 'services.new' class="managing" }}
+      <span class="glyphicon glyphicon-plus"></span> Add New Service
+     {{/link-to}}
   </div>
   {{outlet}}
 </div>
+
+

@@ -6,7 +6,7 @@ moduleFor('controller:users/show', 'Unit | Controller | users/show', {
   // needs: ['controller:foo']
 });
 
-test('#saveUser transitions to employees', function(assert) {
+test('#updateUser transitions to employees', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
         save() {
@@ -25,7 +25,7 @@ test('#saveUser transitions to employees', function(assert) {
   assert.ok(controller);
 });
 
-test('#saveUser will NOT transition to employees', function(assert) {
+test('#updateUser will NOT transition to employees', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
         save() {
