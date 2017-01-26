@@ -5,8 +5,10 @@ export default Ember.Component.extend({
   wasServiceSelected: Ember.computed('model.service', function(){
     let service = this.get('model.service');
 
-    if (service.get('name') && service.get('duration')) {
-      return true;
+    if (service) {
+      if (service.get('name') && service.get('duration')) {
+        return true;
+      }
     } else {
       return false;
     }

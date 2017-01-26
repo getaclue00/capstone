@@ -37,24 +37,4 @@ export default Model.extend({
       return value;
     }
   })
-  // TODELETE LATER
-  // idea for cost calculation
-  // TODELETE LATER
-
-  // formattedCost: computed('cost', {
-  //   get() {
-  //     let appointmentCost = this.get('cost');
-  //     let result = appointmentCost || this.get('service.price_small');
-  //
-  //     if (appointmentCost === undefined) {
-  //       this.set('cost', result);
-  //     }
-  //
-  //     return result;
-  //   },
-  //   set(key, value) {
-  //     this.set('cost', value);
-  //     return value;
-  //   }
-  // })
 });
