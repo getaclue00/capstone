@@ -1,6 +1,6 @@
-<div class="settings-page">
+<div class="settings-page col-md-12">
   <div class="settings">
-    <h5 class="setings-title"><span class="glyphicon glyphicon-cog" style="margin-left: 0.5em"></span> Settings</h5>
+    <h5 class="setings-title"><span class="glyphicon glyphicon-cog"></span> Settings</h5>
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item"><a href="#account-detail-setting" data-toggle="tab" class="nav-link active">Details</a></li>
       <li class="nav-item"><a href="#account-address-setting" data-toggle="tab" class="nav-link">Address</a></li>
@@ -108,6 +108,7 @@
                       {{input value=model.employee.postalCode id="user-postal-code" class="settings-input form-control" placeholder="Postal Code"}}
                     </div>
                   </div>
+                <div class="button-line col-md-12"></div>
                 <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
               </form>
             </div>
@@ -155,6 +156,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="button-line col-md-12"></div>
                 <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
               </form>
             </div>

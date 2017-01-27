@@ -3,7 +3,18 @@ $breakpoint-alpha: 768px;
 //Styling for when on computer
 
 @media (min-width: $breakpoint-alpha) {
+
+  .setings-title {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  .my-account {
+    background-color: #ededed;
+  }
+
   .settings {
+
     .nav-tabs {
       display: none
     }
@@ -46,9 +57,22 @@ $breakpoint-alpha: 768px;
       }
 
       .info-link {
-        border-bottom: 2px solid #E6E9ED;
+        border-bottom: 2px solid #d30b07;
         padding: 1px 5px 6px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.25em;
+
+        a {
+
+          text-decoration: none;
+          color: grey;
+          font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+          font-weight: 500;
+        }
+
+        a:hover {
+
+        }
       }
     }
 
@@ -105,6 +129,14 @@ $breakpoint-alpha: 768px;
 //Styling for when on mobile device
 
 @media (max-width: $breakpoint-alpha) {
+
+  .setings-title {
+    padding-left: 0.8em !important;
+  }
+
+  .settings-page {
+    padding:0px;
+  }
 
   .settings{
     #account-detail-setting, #account-address-setting,
