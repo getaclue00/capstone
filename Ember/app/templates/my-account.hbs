@@ -6,6 +6,9 @@
       <li class="nav-item"><a href="#account-address-setting" data-toggle="tab" class="nav-link">Address</a></li>
       <li class="nav-item"><a href="#account-login-setting" data-toggle="tab" class="nav-link">Login</a></li>
     </ul>
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash messageStyle='bootstrap'}}
+    {{/each}}
     <div class="tab-content">
       <div class="tab-pane fade in active" id="account-detail-setting">
         <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
