@@ -11,7 +11,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['data']).to eq('No appointments')
+        expect(result['data']).to be_empty
         expect(response).to have_http_status(200)
       end
     end

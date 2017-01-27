@@ -14,7 +14,7 @@ class AppointmentsController < ApplicationController
 		if appointments_array && !appointments_array.empty?
 				render json: appointments_array, status: :ok
 		else
-				render json: { data: 'No appointments' }, status: :ok
+				render json: [], status: :ok
 		end
 	end
 

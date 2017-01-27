@@ -9,6 +9,7 @@ class Employee < ActiveRecord::Base
 
     #destroying a service shouldnt destroy associated appointments (only sets FK to id 0)
     has_many :appointments, dependent: :nullify
+    has_one :user, dependent: :destroy
 
     def get_associated_objects
         apts_array = Employee.find(self[:id]).appointment_ids 

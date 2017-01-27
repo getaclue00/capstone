@@ -3,6 +3,11 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model() {
-    return this.get('store').findAll('appointment');
+    const appointments = this.get('store').findAll('appointment');
+    if (appointments) {
+      return appointments;
+    } else {
+      return [];
+    }
   }
 });
