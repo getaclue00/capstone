@@ -100,22 +100,24 @@ $breakpoint-alpha: 660px;
     margin: 0px;
   }
 
-  tr td:nth-child(1) {
-    width: 70%;
-    font-size: 3.5vw;
-    font-weight: bold;
-    display: block;
-    margin: 0px 0px 0px 16px;;
-  }
+  .management-table-body{
+    tr td:nth-child(1) {
+      width: 70%;
+      font-size: 3.5vw;
+      font-weight: bold;
+      display: block;
+      margin: 0px 0px 0px 16px;;
+    }
 
-  tr td:nth-child(2) {
-    display: block;
-    font-size: 2.4vw;
-    width: 75%;
-    margin: 0px 0px 0px 16px;
+    tr td:nth-child(2) {
+      display: block;
+      font-size: 2.4vw;
+      width: 75%;
+      margin: 0px 0px 0px 16px;
 
-    &:before {
-      content: attr(data-th);
+      &:before {
+        content: attr(data-th);
+      }
     }
   }
 
@@ -200,4 +202,3 @@ table.dataTable thead .sorting_asc_disabled {
 table.dataTable thead .sorting_desc_disabled {
   background-image: url("/assets/images/sort_desc_disabled.png");
 }
-
