@@ -1,75 +1,80 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import moment from 'moment';
+//
 
+const time = moment().format('YYYY-MM-DDTHH:mm');
 const appointmentStub = Ember.Object.extend({
-  getColor() {
-    return this.get('color');
-  },
-
-  getTextColor() {
-    return this.get('textColor');
-  },
-
-  getTitle() {
-    return this.get('title');
-  },
-
-  getStart() {
-    return this.get('start');
-  },
-
-  getEnd() {
-    return this.get('end');
-  },
-
-  getNotes() {
-    return this.get('notes');
-  }
+  start:      time,
+  end:        moment(time).add(1, 'hour').format('YYYY-MM-DDTHH:mm'),
+  cost:       '55',
+  notes:      '',
+  status:     'pending',
+  weekNumber: Number(moment(time).format('w')),
+  service:    undefined,
+  employee:   undefined,
+  formattedStart: Ember.computed('start', {
+    get() {
+      return moment(this.get('start')).format('YYYY-MM-DDTHH:mm');
+    },
+    set(key, value) {
+      this.set('start', moment(value).format('YYYY-MM-DDTHH:mm'));
+      this.set('weekNumber', Number(moment(value).format('w')));
+      return value;
+    }
+  }),
+  formattedEnd: Ember.computed('end', {
+    get() {
+      return moment(this.get('end')).format('YYYY-MM-DDTHH:mm');
+    },
+    set(key, value) {
+      this.set('end', moment(value).format('YYYY-MM-DDTHH:mm'));
+      return value;
+    }
+  })
 });
-
+//
 moduleForComponent('appointment-editor', 'Integration | Component | appointment editor', {
   integration: true
 });
 
-test('it renders default view', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-  assert.expect(4);
+test('it renders default empty view', function(assert) {
+  assert.expect(1);
 
-  this.render(hbs`{{appointment-editor}}`);
+  this.render(hbs`{{
+    appointment-editor
+  }}`);
 
-  assert.equal(this.$('input[type="text"]').length, 1, 'should be only 1 input text field - Title');
-  assert.equal(this.$('input[type="color"]').length, 2, 'should be only 2 input color fields - background color and text color');
-  assert.equal(this.$('input[type="datetime-local"]').length, 2, 'should be only 2 input datetime-local filed for start and end times');
-  assert.equal(this.$('textarea').length, 1, 'should be only 1 text area for the notes');
+  const errorMsg = `Please check the appointment-editor configuration. You are missing needed parameters.`;
+
+  assert.deepEqual($('.alert.alert-danger').text().trim(), errorMsg, 'should only render one row with an error message');
 });
 
-test('it renders a view with a model', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-  let appointment = appointmentStub.create({
-    color: '#AB00FF',
-    textColor: '#FFFFFF',
-    title: 'New Appointment Test',
-    start: '2016-10-23T09:10',
-    end: '2016-11-23T09:10',
-    notes: 'some notes'
-  });
+test('it renders a default view', function(assert) {
+  assert.expect(3);
 
-  this.set('model', appointment);
-
-  assert.expect(6);
+  this.set('model', appointmentStub);
+  this.set('services', [
+    { name: 'Service 1',
+      price_small: 99,
+      price_large: 100
+    }
+  ]);
+  this.set('employees', [
+    {
+      fullName: 'John Smith'
+    }
+  ]);
 
   this.render(hbs`{{
     appointment-editor
     model=model
+    listOfServices=services
+    listOfEmployess=employees
   }}`);
 
-  assert.equal(this.$('input[type="text"]').val(), this.get('model.title'), 'titles should match');
-  assert.equal(this.$('input[type="color"]')[0].value.toUpperCase(), this.get('model.color'), 'background colors should watch');
-  assert.equal(this.$('input[type="color"]')[1].value.toUpperCase(), this.get('model.textColor'), 'text colors should watch');
-  assert.equal(this.$('input[type="datetime-local"]')[0].value, this.get('model.start'), 'start times should match');
-  assert.equal(this.$('input[type="datetime-local"]')[1].value, this.get('model.end'), 'end times should match');
-  assert.equal(this.$('textarea').val(), this.get('model.notes'), 'the textarea should be filled in with the model notes');
+  assert.deepEqual($('.form-group.row').length, 2, 'should be 2 rows on initial render');
+  assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
+  assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
 });

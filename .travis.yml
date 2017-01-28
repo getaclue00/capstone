@@ -28,7 +28,7 @@ install:
 
 script:
   - cd Rails
-  - bundle exec rake db:test:prepare
+  - bundle exec rake db:drop db:create db:migrate
   - bundle exec rspec
   - cd ../Ember/
   - ember test
