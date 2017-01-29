@@ -74,7 +74,7 @@ test('it renders a default view', function(assert) {
     listOfEmployess=employees
   }}`);
 
-  assert.deepEqual($('.form-group.row').length, 2, 'should be 2 rows on initial render');
+  assert.deepEqual($('.form-group').length, 2, 'should be 2 rows on initial render');
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
 });
