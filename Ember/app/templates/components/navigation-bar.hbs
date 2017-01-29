@@ -3,13 +3,12 @@
     <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggle-button-left-small-screen">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="navbar-brand">&nbsp;</div>
     {{#if session.isAuthenticated}}
       <button type="button" {{action 'openNav'}} data-target="#mySidenav" aria-controls="mySidenav" aria-expanded="false" aria-label="Toggle quick controls" style="font-color: white; align-self: flex-start; padding: 0.25rem 0.75rem; font-size: 1.25rem; line-height: 1; background: transparent; border: 1px solid transparent; border-radius: 0.25rem; ;position: absolute; right: 1rem;">
         <span class="glyphicon glyphicon-plus" style="color: white; display: inline-block; width: 1.5em; height: 1.5em; vertical-align: middle;"></span>
       </button>
     {{/if}}
+    <div class="navbar-brand">&nbsp;</div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
