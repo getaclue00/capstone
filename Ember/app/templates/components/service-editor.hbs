@@ -1,56 +1,58 @@
 <form class="row">
-  <div class="form-group row">
-    <label for="service-name" class="col-xs-4 col-form-label">Service Name</label>
-    <div class="col-xs-8">
-      {{input type="name" class="form-control" value=model.name id="service-name"}}
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="service-name" class="col-4 col-form-label">Service Name</label>
+      <div class="col-8">
+        {{input type="name" class="form-control" value=model.name id="service-name"}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="service-duration" class="col-xs-4 col-form-label">Duration (min)</label>
-    <div class="col-xs-8">
-      {{input type="number-minutes" class="form-control" value=model.duration id="service-duration"}}
+    <div class="form-group row">
+      <label for="service-duration" class="col-4 col-form-label">Duration (min)</label>
+      <div class="col-8">
+        {{input type="number-minutes" class="form-control" value=model.duration id="service-duration"}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="service-price-sm-vehicle" class="col-xs-4 col-form-label">Price for Small Vehicle</label>
-    <div class="col-xs-8">
-      {{input type="dollar-amount" class="form-control" id="service-price-sm-vehicle" value=model.price_small}}
+    <div class="form-group row">
+      <label for="service-price-sm-vehicle" class="col-4 col-form-label">Price for Small Vehicle</label>
+      <div class="col-8">
+        {{input type="dollar-amount" class="form-control" id="service-price-sm-vehicle" value=model.price_small}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="service-price-lrg-vehicle" class="col-xs-4 col-form-label">Price for Large Vehicle</label>
-    <div class="col-xs-8">
-      {{input type="dollar-amount" class="form-control" id="service-price-lrg-vehicle" value=model.price_large}}
+    <div class="form-group row">
+      <label for="service-price-lrg-vehicle" class="col-4 col-form-label">Price for Large Vehicle</label>
+      <div class="col-8">
+        {{input type="dollar-amount" class="form-control" id="service-price-lrg-vehicle" value=model.price_large}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="service-active" class="col-xs-4 col-form-label">Service Active?</label>
-    <div class="col-xs-8">
-      {{#x-select action='selectActive' id="active-select" value=model.active}}
-        {{#each-in yesNoTranslationMap as |key value|}}
-          {{#x-option value=value}}
-            {{key}}
-          {{/x-option}}
-        {{/each-in}}
-      {{/x-select}}
+    <div class="form-group row">
+      <label for="service-active" class="col-4 col-form-label">Service Active?</label>
+      <div class="col-8">
+        {{#x-select action='selectActive' id="active-select" value=model.active as |xs|}}
+          {{#each-in yesNoTranslationMap as |key value|}}
+            {{#xs.option value=value}}
+              {{key}}
+            {{/xs.option}}
+          {{/each-in}}
+        {{/x-select}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="service-displayable" class="col-xs-4 col-form-label">Service Displayable?</label>
-    <div class="col-xs-8">
-      {{#x-select action='selectDisplayable' id="displayable-select" value=model.displayable}}
-        {{#each-in yesNoTranslationMap as |key value|}}
-          {{#x-option value=value}}
-            {{key}}
-          {{/x-option}}
-        {{/each-in}}
-      {{/x-select}}
+    <div class="form-group row">
+      <label for="service-displayable" class="col-4 col-form-label">Service Displayable?</label>
+      <div class="col-8">
+        {{#x-select action='selectDisplayable' id="displayable-select" value=model.displayable as |xs|}}
+          {{#each-in yesNoTranslationMap as |key value|}}
+            {{#xs.option value=value}}
+              {{key}}
+            {{/xs.option}}
+          {{/each-in}}
+        {{/x-select}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="service-description" class="col-xs-4 col-form-label">Description</label>
-    <div class="col-xs-8">
-      {{textarea class="form-control" id="service-description" value=model.description rows=3}}
+    <div class="form-group row">
+      <label for="service-description" class="col-4 col-form-label">Description</label>
+      <div class="col-8">
+        {{textarea class="form-control" id="service-description" value=model.description rows=3}}
+      </div>
     </div>
   </div>
 </form>
