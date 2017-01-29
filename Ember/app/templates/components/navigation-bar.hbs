@@ -12,6 +12,9 @@
     {{/if}}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <img src="/assets/images/logo.png" class='logo' width="150px" height="40px">
+        </li>
         {{#if session.isAuthenticated}}
           <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
           <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
