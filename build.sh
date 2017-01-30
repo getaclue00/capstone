@@ -37,13 +37,7 @@ cd Rails
 git init
 git add .
 git commit -m "deploying"
-# Travis Only
-git remote add heroku git@heroku.com:radetailing.git
-heroku keys:clear
-yes | heroku keys:add
-git push heroku master -f
-# uncomment this locally
-# git push --set-upstream https://git.heroku.com/radetailing.git master -f
+git push --set-upstream https://git.heroku.com/radetailing.git master -f
 rm -fr .git
 
 printMessage 4 "Cleaning"
@@ -51,6 +45,9 @@ cd ..
 rm Rails/public/crossdomain.xml
 rm -rf Rails/public/assets/
 rm -rf Rails/public/fonts/
+rm -rf Rails/public/testem.js
+rm -rf Rails/public/tests/
+rm Rails/public/robots.txt
 rm Rails/public/index.html
 
 boldMessage 4 "Done"
