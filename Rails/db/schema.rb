@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20170117151905) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-01-26'
+    t.date     "start_date",               default: '2017-01-30'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
