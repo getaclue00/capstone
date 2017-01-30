@@ -346,30 +346,14 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
-    # context 'when the car exists and has no appointments' do
-    #   it 'should delete it' do
-    #     car = FactoryGirl.create :car
+    context 'when the user exists' do
+      it 'should delete it' do
+        user = FactoryGirl.create :user
 
-    #     delete :destroy, params: { id: car.id }
+        delete :destroy, params: { id: user.id }
 
-    #     expect(response).to have_http_status(:no_content)
-    #   end
-    # end
-
-    # context 'when the car exists and has appointments' do
-    #   it 'should delete it' do
-    #     FactoryGirl.create :car, :id => 0 #needed for FK constraints when handling associated appointments
-    #     car = FactoryGirl.create :car_with_appointment
-    #     appt_id = car.appointments[0].id
-
-    #     delete :destroy, params: { id: car.id }
-
-    #     expect(response).to have_http_status(:no_content)
-    #     #validate that associated appointments service id set to 0
-    #     expect(Appointment.find(appt_id).car_id).to eq (0)
-    #   end
-    # end
+        expect(response).to have_http_status(:no_content)
+      end
+    end
   end
-
-
 end
