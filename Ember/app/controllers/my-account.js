@@ -8,7 +8,7 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
 	actions: {
 		updateAccountInfo() {
 
-      var flashMessages = Ember.get(this, 'flashMessages');
+      var flashMessages = this.get('flashMessages');
 
 		    function onSuccessful() {
           window.scrollTo(0,0);

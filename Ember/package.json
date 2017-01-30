@@ -51,8 +51,5 @@
     "ember-welcome-page": "^1.0.1",
     "emberx-select": "2.2.2",
     "loader.js": "^4.0.1"
-  },
-  "dependencies": {
-    "ember-cli-flash": "^1.4.1"
   }
 }
