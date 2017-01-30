@@ -1,5 +1,11 @@
 <form class="row">
 	  <div class="form-group row">
+	    <label for="employee-id" class="col-xs-4 col-form-label">Employee ID</label>
+	    <div class="col-xs-8">
+	      {{input class="form-control" type="name" value=model.employee.id id="employee-id" readonly=true}}
+	    </div>
+	  </div>
+	  <div class="form-group row">
 	    <label for="user-email" class="col-xs-4 col-form-label">Username</label>
 	    <div class="col-xs-8">
 	      {{input class="form-control" type="name" value=model.email id="user-email"}}

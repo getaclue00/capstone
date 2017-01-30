@@ -31,8 +31,7 @@ Router.map(function() {
 
   this.route('users', function() {
     this.route('show', { path: "/:users_id" });
-    this.route('new');
-    // this.route('new');
+    this.route('new', { path: "/:employees_id" });
   });
 });
 
