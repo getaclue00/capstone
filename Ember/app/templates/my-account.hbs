@@ -25,7 +25,7 @@
                     <span class="account-input-title">First Name <span class="required">*</span></span>
                   </label>
                   <div class="col-md-7 col-sm-12">
-                    {{input value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input col-md-7 col-xs-12 form-control"}}
+                    {{input type="text" value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input col-md-7 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
@@ -33,7 +33,7 @@
                     <span class="account-input-title">Last Name <span class="required">*</span></span>
                   </label>
                   <div class="col-md-7 col-sm-12">
-                    {{input value=model.employee.lastName id="user-last-name" placeholder="Last Name" class="settings-input col-md-7 col-xs-12 form-control"}}
+                    {{input type="text" value=model.employee.lastName id="user-last-name"  placeholder="Last Name" class="settings-input col-md-7 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
@@ -49,7 +49,7 @@
                     <span class="start-date-title">Start Date: </span>
                   </label>
                   <div class="col-md-7 col-sm-12">
-                    {{input value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only col-md-7 form-control" style="font-size: smaller"}}
+                    {{input type="datetime" value=model.employee.startDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only col-md-7 form-control" style="font-size: smaller"}}
                   </div>
                 </div>
                 <div class="button-line"></div>
@@ -83,7 +83,7 @@
                         <span class="account-input-title"> Street Name <span class="required">*</span></span>
                       </label>
                       <div class="street-name-input col-md-8">
-                       {{input value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input form-control"}}
+                       {{input type="text" value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input form-control"}}
                       </div>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                       <span class="account-input-title">Province <span class="required">*</span></span>
                     </label>
                     <div class="col-md-8">
-                      {{input value=model.employee.province id="user-province" class="settings-input form-control" placeholder="Province"}}
+                      {{input type="text" value=model.employee.province id="user-province" class="settings-input form-control" placeholder="Province"}}
                     </div>
                   </div>
                   <div class="form-group row col-md-12">
@@ -108,7 +108,7 @@
                       <span class="account-input-title">Postal Code <span class="required">*</span></span>
                     </label>
                     <div class="col-md-8">
-                      {{input value=model.employee.postalCode id="user-postal-code" class="settings-input form-control" placeholder="Postal Code"}}
+                      {{input type="text" pattern="[A-Z][0-9][A-Z] [0-9][A-Z][0-9]" value=model.employee.postalCode id="user-postal-code" class="settings-input form-control" placeholder="Postal Code"}}
                     </div>
                   </div>
                 <div class="button-line col-md-12"></div>
@@ -131,7 +131,7 @@
                 <div class="form-group row col-md-12">
                   <label for="username">
                     <span>Username: </span>
-                    {{input value=model.email id="user-email" readonly=true class="settings-username settings-read-only" placeholder="Username"}}
+                    {{input type="text" value=model.email id="user-email" readonly=true class="settings-username settings-read-only" placeholder="Username"}}
                   </label>
                 </div>
                 <div class="password-div col-md-12">
