@@ -12,10 +12,10 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{login-form}}`);
 
-  assert.equal(this.$('h2').text().trim(), 'Please sign in');
-  assert.equal(this.$('input[type="text"]').attr('placeholder').trim(), 'Email address');
-  assert.equal(this.$('input[type="password"]').attr('placeholder').trim(), 'Password');
+  assert.equal(this.$('h2').text().trim(), 'Login');
+  assert.equal(this.$('input[type="text"]').attr('placeholder'), undefined);
+  assert.equal(this.$('input[type="password"]').attr('placeholder'), undefined);
   assert.equal(this.$('input[type="checkbox"]').length, 1, 'Remember Me checkbox');
   assert.equal(this.$('button').length, 1, 'Only one button - Sign In');
-  assert.equal(this.$('button').text().trim(), 'Sign in');
+  assert.equal(this.$('button').text().trim(), 'SIGN IN');
 });

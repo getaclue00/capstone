@@ -22,12 +22,13 @@ install:
   - cd ../Ember/
   - npm install
   - bower install
+  - npm install -g ember-cli
   - ember --version
   - cd ..
 
 script:
   - cd Rails
-  - bundle exec rake db:test:prepare
+  - bundle exec rake db:drop db:create db:migrate
   - bundle exec rspec
   - cd ../Ember/
   - ember test

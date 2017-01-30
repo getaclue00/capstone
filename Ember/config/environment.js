@@ -20,7 +20,7 @@ module.exports = function(environment) {
   };
 
   ENV['ember-simple-auth'] = {
-    routeAfterAuthentication: 'my-account'
+    routeAfterAuthentication: 'my-calendar'
   };
 
   if (environment === 'development') {
@@ -31,7 +31,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV['ember-cli-mirage'] = {
       enabled: true
-    }
+    };
   }
 
   if (environment === 'test') {

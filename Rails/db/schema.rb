@@ -10,27 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105170323) do
+ActiveRecord::Schema.define(version: 20170122202040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "status",      default: "pending",             null: false
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "color",       default: "#AB00FF",             null: false
-    t.string   "text_color",  default: "#FFFFFF",             null: false
-    t.string   "title",       default: "New Appointment",     null: false
-    t.datetime "start",       default: '2016-10-23 09:10:00', null: false
-    t.datetime "end",         default: '2016-12-31 09:10:00', null: false
+    t.string   "status",                               default: "pending",             null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
+    t.string   "color",                                default: "#AB00FF",             null: false
+    t.string   "text_color",                           default: "#FFFFFF",             null: false
+    t.string   "title",                                default: "New Appointment",     null: false
+    t.datetime "start",                                default: '2016-10-23 09:10:00', null: false
+    t.datetime "end",                                  default: '2016-12-31 09:10:00', null: false
     t.text     "notes"
     t.integer  "car_id"
-    t.integer  "service_id"
-    t.integer  "employee_id"
+    t.integer  "service_id",                                                           null: false
+    t.integer  "employee_id",                          default: 0,                     null: false
+    t.integer  "week_number",                          default: 0
+    t.decimal  "cost",        precision: 10, scale: 2, default: "0.0"
+    t.integer  "year",                                 default: 2017
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
     t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
     t.index ["service_id"], name: "index_appointments_on_service_id", using: :btree
+    t.index ["week_number", "year"], name: "index_appointments_on_week_number_and_year", using: :btree
+    t.index ["week_number"], name: "index_appointments_on_week_number", using: :btree
   end
 
   create_table "cars", force: :cascade do |t|
@@ -63,20 +68,17 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   create_table "employees", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
-    t.string   "email"
     t.string   "phone_number",  limit: 12
     t.integer  "street_number"
     t.string   "street_name"
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2016-11-17'
-    t.boolean  "is_admin",                 default: false
+    t.date     "start_date",               default: '2017-01-26'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
     t.text     "notes"
-    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
   end
 
   create_table "services", force: :cascade do |t|
@@ -106,15 +108,10 @@ ActiveRecord::Schema.define(version: 20161105170323) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "authentication_token",   default: "",    null: false
-    t.string   "first_name",             default: "",    null: false
-    t.string   "last_name",              default: "",    null: false
-    t.string   "telephone",              default: "",    null: false
-    t.boolean  "client",                 default: false, null: false
-    t.boolean  "employee",               default: false, null: false
+    t.integer  "employee_id",                            null: false
     t.index ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
-    t.index ["client"], name: "index_users_on_client", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["employee"], name: "index_users_on_employee", using: :btree
+    t.index ["employee_id"], name: "index_users_on_employee_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -122,4 +119,5 @@ ActiveRecord::Schema.define(version: 20161105170323) do
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
   add_foreign_key "cars", "clients"
+  add_foreign_key "users", "employees"
 end

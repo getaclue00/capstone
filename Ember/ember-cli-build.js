@@ -24,6 +24,7 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/glyphicons/styles/glyphicons.css');
-
+  app.import('bower_components/datatables.net/js/jquery.dataTables.js');
+  app.import('bower_components/datatables.net-dt/css/jquery.dataTables.min.css');
   return app.toTree();
 };

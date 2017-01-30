@@ -6,29 +6,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Add Appointment</h4>
-        <div class="btn-group">
-          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{assignedEmployeeStatement}}
-          </button>
-          <div class="dropdown-menu">
-            {{#each employees as |employee|}}
-              <button class="dropdown-item" {{action 'assignedEmployee' employee}}>{{employee.fullName}}</button>
-            {{/each}}
-          </div>
-        </div>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           {{
             appointment-editor
             model=appointment
-            services=services
+            listOfServices=services
+            listOfEmployess=employees
           }}
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToCalendar'}}>Close</button>
-        <button type="button" class="btn btn-primary" {{action 'saveAppointment'}}>Save changes</button>
+        <button type="button" class="btn btn-success btn-block" {{action 'saveAppointment'}}>Book</button>
+        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" {{action 'goBackToCalendar'}}>Cancel</button>
       </div>
     </div>
   </div>

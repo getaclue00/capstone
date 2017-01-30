@@ -1,26 +1,63 @@
+<div class="admin-container">
 <div class="admin-info">
-  <h3 class="page-title">My Account Information</h3>
+  <h3 class="page-title">Settings</h3>
+
   <form class="my-information" {{action 'save' on="submit"}}>
-    <label for="username">
-      <span>Username*</span>
-      {{input value=username placeholder="admin@admin.com"}}
-    </label>
-    <label for="password">
-      <span>Password <span class="required">*</span></span>
-      {{input value=password placeholder="***********"}}
-    </label>
+    <h3 class="title">User Info</h3> 
     <label for="first_name">
       <span>First Name <span class="required">*</span></span>
-      {{input value=first_name placeholder="Stephany"}}
+      {{input value=model.employee.firstName id="user-first-name"}}
     </label>
     <label for="last_name">
       <span>Last Name <span class="required">*</span></span>
-      {{input value=last_name placeholder="Oliver"}}
+      {{input value=model.employee.lastName id="user-last-name"}}
     </label>
     <label for="phone">
       <span>Phone <span class="required">*</span></span>
-      {{input value=phone placeholder="613-786-8634"}}
+      {{input type="tel" value=model.employee.phoneNumber id="user-phone-number"}}
     </label>
-    <span><button type="submit" class ="btn btn-primary button-color">Save</button></span>
+    <label for="street_number">
+      <span>Street Number <span class="required">*</span></span>
+      {{input type="number" value=model.employee.streetNumber id="user-street-number"}}
+    </label>
+    <label for="street_name">
+      <span>Street Name <span class="required">*</span></span>
+      {{input value=model.employee.streetName id="user-street-name"}}
+    </label>
+    <label for="city">
+      <span>City <span class="required">*</span></span>
+      {{input value=model.employee.city id="user-city"}}
+    </label>
+    <label for="province">
+      <span>Province <span class="required">*</span></span>
+      {{input value=model.employee.province id="user-province"}}
+    </label>
+    <label for="postal_code">
+      <span>Postal Code <span class="required">*</span></span>
+      {{input value=model.employee.postalCode id="user-postal-code"}}
+    </label>
+    <label for="start_date">
+      <span>Start Date </span>
+      {{input value=model.employee.startDate id="user-start-date" readonly=true}}
+    </label>
+    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
   </form>
+
+  <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
+    <h3 class="title">Login Info</h3>
+      <label for="username">
+        <span>Username</span>
+        {{input value=model.email id="user-email" readonly=true}}
+      </label>
+      <label for="new-password">
+        <span>New Password <span class="required">*</span></span>
+        {{input type="password" value=model.password required="required" id="user-new-password"}}
+      </label>
+      <label for="confirm-password">
+        <span>Confirm Password <span class="required">*</span></span>
+        {{input type="password" value=model.confirm required="required" id="user-confirm-password"}}
+      </label>
+    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
+  </form>
+</div>
 </div>

@@ -1,57 +1,71 @@
-<div class="row">
-  <div class="form-group row">
-    <label for="appointment-title" class="col-xs-4 col-form-label">Appointment Title</label>
-    <div class="col-xs-8">
-      {{input class="form-control" value=model.title id="appointment-title"}}
-    </div>
-  </div>
-  <div class="form-group row appointment-button-div">
-    <label for="service" class="col-xs-4 col-form-label">Service</label>
-    <div class="col-xs-8 appointment-button">
-      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{#if model.service.name}}
-        {{model.service.name}}
-      {{else}}
-        None
-      {{/if}}
-      </button>
-      <div class="dropdown-menu">
-        {{#each services as |service|}}
-          <button class="dropdown-item" {{action 'selectService' service model}}>{{service.name}}</button>
-        {{/each}}
+{{#if (and model listOfServices listOfEmployess)}}
+  <div class="row">
+    <div class="form-group row">
+      <label for="service" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Service:</label>
+      <div class="col-xs-12">
+        {{#power-select
+          options=listOfServices
+          selected=aSelectedService
+          renderInPlace=true
+          searchField="name"
+          placeholder="Select a service"
+          onchange=(action "selectService")
+          as |service|
+        }}
+         {{service.name}} - ${{service.price_small}} - ${{service.price_large}}
+        {{/power-select}}
       </div>
     </div>
+    <div class="form-group row">
+      <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Staff:</label>
+      <div class="col-xs-12">
+        {{#power-select
+          options=listOfEmployess
+          selected=aSelectedEmployee
+          renderInPlace=true
+          searchField="fullName"
+          placeholder="Select a staff member"
+          onchange=(action "selectEmployee")
+          as |employee|
+        }}
+         {{employee.fullName}}
+        {{/power-select}}
+      </div>
+    </div>
+    {{#if wasServiceSelected}}
+      <div class="form-group row">
+        <label for="appointment-cost" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Cost:</label>
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            {{input type="number" pattern="\d*" class="form-control" id="appointment-cost" value=model.cost placeholder="Please enter the cost"}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="appointment-start-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
+        <div class="col-xs-12">
+          {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="appointment-end-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Ends:</label>
+        <div class="col-xs-12">
+          {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="appointment-notes" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
+        <div class="col-xs-12">
+          {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
+        </div>
+      </div>
+    {{/if}}
   </div>
-  <div class="form-group row">
-    <label for="appointment-background-color" class="col-xs-4 col-form-label">Background Color</label>
-    <div class="col-xs-8">
-      {{input type="color" class="form-control" value=model.color id="appointment-background-color"}}
+{{else}}
+  <div class="row">
+    <div class="alert alert-danger" role="alert">
+      Please check the appointment-editor configuration. You are missing needed parameters.
     </div>
   </div>
-  <div class="form-group row">
-    <label for="appointment-text-color" class="col-xs-4 col-form-label">Text Color</label>
-    <div class="col-xs-8">
-      {{input type="color" class="form-control" value=model.textColor id="appointment-text-color"}}
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="appointment-start-time" class="col-xs-4 col-form-label">Appointment Start</label>
-    <div class="col-xs-8">
-      {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.start}}
-      <small>Temp: {{model.start}}</small>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="appointment-end-time" class="col-xs-4 col-form-label">Appointment End</label>
-    <div class="col-xs-8">
-      {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.end}}
-      <small>Temp: {{model.end}}</small>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="appointment-notes" class="col-xs-4 col-form-label">Notes</label>
-    <div class="col-xs-8">
-      {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
-    </div>
-  </div>
-</div>
+{{/if}}

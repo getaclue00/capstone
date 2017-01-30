@@ -1,0 +1,32 @@
+<table id="has-datatable" class="management-table" width="100%">
+  <thead>
+    <tr>
+      {{#each headers as |header|}}
+        <th><h1>{{header}}</h1></th>
+      {{/each}}
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="management-table-body">
+    {{#each model as |m|}}
+      <tr class="management-table-row">
+        {{#each-in attributes as |key value|}}
+        <td class="management-column" data-th="{{value}}">
+          {{get m key}}
+        </td>
+        {{/each-in}}
+        <td class='management-buttons'>
+        {{#each-in operations as |key value|}}
+         <div class='management-operation'>
+          {{#link-to key  m.id class="management-icon"}}
+            <span class="glyphicon {{value}}" style="color:#d30b07;"></span>
+          {{/link-to}}
+         </div>
+        {{/each-in}}
+        </td>
+      </tr>
+      <br />
+    {{/each}}
+  </tbody>
+</table>
+<br />

@@ -11,8 +11,8 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('No appointments exist')
-        expect(response).to have_http_status(400)
+        expect(result['data']).to be_empty
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -20,7 +20,9 @@ RSpec.describe AppointmentsController, :type => :controller do
       it "returns with a successful response and the appointments" do
         FactoryGirl.create_list(:appointment, 5)
         get :index
+
         result = JSON.parse(response.body)
+
         expect(result['data'].length).to eq(5)
         expect(response).to have_http_status(:ok)
       end
@@ -58,8 +60,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         expect(attr["color"]).to eq("#AB00FF")
         expect(attr["text_color"]).to eq("#FFFFFF")
         expect(attr["title"]).to eq("New Appointment")
-        expect(attr["start"]).to eq("2016-10-23T09:10:00.000Z")
-        expect(attr["end"]).to eq("2016-12-31T09:10:00.000Z")
+        expect(attr["week_number"]).to eq(Time.now.strftime("%U").to_i)
         expect(attr["notes"]).to eq("note")
         expect(attr["status"]).to eq("pending")
         #VERIFYING APPOINTMENT POINTS TO OBJECTS
@@ -81,16 +82,49 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Appointment creation failed.')
+        expect(result['error']).to eq('Appointment creation failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
 
-   context 'when the data is there and is correct' do
+   context 'when the data is there and is correct (without employee)' do
       it 'returns a succesful response' do
         service = FactoryGirl.create :service
         car = FactoryGirl.create :car
-        employee = FactoryGirl.create :employee
+        FactoryGirl.create :employee, :id => 0 #needed for FK constraints when handling associated default employee
+        data = {
+          "data": {
+            "type": "appointments",
+            "attributes": {
+                "color":"#AB00FF",
+                "text_color":"#FFFFFF",
+                "title":"New Appointment 123 5",
+                "start":"2016-11-08T00:00:00.000Z",
+                "end":"2016-11-08T00:00:00.000Z",
+                "notes":"test note",
+                "status":"pending"
+            },
+            "relationships": {
+              "service":{"data":{"type":"services", "id": service.id}},
+              "car":{"data":{"type":"cars", "id": car.id}}
+              #default employee used
+            }
+          }
+        }
+
+        params = JSON.parse(data.to_json)
+
+        post :create, params: {data: params['data']}
+
+        expect(response).to have_http_status(:created)
+      end
+    end
+
+    context 'when the data is there and is correct (with employee)' do
+      it 'returns a succesful response' do
+        service = FactoryGirl.create :service
+        car = FactoryGirl.create :car
+        employee =FactoryGirl.create :employee
         data = {
           "data": {
             "type": "appointments",
@@ -106,7 +140,7 @@ RSpec.describe AppointmentsController, :type => :controller do
             "relationships": {
               "service":{"data":{"type":"services", "id": service.id}},
               "car":{"data":{"type":"cars", "id": car.id}},
-              "employee":{"data":{"type":"employees", "id": employee.id}}  
+              "employee":{"data":{"type":"employees", "id": employee.id}}
             }
           }
         }
@@ -118,7 +152,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         expect(response).to have_http_status(:created)
       end
     end
-                  
+
 
     context 'when the data is there but not correct' do
       it 'returns a bad response' do
@@ -143,7 +177,8 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Appointment creation failed. Check your data.')
+        expect(result['error']).to eq({"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"], "service"=>["must exist"], "employee"=>["must exist"]}
+)
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -165,7 +200,7 @@ RSpec.describe AppointmentsController, :type => :controller do
             "relationships": {
               "service":{"data":{"type":"services", "id": 9}},
               "car":{"data":{"type":"cars", "id": 9}},
-              "employee":{"data":{"type":"employees", "id": 9}}  
+              "employee":{"data":{"type":"employees", "id": 9}}
             }
           }
         }
@@ -176,7 +211,8 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('Appointment creation failed. Check your data.')
+        expect(result['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"]}
+)
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -212,7 +248,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         patch :update, params: { id: appointment.id }
 
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('Appointment update failed.')
+        expect(result['error']).to eq('Appointment update failed. No parameters sent.')
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -233,19 +269,20 @@ RSpec.describe AppointmentsController, :type => :controller do
         appointment.car_id = car.id
         appointment.service_id = service.id
         appointment.employee_id = employee.id
-        
+
         # Create a serializer instance
         serializer = AppointmentSerializer.new(appointment)
         # Create a serialization based on the configured adapter
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: appointment.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
+
         expect(parsed_response['data']['id'].to_i).to eq(appointment.id)
-        attr = parsed_response['data']['attributes']      
+        attr = parsed_response['data']['attributes']
         expect(attr["color"]).to eq(appointment.color)
         expect(attr["text_color"]).to eq(appointment.text_color)
         expect(attr["title"]).to eq(appointment.title)
@@ -253,11 +290,11 @@ RSpec.describe AppointmentsController, :type => :controller do
         expect(attr["end"]).to eq("2019-02-04T00:00:00.000Z")
         expect(attr["notes"]).to eq(appointment.notes)
         expect(attr["status"]).to eq(appointment.status)
-         #VERIFYING APPOINTMENT POINTS TO OBJECTS
+        #VERIFYING APPOINTMENT POINTS TO OBJECTS
         expect(parsed_response["data"]["relationships"]["car"]["data"]["id"].to_i).to eq(appointment.car_id)
         expect(parsed_response["data"]["relationships"]["service"]["data"]["id"].to_i).to eq(appointment.service_id)
         expect(parsed_response["data"]["relationships"]["employee"]["data"]["id"].to_i).to eq(appointment.employee_id)
-        #VERIFYING THAT OBJECTS POINT TO APPOINTMENT
+        # #VERIFYING THAT OBJECTS POINT TO APPOINTMENT
         expect(Car.find(appointment.car_id).appointments[0].id).to eq (appointment.id)
         expect(Service.find(appointment.service_id).appointments[0].id).to eq (appointment.id)
         expect(Employee.find(appointment.employee_id).appointments[0].id).to eq (appointment.id)
@@ -283,17 +320,47 @@ RSpec.describe AppointmentsController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: appointment.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq("Appointment update failed. Check your data.")
+        expect(parsed_response['error']).to eq( {"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"]}
+)
 
         expect(response).to have_http_status(:bad_request)
       end
-    end 
+    end
 
-    #NOTE THAT UPDATING THE APPOINMTMENT WITH A NON EXISTENT SERVICE/EMPLOYEE/CLIENT ID SETS THE FEILD TO NIL 
+    context 'when the appointment exists and FK constraints not respected' do
+      it "responds successfully" do
+        appointment = FactoryGirl.create :appointment
+         appointment.color = "#A022FF"
+        appointment.text_color = "#c1111F"
+        appointment.title = "Updated title"
+        appointment.start = "2017-12-08T00:00:00.000Z"
+        appointment.end = "2019-02-04T00:00:00.000Z"
+        appointment.notes = "Updated note"
+        appointment.status = "confirmed"
+        appointment.car_id = 1000
+        appointment.service_id = 1000
+        appointment.employee_id = 1000
+
+        # Create a serializer instance
+        serializer = AppointmentSerializer.new(appointment)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: appointment.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"]}
+)
+
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
   end
 
   describe 'DELETE Appointments#destroy' do

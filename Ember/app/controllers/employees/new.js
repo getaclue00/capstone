@@ -5,11 +5,24 @@ export default Ember.Controller.extend({
     closeModal() {
       this.transitionToRoute('employees');
     },
+
     saveEmployee() {
+      let employee = this.get('model');
+
       var self = this;
-      this.get('model').save().then(() => {
+
+      function transitionToPost() {
+        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('employees');
-      });
+      }
+
+      function failure(reason) {
+        // handle the error
+        console.error('There was an error saving the employee: ');
+        console.error(reason);
+      }
+
+      employee.save().then(transitionToPost).catch(failure);
     }
   }
 });

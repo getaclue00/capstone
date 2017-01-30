@@ -1,22 +1,27 @@
-<div class="my-calendar">
-  <p class="my-calendar-title">My Calendar</p>
-  <div class="row">
-    <div class="col-md-4 offset-md-8 my-calendar-view">
-      Change View:
-      <div class="btn-group">
-        <button onclick={{action "changeView" "month"}} class="btn btn-outline-primary btn-sm view-button">Month</button>
-        <button onclick={{action "changeView" "agendaWeek"}} class="btn btn-outline-primary btn-sm view-button">Week</button>
-        <button onclick={{action "changeView" "agendaDay"}} class="btn btn-outline-primary btn-sm view-button">Day</button>
-      </div>
+<div class='container'>
+  <div class="schedule">
+    <div class="calendar-view">
+      {{full-calendar
+        header=calendarHeader
+        aspectRatio=1
+        viewName=viewName
+        fixedWeekCount=false
+        dayClick=(action 'handleCalendarDayClick')
+      }}
     </div>
+    {{#if computedTotal}}
+      <div class="total-cost-this-week">
+        Total revenue this week: {{computedTotal}}
+      </div>
+    {{/if}}
+    <div class="week-view">
+      {{full-calendar
+        header=false
+        events=computedEvents
+        viewName=viewName2
+        eventClick=(action 'handleCalendarEventClick')
+      }}
+    </div>
+    {{outlet}}
   </div>
-  <br>
-  {{full-calendar
-    events=events
-    viewName=viewName
-    businessHours=businessHours
-    eventClick=(action 'handleCalendarEventClick')
-    dayClick=(action 'handleCalendarDayClick')
-  }}
-  {{outlet}}
 </div>
