@@ -65,6 +65,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+      begin
+      user=User.find params[:id]
+      user.destroy
+      head :no_content
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: 'No such user exists' }, status: :not_found
+    end
+  end
+
   private 
 
   def user_sanitized_params

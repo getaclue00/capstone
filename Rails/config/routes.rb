@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   # resources :users, constraints: { format: /(json|html)/ }
   get "users", to: 'users#index', constraints: { format: /(json|html)/ }
   get "users/:id", to: 'users#show', constraints: { format: /(json|html)/ }
+  delete "/users/:id" => "users#destroy", constraints: { format: /(json|html)/ }
 
 
 end

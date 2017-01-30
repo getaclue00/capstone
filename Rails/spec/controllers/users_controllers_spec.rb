@@ -333,8 +333,43 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to have_http_status(:bad_request)
       end
     end
- 
    end
+
+   describe 'DELETE Users#destroy' do
+    context 'when there are no users by such an id' do
+      it 'returns an error' do
+        delete :destroy, params: { id: 999 }
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('No such user exists')
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    # context 'when the car exists and has no appointments' do
+    #   it 'should delete it' do
+    #     car = FactoryGirl.create :car
+
+    #     delete :destroy, params: { id: car.id }
+
+    #     expect(response).to have_http_status(:no_content)
+    #   end
+    # end
+
+    # context 'when the car exists and has appointments' do
+    #   it 'should delete it' do
+    #     FactoryGirl.create :car, :id => 0 #needed for FK constraints when handling associated appointments
+    #     car = FactoryGirl.create :car_with_appointment
+    #     appt_id = car.appointments[0].id
+
+    #     delete :destroy, params: { id: car.id }
+
+    #     expect(response).to have_http_status(:no_content)
+    #     #validate that associated appointments service id set to 0
+    #     expect(Appointment.find(appt_id).car_id).to eq (0)
+    #   end
+    # end
+  end
 
 
 end
