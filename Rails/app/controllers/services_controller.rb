@@ -18,18 +18,22 @@ class ServicesController < ApplicationController
 	end
 
 	def create
-		begin
-	        service=Service.new(service_sanitized_params)
-	        if service.save!
-	  			render json: service, status: :created
-	  		else
-	  			render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
-	  		end
-	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-	      render json: { error: 'Service creation failed. No parameters sent.'}, status: :bad_request
-	    rescue ActiveRecord::StatementInvalid => e
-	      render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
-		end
+    if @current_signedin_user && @current_signedin_user.admin?
+      begin
+        service=Service.new(service_sanitized_params)
+        if service.save!
+          render json: service, status: :created
+        else
+          render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
+        end
+      rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+        render json: { error: 'Service creation failed. No parameters sent.'}, status: :bad_request
+      rescue ActiveRecord::StatementInvalid => e
+        render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
+       end
+    else
+      render json: { error: 'Not Authorized' }, status: 401
+    end
 	end
 
 	def update
@@ -70,5 +74,3 @@ class ServicesController < ApplicationController
 		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:name, :price_small, :price_large, :duration, :description, :active, :displayable] )
 	end
 end
-
-
