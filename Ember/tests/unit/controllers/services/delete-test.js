@@ -24,7 +24,7 @@ test('#deleteService remains on services page following a deletion', function(as
   assert.ok(controller);
 });
 
-test('#deleteService remains on services page following a failed deletion', function(assert) {
+test('#deleteService remains on service page following a failed deletion', function(assert) {
   let controller = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
@@ -34,7 +34,7 @@ test('#deleteService remains on services page following a failed deletion', func
         }
       }),
       transitionToRoute(route) {
-        assert.equal(route, 'services');
+        assert.equal(route, 'service');
       }
   });
   assert.throws(controller.send('deleteService'), "throws with just a message, not using the 'expected' argument");
