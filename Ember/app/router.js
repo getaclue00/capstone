@@ -32,6 +32,7 @@ Router.map(function() {
   this.route('users', function() {
     this.route('show', { path: "/:users_id" });
     this.route('new', { path: "/:employees_id" });
+    this.route('delete', { path: "/delete/:users_id" });
   });
 });
 
