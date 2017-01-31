@@ -1,7 +1,26 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { $, Controller, computed, isEmpty } = Ember;
+
+export default Controller.extend({
+
   viewName: 'month',
+  viewName2: 'listWeek',
+
+  computedTotal: computed('model.@each.cost', function() {
+    const model = this.get('model');
+    var sum = 0;
+    if(model) {
+      model.forEach(function(item) {
+        let price = item.get('cost');
+        sum += Number(price);
+      });
+      return `$${sum}`;
+    } else {
+      return undefined;
+    }
+  }),
+
   businessHours: {
     // days of week. an array of zero-based day of week integers (0=Sunday)
     dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
@@ -9,23 +28,25 @@ export default Ember.Controller.extend({
     start: '10:00', // a start time (10am in this example)
     end: '18:00', // an end time (6pm in this example)
   },
-  newAppointmentDate: '',
 
-  events: Ember.computed('model.[]', function() {
-    // Unfortunately, we need to do this conversion, until we can figure out why the model is not displayed without this conversion...
+  calendarHeader: {
+    left:   'today',
+    center: 'title',
+    right:  'prev,next'
+  },
 
+  computedEvents: computed('model.[]', 'model.@each.start', 'model.@each.end', function() {
     let events = [];
+    let model = this.get('model');
 
-    this.get('store').findAll('appointment').then((items) => {
-      items.forEach((item) => {
-        events.pushObject({
-          id    : item.get('id'),
-          title : item.get('title'),
-          start : item.get('start'),
-          end   : item.get('end'),
-          color : item.get('color'),
-          textColor: item.get('textColor')
-        });
+    model.forEach(function(item) {
+      events.pushObject({
+        id    : item.get('id'),
+        title : 'Service',
+        start : item.get('formattedStart'),
+        end   : item.get('formattedEnd'),
+        color : item.get('color'),
+        textColor: item.get('textColor')
       });
     });
 
@@ -33,29 +54,52 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    changeView(view){
-      this.set('viewName', view);
-    },
-
-    handleCalendarEventClick(calEvent, jsEvent, view) {
-      console.log("calEvent: ", calEvent);
-      console.log("jsEvent: ", jsEvent);
-      console.log("view: ", view);
-      // console.error("handleCalendarEventClick - Not implemented");
+    handleCalendarEventClick(calEvent) {
       this.transitionToRoute('my-calendar.appointments.show', calEvent.id);
     },
 
-    handleCalendarDayClick(date, jsEvent, view) {
-      // console.log('Clicked on: ' + date.format());
+    handleCalendarDayClick(date, jsEvent) {
+      var self = this;
+      let week = date.week();
+      let year = date.weekYear();
 
-      this.set('newAppointmentDate', date.format());
+      let el = $('.fc-scroller.fc-day-grid-container').find('.selected-week');
 
-      console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+      if (el) {
+        el.removeClass('selected-week');
+      }
 
-      console.log('Current view: ' + view.name);
+      $(jsEvent.target).closest('.fc-row.fc-week.fc-widget-content').find('.fc-bg').addClass('selected-week');
 
-      // Ember.$('#myModal').modal('show');
-      this.transitionToRoute('my-calendar.appointments.new');
+      function successfulResponse(results) {
+        if (!isEmpty(results)) {
+          let events = [];
+
+          results.forEach(function(item) {
+            events.pushObject({
+              id    : item.get('id'),
+              start : item.get('formattedStart'),
+              end   : item.get('formattedEnd'),
+              color : item.get('color'),
+              textColor: item.get('textColor')
+            });
+          });
+          self.set('model', results);
+          $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
+          self.set('computedEvents', events);
+        } else {
+          self.set('model', undefined);
+          $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
+          self.set('computedEvents', []);
+        }
+      }
+
+      self.get('store').query('appointment', {
+        filter: {
+          week: week,
+          year: year
+        }
+      }).then(successfulResponse);
     }
   }
 });
