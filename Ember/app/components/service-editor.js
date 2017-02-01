@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       model.rollbackAttributes();
     }
 
-    Ember.$('#service-editor').modal('hide');
+    Ember.$('#myModal').modal('hide');
   },
 
   yesNoTranslationMap: {'Yes': true, 'No': false},
