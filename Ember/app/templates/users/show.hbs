@@ -17,12 +17,13 @@
       </div>
       <div class="modal-footer">
         {{#link-to 'users.delete' model.id}}
-          <button type="submit" class="btn btn-tertiary">Delete Account</button>
+          <button type="button" class="btn btn-tertiary" data-dismiss="modal">Delete Account</button>
         {{/link-to}}
         <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToListOfEmployees'}}>Close</button>
-        <button type="submit" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" {{action 'updateUser'}}>Save changes</button>
       </div>
     </div>
   </div>
 </div>
+
 
