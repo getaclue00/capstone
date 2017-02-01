@@ -10,6 +10,7 @@ $breakpoint-alpha: 768px;
   }
 
   .settings-page {
+    overflow: auto;
     background-color: #ededed;
   }
 
@@ -250,7 +251,7 @@ $breakpoint-alpha: 768px;
 
 .setings-title {
 
-  padding: 80px 10px 20px 0px;
+  padding: 25px 10px 20px 0px;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 0px;

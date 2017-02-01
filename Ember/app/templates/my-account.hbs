@@ -1,4 +1,4 @@
-<div class="settings-page col-md-12">
+<div class="settings-page" style="height: 100%;">
   <div class="settings">
     <h5 class="setings-title"><span class="glyphicon glyphicon-cog"></span> Settings</h5>
     <ul class="nav nav-tabs" role="tablist">
@@ -10,7 +10,7 @@
       {{flash-message flash=flash messageStyle='bootstrap'}}
     {{/each}}
     <div class="tab-content">
-      <div class="tab-pane fade in active" id="account-detail-setting">
+      <div class="tab-pane fade show active" id="account-detail-setting">
         <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="info-link">
             <a data-toggle="collapse" data-parent="#accordion" href="#infoOne" aria-expanded="true" aria-controls="infoOne" class="accordion-title">
@@ -24,32 +24,32 @@
                   <label for="first_name" class="control-label col-md-3">
                     <span class="account-input-title">First Name <span class="required">*</span></span>
                   </label>
-                  <div class="col-md-7 col-sm-12">
-                    {{input type="text" value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input col-md-7 col-xs-12 form-control"}}
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="text" value=model.employee.firstName id="user-first-name" placeholder='First Name' class="settings-input col-md-10 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="last_name" class="control-label col-md-3 col-sm-12">
                     <span class="account-input-title">Last Name <span class="required">*</span></span>
                   </label>
-                  <div class="col-md-7 col-sm-12">
-                    {{input type="text" value=model.employee.lastName id="user-last-name"  placeholder="Last Name" class="settings-input col-md-7 col-xs-12 form-control"}}
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="text" value=model.employee.lastName id="user-last-name"  placeholder="Last Name" class="settings-input col-md-10 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="phone" class="control-label col-md-3 col-sm-3">
                     <span class="account-input-title">Phone Number <span class="required">*</span></span>
                   </label>
-                  <div class="col-md-7 col-sm-12">
-                    {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input col-md-7 col-xs-12 form-control"}}
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="tel" value=model.employee.phoneNumber id="user-phone-number" placeholder="Phone" class="settings-input col-md-10 col-xs-12 form-control"}}
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="start_date" class="col-md-3">
                     <span class="start-date-title">Start Date: </span>
                   </label>
-                  <div class="col-md-7 col-sm-12">
-                    {{input type="datetime-local" value=model.employee.formattedStartDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only col-md-7 form-control" style="font-size: smaller"}}
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="datetime-local" value=model.employee.formattedStartDate id="user-start-date" readonly=true placeholder="Start Date" class="settings-read-only col-md-10 form-control"}}
                   </div>
                 </div>
                 <div class="button-line"></div>
@@ -127,34 +127,34 @@
           </div>
           <div id="infoThree" class="collapse show in" role="tabpanel" aria-labelledby="Login Information">
             <div class="card-block">
-              <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
+              <form class="my-information" {{action 'save' on="submit" }}>
                 <div class="form-group row col-md-12">
                   <label for="username">
                     <span>Username: </span>
                     {{input type="text" value=model.email id="user-email" readonly=true class="settings-username settings-read-only" placeholder="Username"}}
                   </label>
                 </div>
-                <div class="password-div col-md-12">
+                <div class="password-div col-12">
                   <div>
                     <p class="change-password-title">
                       Change Password
                     </p>
                   </div>
-                  <div class="password-block col-md-12">
-                    <div class="form-group row col-md-12">
-                      <label for="new-password" class="col-md-4">
-                        <span>New Password</span>
+                  <div class="password-block col-12">
+                    <div class="form-group col-12">
+                      <label for="new-password" class="col-12">
+                        <span>New Password:</span>
                       </label>
-                      <div class="col-md-8 col-sm-10 col-xs-10 col-centered">
-                        {{input type="password" value=model.password required="required" id="user-new-password" class="settings-input col-md-7 form-control"}}
+                      <div class="col-centered">
+                        {{input type="password" value=model.password required="required" id="user-new-password" class="settings-input col-12 form-control"}}
                       </div>
                     </div>
-                    <div class="form-group row col-md-12">
-                    <label for="confirm-password" class="col-md-4">
-                      <span>Confirm Password</span>
+                    <div class="form-group col-12">
+                    <label for="confirm-password" class="col-12">
+                      <span>Confirm Password:</span>
                     </label>
-                      <div class="col-md-8 col-sm-10 col-xs-10 col-centered">
-                        {{input type="password" value=model.confirm required="required" id="user-confirm-password" class="settings-input col-md-7 form-control"}}
+                      <div class="col-centered">
+                        {{input type="password" value=model.confirm required="required" id="user-confirm-password" class="settings-input col-12 form-control"}}
                       </div>
                     </div>
                   </div>
