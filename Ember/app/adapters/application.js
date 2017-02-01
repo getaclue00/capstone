@@ -6,6 +6,7 @@ const { underscore, pluralize } = Ember.String;
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:devise',
+  namespace: 'api',
 
   pathForType: function(type) {
     let underscored = underscore(type);
