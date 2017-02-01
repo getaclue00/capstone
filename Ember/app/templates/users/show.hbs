@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'goBackToListOfEmployees'}}>
+        <button type="button" class="close" aria-label="Close" {{action 'goBackToListOfEmployees'}}>
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="user-account-editor-show">Modify User Account</h4>
@@ -17,10 +17,10 @@
       </div>
       <div class="modal-footer">
         {{#link-to 'users.delete' model.id}}
-          <button type="button" class="btn btn-tertiary" data-dismiss="modal">Delete Account</button>
+          <button type="button" class="btn btn-tertiary">Delete Account</button>
         {{/link-to}}
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToListOfEmployees'}}>Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" {{action 'updateUser'}}>Save changes</button>
+        <button type="button" class="btn btn-secondary" {{action 'goBackToListOfEmployees'}}>Close</button>
+        <button type="button" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>
       </div>
     </div>
   </div>
