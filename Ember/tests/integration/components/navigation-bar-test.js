@@ -41,7 +41,7 @@ test('it renders employee login bar', function(assert) {
   this.render(hbs`{{navigation-bar}}`);
 
   assert.equal(this.$('.nav-item').length, 2, 'should have 2 nav items; logo and login link');
-  assert.equal(this.$('.nav-list-item').text(), 'Login', 'Navigation option is Login');
+  assert.equal(this.$('.nav-list-item').text().trim(), 'Login', 'Navigation option is Login');
 });
 
 test('it renders administrator\' s navigation bar', function(assert) {
