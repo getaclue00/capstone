@@ -10,7 +10,6 @@ export default Ember.Controller.extend({
       var self = this;
 
       function onSuccessful() {
-        Ember.$('#employee-editor').modal('hide');
         self.transitionToRoute('employees');
       }
 
