@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 	    Ember.$('#user-account-editor').modal('show');
   	},
 
-  	willDestroyElement() {
+  willDestroyElement() {
     let model = this.get('model');
 
     if (model.get('hasDirtyAttributes')) {

@@ -73,16 +73,15 @@
 	    <label for="user-admin" class="col-xs-4 col-form-label font-weight-bold" style="text-transform: uppercase;">Admin</label>
 	    <div class="col-xs-12">
 	    	<div class="input-group">
-		      {{#x-select action='selectAdmin' id="admin-select" value=model.admin}}
+		      {{#x-select action='selectAdmin' id="admin-select" value=model.admin as |xs|}}
 		        {{#each-in yesNoTranslationMap as |key value|}}
-		          {{#x-option value=value}}
+		          {{#xs.option value=value}}
 		            {{key}}
-		          {{/x-option}}
+		          {{/xs.option}}
 		        {{/each-in}}
 		      {{/x-select}}
 		     </div>
 	    </div>
-      </div>
-
+    </div>
 
 
