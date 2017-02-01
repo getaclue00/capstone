@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'goBackToListOfServices'}}>
+        <button type="button" class="close" aria-label="Close" {{action 'goBackToListOfServices'}}>
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Add Service</h4>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToListOfServices'}}>Close</button>
+        <button type="button" class="btn btn-secondary" {{action 'goBackToListOfServices'}}>Close</button>
         <button {{action 'saveService'}} type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
