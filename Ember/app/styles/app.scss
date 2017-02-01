@@ -1,4 +1,4 @@
-@import "bootstrap";
+@import 'bootstrap';
 
 @import "administrator-styles/admin-info";
 @import "administrator-styles/appointment-history";
@@ -12,17 +12,6 @@
 $break-small: 320px;
 $break-large: 1024px;
 
-// Styling placed in this folder relates to styles present on multiple pages
-.container{
-  @media (min-width: $break-small) {
-    padding-top: 3.5em;
-  }
-
-  @media (min-width: $break-large) {
-    padding-top: 65px;
-  }
-}
-
 body {
   @media (min-width: $break-small) {
     transition: background-color .5s;
@@ -30,7 +19,6 @@ body {
 }
 
 .page-title {
-  padding-top: 50px;
   padding-bottom: 20px;
   text-align:center;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -68,7 +56,6 @@ body {
 }
 
 .admin-container{
-  padding-top: 10%;
   margin-right: auto;
   margin-left: auto;
   padding-left: 2%;

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { Controller, isEmpty } = Ember;
+const { Controller } = Ember;
 
 export default Controller.extend({
   actions: {
@@ -41,12 +41,6 @@ export default Controller.extend({
       appointment.save()
        .then(transitionToPost)
        .catch(failure);
-    },
-
-    assignedEmployee(employee) {
-      if (!isEmpty(employee)) {
-        this.set('appointment.employee', employee);
-      }
     }
   }
 });

@@ -19,8 +19,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" {{action 'saveAppointment'}}>Save changes</button>
-        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal" {{action 'goBackToCalendar'}}>Close</button>
+        <div class="btn-group" role="group" aria-label="Appointment control buttons" style="width: 100%">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" {{action 'saveAppointment'}} style="width: 50%;">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToCalendar'}} style="width: 50%;">Close</button>
+        </div>
       </div>
     </div>
   </div>
