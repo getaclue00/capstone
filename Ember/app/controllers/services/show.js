@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
       var self = this;
 
       function onSuccessful() {
+        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('services');
       }
 
