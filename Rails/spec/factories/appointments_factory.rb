@@ -3,7 +3,8 @@ FactoryGirl.define do
     color "#AB00FF"
     text_color "#FFFFFF"
     title "New Appointment"
-    start "2016-10-23 09:10:00"	
+    start Time.now
+    week_number Time.now.strftime("%U").to_i
     notes "note"
     status "pending"
     association (:car)

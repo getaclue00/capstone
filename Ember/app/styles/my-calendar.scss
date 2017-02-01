@@ -1,72 +1,62 @@
-.my-calendar{
-  margin-top: 50px;
-  margin-bottom: 50px;
+$break-small: 320px;
+$break-large: 1024px;
+
+.calendar-view {
+  .fc button {
+    @media (min-width: $break-small) {
+      height: auto;
+      padding: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .fc-scroller.fc-day-grid-container {
+    .selected-week {
+      @media (min-width: $break-small) {
+        background-color: #eeeeee;
+      }
+    }
+  }
+
+  .fc-row.fc-week.fc-widget-content {
+    @media (min-width: $break-small) {
+      min-height:1em;
+      // height: 2em !important;
+      max-height: 3em;
+    }
+  }
+
+  .fc-basic-view.fc-body.fc-row {
+    @media (min-width: $break-small) {
+      min-height:2em;
+    }
+  }
+
+  .fc-center h2 {
+    @media (min-width: $break-small) {
+      font-size: 1em;
+      text-transform: uppercase;
+    }
+  }
+  .fc-scroller.fc-day-grid-container {
+    @media (min-width: $break-small) {
+      height: auto !important;
+    }
+  }
+
+  .fc-toolbar.fc-header-toolbar {
+    @media (min-width: $break-small) {
+      margin-top: 0.17em;
+      margin-bottom: 0.17em;
+    }
+  }
 }
 
-.my-calendar-title {
+.week-view {
+  margin-top: 0.17em;
+}
+
+.total-cost-this-week {
+  text-transform: uppercase;
   text-align: center;
-  font-size: 6vw;
-  font-weight: 300;
-  margin-bottom: 8%;
-  border-bottom: 1px solid black;
-}
-
-.my-calendar-view {
-  float: right;
-  margin-left: 0;
-  width: inherit;
-}
-
-.view-button {
-  color: #959595;
-  border-color: #959595;
-}
-
-.view-button:hover{
-  background: #FF6666;
-  border-color: #FF6666;
-}
-
-.fc-left h2 {
-  font-size: 5vw;
-}
-
-.fc-nonbusiness {
-  background-color: #787878;
-}
-
-.fc-event-container:hover {
-  cursor: pointer;
-  cursor: hand;
-  opacity: 0.5;
-}
-
-.view-button:focus, .view-button.focus {
-  color: #fff;
-  background-color: #EE2C2C;
-  border-color: #EE2C2C;
-}
-.view-button:active, .view-button.active,
-.open > .view-button.dropdown-toggle {
-  color: #fff;
-  background-color: #EE2C2C;
-  border-color: #EE2C2C;
-}
-.view-button:active:hover, .view-button:active:focus, .view-button:active.focus, .view-button.active:hover, .view-button.active:focus, .view-button.active.focus,
-.open > .view-button.dropdown-toggle:hover,
-.open > .view-button.dropdown-toggle:focus,
-.open > .view-button.dropdown-toggle.focus {
-  color: #fff;
-  background-color: #EE2C2C;
-  border-color: #EE2C2C;
-}
-
-.appointment-button-div {
-  margin-bottom: 3.5%;
-  margin-left: -15px;
-  margin-right: -15px;
-}
-
-.appointment-button {
-  height: 100%;
 }

@@ -1,14 +1,16 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import moment from 'moment';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model() {
-    let clickedDate = this.controllerFor('my-calendar').get('newAppointmentDate') || new Date();
+    let time = moment().format('YYYY-MM-DDTHH:mm');
 
     return Ember.RSVP.hash({
       appointment: this.get('store').createRecord('appointment', {
-        start: new Date(clickedDate),
-        end: new Date(clickedDate)
+        start: time,
+        end: time,
+        weekNumber: Number(moment(time).format('w'))
       }),
       services: this.get('store').findAll('service'),
       employees: this.get('store').findAll('employee')

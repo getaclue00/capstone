@@ -40,7 +40,7 @@ test('it renders employee login bar', function(assert) {
 
   this.render(hbs`{{navigation-bar}}`);
 
-  assert.equal(this.$('.nav-item').length, 1, 'should be only 1 clickable link');
+  assert.equal(this.$('.nav-item').length, 2, 'should have 2 nav items; logo and login link');
   assert.equal(this.$('.nav-list-item').text(), 'Login', 'Navigation option is Login');
 });
 
@@ -48,24 +48,16 @@ test('it renders administrator\' s navigation bar', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.login();
-  assert.expect(11);
+  assert.expect(6);
   this.render(hbs`{{navigation-bar session=this.session currentUser=currentUser }}`);
 
   // Number of clickable links
-  assert.equal(this.$('.nav-item').length, 6, 'should be only 6 clickable link in main menu');
-  assert.equal(this.$('.dropdown-item').length, 3, 'should be only 3 clickable link in sub menu');
+  assert.equal(this.$('.nav-item').length, 9, 'should have 9 nav-item items');
 
   // Name of main nav menu links
-  assert.equal(this.$('.nav-list-item')[0].text, 'Home', 'Navigation option is Home');
-  assert.equal(this.$('.nav-list-item')[1].text, 'Manage', 'Navigation option is Manage');
-  assert.equal(this.$('.nav-list-item')[2].text, 'Appointment History', 'Navigation option is Appointment History');
-  assert.equal(this.$('.nav-list-item')[3].text, 'My Calendar', 'Navigation option is My Calendar');
-  assert.equal(this.$('.nav-list-item')[4].text, 'Settings', 'Navigation option is Settings');
-  assert.equal(this.$('.nav-list-item')[5].firstChild.nodeValue, 'Logout', 'Navigation option is Logout');
-
-  // Name of sub nav menu links
-  assert.equal(this.$('.dropdown-item')[0].text, 'Services', 'Navigation option is Services');
-  assert.equal(this.$('.dropdown-item')[1].text, 'Clients', 'Navigation option is Clients');
-  assert.equal(this.$('.dropdown-item')[2].text, 'Employees', 'Navigation option is Employees');
+  assert.equal(this.$('.nav-list-item')[0].text, ' Schedule');
+  assert.equal(this.$('.nav-list-item')[1].text, ' Customers');
+  assert.equal(this.$('.nav-list-item')[2].text, ' Staff');
+  assert.equal(this.$('.nav-list-item')[3].text, ' Services');
+  assert.equal(this.$('.nav-list-item')[4].text, ' Settings');
 });
-
