@@ -1,51 +1,45 @@
-<nav id="main-nav-bar" class="navbar navbar-fixed-top navbar-light bg-faded menu">
-  <div class="navbar-header">
-    <button id="navbar-toggle-button-small-screen" class="hidden-md-up btn btn-lg btn-outline-primary" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation" style='color: white; margin-left: 2%;'>
-    &#9776;
+<div class="pos-f-t">
+  <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" style="min-height: 3em;">
+    <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggle-button-left-small-screen">
+      <span class="navbar-toggler-icon"></span>
     </button>
     {{#if session.isAuthenticated}}
-      <button {{action 'openNav'}} class="btn btn-lg btn-outline-primary" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mySidenav" style="color: white; margin-left: 2%; float:right;">
-        <span class="glyphicon glyphicon-plus"></span>
+      <button type="button" {{action 'openNav'}} data-target="#mySidenav" aria-controls="mySidenav" aria-expanded="false" aria-label="Toggle quick controls" style="font-color: white; align-self: flex-start; padding: 0.25rem 0.75rem; font-size: 1.25rem; line-height: 1; background: transparent; border: 1px solid transparent; border-radius: 0.25rem; ;position: absolute; right: 1rem;">
+        <span class="glyphicon glyphicon-plus" style="color: white; display: inline-block; width: 1.5em; height: 1.5em; vertical-align: middle;"></span>
       </button>
     {{/if}}
-  </div>
-  <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
-    <ul class="nav navbar-nav">
-      <li class="nav-item">
-        <img src="/assets/images/logo.png" class='logo' width="150px" height="55px">
-      </li>
-      {{#if session.isAuthenticated}}
-        <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
-        <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
-        <li class="nav-item">{{#link-to 'employees' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Staff{{/link-to}}</li>
-        <li class="nav-item">{{#link-to 'services' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-tag"></span> Services{{/link-to}}</li>
-        {{!-- <li class="nav-item">{{#link-to 'appointment-history' class='nav-link nav-list-item'}}Appointment History{{/link-to}}</li> --}}
-        <li class="nav-item">{{#link-to 'my-account' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-cog"></span> Settings{{/link-to}}</li>
-        <li class="nav-item"><button type="button" class="btn btn-outline-danger nav-list-item" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-off"></span> Logout</button></li>
-      {{else}}
-        <li class="nav-item">{{#link-to 'login' class='nav-link nav-list-item'}}Login{{/link-to}}</li>
-      {{/if}}
-    </ul>
-  </div>
-  {{#if session.isAuthenticated}}
-    <aside id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick={{action 'closeNav'}}>&times;</a>
-      <ul class="nav navbar-nav">
-        <li class="nav-item" style="
-    max-width: 200px;
-    width: 200px;
-">
-          <span class="nav-list-item navbar-text">
-            Add a new:
-          </span>
-        </li>
+    <div class="navbar-brand">&nbsp;</div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item' {{action 'handleAddNewAppointment'}}>&#x2b; Appointment</button>
+          <img src="/assets/images/logo.png" class='logo' width="150px" height="40px">
         </li>
-        {{!-- <li class="nav-item">
-          <button type='button' class='btn btn-lg btn-outline-primary nav-list-item'>&#x2b; Customer</button>
-        </li> --}}
+        {{#if session.isAuthenticated}}
+          <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
+          <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
+          <li class="nav-item">{{#link-to 'employees' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Staff{{/link-to}}</li>
+          <li class="nav-item">{{#link-to 'services' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-tag"></span> Services{{/link-to}}</li>
+          <li class="nav-item">{{#link-to 'my-account' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-cog"></span> Settings{{/link-to}}</li>
+          <li class="nav-item"><button type="button" class="btn btn-outline-danger nav-list-item" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-off"></span> Logout</button></li>
+        {{else}}
+          <li class="nav-item">{{#link-to 'login' class='nav-link nav-list-item'}}Login{{/link-to}}</li>
+        {{/if}}
       </ul>
-    </aside>
-  {{/if}}
-</nav>
+    </div>
+  </nav>
+</div>
+{{#if session.isAuthenticated}}
+  <aside id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick={{action 'closeNav'}}>&times;</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item" style="max-width: 200px; width: 200px;">
+        <span class="nav-list-item navbar-text">
+          Add a new:
+        </span>
+      </li>
+      <li class="nav-item">
+        <button type='button' class='btn btn-lg btn-outline-primary nav-list-item' {{action 'handleAddNewAppointment'}}>&#x2b; Appointment</button>
+      </li>
+    </ul>
+  </aside>
+{{/if}}

@@ -3,59 +3,59 @@
   <h3 class="page-title">Settings</h3>
 
   <form class="my-information" {{action 'save' on="submit"}}>
-    <h3 class="title">User Info</h3> 
+    <h3 class="title">User Info</h3>
     <label for="first_name">
       <span>First Name <span class="required">*</span></span>
-      {{input value=model.employee.firstName id="user-first-name"}}
+      {{input type="text" class="form-control" value=model.employee.firstName id="first_name" required=true}}
     </label>
     <label for="last_name">
       <span>Last Name <span class="required">*</span></span>
-      {{input value=model.employee.lastName id="user-last-name"}}
+      {{input type="text" class="form-control" value=model.employee.lastName id="last_name" required=true}}
     </label>
     <label for="phone">
       <span>Phone <span class="required">*</span></span>
-      {{input type="tel" value=model.employee.phoneNumber id="user-phone-number"}}
+      {{input type="tel" class="form-control" value=model.employee.phoneNumber id="phone" required=true}}
     </label>
     <label for="street_number">
       <span>Street Number <span class="required">*</span></span>
-      {{input type="number" value=model.employee.streetNumber id="user-street-number"}}
+      {{input type="number" class="form-control" value=model.employee.streetNumber id="street_number" required=true}}
     </label>
     <label for="street_name">
       <span>Street Name <span class="required">*</span></span>
-      {{input value=model.employee.streetName id="user-street-name"}}
+      {{input type="text" class="form-control" value=model.employee.streetName id="street_name" required=true}}
     </label>
     <label for="city">
       <span>City <span class="required">*</span></span>
-      {{input value=model.employee.city id="user-city"}}
+      {{input type="text" class="form-control" value=model.employee.city id="city" required=true}}
     </label>
     <label for="province">
       <span>Province <span class="required">*</span></span>
-      {{input value=model.employee.province id="user-province"}}
+      {{input type="text" class="form-control" value=model.employee.province id="province" required=true}}
     </label>
     <label for="postal_code">
       <span>Postal Code <span class="required">*</span></span>
-      {{input value=model.employee.postalCode id="user-postal-code"}}
+      {{input type="text" class="form-control" value=model.employee.postalCode id="postal_code" required=true}}
     </label>
     <label for="start_date">
       <span>Start Date </span>
-      {{input value=model.employee.startDate id="user-start-date" readonly=true}}
+      {{input class="form-control" value=model.employee.startDate id="start_date" readonly=true}}
     </label>
     <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
   </form>
 
-  <form class="my-information" {{action 'save' on="submit" }} {{input userLoginConfirmation}}>
+  <form class="my-information" {{action 'save' on="submit" }}>
     <h3 class="title">Login Info</h3>
       <label for="username">
         <span>Username</span>
-        {{input value=model.email id="user-email" readonly=true}}
+        {{input type="email" class="form-control" value=model.email id="user-email" readonly=true}}
       </label>
       <label for="new-password">
         <span>New Password <span class="required">*</span></span>
-        {{input type="password" value=model.password required="required" id="user-new-password"}}
+        {{input type="password" class="form-control" value=model.password required=true id="new-password"}}
       </label>
       <label for="confirm-password">
         <span>Confirm Password <span class="required">*</span></span>
-        {{input type="password" value=model.confirm required="required" id="user-confirm-password"}}
+        {{input type="password" class="form-control" value=model.confirm required="required" id="confirm-password"}}
       </label>
     <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
   </form>
