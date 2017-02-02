@@ -13,7 +13,6 @@ export default Ember.Controller.extend({
         transitionToPost();
       }
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('employees');
       }
 
