@@ -6,6 +6,7 @@ const { underscore, pluralize } = Ember.String;
 
 export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   authorizer: 'authorizer:devise',
+  host: 'https://radetailing.herokuapp.com',
   namespace: 'api',
 
   pathForType: function(type) {
