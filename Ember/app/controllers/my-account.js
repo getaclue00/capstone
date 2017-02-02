@@ -28,7 +28,7 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
 	    },
 
     updateLoginInfo() {
-      var flashMessages = Ember.get(this, 'flashMessages');
+      var flashMessages = this.get('flashMessages');
 
     	function onSuccessful() {
         flashMessages.success('Password successfully changed!');
@@ -43,7 +43,6 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
     	}else{
         window.scrollTo(0,0);
         flashMessages.danger("Passwords do not match!");
-    		console.log("Passwords dont match");
     	}
 
     }
