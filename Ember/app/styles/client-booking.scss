@@ -1,0 +1,115 @@
+.actionBar {
+    text-align: right;
+    padding-top: 30px;
+    padding: 20px 0 15px 0;
+}
+.actionBar .buttonDisabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: .55;
+    box-shadow: none;
+}
+.actionBar a {
+    margin: 0 3px;
+}
+
+#smartwizard .loader, #smartwizard .msgBox {
+    display: none;
+}
+
+.btn-circle {
+    width: 100px;
+    height: 50px;
+    padding: 13px 13px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+    outline: none !important;
+}
+
+.booking-confirm-panel-body {
+    min-height: 170px;
+}
+
+/*! The form wizard styles were taken and modified from the Gentelella template: https://github.com/puikinsh/gentelella */
+.wizard_horizontal ul.wizard_steps {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    list-style: none;
+    position: relative;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 0;
+}
+.wizard_horizontal ul.wizard_steps li {
+    text-align: center;
+    display: block;
+    flex: 2 1 auto;
+    list-style-type: none;
+}
+.wizard_horizontal ul.wizard_steps li a,
+.wizard_horizontal ul.wizard_steps li:hover {
+    display: block;
+    position: relative;
+    -moz-opacity: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    color: #666;
+    text-decoration: none;
+}
+.wizard_horizontal ul.wizard_steps li a:before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background: #ccc;
+    top: 20px;
+    width: 100%;
+    z-index: 4;
+    left: 0;
+}
+.wizard_horizontal ul.wizard_steps li.disabled  a.step_no {
+    background: #ccc;
+}
+.wizard_horizontal ul.wizard_steps li a .step_no {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    display: block;
+    margin: 0 auto 5px;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+.wizard_horizontal ul.wizard_steps li.selected a:before,
+.step_no {
+    background: #34495E;
+    color: #fff;
+}
+.wizard_horizontal ul.wizard_steps li.done a:before,
+.wizard_horizontal ul.wizard_steps li.active a:before,
+.wizard_horizontal ul.wizard_steps li.done a .step_no {
+    background: #ff3333;
+    color: #fff;
+}
+
+.wizard_horizontal ul.wizard_steps li.active a .step_no,
+.wizard_horizontal ul.wizard_steps li.active a:before {
+  background: #34495E;
+}
+
+.wizard_horizontal ul.wizard_steps li.done a:after,
+.wizard_horizontal ul.wizard_steps li a:after  {
+    display: none;
+}
+
+.wizard_horizontal ul.wizard_steps li:first-child a:before {
+    left: 50%;
+}
+.wizard_horizontal ul.wizard_steps li:last-child a:before {
+    right: 50%;
+    width: 50%;
+    left: auto;
+}
