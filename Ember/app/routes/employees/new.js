@@ -10,5 +10,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   	goBackToListOfEmployees() {
   	    this.transitionTo('employees');
   	}
-   }
+  }
 });
