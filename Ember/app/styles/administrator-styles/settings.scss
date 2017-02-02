@@ -23,6 +23,9 @@ $breakpoint-alpha: 768px;
     #account-detail-setting {
       display: block;
       opacity: 1;
+      .start-date-span-label {
+        text-align: right;
+      }
     }
 
     #account-address-setting {
