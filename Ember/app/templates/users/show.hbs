@@ -17,7 +17,7 @@
       </div>
       <div class="modal-footer">
         {{#link-to 'users.delete' model.id}}
-          <button type="button" class="btn btn-tertiary">Delete Account</button>
+          <button type="button" class="btn btn-tertiary btn-danger btn-md btn-block" >Delete Account</button>
         {{/link-to}}
         <button type="button" class="btn btn-secondary" {{action 'goBackToListOfEmployees'}}>Close</button>
         <button type="button" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>

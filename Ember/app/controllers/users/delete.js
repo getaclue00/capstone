@@ -6,10 +6,9 @@ export default Ember.Controller.extend({
     deleteUser() {
 
       var self = this;
-      let user = this.get('model');
+      let user = self.get('model');
 
       function onSuccessful() {
-        console.log('Successfully deleted');
         transitionToPost();
       }
       function transitionToPost() {

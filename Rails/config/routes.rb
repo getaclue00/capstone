@@ -7,25 +7,24 @@ Rails.application.routes.draw do
   # we still need the Devise routes, since without them the sign_in method doesn't work. 
   # To get the UsersController to be called upon sign up, set devise_for :users after the usersController namespace 
   # The /users path should be handle by the api and not by devise. The routes file matches the first route when the server is asked to serve.
-  post "users", to: "users#create", constraints: { format: /(json|html)/ }
-  patch "/users/:id" => "users#update", constraints: { format: /(json|html)/ }
+  post "users", to: "users#create", constraints: { format: /(json)/ }
+  patch "/users/:id" => "users#update", constraints: { format: /(json)/ }
 
 
   devise_for :users, controllers: {
     sessions: 'sessions'
   }
-  get "session/csrf", to: "session#csrf"
+  get "session/csrf", to: "session#csrf", constraints: { format: /(json)/ }
 
   #creating the RESTful resources
-  resources :clients
-  resources :employees
-  resources :cars
-  resources :services
-  resources :appointments
-  # resources :users, constraints: { format: /(json|html)/ }
-  get "users", to: 'users#index', constraints: { format: /(json|html)/ }
-  get "users/:id", to: 'users#show', constraints: { format: /(json|html)/ }
-  delete "/users/:id" => "users#destroy", constraints: { format: /(json|html)/ }
+  resources :clients, constraints: { format: /(json)/ }
+  resources :employees, constraints: { format: /(json)/ }
+  resources :cars, constraints: { format: /(json)/ }
+  resources :services, constraints: { format: /(json)/ }
+  resources :appointments, constraints: { format: /(json)/ }
+  get "users", to: 'users#index', constraints: { format: /(json)/ }
+  get "users/:id", to: 'users#show', constraints: { format: /(json)/ }
+  delete "/users/:id" => "users#destroy", constraints: { format: /(json)/ }
 
 
 end
