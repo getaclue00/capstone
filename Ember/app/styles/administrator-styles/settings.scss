@@ -1,0 +1,315 @@
+$breakpoint-alpha: 768px;
+
+//Styling for when on computer
+
+@media (min-width: $breakpoint-alpha) {
+
+  .setings-title {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  .settings-page {
+    overflow: auto;
+    background-color: #ededed;
+  }
+
+  .settings {
+
+    .nav-tabs {
+      display: none
+    }
+
+    #account-detail-setting {
+      display: block;
+      opacity: 1;
+      .start-date-span-label {
+        text-align: right;
+      }
+    }
+
+    #account-address-setting {
+      display: block;
+      opacity: 1;
+      width: 49%;
+      float: left;
+      margin-right: 5px;
+    }
+
+    #account-login-setting {
+      display: block;
+      opacity: 1;
+      width: 49%;
+      margin: 0px 0px 0px 5px;
+      float: right;
+    }
+
+    .tab-content {
+      margin: 0px 25px 0px 25px;
+    }
+
+    .account-info-accordion {
+
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 17px;
+      background: #fff;
+      border: 1px solid #E6E9ED;
+
+      .card-block {
+        border-top: 0px;
+      }
+
+      .info-link {
+        border-bottom: 2px solid #d30b07;
+        padding: 1px 5px 6px;
+        margin-bottom: 20px;
+        font-size: 1.25em;
+
+        a {
+
+          text-decoration: none;
+          color: grey;
+          font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+          font-weight: 500;
+        }
+
+        a:hover {
+
+        }
+      }
+    }
+
+    .accordion-title {
+      margin: 5px 0 6px;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      color: purple;
+      font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+
+    &:before {
+        content: "+";
+        font-size: 1.5em;
+        line-height:0.5em;
+        float: right;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .button-line {
+      border-top: 2px solid #e5e5e5;
+      height: 1px;
+      margin: 20px 0;
+    }
+
+    .my-information {
+      padding: 0px;
+    }
+
+    .card-block {
+      padding: 0px;
+    }
+
+    .button-color {
+      margin-bottom: 20px;
+    }
+
+    .control-label {
+      text-align: right;
+    }
+
+    .account-input-title {
+      padding: 0px;
+      font-size: 0.9em;
+    }
+  }
+}
+
+//Styling for when on mobile device
+
+@media (max-width: $breakpoint-alpha) {
+
+  .settings-page {
+    padding:0px;
+  }
+
+  .settings{
+    #account-detail-setting, #account-address-setting,
+     #account-login-setting {
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    .nav {
+      background-color: #f9f9f9;
+      border: none;
+    }
+
+    .nav .nav-item .active {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid red;
+      background-color: #f9f9f9;
+      color: black;
+    }
+
+    .nav .nav-item a {
+      border-radius: 0px;
+      background-color: #f9f9f9;
+      color: #d3d3d3;
+      margin: 0px;
+      text-align: center;
+    }
+
+    .nav .nav-item a:hover {
+      border: none;
+      border-bottom: 2px solid red;
+    }
+
+    label {
+      text-align: left;
+    }
+
+    .settings-input {
+      width: 100%;
+      border-bottom: 1.5px dotted #d3d3d3;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+
+    }
+
+    .settings-username {
+      width: 60%;
+      border: none;
+    }
+
+    .form-group {
+      padding: 0px;
+    }
+
+    .street-number-input {
+      padding-right: 0px;
+      margin-right: 2px;
+    }
+
+    .street-name-input {
+      padding-left: 0px;
+    }
+
+    .settings-input-street-number {
+      width: 30%;
+      float: left;
+      padding: 0px;
+
+    }
+
+    .settings-input-street-name {
+      width: 75%;
+      float: right;
+      padding: 0px;
+    }
+
+    .setings-title {
+      background-color: #DCDCDC;
+    }
+
+    #user-start-date {
+      font-size: small;
+    }
+
+    .info-link {
+      display: none;
+    }
+
+    .account-input-title {
+      display: none;
+    }
+
+    .button-line {
+      display: none;
+    }
+
+    .control-label{
+      display: none;
+    }
+
+    .col-centered {
+      float: none;
+      margin: 0 auto;
+    }
+  }
+}
+
+.setings-title {
+
+  padding: 25px 10px 20px 0px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 0px;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.nav > li {
+  position: relative;
+  display: block;
+}
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.password-div {
+
+  margin-bottom: 20px;
+
+  .password-block {
+    border: 1px solid #eee;
+    border-top: 0px;
+    padding-top: 1.5em;
+    background-color:#f9f9f9;
+  }
+
+  .change-password-title {
+
+    background-color: #EE2C2C;
+    text-align:center;
+    font-weight:600;
+    padding: 1em 1em 1em 0em;
+    display:block;
+    margin: 0px;
+    text-decoration:none;
+    color:#fff;
+  }
+}
+
+.settings-read-only {
+  border: none;
+  text-align: center;
+}
