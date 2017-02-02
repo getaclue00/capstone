@@ -11,7 +11,6 @@ export default Ember.Controller.extend({
       let service = this.get('model');
 
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('services');
       }
 

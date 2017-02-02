@@ -7,6 +7,16 @@ export default Ember.Component.extend({
     Ember.$('#myModal').modal('show');
   },
 
+  willDestroyElement() {
+    let model = this.get('model');
+
+    if (model.get('hasDirtyAttributes')) {
+      model.rollbackAttributes();
+    }
+
+    Ember.$('#myModal').modal('hide');
+  },
+
   yesNoTranslationMap: {'Yes': true, 'No': false},
 
   actions: {
