@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import Ember from 'ember';
+import moment from 'moment';
 
 const { Model, attr, hasMany, belongsTo } = DS;
 
@@ -23,5 +24,9 @@ export default Model.extend({
   address: Ember.computed('streetNumber', 'streetName', 'city', 'province', 'postalCode', function(){
     return `${this.get('streetNumber')}-${this.get('streetName')}, ${this.get('city')}, \
 ${this.get('province')}, ${this.get('postalCode')}`;
- })
+ }),
+
+  formattedStartDate: Ember.computed('startDate', function(){
+    return moment(this.get('startDate')).format('YYYY-MM-DDTHH:mm');
+  })
 });
