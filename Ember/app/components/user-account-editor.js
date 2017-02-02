@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 	didInsertElement() {
 	    this._super(...arguments);
-	    Ember.$('#user-account-editor').modal('show');
+	    Ember.$('.modal').modal('show');
   	},
 
   willDestroyElement() {
@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     if (model.get('hasDirtyAttributes')) {
       model.rollbackAttributes();
     }
-    Ember.$('#user-account-editor').modal('hide');
+    Ember.$('.modal').modal('hide');
   },
 
   yesNoTranslationMap: {'Yes': true, 'No': false},

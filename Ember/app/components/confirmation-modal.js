@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
-    Ember.$('#myModal').modal('show');
+    Ember.$('.modal').modal('show');
   },
 
   willDestroyElement() {
@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     if (model.get('hasDirtyAttributes')) {
       model.rollbackAttributes();
     }
-    Ember.$('#myModal').modal('hide');
+    Ember.$('.modal').modal('hide');
   }
 
 });
