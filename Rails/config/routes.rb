@@ -15,4 +15,7 @@ Rails.application.routes.draw do
 
     resources :users, constraints: { format: /(json|html)/ }
   end
+
+  # putting wildcard back
+  get '*path' => redirect('/')
 end
