@@ -12,7 +12,6 @@ export default Ember.Component.extend({
     if (model.get('hasDirtyAttributes')) {
       model.rollbackAttributes();
     }
-
     Ember.$('#myModal').modal('hide');
   }
 
