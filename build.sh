@@ -34,6 +34,10 @@ printMessage 4 "Pushing to Heroku"
 # as per http://stackoverflow.com/a/20555895
 cd Rails
 
+sed -i .bck 's/<\/head>/<%= csrf_meta_tags %>&/' public/index.html
+sed -i .bck 's/<body>/&<%= yield %>/' public/index.html
+mv public/index.html app/views/layouts/application.html.erb
+
 git init
 git add .
 git commit -m "deploying"
