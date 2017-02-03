@@ -126,6 +126,129 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
+  describe "POST Users#create" do
+
+    context 'when the data is empty' do
+      it "returns an error" do
+        post :create
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq('User creation failed. No parameters sent.')
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+  
+
+   context 'when the data is there and is correct' do
+      it 'returns a succesful response' do
+        employee = FactoryGirl.create :employee
+        data = {
+          "data": {
+            "type": "users",
+            "attributes": {
+                "email":"test@test.com",
+                "password":"password",
+                "admin":true
+            },
+            "relationships": {
+              "employee":{"data":{"type":"employees", "id": employee.id}} 
+            }
+          }
+        }
+
+        params = JSON.parse(data.to_json)
+
+        post :create, params: {data: params['data']}
+
+        expect(response).to have_http_status(:created)
+      end
+    end
+                  
+
+    context 'when the data is there but not correct' do
+      it 'returns a bad response' do
+        employee = FactoryGirl.create :employee
+        data = {
+          "data": {
+              "type":"users",
+              "attributes": {
+                "email":"test@test.com",
+                #password is mandatory
+                "admin":true
+              },
+              "relationships": {
+                "employee":{"data":{"type":"employees", "id": employee.id}} 
+              }  
+          }
+        }
+
+        params = JSON.parse(data.to_json)
+
+        post :create, params: {data: params['data']}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq( {"password" => ["can't be blank"]}
+)
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    context 'when the data is there but not associated to employee' do
+      it 'returns a bad response' do
+        data = {
+          "data": {
+              "type":"users",
+              "attributes": {
+                "email":"test@test.com",
+                "password":"password",
+                "admin":true
+              }
+          }
+        }
+
+        params = JSON.parse(data.to_json)
+
+        post :create, params: {data: params['data']}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq( {"employee" => ["must exist"]}
+)
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    context 'when the data is there but FK constraint not respected' do
+      it 'returns a succesful response' do
+        employee = FactoryGirl.create :employee
+        data = {
+          "data": {
+            "type": "cars",
+            "attributes": {
+                "email":"test@test.com",
+                "password":"password",
+                "admin":true
+            },
+            "relationships": {
+              "employee":{"data":{"type":"employees", "id": 77}} 
+            }
+          }
+        }
+
+        params = JSON.parse(data.to_json)
+
+        post :create, params: {data: params['data']}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq({"employee" => ["must exist"]})
+        expect(response).to have_http_status(:bad_request)
+      end
+    end
+   end
+
   describe 'PATCH User#update' do
     context 'when no such user exists' do
       it 'returns an error' do
@@ -210,8 +333,27 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to have_http_status(:bad_request)
       end
     end
- 
    end
 
+   describe 'DELETE Users#destroy' do
+    context 'when there are no users by such an id' do
+      it 'returns an error' do
+        delete :destroy, params: { id: 999 }
 
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('No such user exists')
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when the user exists' do
+      it 'should delete it' do
+        user = FactoryGirl.create :user
+
+        delete :destroy, params: { id: user.id }
+
+        expect(response).to have_http_status(:no_content)
+      end
+    end
+  end
 end

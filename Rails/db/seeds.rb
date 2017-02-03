@@ -19,6 +19,7 @@ Appointment.create({title: 'Appointment With Employee, Car, and Service', notes:
 
 Employee.create({ id: '1', last_name: 'Testing', first_name: 'Tester', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
 Employee.create({ id: '2', last_name: 'Wayne', first_name: 'Bruce', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+
 User.create({email: 'test@test.com', password: 'password', admin: true, employee_id: '1'})
 User.create({email: 'batman@batman.com', password: 'password', admin: false, employee_id: '2'})
 

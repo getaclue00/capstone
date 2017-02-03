@@ -1,8 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  actions: {
-    updateEmployee() {
+	actions: {
+
+    updateUser() {
       var self = this;
 
       function onSuccessful() {
@@ -13,7 +14,11 @@ export default Ember.Controller.extend({
         throw error.message;
       }
 
-      this.get('model').save().then(onSuccessful).catch(onError);
+      if (this.get('model').get('confirm') === this.get('model').get('password')){
+	    	this.get('model').save().then(onSuccessful).catch(onError);
+	  }else{
+	    	console.log("Passwords dont match");
+	  }   
     }
   }
 });

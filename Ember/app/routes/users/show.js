@@ -3,12 +3,13 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model(params) {
-    return this.get('store').findRecord('employee', params.employees_id);
+    let id = params.users_id;
+    return this.get('store').findRecord('user', id);
   },
 
   actions: {
     goBackToListOfEmployees() {
-      this.transitionTo('employees');
+      this.transitionTo('/employees');
     }
   }
 });

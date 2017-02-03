@@ -3,7 +3,11 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model(params) {
-    return this.get('store').findRecord('employee', params.employees_id);
+  	//peekRecord gets a record by a given type and ID without triggering a fetch.
+  	let employee = this.get('store').peekRecord('employee', params.employees_id);
+  	return this.get('store').createRecord('user', {
+  		employee: employee
+  	});
   },
 
   actions: {
@@ -12,3 +16,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     }
   }
 });
+
+
+
