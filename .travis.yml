@@ -53,6 +53,10 @@ cache:
     - Ember/node_modules
     - Ember/bower_components
 
+branches:
+  except:
+    - testing-production-building
+
 # safelist
 # branches:
 #   only:
