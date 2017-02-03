@@ -1,63 +1,171 @@
-<div class="admin-container">
-<div class="admin-info">
-  <h3 class="page-title">Settings</h3>
-
-  <form class="my-information" {{action 'save' on="submit"}}>
-    <h3 class="title">User Info</h3>
-    <label for="first_name">
-      <span>First Name <span class="required">*</span></span>
-      {{input type="text" class="form-control" value=model.employee.firstName id="first_name" required=true}}
-    </label>
-    <label for="last_name">
-      <span>Last Name <span class="required">*</span></span>
-      {{input type="text" class="form-control" value=model.employee.lastName id="last_name" required=true}}
-    </label>
-    <label for="phone">
-      <span>Phone <span class="required">*</span></span>
-      {{input type="tel" class="form-control" value=model.employee.phoneNumber id="phone" required=true}}
-    </label>
-    <label for="street_number">
-      <span>Street Number <span class="required">*</span></span>
-      {{input type="number" class="form-control" value=model.employee.streetNumber id="street_number" required=true}}
-    </label>
-    <label for="street_name">
-      <span>Street Name <span class="required">*</span></span>
-      {{input type="text" class="form-control" value=model.employee.streetName id="street_name" required=true}}
-    </label>
-    <label for="city">
-      <span>City <span class="required">*</span></span>
-      {{input type="text" class="form-control" value=model.employee.city id="city" required=true}}
-    </label>
-    <label for="province">
-      <span>Province <span class="required">*</span></span>
-      {{input type="text" class="form-control" value=model.employee.province id="province" required=true}}
-    </label>
-    <label for="postal_code">
-      <span>Postal Code <span class="required">*</span></span>
-      {{input type="text" class="form-control" value=model.employee.postalCode id="postal_code" required=true}}
-    </label>
-    <label for="start_date">
-      <span>Start Date </span>
-      {{input class="form-control" value=model.employee.startDate id="start_date" readonly=true}}
-    </label>
-    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
-  </form>
-
-  <form class="my-information" {{action 'save' on="submit" }}>
-    <h3 class="title">Login Info</h3>
-      <label for="username">
-        <span>Username</span>
-        {{input type="email" class="form-control" value=model.email id="user-email" readonly=true}}
-      </label>
-      <label for="new-password">
-        <span>New Password <span class="required">*</span></span>
-        {{input type="password" class="form-control" value=model.password required=true id="new-password"}}
-      </label>
-      <label for="confirm-password">
-        <span>Confirm Password <span class="required">*</span></span>
-        {{input type="password" class="form-control" value=model.confirm required="required" id="confirm-password"}}
-      </label>
-    <span><button type="submit" class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
-  </form>
-</div>
+<div class="settings-page" style="height: 100%;">
+  <div class="settings">
+    <h5 class="setings-title"><span class="glyphicon glyphicon-cog"></span> Settings</h5>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item"><a href="#account-detail-setting" data-toggle="tab" class="nav-link active">Details</a></li>
+      <li class="nav-item"><a href="#account-address-setting" data-toggle="tab" class="nav-link">Address</a></li>
+      <li class="nav-item"><a href="#account-login-setting" data-toggle="tab" class="nav-link">Login</a></li>
+    </ul>
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash messageStyle='bootstrap'}}
+    {{/each}}
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="account-detail-setting">
+        <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="info-link">
+            <a data-toggle="collapse" data-parent="#accordion" href="#infoOne" aria-expanded="true" aria-controls="infoOne" class="accordion-title">
+              Details
+            </a>
+          </div>
+          <div id="infoOne" class="collapse show in" role="tabpanel" aria-labelledby="Details">
+            <div class="card-block">
+              <form class="my-information">
+                <div class="form-group row">
+                  <label for="first_name" class="control-label col-md-3">
+                    <span class="account-input-title">First Name </span>
+                  </label>
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="text" value=model.employee.firstName id="first_name" placeholder='First Name' class="settings-input col-md-10 col-xs-12 form-control"}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="last_name" class="control-label col-md-3 col-sm-12">
+                    <span class="account-input-title">Last Name </span>
+                  </label>
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="text" value=model.employee.lastName id="last_name"  placeholder="Last Name" class="settings-input col-md-10 col-xs-12 form-control"}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="phone" class="control-label col-md-3 col-sm-3">
+                    <span class="account-input-title">Phone Number </span>
+                  </label>
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="tel" value=model.employee.phoneNumber id="phone" placeholder="Phone" class="settings-input col-md-10 col-xs-12 form-control"}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="start_date" class="col-md-3 start-date-span-label">
+                    <span class="start-date-title">Start Date: </span>
+                  </label>
+                  <div class="col-md-9 col-sm-12">
+                    {{input type="datetime-local" value=model.employee.formattedStartDate id="start_date" readonly=true placeholder="Start Date" class="settings-read-only col-md-10 form-control"}}
+                  </div>
+                </div>
+                <div class="button-line"></div>
+                <span><button class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="account-address-setting">
+        <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="info-link">
+            <a data-toggle="collapse" data-parent="#accordion" href="#infoTwo" aria-expanded="true" aria-controls="infoTwo" class="accordion-title">
+              Address
+            </a>
+          </div>
+          <div id="infoTwo" class="collapse show in" role="tabpanel" aria-labelledby="Address">
+            <div class="card-block">
+              <form class="my-information">
+                <div class="street-info-container">
+                  <div class="form-group row col-md-12 settings-input-street-number">
+                    <label for="street_number" class="control-label col-md-4" style="padding-left: 0px;">
+                       <span class="account-input-title">Street Number </span>
+                    </label>
+                    <div class="street-number-input col-md-8">
+                      {{input type="number" value=model.employee.streetNumber id="street_number" placeholder="Street Number" class="form-control settings-input"}}
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12 settings-input-street-name">
+                      <label for="street_name" class="control-label col-md-4" style="padding-left: 0px;">
+                        <span class="account-input-title"> Street Name </span>
+                      </label>
+                      <div class="street-name-input col-md-8">
+                       {{input type="text" value=model.employee.streetName id="user-street-name" placeholder="Street Name" class="settings-input form-control"}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="city" class="control-label col-md-4" style="padding-left: 0px;">
+                      <span class="account-input-title">City </span>
+                    </label>
+                    <div class="col-md-8 col-sm-12">
+                      {{input value=model.employee.city id="city" placeholder="City" class="settings-input form-control"}}
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="province" class="control-label col-md-4" style="padding-left: 0px;">
+                      <span class="account-input-title">Province </span>
+                    </label>
+                    <div class="col-md-8">
+                      {{input type="text" value=model.employee.province id="province" class="settings-input form-control" placeholder="Province"}}
+                    </div>
+                  </div>
+                  <div class="form-group row col-md-12">
+                    <label for="postal_code" class="control-label col-md-4" style="padding-left: 0px;">
+                      <span class="account-input-title">Postal Code </span>
+                    </label>
+                    <div class="col-md-8">
+                      {{input type="text" pattern="[A-Z][0-9][A-Z] [0-9][A-Z][0-9]" value=model.employee.postalCode id="postal_code" class="settings-input form-control" placeholder="Postal Code"}}
+                    </div>
+                  </div>
+                <div class="button-line col-md-12"></div>
+                <span><button class ="btn btn-primary button-color" {{action 'updateAccountInfo'}}>Save</button></span>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="account-login-setting">
+        <div class="account-info-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="info-link">
+            <a data-toggle="collapse" data-parent="#accordion" href="#infoThree" aria-expanded="true" aria-controls="infoThree" class="accordion-title">
+              Login Information
+            </a>
+          </div>
+          <div id="infoThree" class="collapse show in" role="tabpanel" aria-labelledby="Login Information">
+            <div class="card-block">
+              <form class="my-information">
+                <div class="form-group row col-md-12">
+                  <label for="username">
+                    <span>Username: </span>
+                    {{input type="text" value=model.email id="username" readonly=true class="settings-username settings-read-only" placeholder="Username"}}
+                  </label>
+                </div>
+                <div class="password-div col-12">
+                  <div>
+                    <p class="change-password-title">
+                      Change Password
+                    </p>
+                  </div>
+                  <div class="password-block col-12">
+                    <div class="form-group col-12">
+                      <label for="new-password" class="col-12">
+                        <span>New Password:</span>
+                      </label>
+                      <div class="col-centered">
+                        {{input type="password" value=model.password required="required" id="new-password" class="settings-input col-12 form-control"}}
+                      </div>
+                    </div>
+                    <div class="form-group col-12">
+                    <label for="confirm-password" class="col-12">
+                      <span>Confirm Password:</span>
+                    </label>
+                      <div class="col-centered">
+                        {{input type="password" value=model.confirm required="required" id="confirm-password" class="settings-input col-12 form-control"}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="button-line col-md-12"></div>
+                <span><button class ="btn btn-primary button-color" {{action 'updateLoginInfo'}}>Save</button></span>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
