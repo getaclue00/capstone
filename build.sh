@@ -20,15 +20,24 @@ boldMessage () {
 
 #echo -e "${color}Building Ember app${reset}"
 boldMessage 4 "Building Ember app"
-
 cd Ember
 ember build --environment production
-cd ../
 
+boldMessage 4 "Deploying Ember app to surge.sh"
+cd dist
+cp index.html 200.html
+surge --domain http://radetailing.surge.sh/
+
+cd ../../
+
+boldMessage 4 "Cleaning Ember app build"
+rm -rf Ember/dist
+
+boldMessage 4 "Cleaning Rails assets"
 rm -rf Rails/public/assets
 
-printMessage 4 "Copying ember build files to rails"
-cp -r Ember/dist/ Rails/public/
+# printMessage 4 "Copying ember build files to rails"
+# cp -r Ember/dist/ Rails/public/
 
 printMessage 4 "Pushing to Heroku"
 # as per http://stackoverflow.com/a/20555895
