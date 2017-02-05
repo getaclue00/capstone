@@ -52,7 +52,7 @@ RSpec.describe ServicesController, :type => :controller do
         expect(response).to have_http_status(:ok)
 
         attr = result["data"]["attributes"];
-        
+
         expect(attr["name"]).to eq("serviceA")
         expect(attr["price_small"].to_f).to eq(120.0)
         expect(attr["price_large"].to_f).to eq(250.0)
@@ -95,7 +95,7 @@ RSpec.describe ServicesController, :type => :controller do
               },
               "type":"services"
               }
-      
+
             }
 
         params = JSON.parse(data.to_json)
@@ -123,7 +123,7 @@ RSpec.describe ServicesController, :type => :controller do
               },
               "type":"services"
               }
-      
+
             }
         params = JSON.parse(data.to_json)
 
@@ -133,7 +133,7 @@ RSpec.describe ServicesController, :type => :controller do
 
         expect(response).to have_http_status(:bad_request)
         expect(result['error']).to eq('Service creation failed. Check your data.')
-        
+
       end
     end
    end
@@ -189,7 +189,7 @@ RSpec.describe ServicesController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: service.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
@@ -210,7 +210,7 @@ RSpec.describe ServicesController, :type => :controller do
     #no test to updating with invalid attributes
     #invalid attributes passed to an update dont result in failures, they simply result in 0 values being assigned
 
-      
+
   end
 
   describe 'DELETE Services#destroy' do
