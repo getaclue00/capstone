@@ -1,42 +1,44 @@
 // import { moduleFor, test } from 'ember-qunit';
 // import Ember from 'ember';
 
-// moduleFor('controller:services/delete', 'Unit | Controller | services/delete', {
+// moduleFor('controller:users/new', 'Unit | Controller | users/new', {
 //   // Specify the other units that are required for this test.
 //   // needs: ['controller:foo']
 // });
 
-// test('#deleteService remains on services page following a deletion', function(assert) {
+// test('#createUser transitions to employees', function(assert) {
 //   let controller = this.subject({
 //       model: Ember.Object.create({
-//         destroyRecord() {
+//         save() {
 //           return new Ember.RSVP.Promise(function(resolve) {
 //             resolve(true);
 //           });
 //         }
 //       }),
 //       transitionToRoute(route) {
-//         assert.equal(route, 'services');
+//         assert.equal(route, 'employees');
 //       }
 //   });
-//   controller.send('deleteService');
+
+//   controller.send('createUser');
 
 //   assert.ok(controller);
 // });
 
-// test('#deleteService remains on service page following a failed deletion', function(assert) {
+// test('#createUser will NOT transition to employees', function(assert) {
 //   let controller = this.subject({
 //       model: Ember.Object.create({
-//         destroyRecord() {
+//         save() {
 //           return new Ember.RSVP.Promise(function(resolve, reject) {
-//             reject({ error: 'could not destroy a record' });
+//             reject({ error: 'Password dont match' });
 //           });
 //         }
 //       }),
 //       transitionToRoute(route) {
-//         assert.equal(route, 'service');
+//         assert.equal(route, 'user');
 //       }
 //   });
-//   assert.throws(controller.send('deleteService'), "throws with just a message, not using the 'expected' argument");
+
+//   assert.throws(controller.send('createUser'), "throws with just a message, not using the 'expected' argument");
 
 // });

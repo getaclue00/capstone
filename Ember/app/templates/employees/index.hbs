@@ -10,6 +10,7 @@
         <th><h1>End Date</h1></th>
         <th></th>
         <th></th>
+        <th><h1>User Account</h1></th>
       </tr>
     </thead>
     <tbody>
@@ -36,9 +37,20 @@
             {{/link-to}}
           </td>
           <td class='employee-operation'>
-            <button type="submit" class="dropdown-item" onclick={{action "handleDeleteEmployee" employee }}>
+            {{#link-to 'employees.delete' employee.id class="dropdown-item"}}
               <span class="glyphicon glyphicon-minus"></span>
-            </button>
+            {{/link-to}}
+          </td>
+          <td class='employee-operation'>
+          {{#if employee.user}}
+            {{#link-to 'users.show' employee.user.id class="dropdown-item"}}
+              <span class="glyphicon glyphicon-user"></span>
+            {{/link-to}}
+          {{else}}
+            {{#link-to 'users.new' employee.id class="dropdown-item"}}
+              <span class="glyphicon glyphicon-plus"></span>
+            {{/link-to}}
+          {{/if}}
           </td>
         </tr>
       {{/each}}

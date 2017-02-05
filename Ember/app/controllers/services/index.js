@@ -12,10 +12,5 @@ export default Ember.Controller.extend({
 
   operations: {'services.show': 'glyphicon-pencil', 'services.delete': 'glyphicon-minus'},
 
-  actions: {
 
-    handleAddNewService() {
-      this.transitionToRoute('services.new');
-    }
-  }
 });

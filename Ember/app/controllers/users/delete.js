@@ -1,11 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  type: "user",
   actions: {
-    updateEmployee() {
+    deleteUser() {
+
       var self = this;
+      let user = self.get('model');
 
       function onSuccessful() {
+        transitionToPost();
+      }
+      function transitionToPost() {
         self.transitionToRoute('employees');
       }
 
@@ -13,7 +19,9 @@ export default Ember.Controller.extend({
         throw error.message;
       }
 
-      this.get('model').save().then(onSuccessful).catch(onError);
+      if (user) {
+        user.destroyRecord().then(onSuccessful).catch(onError);
+      }
     }
   }
 });
