@@ -29,13 +29,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def create
+    begin
+          user=User.new(user_sanitized_params)
+          if user.save!
+          render json: user, status: :created
+        else
+          render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
+        end
+      rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+        render json: { error: 'User creation failed. No parameters sent.'}, status: :bad_request
+      rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
+        render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
+      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+        render json: { error: user.errors.messages}, status: :bad_request
+    end
+  end
+
   def update
     begin
       user=User.find params[:id]
         if user.update!(user_sanitized_params)
           render json: user, status: :ok
         else
-          render json: { error: 'User update failed.'}, status: :bad_request
+          render json: { error: 'User update failed. Check your data.'}, status: :bad_request
         end
     rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
       render json: { error: 'User update failed. No parameters sent.'}, status: :bad_request
@@ -48,10 +65,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+      begin
+      user=User.find params[:id]
+      user.destroy
+      head :no_content
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: 'No such user exists' }, status: :not_found
+    end
+  end
+
   private 
 
   def user_sanitized_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password, :admin] )
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password, :admin, :employee] )
   end
 end
 
