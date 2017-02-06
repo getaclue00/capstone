@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   get "users", to: 'users#index', constraints: ApiConstraint.new
   get "users/:id", to: 'users#show', constraints: ApiConstraint.new
   delete "/users/:id" => "users#destroy", constraints: ApiConstraint.new
+
+  # catch-all route for any errors
+  get "*path", to: "application#catch_all_404", via: :all
 end
