@@ -2,9 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    closeModal() {
-      this.transitionToRoute('employees');
-    },
 
     saveEmployee() {
       let employee = this.get('model');
