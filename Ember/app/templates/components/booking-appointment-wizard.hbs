@@ -2,34 +2,34 @@
   <!-- page content -->
   <h2 class="text-center">Booking Information</h2>
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div id="smartwizard" class="wizard_horizontal">
-        <ul class="wizard_steps">
-          <li>
+    <div class="col-12">
+      <div id="smartwizard" class="wizard_horizontal col-12">
+        <ul class="wizard_steps col-12">
+          <li class="col-2.4">
             <a href="#step-1">
             <span class="step_no">1</span>
             <span class="step_descr">Service</span>
             </a>
           </li>
-          <li>
+          <li class="col-2.4">
             <a href="#step-2">
             <span class="step_no">2</span>
             <span class="step_descr">Car Info</span>
             </a>
           </li>
-          <li>
+          <li class="col-2.4">
             <a href="#step-3">
             <span class="step_no">3</span>
             <span class="step_descr">Date</span>
             </a>
           </li>
-          <li>
+          <li class="col-2.4">
             <a href="#step-4">
             <span class="step_no">4</span>
             <span class="step_descr">Your Info</span>
             </a>
           </li>
-          <li>
+          <li class="col-2.4">
             <a href="#step-5">
             <span class="step_no">5</span>
             <span class="step_descr">Confirm</span>
@@ -39,7 +39,7 @@
         <div>
           <div id="step-1">
             <div class="row">
-              <div class="col-sm-12 text-center">
+              <div class="col-12 text-center">
                 <h3>Select a Service</h3>
                 <hr>
               </div>
@@ -47,13 +47,13 @@
           </div>
           <div id="step-2" class="">
             <div class="row">
-              <div class="col-sm-12 text-center">
+              <div class="col-12 text-center">
                 <h3>Enter Car Information</h3>
               </div>
               <hr>
             </div>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-12">
                 <h5>Size</h5>
                 <div data-toggle="buttons">
                   <label class="btn btn-secondary btn-circle">
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-12">
                 <h5>Interior</h5>
                 <div data-toggle="buttons">
                   <label class="btn btn-secondary btn-circle">
@@ -114,7 +114,7 @@
           </div>
           <div id="step-3">
             <div class="row">
-              <div class="col-sm-12 text-center">
+              <div class="col-12 text-center">
                 <h3>Enter Date Selections</h3>
                 <hr>
               </div>
@@ -122,29 +122,37 @@
           </div>
           <div id="step-4">
             <div class="row">
-              <div class="col-sm-12 text-center">
+              <div class="col-12 text-center">
                 <h3>Please Fill in the Information</h3>
                 <hr>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-12">
                 <form>
-                  <div class="form-group">
-                    <label for="personal-info-name">Name</label>
-                    <input type="text" class="form-control" id="personal-info-name" placeholder="Name">
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-name">Name</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control" id="personal-info-name" placeholder="Name">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="personal-info-email">Email address</label>
-                    <input type="email" class="form-control" id="personal-info-email" placeholder="Email">
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-email"><span>Email Address</span></label>
+                    <div class="col-9">
+                      <input type="email" class="form-control" id="personal-info-email" placeholder="Email">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="personal-info-address">Address</label>
-                    <input type="text" class="form-control" id="personal-info-address" placeholder="Address">
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-address">Address</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control" id="personal-info-address" placeholder="Address">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="personal-info-phone-number">Phone number</label>
-                    <input type='tel' class="form-control" id="personal-info-phone-number" pattern='[\+]\d{1}[\(]\d{3}[\)]\d{3}[\-]\d{4}' placeholder='Format: +0(000)000-0000'>
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-phone-number">Phone number</label>
+                    <div class="col-9">
+                      <input type='tel' class="form-control" id="personal-info-phone-number" pattern='[\+]\d{1}[\(]\d{3}[\)]\d{3}[\-]\d{4}' placeholder='Format: +0(000)000-0000'>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="personal-info-comments">Comments</label>

@@ -1,34 +1,30 @@
-.actionBar {
-    text-align: right;
-    padding-top: 30px;
-    padding: 20px 0 15px 0;
-}
-.actionBar .buttonDisabled {
-    pointer-events: none;
-    cursor: not-allowed;
-    opacity: .55;
-    box-shadow: none;
-}
-.actionBar a {
-    margin: 0 3px;
-}
+// .actionBar {
+//     text-align: right;
+//     padding-top: 30px;
+//     padding: 20px 0 15px 0;
+// }
+// .actionBar .buttonDisabled {
+//     pointer-events: none;
+//     cursor: not-allowed;
+//     opacity: .55;
+//     box-shadow: none;
+// }
+// .actionBar a {
+//     margin: 0 3px;
+// }
+
+$breakpoint-alpha: 768px;
 
 #smartwizard .loader, #smartwizard .msgBox {
     display: none;
 }
 
-.btn-circle {
-    width: 100px;
-    height: 50px;
-    padding: 13px 13px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 25px;
-    outline: none !important;
-}
-
 .booking-confirm-panel-body {
     min-height: 170px;
+}
+
+.wizard_horizontal {
+  padding: 0px;
 }
 
 /*! The form wizard styles were taken and modified from the Gentelella template: https://github.com/puikinsh/gentelella */
@@ -57,6 +53,7 @@
     opacity: 1;
     color: #666;
     text-decoration: none;
+    margin: 0px;
 }
 .wizard_horizontal ul.wizard_steps li a:before {
     content: "";
@@ -72,17 +69,27 @@
     background: #ccc;
 }
 .wizard_horizontal ul.wizard_steps li a .step_no {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
     border-radius: 100px;
     display: block;
     margin: 0 auto 5px;
-    font-size: 16px;
+    font-size: 0.8em;
     text-align: center;
     position: relative;
     z-index: 5;
 }
+
+.wizard_horizontal ul.wizard_steps li.active a .step_descr {
+    color: #34495E;
+}
+
+.wizard_horizontal ul.wizard_steps li a .step_descr {
+    font-size: 0.75em;
+}
+
+
 .wizard_horizontal ul.wizard_steps li.selected a:before,
 .step_no {
     background: #34495E;
@@ -112,4 +119,15 @@
     right: 50%;
     width: 50%;
     left: auto;
+}
+
+//Styling for computer
+@media (min-width: $breakpoint-alpha) {
+
+  .wizard_horizontal {
+
+    .client-information{
+      text-align: right;
+    }
+  }
 }
