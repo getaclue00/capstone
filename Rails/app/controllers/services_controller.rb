@@ -1,4 +1,6 @@
 class ServicesController < ApplicationController
+  before_action :authenticate_user_from_token!
+
   def index
     services_array=Service.all
     if services_array && !services_array.empty?
@@ -18,7 +20,7 @@ class ServicesController < ApplicationController
   end
 
   def create
-    if @current_signedin_user && @current_signedin_user.admin?
+    if current_user && current_user.admin?
       begin
         service=Service.new(service_sanitized_params)
         if service.save!
@@ -37,7 +39,7 @@ class ServicesController < ApplicationController
   end
 
   def update
-    if @current_signedin_user && @current_signedin_user.admin?
+    if current_user && current_user.admin?
       begin
         service=Service.find params[:id]
         if service.update!(service_sanitized_params)
@@ -57,7 +59,7 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    if @current_signedin_user && @current_signedin_user.admin?
+    if current_user && current_user.admin?
       begin
         service=Service.find params[:id]
         service.destroy
