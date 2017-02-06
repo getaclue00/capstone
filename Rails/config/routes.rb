@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   #creating the RESTful resources
   resources :clients
-  resources :employees
+  resources :employees, constraints: ApiConstraint.new
   resources :cars
   resources :services, constraints: ApiConstraint.new
   resources :appointments
