@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe ServicesController, :type => :controller do
-   include Devise::Test::ControllerHelpers
+  include Devise::Test::ControllerHelpers
 
   describe 'GET Services#index' do
     context 'when there are no services' do
@@ -69,8 +69,17 @@ RSpec.describe ServicesController, :type => :controller do
   end
 
   describe "POST Services#create" do
+    # let(:current_user) { FactoryGirl.create :user }
+    #
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when the data is empty' do
       it "returns an error" do
+
         post :create
 
         result = JSON.parse(response.body)
@@ -139,6 +148,13 @@ RSpec.describe ServicesController, :type => :controller do
    end
 
   describe 'PATCH Service#update' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when no such service exists' do
       it 'returns an error' do
 
@@ -214,6 +230,13 @@ RSpec.describe ServicesController, :type => :controller do
   end
 
   describe 'DELETE Services#destroy' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when there are no services by such an id' do
       it 'returns an error' do
         delete :destroy, params: { id: 999 }
