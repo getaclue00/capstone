@@ -3,8 +3,9 @@ class ServicesController < ApplicationController
     if params[:filter].present? && params[:filter][:displayable].present?
       services_array = Service.where('displayable = ?', params[:filter][:displayable]).all
     else
-	   	services_array = Service.where Service.all
-     end
+	   	services_array = Service.all
+    end
+
 		if services_array && !services_array.empty?
       		render json: services_array, status: :ok
     	else

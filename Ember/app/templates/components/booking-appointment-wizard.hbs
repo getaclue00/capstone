@@ -43,7 +43,7 @@
                 <h3>Select a Service</h3>
                 <hr>
               </div>
-              <div class="x_content col-12">
+              <div class="col-12">
                 <table class="table table-hover">
                   <thead>
                     <tr>
@@ -68,9 +68,9 @@
           <div id="step-2" class="">
             <div class="row">
               <div class="col-12 text-center">
-                <h3 style="text-decoration: underline;">Enter Car Information</h3>
+                <h3>Enter Car Information</h3>
+                <hr>
               </div>
-              <hr>
             </div>
             <br />
             <div class="row" style="text-align: center;">
@@ -123,12 +123,15 @@
               </div>
               <div class="col-md-4 text-center">
                 <h5>Colour</h5>
-                <select class="custom-select">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
+                <input list="car-colour" value="Blue" class="form-control col-4">
+                <datalist id="car-colour">
+                  <option value="Blue" />
+                  <option value="Red" />
+                  <option value="Black" />
+                  <option value="White" />
+                  <option value="Grey" />
+                  <option value="Green" />
+                </datalist>
               </div>
             </div>
           </div>
