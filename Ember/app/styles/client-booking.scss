@@ -1,18 +1,3 @@
-// .actionBar {
-//     text-align: right;
-//     padding-top: 30px;
-//     padding: 20px 0 15px 0;
-// }
-// .actionBar .buttonDisabled {
-//     pointer-events: none;
-//     cursor: not-allowed;
-//     opacity: .55;
-//     box-shadow: none;
-// }
-// .actionBar a {
-//     margin: 0 3px;
-// }
-
 $breakpoint-alpha: 768px;
 
 #smartwizard .loader, #smartwizard .msgBox {
@@ -119,6 +104,11 @@ $breakpoint-alpha: 768px;
     right: 50%;
     width: 50%;
     left: auto;
+}
+
+.btn-circle {
+
+  margin: 0.2em;
 }
 
 //Styling for computer
