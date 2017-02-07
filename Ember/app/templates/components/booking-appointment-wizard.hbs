@@ -43,6 +43,26 @@
                 <h3>Select a Service</h3>
                 <hr>
               </div>
+              <div class="x_content col-12">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Duration</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each model.services as |s|}}
+                      <tr>
+                        <td>{{s.name}}</td>
+                        <td>{{s.duration}}</td>
+                        <td>{{s.price_small}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
           <div id="step-2" class="">
