@@ -11,5 +11,17 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       })
     });
   },
+
+  renderSmartWizard() {
+    Ember.$('#smartwizard').smartWizard({
+      reverseButtonsOrder: true,
+    })
+  },
+
+  actions: {
+    didTransition() {
+      Ember.run.next(this, 'renderSmartWizard');
+    }
+  }
 });
 

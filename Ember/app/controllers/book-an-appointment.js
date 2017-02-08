@@ -1,13 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-  didInsertElement() {
-    this.$('#smartwizard').smartWizard({
-      reverseButtonsOrder: true,
-    });
-  },
-
-  viewName: 'month',
+export default Ember.Controller.extend({
+    viewName: 'month',
 
   businessHours: {
     // days of week. an array of zero-based day of week integers (0=Sunday)
