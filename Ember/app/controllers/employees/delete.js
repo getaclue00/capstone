@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
       let employee = this.get('model');
 
       function onSuccessful() {
-        console.log('Successfully deleted');
         transitionToPost();
       }
       function transitionToPost() {

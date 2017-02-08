@@ -10,13 +10,13 @@ test('checking type', function(assert) {
   assert.expect(1);
   const ctrl = this.subject();
 
-  // check the type
   assert.equal(ctrl.get('type'), 'employee', 'type properly set');
 });
 
 
 
 test('#deleteEmployee deletes the employee', function(assert) {
+  var done = assert.async(); //Tell QUnit to wait for the done() call inside the timeout.
   const ctrl = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
@@ -26,20 +26,19 @@ test('#deleteEmployee deletes the employee', function(assert) {
         }
       }),
       transitionToRoute(route) {
-     
       	assert.equal(route, 'employees');
+      	done();	
       }
   });
 
   ctrl.send('deleteEmployee');
-
   assert.ok(ctrl); //passes if first argument is T
 });
 
 
 
-test('#deleteEmployee remains on employee page following a failed deletion', function(assert) {
-  let ctrl = this.subject({
+test('#deleteEmployee throws an error following a failed deletion', function(assert) {
+  const ctrl = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
           return new Ember.RSVP.Promise(function(resolve, reject) {
