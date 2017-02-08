@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    viewName: 'month',
+  selectTime: false,
+  selectedDate: null,
+  viewName: 'month',
 
   businessHours: {
     // days of week. an array of zero-based day of week integers (0=Sunday)
@@ -18,8 +20,10 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    handleCalendarDayClick() {
-      console.log("hi");
+    handleCalendarDayClick(date, jsEvent, view) {
+      this.set('selectedDate', date.format());
+      this.set('selectTime', true);
+
     }
   }
 });

@@ -143,9 +143,16 @@
                       aspectRatio=1
                       viewName=viewName
                       fixedWeekCount=false
+                      businessHours=businessHours
                       dayClick=(action 'handleCalendarDayClick')
                     }}
                   </div>
+                  {{#if selectTime}}
+                    {{appointment-time-selection
+                      selectTime=selectTime
+                    }}
+                  {{/if}}
+                  <div class="authors"></div>
                    <div class="calendar-times col-6">
                   </div>
                 </div>
