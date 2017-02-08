@@ -191,12 +191,12 @@ RSpec.describe EmployeesController, :type => :controller do
   describe 'PATCH Employee#update' do
 
     before :each do
-      user = FactoryGirl.create :user, email: 'test@test.com'
-      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+      @user = FactoryGirl.create :user, email: 'test@test.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{@user.authentication_token}\", email=\"#{@user.email}\""
     end
 
     context 'when no such employee exists' do
-      it 'returns an error' do
+      it 'returns an error (and employee is an admin)' do
 
         employee = FactoryGirl.create :employee_with_appointment
         employee.last_name = "Testing Update of a non existent employee"
@@ -214,11 +214,48 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(result['error']).to eq('No such employee exists')
         expect(response).to have_http_status(:not_found)
       end
+
+      it 'returns an error (and employee is the employee but not an admin)' do
+        @user.admin = false
+
+        employee = FactoryGirl.create :employee_with_appointment
+        @user.employee = employee
+        @user.save
+
+        employee.last_name = "Testing Update of a non existent employee"
+
+        # Create a serializer instance
+        serializer = EmployeeSerializer.new(employee)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: { id: 777, data: params['data']}
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('Not Authorized')
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
 
     context 'when the employee exists and the update had no params sent' do
-      it "responds with a bad request" do
+      it "responds with a bad request (and employee is an admin)" do
         employee = FactoryGirl.create :employee_with_appointment
+
+        patch :update, params: { id: employee.id }
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('Employee update failed. No parameters sent.')
+        expect(response).to have_http_status(:bad_request)
+      end
+
+      it "responds with a bad request (and employee is the employee but not an admin)" do
+        @user.admin = false
+
+        employee = FactoryGirl.create :employee_with_appointment
+        @user.employee = employee
+        @user.save
 
         patch :update, params: { id: employee.id }
 
@@ -228,7 +265,7 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
 
-    context 'when the employee exists and the correct params were sent' do
+    context 'when the employee exists and the correct params were sent (and employee is an admin)' do
       it "responds successfully" do
         employee = FactoryGirl.create :employee_with_appointment
         employee.last_name = "updated lastName"
@@ -271,8 +308,91 @@ RSpec.describe EmployeesController, :type => :controller do
       end
     end
 
-    context 'when the employee exists and the incorrect params were sent' do
+    context 'when the employee exists and the correct params were sent (and user is NOT an admin OR the employee that wants to update their data)' do
       it "responds successfully" do
+        @user.admin = false
+        @user.save
+
+        employee = FactoryGirl.create :employee_with_appointment
+        employee.last_name = "updated lastName"
+        employee.first_name = "updated firstName"
+        employee.phone_number = "444-222-4567"
+        employee.street_number = 3
+        employee.street_name = "updated Street"
+        employee.city = "updated city"
+        employee.province = "updated province"
+        employee.postal_code = "J2J 9Q9"
+        employee.start_date = "2058-12-12"
+        employee.end_date = "2060-11-11"
+        employee.notes = "updated note"
+
+        # Create a serializer instance
+        serializer = EmployeeSerializer.new(employee)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: employee.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['error']).to eq('Not Authorized')
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when the employee exists, the correct params were sent, user is NOT an admin, and the employee is the employee' do
+      it "responds successfully" do
+        @user.admin = false
+
+        employee = FactoryGirl.create :employee_with_appointment
+        @user.employee = employee
+        @user.save
+
+        employee.last_name = "updated lastName"
+        employee.first_name = "updated firstName"
+        employee.phone_number = "444-222-4567"
+        employee.street_number = 3
+        employee.street_name = "updated Street"
+        employee.city = "updated city"
+        employee.province = "updated province"
+        employee.postal_code = "J2J 9Q9"
+        employee.start_date = "2058-12-12"
+        employee.end_date = "2060-11-11"
+        employee.notes = "updated note"
+
+        # Create a serializer instance
+        serializer = EmployeeSerializer.new(employee)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: employee.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['data']['id'].to_i).to eq(employee.id)
+        attr = parsed_response['data']['attributes']
+        expect(attr["last_name"]).to eq(employee.last_name)
+        expect(attr["first_name"]).to eq(employee.first_name)
+        expect(attr["phone_number"]).to eq(employee.phone_number)
+        expect(attr["street_number"].to_i).to eq(employee.street_number)
+        expect(attr["street_name"]).to eq(employee.street_name)
+        expect(attr["city"]).to eq(employee.city)
+        expect(attr["province"]).to eq(employee.province)
+        expect(attr["postal_code"]).to eq(employee.postal_code)
+        expect(attr["start_date"]).to eq("2058-12-12")
+        expect(attr["end_date"]).to eq("2060-11-11")
+        expect(attr["notes"]).to eq(employee.notes)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when the employee exists and the incorrect params were sent' do
+      it "responds successfully when user is an admin" do
         employee = FactoryGirl.create :employee_with_appointment
         employee.last_name = "testing"
         employee.first_name = "test"
@@ -296,13 +416,45 @@ RSpec.describe EmployeesController, :type => :controller do
         patch :update, params: {id: employee.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
-)
+        expect(parsed_response['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]})
+
+        expect(response).to have_http_status(:bad_request)
+      end
+
+      it "responds successfully when user is the employee (but not an admin)" do
+        @user.admin = false
+
+        employee = FactoryGirl.create :employee_with_appointment
+        @user.employee = employee
+        @user.save
+
+        employee.last_name = "testing"
+        employee.first_name = "test"
+        employee.phone_number = "0"
+        employee.street_number = "pp"
+        employee.street_name = "Albert Street"
+        employee.city = "Ottawa"
+        employee.province = "Ontario"
+        employee.postal_code = "J6"
+        employee.start_date = "jj"
+        employee.end_date = "kk"
+        employee.notes = "test note"
+
+        # Create a serializer instance
+        serializer = EmployeeSerializer.new(employee)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: employee.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]})
 
         expect(response).to have_http_status(:bad_request)
       end
     end
-
   end
 
   describe 'DELETE Employees#destroy' do
