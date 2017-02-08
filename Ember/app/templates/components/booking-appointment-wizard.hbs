@@ -135,6 +135,21 @@
                 <h3>Enter Date Selections</h3>
                 <hr>
               </div>
+              <div class="container">
+                <div class="schedule">
+                  <div class="calendar-view">
+                    {{full-calendar
+                      header=header
+                      aspectRatio=1
+                      viewName=viewName
+                      fixedWeekCount=false
+                      dayClick=(action 'handleCalendarDayClick')
+                    }}
+                  </div>
+                   <div class="calendar-times col-6">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div id="step-4">
