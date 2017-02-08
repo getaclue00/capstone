@@ -19,6 +19,17 @@ body {
   }
 }
 
+.map-container {
+  width: 100%;
+  height: 120px;
+  .map {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+}
+
 .page-title {
   padding-bottom: 20px;
   text-align:center;
