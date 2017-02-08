@@ -1,30 +1,25 @@
+require_dependency 'api_constraint'
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # rake routes gives us 2 same routes for POST /users
-  # When you run tests, you explicitly call the #create method of the UsersController, but when you send a 
-  # real request, it actually routes to devise/registrations#create. 
-  # we still need the Devise routes, since without them the sign_in method doesn't work. 
-  # To get the UsersController to be called upon sign up, set devise_for :users after the usersController namespace 
-  # The /users path should be handle by the api and not by devise. The routes file matches the first route when the server is asked to serve.
-  post "users", to: "users#create", constraints: { format: /(json)/ }
-  patch "/users/:id" => "users#update", constraints: { format: /(json)/ }
-
+  post "users", to: "users#create", constraints: ApiConstraint.new
+  patch "/users/:id" => "users#update", constraints: ApiConstraint.new
 
   devise_for :users, controllers: {
     sessions: 'sessions'
-  }
-  get "session/csrf", to: "session#csrf", constraints: { format: /(json)/ }
+  }, skip: [:registrations, :passwords]
 
-  #creating the RESTful resources
-  resources :clients, constraints: { format: /(json)/ }
-  resources :employees, constraints: { format: /(json)/ }
-  resources :cars, constraints: { format: /(json)/ }
-  resources :services, constraints: { format: /(json)/ }
-  resources :appointments, constraints: { format: /(json)/ }
-  get "users", to: 'users#index', constraints: { format: /(json)/ }
-  get "users/:id", to: 'users#show', constraints: { format: /(json)/ }
-  delete "/users/:id" => "users#destroy", constraints: { format: /(json)/ }
+  resources :clients
+  resources :employees, constraints: ApiConstraint.new
+  resources :cars
+  resources :services, constraints: ApiConstraint.new
+  resources :appointments, constraints: ApiConstraint.new
 
+  get "users", to: 'users#index', constraints: ApiConstraint.new
+  get "users/:id", to: 'users#show', constraints: ApiConstraint.new
+  delete "/users/:id" => "users#destroy", constraints: ApiConstraint.new
 
+  # catch-all route for any errors
+  get "*path", to: "application#catch_all_404", via: :all
 end

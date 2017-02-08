@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe ServicesController, :type => :controller do
-   include Devise::Test::ControllerHelpers
+  include Devise::Test::ControllerHelpers
 
   describe 'GET Services#index' do
     context 'when there are no services' do
@@ -52,7 +52,7 @@ RSpec.describe ServicesController, :type => :controller do
         expect(response).to have_http_status(:ok)
 
         attr = result["data"]["attributes"];
-        
+
         expect(attr["name"]).to eq("serviceA")
         expect(attr["price_small"].to_f).to eq(120.0)
         expect(attr["price_large"].to_f).to eq(250.0)
@@ -69,8 +69,17 @@ RSpec.describe ServicesController, :type => :controller do
   end
 
   describe "POST Services#create" do
+    # let(:current_user) { FactoryGirl.create :user }
+    #
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when the data is empty' do
       it "returns an error" do
+
         post :create
 
         result = JSON.parse(response.body)
@@ -95,7 +104,7 @@ RSpec.describe ServicesController, :type => :controller do
               },
               "type":"services"
               }
-      
+
             }
 
         params = JSON.parse(data.to_json)
@@ -123,7 +132,7 @@ RSpec.describe ServicesController, :type => :controller do
               },
               "type":"services"
               }
-      
+
             }
         params = JSON.parse(data.to_json)
 
@@ -133,12 +142,19 @@ RSpec.describe ServicesController, :type => :controller do
 
         expect(response).to have_http_status(:bad_request)
         expect(result['error']).to eq('Service creation failed. Check your data.')
-        
+
       end
     end
    end
 
   describe 'PATCH Service#update' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when no such service exists' do
       it 'returns an error' do
 
@@ -189,7 +205,7 @@ RSpec.describe ServicesController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: service.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
@@ -210,10 +226,17 @@ RSpec.describe ServicesController, :type => :controller do
     #no test to updating with invalid attributes
     #invalid attributes passed to an update dont result in failures, they simply result in 0 values being assigned
 
-      
+
   end
 
   describe 'DELETE Services#destroy' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when there are no services by such an id' do
       it 'returns an error' do
         delete :destroy, params: { id: 999 }
