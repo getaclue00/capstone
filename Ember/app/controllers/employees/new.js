@@ -12,13 +12,11 @@ export default Ember.Controller.extend({
         self.transitionToRoute('employees');
       }
 
-      function failure(reason) {
-        // handle the error
-        console.error('There was an error saving the employee: ');
-        console.error(reason);
+      function onError(error) {
+        throw error.message;
       }
 
-      employee.save().then(transitionToPost).catch(failure);
+      employee.save().then(transitionToPost).catch(onError);
     }
   }
 });
