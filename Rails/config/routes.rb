@@ -1,25 +1,27 @@
+require_dependency 'api_constraint'
+
 Rails.application.routes.draw do
   scope '/api' do
-    # constraints: lambda { |req| req.format == :json }
     post "users", to: "users#create"
     patch "/users/:id" => "users#update"
+    post "users", to: "users#create", constraints: ApiConstraint.new
+    patch "/users/:id" => "users#update", constraints: ApiConstraint.new
 
     devise_for :users, controllers: {
       sessions: 'sessions'
-    }
-    get "session/csrf", to: "session#csrf"
+    }, skip: [:registrations, :passwords]
 
-    #creating the RESTful resources
     resources :clients
-    resources :employees
+    resources :employees, constraints: ApiConstraint.new
     resources :cars
-    resources :services
-    resources :appointments
-    get "users", to: 'users#index'
-    get "users/:id", to: 'users#show'
-    delete "/users/:id" => "users#destroy"
+    resources :services, constraints: ApiConstraint.new
+    resources :appointments, constraints: ApiConstraint.new
+
+    get "users", to: 'users#index', constraints: ApiConstraint.new
+    get "users/:id", to: 'users#show', constraints: ApiConstraint.new
+    delete "/users/:id" => "users#destroy", constraints: ApiConstraint.new
   end
 
-  # putting wildcard back
-  get '*path' => redirect('/')
+  # catch-all route for any errors
+  get "*path", to: "application#catch_all_404", via: :all
 end

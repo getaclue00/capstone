@@ -53,7 +53,7 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(response).to have_http_status(:ok)
 
         attr = result["data"]["attributes"];
-        
+
         expect(attr["last_name"]).to eq("Radwan")
         expect(attr["first_name"]).to eq("Nada")
         expect(attr["phone_number"]).to eq("345-468-3444")
@@ -85,7 +85,7 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(response).to have_http_status(:ok)
 
         attr = result["data"]["attributes"];
-        
+
         expect(attr["last_name"]).to eq("Radwan")
         expect(attr["first_name"]).to eq("Nada")
         expect(attr["phone_number"]).to eq("345-468-3444")
@@ -106,6 +106,12 @@ RSpec.describe EmployeesController, :type => :controller do
   end
 
   describe "POST Employees#create" do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when the data is empty' do
       it "returns an error" do
         post :create
@@ -136,7 +142,7 @@ RSpec.describe EmployeesController, :type => :controller do
               },
               "type":"employees"
               }
-      
+
             }
 
         params = JSON.parse(data.to_json)
@@ -166,7 +172,7 @@ RSpec.describe EmployeesController, :type => :controller do
               },
               "type":"employees"
               }
-      
+
             }
         params = JSON.parse(data.to_json)
 
@@ -177,12 +183,18 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(response).to have_http_status(:bad_request)
         expect(result['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
 )
-        
+
       end
     end
    end
 
   describe 'PATCH Employee#update' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when no such employee exists' do
       it 'returns an error' do
 
@@ -237,12 +249,12 @@ RSpec.describe EmployeesController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: employee.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['data']['id'].to_i).to eq(employee.id)
-        attr = parsed_response['data']['attributes']      
+        attr = parsed_response['data']['attributes']
         expect(attr["last_name"]).to eq(employee.last_name)
         expect(attr["first_name"]).to eq(employee.first_name)
         expect(attr["phone_number"]).to eq(employee.phone_number)
@@ -280,7 +292,7 @@ RSpec.describe EmployeesController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: employee.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
@@ -294,6 +306,12 @@ RSpec.describe EmployeesController, :type => :controller do
   end
 
   describe 'DELETE Employees#destroy' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when there are no employees by such an id' do
       it 'returns an error' do
         delete :destroy, params: { id: 999 }
@@ -338,10 +356,10 @@ RSpec.describe EmployeesController, :type => :controller do
         expect(response).to have_http_status(:no_content)
         #validate that associated user is deleted
         begin
-            User.find(user_id)
-            expect("user was not deleted").to eq("user was deleted")
+          User.find(user_id)
+          expect("user was not deleted").to eq("user was deleted")
         rescue ActiveRecord::RecordNotFound => e
-            expect(0).to eq(0)
+          expect(0).to eq(0)
         end
       end
     end
