@@ -5,11 +5,13 @@
         <button type="button" class="close" aria-label="Close" {{action 'toggleSelectTime'}}>
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="appointment-time-selection-show">Available Times</h4>
+        <h4 class="modal-title" id="appointment-time-selection-show">Available Times for {{selectedDate}}</h4>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-
+            {{#each availableTimes as |t|}}
+            <button type="button" class="btn btn-outline-info">{{t}}</button>
+            {{/each}}
         </div>
       </div>
       <div class="modal-footer">
