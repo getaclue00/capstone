@@ -14,10 +14,9 @@ export default Ember.Controller.extend({
         self.transitionToRoute('services');
       }
 
-      function failure(reason) {
+      function failure(error) {
         // handle the error
-        console.error('There was an error saving the service: ');
-        console.error(reason);
+        throw(error.message);
       }
 
       service.save().then(transitionToPost).catch(failure);
