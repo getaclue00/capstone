@@ -38,10 +38,6 @@ test('#saveEmployee throws as error following a failed creation', function(asser
   });
 
   assert.throws(ctrl.send('saveEmployee'),
-   {
-	  "message": "Cannot read property 'call' of undefined",
-	  "name": "TypeError"
-	},
    "throws with just a message, not using the 'expected' argument");
 
 });

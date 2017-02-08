@@ -38,10 +38,6 @@ test('#updateEmployee throws as error following a failed update', function(asser
   });
 
   assert.throws(ctrl.send('updateEmployee'),
-   {
-	  "message": "Cannot read property 'call' of undefined",
-	  "name": "TypeError"
-	},
    "throws with just a message, not using the 'expected' argument");
 
 });

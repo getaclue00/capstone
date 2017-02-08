@@ -15,7 +15,7 @@ test('checking type', function(assert) {
 
 
 
-test('#deleteEmployee deletes the employee', function(assert) {
+test('#deleteEmployee deletes and redirects to employees page', function(assert) {
   var done = assert.async(); //Tell QUnit to wait for the done() call inside the timeout.
   const ctrl = this.subject({
       model: Ember.Object.create({
@@ -48,9 +48,5 @@ test('#deleteEmployee throws an error following a failed deletion', function(ass
       })
   });
   assert.throws(ctrl.send('deleteEmployee'),  		
-	{
-	  "message": "Cannot read property 'call' of undefined",
-	  "name": "TypeError"
-	},
     "throws with just a message, not using the 'expected' argument");
 });
