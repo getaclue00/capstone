@@ -103,27 +103,21 @@
             </div>
             <br />
             <div class="row">
-              <div class="col-md-4 text-center">
+              <div class="col-md-6 text-center">
                 <h5>Make</h5>
-                <select class="custom-select">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
+                <input list="car-make" value="Ford" class="form-control col-6" style="display: inline;">
+                <datalist id="car-make">
+                  <option value="Ford" />
+                  <option value="Toyota" />
+                  <option value="Honda" />
+                  <option value="Hyundai" />
+                  <option value="Dodge" />
+                  <option value="BMW" />
+                </datalist>
               </div>
-              <div class="col-md-4 text-center">
-                <h5>Model</h5>
-                <select class="custom-select">
-                  <option selected>Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-              <div class="col-md-4 text-center">
+              <div class="col-md-6 text-center">
                 <h5>Colour</h5>
-                <input list="car-colour" value="Blue" class="form-control col-4">
+                <input list="car-colour" value="Blue" class="form-control col-6" style="display: inline;">
                 <datalist id="car-colour">
                   <option value="Blue" />
                   <option value="Red" />
