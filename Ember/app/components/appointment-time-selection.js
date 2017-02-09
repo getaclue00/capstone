@@ -4,7 +4,7 @@ import moment from 'moment';
 export default Ember.Component.extend({
 
   availableTimes: Ember.computed('params.[]', function(){
-    var arrayTime = new Array();
+    var arrayTime = [];
     var start = this.get('businessHours.start');
     var end = this.get('businessHours.end');
     var timeDiff = moment(end,"HH:mm").diff(moment(start,"HH:mm"));
@@ -47,7 +47,8 @@ export default Ember.Component.extend({
 
   actions: {
 
-    toggleSelectTime(){
+    resetForm(){
+      this.get('model').set('employee', null);
       this.set('selectTime', false);
     },
 

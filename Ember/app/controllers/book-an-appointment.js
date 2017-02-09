@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Controller.extend({
   selectTime: false,
@@ -19,7 +20,7 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    handleCalendarDayClick(date, jsEvent, view) {
+    handleCalendarDayClick(date) {
       if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
         if(this.get('businessHours.dow').indexOf(parseInt(date.format('e'), 10)) > -1){
           this.set('selectedDate', moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY'));
