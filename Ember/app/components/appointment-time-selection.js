@@ -5,14 +5,18 @@ export default Ember.Component.extend({
 
   availableTimes: Ember.computed('params.[]', function(){
     var arrayTime = new Array();
+    var start = this.get('businessHours.start');
+    var end = this.get('businessHours.end');
+    var timeDiff = moment(end,"HH:mm").diff(moment(start,"HH:mm"));
+    var time = start;
 
-    for(var i = 0; i < 5; i++){
-       console.log("s");
-      arrayTime.push(moment("123", "hmm").format("HH:mm"));
+    for(var i = 0 ; i < timeDiff; i+=1800000){
+
+      arrayTime.push(moment(time, "HH:mm").format("HH:mm"));
+      time = moment(time, "HH:mm").add(30, 'minutes');
     }
 
     return arrayTime;
-
   }),
 
   aSelectedEmployee: Ember.computed('model.employee', function(){

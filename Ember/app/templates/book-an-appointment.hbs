@@ -73,8 +73,6 @@
                       viewName=viewName
                       fixedWeekCount=false
                       businessHours=businessHours
-                      selectConstraint=businessHours
-                      dow=dow
                       dayClick=(action 'handleCalendarDayClick')
                     }}
                   </div>
@@ -84,6 +82,7 @@
                       selectedDate=selectedDate
                       model=appointment
                       listOfEmployees=employees
+                      businessHours=businessHours
                     }}
                   {{/if}}
                   <div class="authors"></div>

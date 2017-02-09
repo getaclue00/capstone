@@ -107,10 +107,12 @@ $breakpoint-alpha: 768px;
 }
 
 .btn-circle {
-
   margin: 0.2em;
 }
 
+.time-button {
+  margin: 5px;
+}
 //Styling for computer
 @media (min-width: $breakpoint-alpha) {
 

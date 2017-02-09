@@ -9,8 +9,8 @@ export default Ember.Controller.extend({
     // days of week. an array of zero-based day of week integers (0=Sunday)
     dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday Friday
 
-    start: '10:00', // a start time (10am in this example)
-    end: '18:00',
+    start: '9:00', // a start time (10am in this example)
+    end: '17:00',
   },
   header: {
     left:   'today',
@@ -25,8 +25,6 @@ export default Ember.Controller.extend({
           this.set('selectedDate', moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY'));
           this.set('selectTime', true);
         }
-      } else {
-        // Else part is for past dates
       }
     }
   }
