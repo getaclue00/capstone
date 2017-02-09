@@ -2,6 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  showLocationMap: false,
+
+  showLocationMapDiv: Ember.computed('model.location', function() {
+    let location = this.get('model.location');
+    if (Ember.isEmpty(location)) {
+      this.set('showLocationMap', false);
+      return false;
+    } else {
+      return true;
+    }
+  }),
+
   wasServiceSelected: Ember.computed('model.service', function(){
     let service = this.get('model.service');
 

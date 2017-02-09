@@ -17,7 +17,6 @@ export default Ember.Service.extend({
     let element = this.get(`cachedMaps.${camelizedLocation}`);
     if (!element) {
       element = this.createMapElement();
-      this.get('mapUtil').getCoordinates(location);
       this.get('mapUtil').createMap(element, location);
       this.set(`cachedMaps.${camelizedLocation}`, element);
     }
