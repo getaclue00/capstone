@@ -20,10 +20,10 @@ export default Ember.Controller.extend({
 
       if (this.get('model').get('confirm') === this.get('model').get('password')){
 	    	this.get('model').save().then(onSuccessful).catch(onError);
-	  }else{
+	    }else{
 	    	window.scrollTo(0,0);
         flashMessages.danger('Passwords do not match!');
-	  }   
+	    }   
     }
   }
 });
