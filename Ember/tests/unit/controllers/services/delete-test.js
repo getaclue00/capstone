@@ -44,9 +44,5 @@ test('#deleteService throws an error following a failed deletion', function(asse
       })
     });
   assert.throws(controller.send('deleteService'),
-  	{
-	  "message": "Cannot read property 'call' of undefined",
-	  "name": "TypeError"
-	},
    "throws with just a message, not using the 'expected' argument");
 });
