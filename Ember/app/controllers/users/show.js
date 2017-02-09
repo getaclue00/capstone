@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 
       function onError(error) {
         window.scrollTo(0,0);
-        flashMessages.success('Account was not updated');
+        flashMessages.danger('Account was not updated');
         throw error.message;
       }
 
@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
 	    	this.get('model').save().then(onSuccessful).catch(onError);
 	  }else{
 	    	window.scrollTo(0,0);
-        flashMessages.success('Passwords do not match!');
+        flashMessages.danger('Passwords do not match!');
 	  }   
     }
   }

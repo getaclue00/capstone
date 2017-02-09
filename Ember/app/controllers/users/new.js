@@ -7,7 +7,6 @@ export default Ember.Controller.extend({
     // Action for saving a new service
     createUser() {
       var flashMessages = this.get('flashMessages');
-
       let user = this.get('model');
 
       var self = this;
@@ -18,16 +17,16 @@ export default Ember.Controller.extend({
 
       function onError(error) {
         window.scrollTo(0,0);
-        flashMessages.success('Account was not created');
+        flashMessages.danger('Account was not created');
         throw error.message;
       }
 
       if (this.get('model').get('confirm') === this.get('model').get('password')){
           user.save().then(onSuccessful).catch(onError);
-	  }else{
+	    }else{
 	    	window.scrollTo(0,0);
-        flashMessages.success('Passwords do not match!');
-	  }   
+        flashMessages.danger('Passwords do not match!');
+	    }   
     }
   }
 });
