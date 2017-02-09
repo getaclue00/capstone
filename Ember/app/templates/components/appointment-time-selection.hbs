@@ -9,9 +9,27 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
+          <div class="form-group">
+            <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Staff:</label>
+            <div class="col-xs-12">
+              {{#power-select
+                options=listOfEmployees
+                selected=aSelectedEmployee
+                renderInPlace=true
+                searchField="fullName"
+                placeholder="Select a staff member"
+                onchange=(action "selectEmployee")
+                as |employee|
+              }}
+               {{employee.fullName}}
+              {{/power-select}}
+            </div>
+          </div>
+          {{#if wasEmployeeSelected}}
             {{#each availableTimes as |t|}}
             <button type="button" class="btn btn-outline-info">{{t}}</button>
             {{/each}}
+          {{/if}}
         </div>
       </div>
       <div class="modal-footer">

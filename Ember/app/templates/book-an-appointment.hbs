@@ -1,5 +1,4 @@
 <div class="container-fluid">
-  <!-- page content -->
   <h2 class="text-center">Booking Information</h2>
   <div class="row">
     <div class="col-12">
@@ -47,7 +46,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{#each model.services as |s|}}
+                    {{#each services as |s|}}
                       <tr>
                         <td>{{s.name}}</td>
                         <td>{{s.duration}}</td>
@@ -74,6 +73,8 @@
                       viewName=viewName
                       fixedWeekCount=false
                       businessHours=businessHours
+                      selectConstraint=businessHours
+                      dow=dow
                       dayClick=(action 'handleCalendarDayClick')
                     }}
                   </div>
@@ -81,6 +82,8 @@
                     {{appointment-time-selection
                       selectTime=selectTime
                       selectedDate=selectedDate
+                      model=appointment
+                      listOfEmployees=employees
                     }}
                   {{/if}}
                   <div class="authors"></div>

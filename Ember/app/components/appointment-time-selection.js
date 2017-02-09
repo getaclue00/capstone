@@ -3,8 +3,6 @@ import moment from 'moment';
 
 export default Ember.Component.extend({
 
-  // startTime: moment('8:00 AM').format('HH:mm A'),
-  // endTime: moment('5:00 PM').format('HH:mm A'),
   availableTimes: Ember.computed('params.[]', function(){
     var arrayTime = new Array();
 
@@ -15,6 +13,22 @@ export default Ember.Component.extend({
 
     return arrayTime;
 
+  }),
+
+  aSelectedEmployee: Ember.computed('model.employee', function(){
+    return this.get('model.employee');
+  }),
+
+  wasEmployeeSelected: Ember.computed('model.employee', function(){
+    let employee = this.get('model.employee');
+
+    if (employee) {
+      if (employee.get('firstName') && employee.get('lastName')) {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }),
 
  didInsertElement() {
@@ -31,6 +45,12 @@ export default Ember.Component.extend({
 
     toggleSelectTime(){
       this.set('selectTime', false);
-    }
+    },
+
+    selectEmployee(employee) {
+      if(!Ember.isEmpty(employee)){
+        this.get('model').set('employee', employee);
+      }
+    },
   }
 });
