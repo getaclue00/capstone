@@ -1,89 +1,72 @@
-// import { moduleFor, test } from 'ember-qunit';
-// import Ember from 'ember';
-//
-// moduleFor('controller:my-calendar/appointments/show', 'Unit | Controller | my calendar/appointments/show', {
-// });
-//
-// test('#deleteAppointment transitionsTo my-calendar', function(assert) {
-//   // let controller = this.subject();
-//   let controller = this.subject({
-//       appointment: Ember.Object.create({
-//         destroyRecord() {
-//           return new Ember.RSVP.Promise(function(resolve) {
-//             resolve(true);
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'my-calendar');
-//       }
-//   });
-//
-//   controller.send('deleteAppointment');
-//
-//   assert.ok(controller);
-// });
-//
-// test('#deleteAppointment will NOT transitionsTo my-calendar', function(assert) {
-//   // let controller = this.subject();
-//   let controller = this.subject({
-//       appointment: Ember.Object.create({
-//         destroyRecord() {
-//           return new Ember.RSVP.Promise(function(resolve, reject) {
-//             reject({ error: 'could not destroy a record' });
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'my-calendar');
-//       }
-//   });
-//
-//   // controller.send('deleteAppointment');
-//
-//   assert.throws(controller.send('deleteAppointment'), "throws with just a message, not using the 'expected' argument");
-//
-//   // assert.ok(controller);
-// });
-//
-// test('#saveAppointment transitionsTo my-calendar', function(assert) {
-//   // let controller = this.subject();
-//   let controller = this.subject({
-//       appointment: Ember.Object.create({
-//         save() {
-//           return new Ember.RSVP.Promise(function(resolve) {
-//             resolve(true);
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'my-calendar');
-//       }
-//   });
-//
-//   controller.send('saveAppointment');
-//
-//   assert.ok(controller);
-// });
-//
-// test('#saveAppointment will NOT transitionsTo my-calendar', function(assert) {
-//   // let controller = this.subject();
-//   let controller = this.subject({
-//       appointment: Ember.Object.create({
-//         save() {
-//           return new Ember.RSVP.Promise(function(resolve, reject) {
-//             reject({ error: 'could not destroy a record' });
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'my-calendar');
-//       }
-//   });
-//
-//   // controller.send('deleteAppointment');
-//
-//   assert.throws(controller.send('saveAppointment'), "throws with just a message, not using the 'expected' argument");
-//
-//   // assert.ok(controller);
-// });
+import { moduleFor, test } from 'ember-qunit';
+import Ember from 'ember';
+
+moduleFor('controller:my-calendar/appointments/show', 'Unit | Controller | my calendar/appointments/show', {
+});
+
+test('#deleteAppointment transitionsTo my-calendar', function(assert) {
+  var done = assert.async();
+  let ctrl = this.subject({
+      appointment: Ember.Object.create({
+        destroyRecord() {
+          return new Ember.RSVP.Promise(function(resolve) {
+            resolve(true);
+          });
+        }
+      }),
+      transitionToRoute(route) {
+        assert.equal(route, 'my-calendar');
+        done();
+      }
+  });
+
+  ctrl.send('deleteAppointment');
+
+  assert.ok(ctrl);
+});
+
+test('#deleteAppointment throws an error following a failed delete', function(assert) {
+  let ctrl = this.subject({
+      appointment: Ember.Object.create({
+        destroyRecord() {
+          return new Ember.RSVP.Promise(function(resolve, reject) {
+            reject({ error: 'could not destroy a record' });
+          });
+        }
+      })
+  });
+
+  assert.throws(ctrl.send('deleteAppointment'), "throws with just a message, not using the 'expected' argument");
+});
+
+test('#saveAppointment transitionsTo my-calendar', function(assert) {
+  var done = assert.async();
+  let ctrl = this.subject({
+      appointment: Ember.Object.create({
+        save() {
+          return new Ember.RSVP.Promise(function(resolve) {
+            resolve(true);
+          });
+        }
+      }),
+      transitionToRoute(route) {
+        assert.equal(route, 'my-calendar');
+        done();
+      }
+  });
+  ctrl.send('saveAppointment');
+  assert.ok(ctrl);
+});
+
+test('#saveAppointment throws an error following a failed update', function(assert) {
+  let ctrl = this.subject({
+      appointment: Ember.Object.create({
+        save() {
+          return new Ember.RSVP.Promise(function(resolve, reject) {
+            reject({ error: 'could not update a record' });
+          });
+        }
+      })
+  });
+  assert.throws(ctrl.send('saveAppointment'), "throws with just a message, not using the 'expected' argument");
+});
