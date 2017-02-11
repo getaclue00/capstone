@@ -23,8 +23,12 @@ Employee.create({ id: '2', last_name: 'Wayne', first_name: 'Bruce', phone_number
 User.create({email: 'test@test.com', password: 'password', admin: true, employee_id: '1'})
 User.create({email: 'batman@batman.com', password: 'password', admin: false, employee_id: '2'})
 
-Service.create({name: 'Engine Degreasing', price_small: '99', price_large: '99', duration: '90', description: '...', active: true, displayable: true})
-Service.create({name: 'Platinum', price_small: '159', price_large: '179', duration: '150', description: '...', active: true, displayable: true})
-Service.create({name: 'Silver', price_small: '90', price_large: '79', duration: '99', description: '...', active: true, displayable: true})
-Service.create({name: 'Shampoo for Tough Stains and Spills', price_small: '100', price_large: '130', duration: '90', description: '...', active: true, displayable: true})
+Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'small', duration: '90', description: '...', active: true, displayable: true})
+Service.create({name: 'Platinum', price: '159', vehicle_size: 'small', duration: '150', description: '...', active: true, displayable: true})
+Service.create({name: 'Silver', price: '90', vehicle_size: 'small', duration: '99', description: '...', active: true, displayable: true})
+Service.create({name: 'Shampoo for Tough Stains and Spills', price: '100', vehicle_size: 'small', duration: '90', description: '...', active: true, displayable: true})
 
+Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'large', duration: '90', description: '...', active: true, displayable: true})
+Service.create({name: 'Platinum', price: '179', vehicle_size: 'large', duration: '150', description: '...', active: true, displayable: true})
+Service.create({name: 'Silver', price: '79', vehicle_size: 'large', description: '...', active: true, displayable: true})
+Service.create({name: 'Shampoo for Tough Stains and Spills', price: '130', vehicle_size: 'large', duration: '90', description: '...', active: true, displayable: true})
