@@ -6,10 +6,30 @@ moduleForModel('employee', 'Unit | Model | employee', {
   needs: ['model:appointment', 'model:user']
 });
 
+test('checking fullName', function(assert) {
+  assert.expect(1);
+  const ctrl = this.subject({firstName: 'Bruce', lastName: 'Wayne'});
+  assert.equal(ctrl.get('fullName'), 'Bruce Wayne', 'fullName properly computed');
+});
+
+test('checking address', function(assert) {
+  assert.expect(1);
+  const ctrl = this.subject({streetNumber: '23', streetName: 'Bank Street', city: 'Ottawa' , postalCode: "R3T 5E5"});
+  assert.equal(ctrl.get('address'), '23-Bank Street, Ottawa, undefined, R3T 5E5', 'address properly computed');
+});
+
+test('checking formattedStartDate', function(assert) {
+  assert.expect(1);
+  const ctrl = this.subject({startDate: "11/11/2016"});
+
+  var re = /(\d){4}-(\d){2}-(\d){2}T(\d){2}:(\d){2}/g;
+  assert.ok(re.test(ctrl.get('formattedStartDate')));
+});
+
 test('should own appointments', function(assert) {
   const Employee = this.store().modelFor('employee');
   const relationship = Ember.get(Employee, 'relationshipsByName').get('appointments');
-  // let store = this.store();
+
   assert.equal(relationship.key, 'appointments', 'has relationship with appointments');
   assert.equal(relationship.kind, 'hasMany', 'kind of relationship is hasMany');
 });

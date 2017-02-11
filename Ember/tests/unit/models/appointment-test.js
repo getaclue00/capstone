@@ -18,9 +18,8 @@ test('checking default values for variables', function(assert) {
 
 test('checking formattedStart', function(assert) {
   assert.expect(4);
-  const ctrl = this.subject();
+  const ctrl = this.subject({start: "11/11/2016"});
 
-  ctrl.set('model',Ember.Object.create({ start: "11/11/2016" , weekNumber: 4}));
   var re = /(\d){4}-(\d){2}-(\d){2}T(\d){2}:(\d){2}/g;
   assert.ok(re.test(ctrl.get('formattedStart')));
 
@@ -35,9 +34,8 @@ test('checking formattedStart', function(assert) {
 
 test('checking formattedEnd', function(assert) {
   assert.expect(3);
-  const ctrl = this.subject();
+  const ctrl = this.subject({end: "11/11/2016"});
 
-  ctrl.set('model',Ember.Object.create({ end: "11/11/2016" }));
   var re = /(\d){4}-(\d){2}-(\d){2}T(\d){2}:(\d){2}/g;
   assert.ok(re.test(ctrl.get('formattedEnd')));
 
