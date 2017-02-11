@@ -6,10 +6,12 @@ moduleForModel('user', 'Unit | Model | user', {
   needs: ['model:employee']
 });
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+test('checking default values for variables', function(assert) {
+  assert.expect(2);
+  const ctrl = this.subject();
+
+  assert.equal(ctrl.get('email'), "not setup", 'email default value properly set');
+  assert.equal(ctrl.get('admin'), false, 'admin default value properly set');
 });
 
 test('should belong to an employee', function (assert){
