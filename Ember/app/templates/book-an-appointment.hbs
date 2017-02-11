@@ -41,15 +41,13 @@
                   <thead>
                     <tr>
                       <th>Service</th>
-                      <th>Duration</th>
                       <th>Price</th>
                     </tr>
                   </thead>
                   <tbody>
                     {{#each services as |s|}}
                       <tr>
-                        <td>{{s.name}}</td>
-                        <td>{{s.duration}}</td>
+                        <td><button class="btn btn btn-outline-primary" {{action 'selectService' s}}>{{s.name}}</button></td>
                         <td>{{s.price_small}}</td>
                       </tr>
                     {{/each}}
