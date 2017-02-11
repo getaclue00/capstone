@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  sizes: ["small", "large"],
 
   didInsertElement() {
     this._super(...arguments);
@@ -17,17 +18,27 @@ export default Ember.Component.extend({
     Ember.$('#myModal').modal('hide');
   },
 
-  yesNoTranslationMap: {'Yes': true, 'No': false},
+  selectedVehicleSize: Ember.computed('model.vehicle_size', function(){
+    return this.get('model.vehicle_size');
+  }),
 
   actions: {
 
     // Used to change the selected value for service's displayable attribute
     selectDisplayable(value) {
-      this.set('model.displayable', value);
+      var displayable = (value ? false : true);
+      this.set('model.displayable', displayable);
     },
     // Used to change the selected value for service's active attribute
     selectActive(value) {
-      this.set('model.active', value);
+      var active = (value ? false : true);
+      this.set('model.active', active);
+    },
+
+    selectVehicleSize(size) {
+      if(!Ember.isEmpty(size)){
+        this.get('model').set('vehicle_size', size);
+      }
     }
   }
 });

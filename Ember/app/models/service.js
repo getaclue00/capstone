@@ -13,14 +13,10 @@ export default Model.extend({
   active:       attr('boolean', { defaultValue: false }),
   displayable:  attr('boolean', { defaultValue: false }),
   appointments: hasMany('appointment', { async: true }),
-  formattedActive: computed('active', {
-    get() {
+  formattedActive: computed('active', function(){
       return (this.get('active') ? 'Yes' : 'No');
-    },
   }),
-  formattedDisplayable: computed('end', {
-    get() {
+  formattedDisplayable: computed('displayable', function(){
       return (this.get('displayable') ? 'Yes' : 'No');
-    }
   })
 });
