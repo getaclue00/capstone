@@ -15,12 +15,16 @@
           }}
         </div>
       </div>
-      <div class="modal-footer">
-        {{#link-to 'users.delete' model.id}}
-          <button type="button" class="btn btn-tertiary btn-danger btn-md btn-block" >Delete Account</button>
-        {{/link-to}}
-        <button type="button" class="btn btn-secondary" {{action 'goBackToListOfEmployees'}}>Close</button>
-        <button type="button" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>
+      <div class="modal-footer" style="display: inline">
+        <div style="text-align: right">
+          <button type="button" class="btn btn-secondary" {{action 'goBackToListOfEmployees'}}>Close</button>
+          <button type="button" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>
+        </div>
+        <div style="margin-top: 20px">
+          {{#link-to 'users.delete' model.id}}
+            <button type="button" class="btn btn-tertiary btn-danger btn-md btn-block" >Delete Account</button>
+          {{/link-to}}
+        </div>
       </div>
     </div>
   </div>
