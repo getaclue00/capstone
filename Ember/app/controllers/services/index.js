@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   attributes: {"name": "Name of Service", "duration" : "Duration (minutes):", "price" : "Price ($)",
                 "formattedActive": "Active", "formattedDisplayable": "Displayable"},
 
-  operations: {'services.show': 'glyphicon-pencil', 'services.delete': 'glyphicon-minus'},
+  operations: {'services.show': 'glyphicon-pencil', 'services.delete': 'glyphicon-remove'},
 
-
+  collection: 'services'
 });

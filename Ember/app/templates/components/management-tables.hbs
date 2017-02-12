@@ -4,6 +4,9 @@
       {{#each headers as |header|}}
         <th><h1>{{header}}</h1></th>
       {{/each}}
+      {{#if employeeCollection}}
+        <th><h1>User Account</h1></th>
+      {{/if}}
       <th></th>
     </tr>
   </thead>
@@ -15,6 +18,19 @@
           {{get m key}}
         </td>
         {{/each-in}}
+        {{#if employeeCollection}}
+          <td>
+          {{#if m.user}}
+            {{#link-to 'users.show' m.user.id class="dropdown-item"}}
+              <span class="glyphicon glyphicon-user"></span>
+            {{/link-to}}
+          {{else}}
+            {{#link-to 'users.new' m.id class="dropdown-item"}}
+              <span class="glyphicon glyphicon-plus"></span>
+            {{/link-to}}
+          {{/if}}
+          </td>
+        {{/if}}
         <td class='management-buttons'>
         {{#each-in operations as |key value|}}
          <div class='management-operation'>
