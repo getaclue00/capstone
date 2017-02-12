@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  sizes: ["small", "large"],
+  sizes: ["Small", "Large"],
 
   didInsertElement() {
     this._super(...arguments);

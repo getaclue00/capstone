@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :service do
     name "serviceA"
     price 120.0
-    vehicle_size 'small'
+    vehicle_size 'Small'
     duration 2.0
     description "This is a description"
     active true

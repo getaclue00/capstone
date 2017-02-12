@@ -37,7 +37,7 @@
       <div class="row">
         <label for="service-active" class="col-5 col-form-label">Service Active?</label>
         <div class="admin-switch" {{action 'selectActive' model.active}}>
-          {{input type="checkbox" class="checkbox" checked=model.active}}
+          {{input type="checkbox" id="service-active" class="checkbox" checked=model.active}}
           <div class="slider round"></div>
         </div>
       </div>
@@ -45,7 +45,7 @@
     <div class="form-group row">
       <label for="service-displayable" class="col-5 col-form-label">Service Displayable?</label>
       <div class="admin-switch" {{action 'selectDisplayable' model.displayable}}>
-        {{input type="checkbox" class="checkbox" checked=model.displayable}}
+        {{input type="checkbox" id="service-displayable" class="checkbox" checked=model.displayable}}
         <div class="slider round"></div>
       </div>
     </div>
