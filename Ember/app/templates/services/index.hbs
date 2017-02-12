@@ -1,16 +1,35 @@
 <div class="management-div">
   <div class="management-title-div">
-      <h3>Manage Services</h3>
+      <h4><span class="glyphicon glyphicon-tag" style="margin: 0px 0.5em;"></span>Manage Services</h4>
   </div>
-  <br>
-  {{
-    management-tables
-    model=model
-    headers=headers
-    attributes=attributes
-    operations=operations
-  }}
-
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a href="#small-vehicle-list" data-toggle="tab" class="nav-link active">Small Vehicles</a></li>
+    <li class="nav-item"><a href="#large-vehicle-list" data-toggle="tab" class="nav-link">Large Vehicles</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="small-vehicle-list">
+      <div>
+          {{
+            management-tables
+            model=model.serviceForSmallCars
+            headers=headers
+            attributes=attributes
+            operations=operations
+          }}
+      </div>
+    </div>
+    <div class="tab-pane fade" id="large-vehicle-list">
+      <div>
+        {{
+          management-tables
+          model=model.servicesForLargeVehicles
+          headers=headers
+          attributes=attributes
+          operations=operations
+        }}
+      </div>
+    </div>
+  </div>
   <div class="buttons service-button">
      {{#link-to 'services.new' class="managing" }}
       <span class="glyphicon glyphicon-plus"></span> Add New Service

@@ -2,7 +2,18 @@ class ServicesController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def index
-    services_array=Service.all
+
+    if params[:filter].present?
+      if  params[:filter][:vehicle_size].present?
+         services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
+      else
+
+      end
+
+    else
+      services_array=Service.all
+    end
+
     if services_array && !services_array.empty?
       render json: services_array, status: :ok
     else
