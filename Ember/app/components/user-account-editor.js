@@ -20,8 +20,8 @@ export default Ember.Component.extend({
   actions: {
 
     // Used to change the selected value for user's admin attribute
-    selectAdmin(value) {
-      this.set('model.admin', value);
+    selectAdmin() {
+      this.toggleProperty('model.admin');
     }
   }
 });

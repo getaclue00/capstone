@@ -30,18 +30,11 @@
     	</div>
   </div>
 </div>
-<div class="form-group">
-  <label for="user-admin" class="col-sm-4 col-form-label font-weight-bold" style="text-transform: uppercase;">Admin</label>
-  <div class="col-sm-12">
-  	<div class="input-group">
-      {{#x-select action='selectAdmin' id="admin-select" value=model.admin as |xs|}}
-        {{#each-in yesNoTranslationMap as |key value|}}
-          {{#xs.option value=value}}
-            {{key}}
-          {{/xs.option}}
-        {{/each-in}}
-      {{/x-select}}
-    </div>
+<div class="form-group row">
+  <label for="user-admin" class="col-sm-3 col-form-label font-weight-bold" style="text-transform: uppercase;">Admin</label>
+    <div class="admin-switch" {{action 'selectAdmin'}}>
+      {{input type="checkbox" id="user-admin" class="checkbox" checked=model.admin}}
+    <div class="slider round"></div>
   </div>
 </div>
 

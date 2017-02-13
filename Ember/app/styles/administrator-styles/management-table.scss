@@ -137,7 +137,7 @@ $breakpoint-alpha: 660px;
       border-top: none;
       border-left: none;
       border-right: none;
-      border-bottom: 2px solid red;
+      border-bottom: 0.65em solid red;
       background-color: #f9f9f9;
       color: black;
     }
@@ -146,12 +146,12 @@ $breakpoint-alpha: 660px;
       border-radius: 0px;
       background-color: #f9f9f9;
       color: #d3d3d3;
-      margin: 10px 0px;
+      margin: 0px;
     }
 
     .nav .nav-item a:hover {
       border: none;
-      border-bottom: 2px solid red;
+      border-bottom: 0.65em solid red;
     }
 }
 
@@ -173,6 +173,10 @@ $breakpoint-alpha: 660px;
     font-weight: normal;
     text-shadow: 0 0.5px 0.5px #fff;
     margin: 0px;
+
+    span {
+      margin: 0px 0.5em;
+    }
   }
 }
 
