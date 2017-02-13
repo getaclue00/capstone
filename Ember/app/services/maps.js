@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import MapUtil from '../utils/google-maps';
 
+// references https://guides.emberjs.com/v2.11.0/tutorial/service/
+
 export default Ember.Service.extend({
 
   init() {
@@ -13,7 +15,7 @@ export default Ember.Service.extend({
   },
 
   getMapElement(location) {
-    let camelizedLocation = location.camelize();
+    let camelizedLocation = 'capstone' + location.replace(/,/g,'').camelize();
     let element = this.get(`cachedMaps.${camelizedLocation}`);
     if (!element) {
       element = this.createMapElement();

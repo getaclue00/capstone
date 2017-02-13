@@ -10,27 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122202040) do
+ActiveRecord::Schema.define(version: 20170208225931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "status",                               default: "pending",             null: false
-    t.datetime "created_at",                                                           null: false
-    t.datetime "updated_at",                                                           null: false
-    t.string   "color",                                default: "#AB00FF",             null: false
-    t.string   "text_color",                           default: "#FFFFFF",             null: false
-    t.string   "title",                                default: "New Appointment",     null: false
-    t.datetime "start",                                default: '2016-10-23 09:10:00', null: false
-    t.datetime "end",                                  default: '2016-12-31 09:10:00', null: false
+    t.string   "status",                               default: "pending",                 null: false
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
+    t.string   "color",                                default: "#AB00FF",                 null: false
+    t.string   "text_color",                           default: "#FFFFFF",                 null: false
+    t.string   "title",                                default: "New Appointment",         null: false
+    t.datetime "start",                                default: '2016-10-23 09:10:00',     null: false
+    t.datetime "end",                                  default: '2016-12-31 09:10:00',     null: false
     t.text     "notes"
     t.integer  "car_id"
-    t.integer  "service_id",                                                           null: false
-    t.integer  "employee_id",                          default: 0,                     null: false
+    t.integer  "service_id",                                                               null: false
+    t.integer  "employee_id",                          default: 0,                         null: false
     t.integer  "week_number",                          default: 0
     t.decimal  "cost",        precision: 10, scale: 2, default: "0.0"
     t.integer  "year",                                 default: 2017
+    t.string   "location",                             default: "174 Bank St, Ottawa, On"
     t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
     t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
     t.index ["service_id"], name: "index_appointments_on_service_id", using: :btree
@@ -74,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170122202040) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-01-31'
+    t.date     "start_date",               default: '2017-01-26'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"

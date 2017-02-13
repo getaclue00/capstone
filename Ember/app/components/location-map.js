@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+// references https://guides.emberjs.com/v2.11.0/tutorial/service/
+
 export default Ember.Component.extend({
   maps: Ember.inject.service(),
 

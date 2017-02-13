@@ -1,25 +1,27 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
-moduleForComponent('location-map', 'Integration | Component | location map', {
-  integration: true
+// references https://guides.emberjs.com/v2.11.0/tutorial/service/
+
+let stubMapsService = Ember.Service.extend({
+  getMapElement(location) {
+    this.set('calledWithLocation', location);
+    return document.createElement('div');
+  }
 });
 
-test('it renders', function(assert) {
+moduleForComponent('location-map', 'Integration | Component | location map', {
+  integration: true,
+  beforeEach() {
+    this.register('service:maps', stubMapsService);
+    this.inject.service('maps', { as: 'mapsService' });
+  }
+});
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{location-map}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#location-map}}
-      template block text
-    {{/location-map}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+test('should append map element to container element', function(assert) {
+  this.set('myLocation', '174 Bank St, Ottawa, On');
+  this.render(hbs`{{location-map location=myLocation}}`);
+  assert.equal(this.$('.map-container').children().length, 1, 'the map element should be put onscreen');
+  assert.equal(this.get('mapsService.calledWithLocation'), '174 Bank St, Ottawa, On', 'a map of downtown Ottawa should be requested');
 });
