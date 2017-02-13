@@ -74,7 +74,7 @@ test('it renders a view with a model', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', employee);
 
-  assert.expect(16);
+  assert.expect(14);
 
   this.render(hbs`{{
     employee-editor
@@ -82,10 +82,8 @@ test('it renders a view with a model', function(assert) {
   }}`);
 
   // Test in correct inputs bar are present
-  // assert.equal(this.$('input[type="text"]').length, 6, 'should be 6 text fields'); TYPE NOT SUPPORTED BY PHANTOMJS
   assert.equal(this.$('input[type="number"]').length, 1, 'should be only 1 input number field for streetNumber');
   assert.equal(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
-  assert.equal(this.$('input[type="datetime-local"]').length, 2, 'should be only 2 input for start and end dates');
   assert.equal(this.$('textarea').length, 1, 'should be only 1 text area for the notes');
 
   // Test if proper values are placed into form

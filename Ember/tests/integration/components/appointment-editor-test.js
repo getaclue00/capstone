@@ -83,7 +83,7 @@ test('it renders a default view', function(assert) {
 });
 
 test('it renders a complete view upon service selection', function(assert) {
-  assert.expect(6);
+  assert.expect(5);
 
   this.set('model', appointmentStub);
   this.set('services', [
@@ -110,6 +110,5 @@ test('it renders a complete view upon service selection', function(assert) {
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
   assert.equal(this.$('input[type="number"]').attr('placeholder'), 'Please enter the cost');
-  // assert.equal(this.$('input[type="datetime-local"]').length, 2, 'appointment start and end times'); TYPE NOT SUPPORTED BY PHANTOMJS
   assert.equal(this.$('textarea').attr('rows'), 3, 'notes section');
 });
