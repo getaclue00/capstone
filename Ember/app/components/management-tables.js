@@ -6,7 +6,7 @@ export default Ember.Component.extend({
       this.$('#has-datatable').DataTable({
      });
   },
-  employeeCollection: function() {
+  employeeCollection() {
     return this.get('collection') === 'employees';
-  }.property('collection')
+  }
 });

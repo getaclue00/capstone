@@ -25,14 +25,12 @@ export default Ember.Component.extend({
   actions: {
 
     // Used to change the selected value for service's displayable attribute
-    selectDisplayable(value) {
-      var displayable = (value ? false : true);
-      this.set('model.displayable', displayable);
+    selectDisplayable() {
+      this.toggleProperty('model.displayable');
     },
     // Used to change the selected value for service's active attribute
-    selectActive(value) {
-      var active = (value ? false : true);
-      this.set('model.active', active);
+    selectActive() {
+      this.toggleProperty('model.active');
     },
 
     selectVehicleSize(size) {

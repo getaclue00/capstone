@@ -210,6 +210,10 @@ $breakpoint-alpha: 660px;
 .management-icon {
   padding: 10px 30px;
   white-space: nowrap;
+
+  span {
+    color: #d30b07;
+  }
 }
 
 table.dataTable thead .sorting {

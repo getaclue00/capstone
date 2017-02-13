@@ -9,15 +9,15 @@ export default Model.extend({
   name:         attr('string', { defaultValue: '' }),
   duration:     attr('number', { defaultValue: '60.00' }),
   price:        attr('number', { defaultValue: '100.00' }),
-  vehicle_size: attr('string', { defaultValue: 'small' }),
+  vehicle_size: attr('string', { defaultValue: 'Small' }),
   description:  attr('string', { defaultValue: '...' }),
   active:       attr('boolean', { defaultValue: false }),
   displayable:  attr('boolean', { defaultValue: false }),
   appointments: hasMany('appointment', { async: true }),
   formattedActive: computed('active', function(){
-      return (this.get('active') ? 'Yes' : 'No');
+      return this.get('active') ? 'Yes' : 'No';
   }),
   formattedDisplayable: computed('displayable', function(){
-      return (this.get('displayable') ? 'Yes' : 'No');
+      return this.get('displayable') ? 'Yes' : 'No';
   })
 });

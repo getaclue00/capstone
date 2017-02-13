@@ -23,11 +23,11 @@
             <div class='management-operation'>
           {{#if m.user}}
             {{#link-to 'users.show' m.user.id class="management-icon"}}
-              <span class="glyphicon glyphicon-user" style="color:#d30b07;"></span>
+              <span class="glyphicon glyphicon-user"></span>
             {{/link-to}}
           {{else}}
             {{#link-to 'users.new' m.id class="management-icon"}}
-              <span class="glyphicon glyphicon-plus" style="color:#d30b07;"></span>
+              <span class="glyphicon glyphicon-plus"></span>
             {{/link-to}}
           {{/if}}
         </div>
@@ -37,7 +37,7 @@
         {{#each-in operations as |key value|}}
          <div class='management-operation'>
           {{#link-to key  m.id class="management-icon"}}
-            <span class="glyphicon {{value}}" style="color:#d30b07;"></span>
+            <span class="glyphicon {{value}}"></span>
           {{/link-to}}
          </div>
         {{/each-in}}

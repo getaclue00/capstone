@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20170211154840) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-02-11'
+    t.date     "start_date",               default: '2017-02-13'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
@@ -90,7 +90,8 @@ ActiveRecord::Schema.define(version: 20170211154840) do
     t.boolean  "active",                                default: false,   null: false
     t.boolean  "displayable",                           default: false,   null: false
     t.decimal  "price",        precision: 10, scale: 2
-    t.string   "vehicle_size",                          default: "small"
+    t.string   "vehicle_size",                          default: "Small"
+    t.index ["vehicle_size"], name: "index_services_on_vehicle_size", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

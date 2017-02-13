@@ -13,13 +13,16 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-price-vehicle" class="col-4 col-form-label">Price $</label>
+      <label for="service-price-vehicle" class="col-4 col-form-label">Price</label>
       <div class="col-8">
-        {{input type="number" pattern="\d*" class="form-control" id="service-price" value=model.price}}
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          {{input type="number" pattern="\d*" class="form-control" id="service-price" value=model.price}}
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-vehicle-type" class="col-4 col-form-label">Vehicle Type</label>
+      <label for="service-vehicle-type" class="col-4 col-form-label">Vehicle</label>
       <div class="col-8">
         {{#power-select
           options=sizes
@@ -35,7 +38,7 @@
     </div>
     <div class="form-group">
       <div class="row">
-        <label for="service-active" class="col-5 col-form-label">Service Active?</label>
+        <label for="service-active" class="col-5 col-form-label">Active</label>
         <div class="admin-switch" {{action 'selectActive' model.active}}>
           {{input type="checkbox" id="service-active" class="checkbox" checked=model.active}}
           <div class="slider round"></div>
@@ -43,7 +46,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-displayable" class="col-5 col-form-label">Service Displayable?</label>
+      <label for="service-displayable" class="col-5 col-form-label">Displayable</label>
       <div class="admin-switch" {{action 'selectDisplayable' model.displayable}}>
         {{input type="checkbox" id="service-displayable" class="checkbox" checked=model.displayable}}
         <div class="slider round"></div>
