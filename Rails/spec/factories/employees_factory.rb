@@ -11,17 +11,17 @@ FactoryGirl.define do
     start_date "2013-10-22"
     end_date "2015-11-19"
     notes "This is a note"
-  
+
     factory :employee_with_appointment do
-        after(:create) do |employee|
-            create(:appointment, employee: employee)
-        end
+      after(:create) do |employee|
+        create(:appointment, employee: employee)
+      end
     end
 
     factory :employee_with_user do
-        after(:create) do |employee|
-            create(:user, employee: employee)
-        end
+      after(:create) do |employee|
+        create(:user, employee: employee)
+      end
     end
   end
 end
