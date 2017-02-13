@@ -4,6 +4,6 @@ class AddLocationToAppointments < ActiveRecord::Migration[5.0]
   end
 
   def down
-    add_column :appointments, :location, :string
+    remove_column :appointments, :location, :string
   end
 end
