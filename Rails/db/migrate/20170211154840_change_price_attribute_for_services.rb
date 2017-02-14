@@ -8,10 +8,10 @@ class ChangePriceAttributeForServices < ActiveRecord::Migration[5.0]
   end
 
   def down
+    remove_index   :services, :vehicle_size
     remove_column  :services, :price
     remove_column  :services, :vehicle_size
     add_column     :services, :price_small, :decimal, precision: 10, scale: 2
     add_column     :services, :price_large, :decimal, precision: 10, scale: 2
-    remove_index   :services, :vehicle_size
   end
 end

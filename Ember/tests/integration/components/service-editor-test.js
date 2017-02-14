@@ -12,7 +12,7 @@ const ServiceStub = Ember.Object.extend({
   },
 
   getVehicleSize() {
-    return this.get('vehicle_size');
+    return this.get('vehicleSize');
   },
 
   getDuration() {

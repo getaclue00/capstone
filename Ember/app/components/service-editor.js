@@ -18,10 +18,6 @@ export default Ember.Component.extend({
     Ember.$('#myModal').modal('hide');
   },
 
-  selectedVehicleSize: Ember.computed('model.vehicle_size', function(){
-    return this.get('model.vehicle_size');
-  }),
-
   actions: {
 
     // Used to change the selected value for service's displayable attribute
@@ -35,7 +31,7 @@ export default Ember.Component.extend({
 
     selectVehicleSize(size) {
       if(!Ember.isEmpty(size)){
-        this.get('model').set('vehicle_size', size);
+        this.get('model').set('vehicleSize', size);
       }
     }
   }

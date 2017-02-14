@@ -26,7 +26,7 @@
       <div class="col-8">
         {{#power-select
           options=sizes
-          selected=selectedVehicleSize
+          selected=model.vehicleSize
           renderInPlace=true
           placeholder="Size of Vehicle"
           onchange=(action "selectVehicleSize")
