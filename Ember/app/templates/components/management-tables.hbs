@@ -11,22 +11,22 @@
     </tr>
   </thead>
   <tbody class="management-table-body">
-    {{#each model as |m|}}
+    {{#each model as |collection|}}
       <tr class="management-table-row">
         {{#each-in attributes as |key value|}}
         <td class="management-column" data-th="{{value}}">
-          {{get m key}}
+          {{get collection key}}
         </td>
         {{/each-in}}
         {{#if employeeCollection}}
           <td>
             <div class='management-operation'>
-          {{#if m.user}}
-            {{#link-to 'users.show' m.user.id class="management-icon"}}
+          {{#if collection.user}}
+            {{#link-to 'users.show' collection.user.id class="management-icon"}}
               <span class="glyphicon glyphicon-user"></span>
             {{/link-to}}
           {{else}}
-            {{#link-to 'users.new' m.id class="management-icon"}}
+            {{#link-to 'users.new' collection.id class="management-icon"}}
               <span class="glyphicon glyphicon-plus"></span>
             {{/link-to}}
           {{/if}}
@@ -36,7 +36,7 @@
         <td class='management-buttons'>
         {{#each-in operations as |key value|}}
          <div class='management-operation'>
-          {{#link-to key  m.id class="management-icon"}}
+          {{#link-to key  collection.id class="management-icon"}}
             <span class="glyphicon {{value}}"></span>
           {{/link-to}}
          </div>
