@@ -9,13 +9,12 @@
 #used in appointments table to reference a deleted employee/car/service and cannot be deleted if referenced by appointments
 Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
 Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
-Car.create({ id: '0', make: 'DEFAULT', model: 'DEFAULT', size: 'small', interior: 'DEFAULT', colour: 'DEFAULT', client_id: '0'})
 Service.create({id: '0', name: 'DEFAULT', active: false, displayable: false})
 
-Appointment.create({title: 'Batman Appointment', car_id: '0', service_id: '0'}) #employee_id can be null
-Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', car_id: '0', service_id: '0'})
-Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', car_id: '0', service_id: '0'})
-Appointment.create({title: 'Appointment With Employee, Car, and Service', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', car_id: 0, service_id: 0, employee_id: 0})
+Appointment.create({title: 'Batman Appointment', client_id: '0', service_id: '0'}) #employee_id can be null
+Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', client_id: '0', service_id: '0'})
+Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', client_id: '0', service_id: '0'})
+Appointment.create({title: 'Appointment With Employee, Car, and Service', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', client_id: 0, service_id: 0, employee_id: 0})
 
 Employee.create({ id: '1', last_name: 'Testing', first_name: 'Tester', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
 Employee.create({ id: '2', last_name: 'Wayne', first_name: 'Bruce', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})

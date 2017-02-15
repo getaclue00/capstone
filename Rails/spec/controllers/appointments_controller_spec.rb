@@ -44,7 +44,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     context 'when the appointment exists' do
       it 'returns the appointment data' do
         appointment = FactoryGirl.create :appointment
-        car_id = appointment.car.id
+        client_id = appointment.client.id
         service_id = appointment.service.id
         employee_id = appointment.employee.id
 
@@ -64,11 +64,11 @@ RSpec.describe AppointmentsController, :type => :controller do
         expect(attr["notes"]).to eq("note")
         expect(attr["status"]).to eq("pending")
         #VERIFYING APPOINTMENT POINTS TO OBJECTS
-        expect(result["data"]["relationships"]["car"]["data"]["id"].to_i).to eq(car_id)
+        expect(result["data"]["relationships"]["client"]["data"]["id"].to_i).to eq(client_id)
         expect(result["data"]["relationships"]["service"]["data"]["id"].to_i).to eq(service_id)
         expect(result["data"]["relationships"]["employee"]["data"]["id"].to_i).to eq(employee_id)
         #VERIFYING THAT OBJECTS POINT TO APPOINTMENT
-        expect(Car.find(car_id).appointments[0].id).to eq (appointment.id)
+        expect(Client.find(client_id).appointments[0].id).to eq (appointment.id)
         expect(Service.find(service_id).appointments[0].id).to eq (appointment.id)
         expect(Employee.find(employee_id).appointments[0].id).to eq (appointment.id)
       end
@@ -90,7 +90,7 @@ RSpec.describe AppointmentsController, :type => :controller do
    context 'when the data is there and is correct (without employee)' do
       it 'returns a succesful response' do
         service = FactoryGirl.create :service
-        car = FactoryGirl.create :car
+        client = FactoryGirl.create :client
         FactoryGirl.create :employee, :id => 0 #needed for FK constraints when handling associated default employee
         data = {
           "data": {
@@ -106,7 +106,7 @@ RSpec.describe AppointmentsController, :type => :controller do
             },
             "relationships": {
               "service":{"data":{"type":"services", "id": service.id}},
-              "car":{"data":{"type":"cars", "id": car.id}}
+              "client":{"data":{"type":"clients", "id": client.id}}
               #default employee used
             }
           }
@@ -123,7 +123,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     context 'when the data is there and is correct (with employee)' do
       it 'returns a succesful response' do
         service = FactoryGirl.create :service
-        car = FactoryGirl.create :car
+        client = FactoryGirl.create :client
         employee =FactoryGirl.create :employee
         data = {
           "data": {
@@ -139,7 +139,7 @@ RSpec.describe AppointmentsController, :type => :controller do
             },
             "relationships": {
               "service":{"data":{"type":"services", "id": service.id}},
-              "car":{"data":{"type":"cars", "id": car.id}},
+              "client":{"data":{"type":"clients", "id": client.id}},
               "employee":{"data":{"type":"employees", "id": employee.id}}
             }
           }
@@ -199,7 +199,7 @@ RSpec.describe AppointmentsController, :type => :controller do
             },
             "relationships": {
               "service":{"data":{"type":"services", "id": 9}},
-              "car":{"data":{"type":"cars", "id": 9}},
+              "client":{"data":{"type":"clients", "id": 9}},
               "employee":{"data":{"type":"employees", "id": 9}}
             }
           }
@@ -256,7 +256,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     context 'when the appointment exists and the correct params were sent' do
       it "responds successfully" do
         appointment = FactoryGirl.create :appointment
-        car = FactoryGirl.create :car
+        client = FactoryGirl.create :client
         service = FactoryGirl.create :service
         employee = FactoryGirl.create :employee
         appointment.color = "#A022FF"
@@ -266,7 +266,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         appointment.end = "2019-02-04T00:00:00.000Z"
         appointment.notes = "Updated note"
         appointment.status = "confirmed"
-        appointment.car_id = car.id
+        appointment.client_id = client.id
         appointment.service_id = service.id
         appointment.employee_id = employee.id
 
@@ -291,11 +291,11 @@ RSpec.describe AppointmentsController, :type => :controller do
         expect(attr["notes"]).to eq(appointment.notes)
         expect(attr["status"]).to eq(appointment.status)
         #VERIFYING APPOINTMENT POINTS TO OBJECTS
-        expect(parsed_response["data"]["relationships"]["car"]["data"]["id"].to_i).to eq(appointment.car_id)
+        expect(parsed_response["data"]["relationships"]["client"]["data"]["id"].to_i).to eq(appointment.client_id)
         expect(parsed_response["data"]["relationships"]["service"]["data"]["id"].to_i).to eq(appointment.service_id)
         expect(parsed_response["data"]["relationships"]["employee"]["data"]["id"].to_i).to eq(appointment.employee_id)
         # #VERIFYING THAT OBJECTS POINT TO APPOINTMENT
-        expect(Car.find(appointment.car_id).appointments[0].id).to eq (appointment.id)
+        expect(Client.find(appointment.client_id).appointments[0].id).to eq (appointment.id)
         expect(Service.find(appointment.service_id).appointments[0].id).to eq (appointment.id)
         expect(Employee.find(appointment.employee_id).appointments[0].id).to eq (appointment.id)
 
@@ -341,7 +341,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         appointment.end = "2019-02-04T00:00:00.000Z"
         appointment.notes = "Updated note"
         appointment.status = "confirmed"
-        appointment.car_id = 1000
+        appointment.client_id = 1000
         appointment.service_id = 1000
         appointment.employee_id = 1000
 

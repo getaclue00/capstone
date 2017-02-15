@@ -18,7 +18,7 @@ RSpec.describe ClientsController, :type => :controller do
 
     context 'when there are clients' do
       it "returns with a successful response and the clients" do
-        FactoryGirl.create_list(:client_with_car, 5)
+        FactoryGirl.create_list(:client_with_appointment, 5)
         get :index
         result = JSON.parse(response.body)
         expect(result['data'].length).to eq(5)
@@ -41,8 +41,8 @@ RSpec.describe ClientsController, :type => :controller do
 
     context 'when the client exists' do
       it 'returns the client data' do
-        client = FactoryGirl.create :client_with_car
-        car_id = client.cars[0].id
+        client = FactoryGirl.create :client_with_appointment
+        appointment_id = client.appointments[0].id
 
         get :show, params: { id: client.id }
 
@@ -62,9 +62,9 @@ RSpec.describe ClientsController, :type => :controller do
         expect(attr["province"]).to eq("Ontario")
         expect(attr["postal_code"]).to eq("A0A 0A0")
         #VERIFYING CLIENT POINTS TO OBJECTS
-        expect(result["data"]["relationships"]["cars"]["data"][0]["id"].to_i).to eq(car_id)
+        expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
         #VERIFYING THAT OBJECTS POINT TO CLIENT
-        expect(Car.find(car_id).client.id).to eq (client.id)
+        expect(Appointment.find(appointment_id).client.id).to eq (client.id)
       end
     end
   end
@@ -147,7 +147,7 @@ RSpec.describe ClientsController, :type => :controller do
     context 'when no such client exists' do
       it 'returns an error' do
 
-        client = FactoryGirl.create :client_with_car
+        client = FactoryGirl.create :client_with_appointment
         client.last_name = "Testing Update of a non existent client"
 
         # Create a serializer instance
@@ -167,7 +167,7 @@ RSpec.describe ClientsController, :type => :controller do
 
     context 'when the client exists and the update had no params sent' do
       it "responds with a bad request" do
-        client = FactoryGirl.create :client_with_car
+        client = FactoryGirl.create :client_with_appointment
 
         patch :update, params: { id: client.id }
 
@@ -179,7 +179,7 @@ RSpec.describe ClientsController, :type => :controller do
 
     context 'when the client exists and the correct params were sent' do
       it "responds successfully" do
-        client = FactoryGirl.create :client_with_car
+        client = FactoryGirl.create :client_with_appointment
         client.last_name = "updated lastName"
         client.first_name = "updated firstName"
         client.email = "o@yahoo.com"
@@ -218,7 +218,7 @@ RSpec.describe ClientsController, :type => :controller do
 
     context 'when the client exists and the incorrect params were sent' do
       it "responds successfully" do
-        client = FactoryGirl.create :client_with_car
+        client = FactoryGirl.create :client_with_appointment
         client.last_name = "updated lastName"
         client.first_name = "updated firstName"
         client.email = "o@yahoo.com"
@@ -258,7 +258,7 @@ RSpec.describe ClientsController, :type => :controller do
       end
     end
 
-    context 'when the client exists and has no cars' do
+    context 'when the client exists and has no appointments' do
       it 'should delete it' do
         client = FactoryGirl.create :client
 
@@ -268,21 +268,17 @@ RSpec.describe ClientsController, :type => :controller do
       end
     end
 
-    context 'when the client exists and has cars' do
+    context 'when the client exists and has appointments' do
       it 'should delete it' do
-        client = FactoryGirl.create :client_with_car
-        car_id = client.cars[0].id
+        FactoryGirl.create :client, :id => 0 #needed for FK constraints when handling associated appointments
+        client = FactoryGirl.create :client_with_appointment
+        appt_id = client.appointments[0].id
 
         delete :destroy, params: { id: client.id }
 
         expect(response).to have_http_status(:no_content)
-        #validate that associated car is deleted
-        begin
-        	Car.find(car_id)
-        	expect("car was not deleted").to eq("car was deleted")
-        rescue ActiveRecord::RecordNotFound => e
-        	expect(0).to eq(0)
-        end
+        #validate that associated appointments client id set to 0
+        expect(Appointment.find(appt_id).client_id).to eq (0)
       end
     end
   end

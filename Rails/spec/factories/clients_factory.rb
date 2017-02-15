@@ -10,10 +10,10 @@ FactoryGirl.define do
 	  	city "Ottawa"
 	  	province "Ontario"
 
-	factory :client_with_car do
-    	after(:create) do |client|
-      		create(:car, client: client)
-    	end
-  	end
+	  	factory :client_with_appointment do
+	    	after(:create) do |client|
+	      		create(:appointment, client: client)
+	    	end
+	  	end
 	end
 end
