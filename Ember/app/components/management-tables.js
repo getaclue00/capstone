@@ -7,6 +7,6 @@ export default Ember.Component.extend({
      });
   },
   employeeCollection: Ember.computed('collection', function() {
-  return this.get('collection') === 'employees';
+  	return this.get('collection') === 'employees';
   })
 });
