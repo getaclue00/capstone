@@ -1,0 +1,22 @@
+<div class="management-div">
+  <div class="management-title-div">
+      <h4><span class="glyphicon glyphicon-user"></span>Manage Clients</h4>
+  </div>
+  <br />
+  <div>
+      {{
+        management-tables
+        model=model
+        headers=headers
+        attributes=attributes
+        operations=operations
+        collection=collection
+      }}
+  </div>
+  <div class="col-12 text-center">
+     {{#link-to 'clients.new' class="btn btn-danger btn-lg" }}
+      <span class="glyphicon glyphicon-plus"></span> Add Client
+     {{/link-to}}
+  </div>
+</div>
+
