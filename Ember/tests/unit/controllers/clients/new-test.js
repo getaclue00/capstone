@@ -4,6 +4,12 @@ import Ember from 'ember';
 moduleFor('controller:clients/new', 'Unit | Controller | clients/new', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
+  needs: ['service:flash-messages'],
+  beforeEach() {
+    //We have to register any types we expect to use in this component
+    const typesUsed = ['danger'];
+    Ember.getOwner(this).lookup('service:flash-messages').registerTypes(typesUsed);
+  }
 });
 
 test('#saveClient transitions to clients', function(assert) {
