@@ -5,46 +5,43 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Controller.extend(AuthenticatedRouteMixin,{
   flashMessages: Ember.inject.service(),
 
-	actions: {
-		updateAccountInfo() {
-
+  actions: {
+    updateAccountInfo() {
       var flashMessages = this.get('flashMessages');
 
-		    function onSuccessful() {
-          window.scrollTo(0,0);
-          flashMessages.success('Successfully saved!');
-        }
+      function onSuccessful() {
+        window.scrollTo(0,0);
+        flashMessages.success('Successfully saved!');
+      }
 
-		    function onError(error) {
-          window.scrollTo(0,0);
-          flashMessages.danger("Account information was not saved");
-		    	throw error.message;
-		    }
+      function onError(error) {
+        window.scrollTo(0,0);
+        flashMessages.danger("Account information was not saved");
+        throw error.message;
+      }
 
-		    this.get('model').get('employee').then((e) => {
-	     	 	e.save().then(onSuccessful).catch(onError);
-	      	});
-
-	    },
+      this.get('model').get('employee').then((e) => {
+        e.save().then(onSuccessful).catch(onError);
+       });
+     },
 
     updateLoginInfo() {
       var flashMessages = this.get('flashMessages');
 
-    	function onSuccessful() {
+      function onSuccessful() {
         flashMessages.success('Password successfully changed!');
       }
 
-	    function onError(error) {
-	    	throw error.message;
-	    }
+      function onError(error) {
+       throw error.message;
+      }
 
-    	if (this.get('model').get('confirm') === this.get('model').get('password')){
-    		this.get('model').save().then(onSuccessful).catch(onError);
-    	}else{
+      if (this.get('model').get('confirm') === this.get('model').get('password')) {
+        this.get('model').save().then(onSuccessful).catch(onError);
+      } else {
         window.scrollTo(0,0);
         flashMessages.danger("Passwords do not match!");
-    	}
-
+      }
     }
-	}
+  }
 });

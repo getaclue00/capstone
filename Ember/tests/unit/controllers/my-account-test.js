@@ -24,11 +24,11 @@ test('#updateAccountInfo does NOT transition away from my-account ', function(as
 
   let userStub = Ember.Object.create({
     get(property) {
-      assert.equal(property, 'employee', 'expected to be calling for an employee');
+      assert.deepEqual(property, 'employee', 'expected to be calling for an employee');
 
       let mockEmployee = Ember.Object.create({
         save() {
-          return new Ember.RSVP.resolve();
+          return Ember.RSVP.resolve();
         }
       });
 
@@ -44,7 +44,7 @@ test('#updateAccountInfo does NOT transition away from my-account ', function(as
 
   setTimeout(function() {
     assert.ok(controller);
-    assert.equal(controller.get('flashMessages.calledWithMessage'), 'Successfully saved!', 'success flashMessages fired');
+    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Successfully saved!', 'success flashMessages fired');
     done();
   }, 500);
 
@@ -55,12 +55,12 @@ test('#updateAccountInfo throws an error following a failed update', function(as
 
   let userStub = Ember.Object.create({
     get(property) {
-      assert.equal(property, 'employee', 'expected to be calling for an employee');
+      assert.deepEqual(property, 'employee', 'expected to be calling for an employee');
 
       let mockEmployee = Ember.Object.create({
         save() {
           let errorMsg = { error: 'could not update a record' };
-          return new Ember.RSVP.reject(errorMsg);
+          return Ember.RSVP.reject(errorMsg);
         }
       });
 
@@ -72,41 +72,86 @@ test('#updateAccountInfo throws an error following a failed update', function(as
     model: userStub
   });
 
-  // assert.throws(controller.send('updateAccountInfo'), "throws with just a message, not using the 'expected' argument");
   controller.send('updateAccountInfo');
 
   setTimeout(function() {
-    assert.equal(controller.get('flashMessages.calledWithMessage'), 'Account information was not saved', 'danger flashMessages fired');
+    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Account information was not saved', 'danger flashMessages fired');
     done();
   }, 500);
 });
 
-//
-//
-// test('#saveLoginInfo does NOT transition away from my-account ', function(assert) {
-//   let controller = this.subject({
-//       model: Ember.Object.create({
-//         save() {
-//           return new Ember.RSVP.Promise(function(resolve) {
-//             resolve(true);
-//           });
-//         }
-//       })
-//   });
-//   controller.send('updateLoginInfo');
-//
-//   assert.ok(controller);
-// });
-//
-// test('#saveLoginInfo throws an error following a failed update', function(assert) {
-//   let controller = this.subject({
-//       model: Ember.Object.create({
-//         save() {
-//           return new Ember.RSVP.Promise(function(resolve, reject) {
-//             reject({ error: 'could not update a record' });
-//           });
-//         }
-//       })
-//   });
-//   assert.throws(controller.send('updateLoginInfo'), "throws with just a message, not using the 'expected' argument");
-// });
+test('#updateLoginInfo does NOT transition away from my-account (passwords match)', function(assert) {
+  let done = assert.async();
+
+  let userStub = Ember.Object.create({
+    confirm: 'password',
+    password: 'password',
+
+    save() {
+      return Ember.RSVP.resolve();
+    }
+  });
+
+  let controller = this.subject({
+    model: userStub
+  });
+
+  controller.send('updateLoginInfo');
+
+  setTimeout(function() {
+    assert.ok(controller);
+    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Password successfully changed!', 'success flashMessages fired');
+    done();
+  }, 500);
+});
+
+test('#updateLoginInfo does NOT transition away from my-account (passwords do not match)', function(assert) {
+  let done = assert.async();
+
+  let userStub = Ember.Object.create({
+    confirm: 'password',
+    password: 'pass1word',
+
+    save() {
+      return Ember.RSVP.resolve();
+    }
+  });
+
+  let controller = this.subject({
+    model: userStub
+  });
+
+  controller.send('updateLoginInfo');
+
+  setTimeout(function() {
+    assert.ok(controller);
+    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
+    done();
+  }, 500);
+});
+
+test('#updateLoginInfo throws an error following a failed update', function(assert) {
+  let done = assert.async();
+
+  let userStub = Ember.Object.create({
+    confirm: 'password',
+    password: 'password',
+
+    save() {
+      let errorMsg = { error: 'could not update a record' };
+      return Ember.RSVP.reject(errorMsg);
+    }
+  });
+
+  let controller = this.subject({
+    model: userStub
+  });
+
+  controller.send('updateLoginInfo');
+
+  setTimeout(function() {
+    assert.ok(controller);
+    assert.throws(controller.send('updateLoginInfo'), "throws with just a message, not using the 'expected' argument");
+    done();
+  }, 500);
+});
