@@ -10,13 +10,13 @@ test('checking arrays and hash maps', function(assert) {
   const ctrl = this.subject();
 
   assert.deepEqual(ctrl.get('headers'), 
-  	["Name", "Client ID", "Phone",
-            "Email"],
+  	["Name", "Client ID", "Email",
+            "Phone"],
   	'header properly set');
 
   assert.deepEqual(ctrl.get('attributes'), 
-  	{"fullName": "Name", "id" : "Client ID:", "phoneNumber" : "Phone",
-                "email": "Email"},
+  	{"fullName": "Name", "id" : "Client ID:", "email": "Email",
+     "phoneNumber" : "Phone"},
     'attributes properly set');
 
   assert.deepEqual(ctrl.get('operations'), 

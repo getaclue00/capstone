@@ -20,7 +20,9 @@ Router.map(function() {
     this.route('show', { path: "/:services_id" });
     this.route('delete', { path: "/delete/:services_id" });
   });
-  this.route('clients', function() {});
+  this.route('clients', function() {
+    this.route('new');
+  });
   this.route('employees', function() {
     this.route('new');
     this.route('show', { path: "/:employees_id" });
