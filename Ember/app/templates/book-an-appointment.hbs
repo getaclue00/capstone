@@ -41,14 +41,21 @@
                   <thead>
                     <tr>
                       <th>Service</th>
+                      <th></th>
                       <th>Price</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {{#each services as |s|}}
+                    {{#each services as |service|}}
                       <tr>
-                        <td><button class="btn btn btn-outline-primary" {{action 'selectService' s}}>{{s.name}}</button></td>
-                        <td>{{s.price_small}}</td>
+                        <td><button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button></td>
+                        <td>
+                          <span class="glyphicon glyphicon-info-sign pin-info" {{action 'displayDescription' service.id}}></span>
+                          <div id="{{service.id}}" class="service-info">
+                            {{service.description}}
+                          </div>
+                        </td>
+                        <td>{{service.price_small}}</td>
                       </tr>
                     {{/each}}
                   </tbody>

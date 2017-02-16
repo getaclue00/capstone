@@ -4,6 +4,7 @@ import moment from 'moment';
 export default Ember.Controller.extend({
   selectTime: false,
   selectedDate: null,
+  previousDescription: null,
 
   viewName: 'month',
   businessHours: {
@@ -20,19 +21,28 @@ export default Ember.Controller.extend({
   },
 
   actions: {
+
+    displayDescription(serviceId){
+      if (document.getElementById(this.get('previousDescription'))) {
+        document.getElementById(serviceId).style.display = 'block';
+        document.getElementById(this.get('previousDescription')).style.display = 'none';
+      } else {
+        document.getElementById(serviceId).style.display = 'block';
+      }
+      this.set('previousDescription', serviceId);
+    },
+
     selectService(service) {
       if(!Ember.isEmpty(service)){
         this.get('appointment').set('service', service);
       }
     },
 
-    handleCalendarDayClick(date, jsEvent) {
+    handleCalendarDayClick(date) {
       if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
         if(this.get('businessHours.dow').indexOf(parseInt(date.format('e'), 10)) > -1){
           this.set('selectedDate', moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY'));
-          this.set('selectTime', true);
-          $(jsEvent.target).closest('.fc-row.fc-week.fc-widget-content.fc-bg.td.fc-day').find('.fc-day').addClass('selectedDay');
-        }
+          this.set('selectTime', true);        }
       }
     }
   }

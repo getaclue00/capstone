@@ -113,6 +113,15 @@ $breakpoint-alpha: 768px;
 .time-button {
   margin: 5px;
 }
+
+.pin-info:hover {
+  color: purple;
+  cursor: pointer;
+}
+
+.service-info {
+  display:none;
+}
 //Styling for computer
 @media (min-width: $breakpoint-alpha) {
 
@@ -122,4 +131,13 @@ $breakpoint-alpha: 768px;
       text-align: right;
     }
   }
+}
+
+@media (max-width: $breakpoint-alpha){
+
+  .service-selection-btn{
+    white-space: inherit;
+    text-align: left;
+  }
+
 }
