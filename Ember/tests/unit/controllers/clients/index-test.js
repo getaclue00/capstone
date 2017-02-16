@@ -6,7 +6,7 @@ moduleFor('controller:clients/index', 'Unit | Controller | clients/index', {
 });
 
 test('checking arrays and hash maps', function(assert) {
-  assert.expect(4);
+  assert.expect(3);
   const ctrl = this.subject();
 
   assert.deepEqual(ctrl.get('headers'), 
@@ -19,9 +19,9 @@ test('checking arrays and hash maps', function(assert) {
      "phoneNumber" : "Phone"},
     'attributes properly set');
 
-  assert.deepEqual(ctrl.get('operations'), 
-  	{'clients.show': 'glyphicon-pencil', 'clients.delete': 'glyphicon-remove'},
-   'operations properly set');
+  // assert.deepEqual(ctrl.get('operations'), 
+  // 	{'clients.show': 'glyphicon-pencil', 'clients.delete': 'glyphicon-remove'},
+  //  'operations properly set');
 
   assert.equal(ctrl.get('collection'), 
   	'clients',

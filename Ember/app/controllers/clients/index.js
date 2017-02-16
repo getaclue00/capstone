@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
                 },
 
     // operations: {'clients.show': 'glyphicon-pencil', 'clients.delete': 'glyphicon-remove'},
+    operations: {'clients.show': 'glyphicon-pencil'},
 
     collection: 'clients'
 });
