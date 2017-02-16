@@ -34,7 +34,7 @@ const ServiceStub = Ember.Object.extend({
 let service = ServiceStub.create({
   name: 'Clean Car',
   price: '100',
-  price_size: 'Small',
+  vehicle_size: 'Small',
   duration: '60',
   description: 'Cleaning the car',
   active: true,

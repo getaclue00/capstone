@@ -6,12 +6,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return Ember.RSVP.hash({
       serviceForSmallCars: this.get('store').query('service', {
         filter: {
-          vehicleSize: "Small"
+          vehicle_size: "Small"
         }
       }),
       servicesForLargeVehicles: this.get('store').query('service', {
         filter: {
-          vehicleSize: "Large"
+          vehicle_size: "Large"
         }
       })
     });
