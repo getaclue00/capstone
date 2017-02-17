@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122202040) do
+ActiveRecord::Schema.define(version: 20170211154840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,15 +82,16 @@ ActiveRecord::Schema.define(version: 20170122202040) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "name",                                                 null: false
-    t.decimal  "price_small", precision: 10, scale: 2
-    t.decimal  "price_large", precision: 10, scale: 2
-    t.decimal  "duration",    precision: 10, scale: 2
+    t.string   "name",                                                    null: false
+    t.decimal  "duration",     precision: 10, scale: 2
     t.text     "description"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
-    t.boolean  "active",                               default: false, null: false
-    t.boolean  "displayable",                          default: false, null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.boolean  "active",                                default: false,   null: false
+    t.boolean  "displayable",                           default: false,   null: false
+    t.decimal  "price",        precision: 10, scale: 2
+    t.string   "vehicle_size",                          default: "Small"
+    t.index ["vehicle_size"], name: "index_services_on_vehicle_size", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

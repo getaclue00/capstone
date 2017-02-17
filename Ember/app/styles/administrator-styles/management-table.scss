@@ -126,6 +126,33 @@ $breakpoint-alpha: 660px;
 }
 
 // Styling for both mobile and computer
+.management-div {
+  .nav {
+      background-color: #f9f9f9;
+      border: none;
+    }
+
+    .nav .nav-item .active {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 0.65em solid red;
+      background-color: #f9f9f9;
+      color: black;
+    }
+
+    .nav .nav-item a {
+      border-radius: 0px;
+      background-color: #f9f9f9;
+      color: #d3d3d3;
+      margin: 0px;
+    }
+
+    .nav .nav-item a:hover {
+      border: none;
+      border-bottom: 0.65em solid red;
+    }
+}
 
 .management-title-div {
 
@@ -134,18 +161,21 @@ $breakpoint-alpha: 660px;
     background-image: -o-linear-gradient(top, #d30b07 0%, #7a2828 80%);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#d30b07), to(#7a2828));
 
-  h3, h3:after {
+  h4, h4:after {
     font-weight: 400;
     color: #fffaef;
   }
 
-  h3 {
-    z-index: 100;
-    font-size: 2.8em;
-    line-height: 130px;
+  h4 {
+    font-size: 2em;
+    line-height: 2em;
     font-weight: normal;
-    text-align: center;
-    text-shadow: 0 1px 1px #fff;
+    text-shadow: 0 0.5px 0.5px #fff;
+    margin: 0px;
+
+    span {
+      margin: 0px 0.5em;
+    }
   }
 }
 
@@ -183,6 +213,10 @@ $breakpoint-alpha: 660px;
 .management-icon {
   padding: 10px 30px;
   white-space: nowrap;
+
+  span {
+    color: #d30b07;
+  }
 }
 
 table.dataTable thead .sorting {
