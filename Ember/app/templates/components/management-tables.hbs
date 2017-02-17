@@ -4,22 +4,40 @@
       {{#each headers as |header|}}
         <th><h1>{{header}}</h1></th>
       {{/each}}
+      {{#if employeeCollection}}
+        <th><h1>User Account</h1></th>
+      {{/if}}
       <th></th>
     </tr>
   </thead>
   <tbody class="management-table-body">
-    {{#each model as |m|}}
+    {{#each model as |collection|}}
       <tr class="management-table-row">
         {{#each-in attributes as |key value|}}
         <td class="management-column" data-th="{{value}}">
-          {{get m key}}
+          {{get collection key}}
         </td>
         {{/each-in}}
+        {{#if employeeCollection}}
+          <td>
+            <div class='management-operation'>
+          {{#if collection.user}}
+            {{#link-to 'users.show' collection.user.id class="management-icon"}}
+              <span class="glyphicon glyphicon-user"></span>
+            {{/link-to}}
+          {{else}}
+            {{#link-to 'users.new' collection.id class="management-icon"}}
+              <span class="glyphicon glyphicon-plus"></span>
+            {{/link-to}}
+          {{/if}}
+        </div>
+          </td>
+        {{/if}}
         <td class='management-buttons'>
         {{#each-in operations as |key value|}}
          <div class='management-operation'>
-          {{#link-to key  m.id class="management-icon"}}
-            <span class="glyphicon {{value}}" style="color:#d30b07;"></span>
+          {{#link-to key  collection.id class="management-icon"}}
+            <span class="glyphicon {{value}}"></span>
           {{/link-to}}
          </div>
         {{/each-in}}

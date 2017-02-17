@@ -13,44 +13,46 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-price-sm-vehicle" class="col-4 col-form-label">Price for Small Vehicle</label>
+      <label for="service-price-vehicle" class="col-4 col-form-label">Price</label>
       <div class="col-8">
-        {{input type="number" pattern="\d*" class="form-control" id="service-price-sm-vehicle" value=model.price_small}}
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          {{input type="number" pattern="\d*" class="form-control" id="service-price" value=model.price}}
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-price-lrg-vehicle" class="col-4 col-form-label">Price for Large Vehicle</label>
+      <label for="service-vehicle-type" class="col-4 col-form-label">Vehicle</label>
       <div class="col-8">
-        {{input type="number" pattern="\d*" class="form-control" id="service-price-lrg-vehicle" value=model.price_large}}
+        {{#power-select
+          options=sizes
+          selected=model.vehicleSize
+          renderInPlace=true
+          placeholder="Size of Vehicle"
+          onchange=(action "selectVehicleSize")
+          as |size|
+        }}
+        {{size}}
+        {{/power-select}}
+          </div>
+    </div>
+    <div class="form-group row">
+      <label for="service-active" class="col-5 col-form-label">Active</label>
+      <div class="admin-switch" {{action 'selectActive'}}>
+        {{input type="checkbox" id="service-active" class="checkbox" checked=model.active}}
+        <div class="slider round"></div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-active" class="col-4 col-form-label">Service Active?</label>
-      <div class="col-8">
-        {{#x-select action='selectActive' id="service-active" value=model.active as |xs|}}
-          {{#each-in yesNoTranslationMap as |key value|}}
-            {{#xs.option value=value}}
-              {{key}}
-            {{/xs.option}}
-          {{/each-in}}
-        {{/x-select}}
+      <label for="service-displayable" class="col-5 col-form-label">Displayable</label>
+      <div class="admin-switch" {{action 'selectDisplayable'}}>
+        {{input type="checkbox" id="service-displayable" class="checkbox" checked=model.displayable}}
+        <div class="slider round"></div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-displayable" class="col-4 col-form-label">Service Displayable?</label>
-      <div class="col-8">
-        {{#x-select action='selectDisplayable' id="service-displayable" value=model.displayable as |xs|}}
-          {{#each-in yesNoTranslationMap as |key value|}}
-            {{#xs.option value=value}}
-              {{key}}
-            {{/xs.option}}
-          {{/each-in}}
-        {{/x-select}}
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="service-description" class="col-4 col-form-label">Description</label>
-      <div class="col-8">
+      <label for="service-description" class="col-12 col-form-label">Description</label>
+      <div class="col-12">
         {{textarea class="form-control" id="service-description" value=model.description rows=3}}
       </div>
     </div>
