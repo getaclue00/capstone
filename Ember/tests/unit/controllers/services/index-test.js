@@ -9,17 +9,14 @@ test('checking arrays and hash maps', function(assert) {
   assert.expect(3);
   const ctrl = this.subject();
 
-  assert.deepEqual(ctrl.get('headers'), 
-  	["Name of Service", "Duration (minutes)", "Price for Small Vehicle ($)", "Price for Large Vehicle ($)",
-            "Active", "Displayable"],
-  	'header properly set');
+  const headers = ["Name of Service", "Duration (minutes)", "Price for Small Vehicle ($)", "Price for Large Vehicle ($)",
+            "Active", "Displayable"];
+  assert.deepEqual(ctrl.get('headers'), headers,'header properly set');
 
-  assert.deepEqual(ctrl.get('attributes'), 
-  	{"name": "Name of Service", "duration" : "Duration (minutes):", "price_small" : "Price for Small Vehicle ($)",
-               "price_large": "Price for Large Vehicle ($)", "active": "Active", "displayable": "Displayable"},
-    'attributes properly set');
+  const attributes = {"name": "Name of Service", "duration" : "Duration (minutes):", "price_small" : "Price for Small Vehicle ($)",
+               "price_large": "Price for Large Vehicle ($)", "active": "Active", "displayable": "Displayable"};
+  assert.deepEqual(ctrl.get('attributes'), attributes,'attributes properly set');
 
-  assert.deepEqual(ctrl.get('operations'), 
-  	{'services.show': 'glyphicon-pencil', 'services.delete': 'glyphicon-minus'},
-   'operations properly set');
+  const operations = {'services.show': 'glyphicon-pencil', 'services.delete': 'glyphicon-minus'};
+  assert.deepEqual(ctrl.get('operations'), operations,'operations properly set');
 });

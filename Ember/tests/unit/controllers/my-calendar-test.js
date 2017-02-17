@@ -15,15 +15,15 @@ test('checking defined variables', function(assert) {
 
   assert.equal(ctrl.get('viewName2'), 'listWeek', 'variable properly set');
 
-  assert.deepEqual(ctrl.get('businessHours'), 
+  assert.deepEqual(ctrl.get('businessHours'),
   	{
-    dow: [ 1, 2, 3, 4, 5 ], 
-    start: '10:00', 
-    end: '18:00', 
+    dow: [ 1, 2, 3, 4, 5 ],
+    start: '10:00',
+    end: '18:00',
   	},
   'variable properly set');
 
-  assert.deepEqual(ctrl.get('calendarHeader'), 
+  assert.deepEqual(ctrl.get('calendarHeader'),
   	{
     left:   'today',
     center: 'title',
@@ -37,7 +37,9 @@ test('checking computedTotal', function(assert) {
   assert.expect(1);
   const ctrl = this.subject();
 
-  ctrl.set('model',[Ember.Object.create({ cost: 2 }) ,Ember.Object.create({ cost: 1 })]);
+  const modelArray = [Ember.Object.create({ cost: 2 }) ,Ember.Object.create({ cost: 1 })];
+
+  ctrl.set('model', modelArray);
   assert.equal(ctrl.get('computedTotal'), '$3', 'total is calculated correctly');
 });
 
@@ -45,8 +47,9 @@ test('checking computedEvents', function(assert) {
   assert.expect(1);
   const ctrl = this.subject();
 
-  ctrl.set('model',[Ember.Object.create({ id:1, formattedStart: "11/11/2016", formattedEnd: "12/12/2016", color: "#ff8000", textColor: "#ff8000"}) ,Ember.Object.create({ id:2, formattedStart: "10/10/2016", formattedEnd: "11/11/2016", color: "#fa6400", textColor: "#fd5300"})]);
-  assert.deepEqual(ctrl.get('computedEvents'), 
+  const modelArray = [Ember.Object.create({ id:1, formattedStart: "11/11/2016", formattedEnd: "12/12/2016", color: "#ff8000", textColor: "#ff8000"}) ,Ember.Object.create({ id:2, formattedStart: "10/10/2016", formattedEnd: "11/11/2016", color: "#fa6400", textColor: "#fd5300"})];
+  ctrl.set('model',modelArray);
+  assert.deepEqual(ctrl.get('computedEvents'),
 	[
 	  {
 	    "color": "#ff8000",
@@ -64,7 +67,7 @@ test('checking computedEvents', function(assert) {
 	    "textColor": "#fd5300",
 	    "title": "Service"
 	  }
-	], 
+	],
   	'events calculated correctly');
 });
 
