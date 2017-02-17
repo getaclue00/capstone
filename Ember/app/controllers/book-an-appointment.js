@@ -24,8 +24,8 @@ export default Ember.Controller.extend({
 
     displayDescription(serviceId){
       if (document.getElementById(this.get('previousDescription'))) {
-        document.getElementById(serviceId).style.display = 'block';
         document.getElementById(this.get('previousDescription')).style.display = 'none';
+        document.getElementById(serviceId).style.display = 'block';
       } else {
         document.getElementById(serviceId).style.display = 'block';
       }

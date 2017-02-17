@@ -121,6 +121,19 @@ $breakpoint-alpha: 768px;
 
 .service-info {
   display:none;
+  z-index: 1000;
+  position: absolute;
+  top: 1px;
+  left: 30%;
+  width: 65%;
+
+  .card-header{
+    text-align: right;
+    p:hover {
+      cursor: pointer;
+    }
+  }
+
 }
 //Styling for computer
 @media (min-width: $breakpoint-alpha) {

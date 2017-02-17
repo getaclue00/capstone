@@ -6,37 +6,39 @@
         <ul class="wizard_steps col-12">
           <li class="col-2.4">
             <a href="#step-1">
-            <span class="step_no">1</span>
-            <span class="step_descr">Service</span>
+              <span class="step_no">1</span>
+              <span class="step_descr">Service</span>
             </a>
           </li>
           <li class="col-2.4">
             <a href="#step-2">
-            <span class="step_no">2</span>
-            <span class="step_descr">Date</span>
+              <span class="step_no">2</span>
+              <span class="step_descr">Date</span>
             </a>
           </li>
           <li class="col-2.4">
             <a href="#step-3">
-            <span class="step_no">3</span>
-            <span class="step_descr">Your Info</span>
+              <span class="step_no">3</span>
+              <span class="step_descr">Your Info</span>
             </a>
           </li>
           <li class="col-2.4">
             <a href="#step-4">
-            <span class="step_no">4</span>
-            <span class="step_descr">Confirm</span>
+              <span class="step_no">4</span>
+              <span class="step_descr">Confirm</span>
             </a>
           </li>
         </ul>
         <div>
           <div id="step-1">
-            <div class="row">
-              <div class="col-12 text-center">
-                <h3>Select a Service</h3>
-                <hr>
-              </div>
-              <div class="col-12">
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a href="#small-vehicle-list" data-toggle="tab" class="nav-link active">Small Vehicles</a>
+              </li>
+              <li class="nav-item"><a href="#large-vehicle-list" data-toggle="tab" class="nav-link">Large Vehicles</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="small-vehicle-list">
                 <table class="table table-hover">
                   <thead>
                     <tr>
@@ -46,17 +48,52 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{#each services as |service|}}
-                      <tr>
-                        <td><button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button></td>
-                        <td>
-                          <span class="glyphicon glyphicon-info-sign pin-info" {{action 'displayDescription' service.id}}></span>
-                          <div id="{{service.id}}" class="service-info">
-                            {{service.description}}
-                          </div>
-                        </td>
-                        <td>{{service.price_small}}</td>
-                      </tr>
+                    {{#each smallVehicleServices as |service|}}
+                    <tr>
+                      <td>
+                        <button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                      </td>
+                      <td>
+                        <span class="glyphicon glyphicon-info-sign pin-info" {{action 'displayDescription' service.id}}></span>
+                      </td>
+                      <td>{{service.price}}</td>
+                    </tr>
+                    <div id="{{service.id}}" class="card service-info">
+                      <h3 class="card-header"><p>x</p></h3>
+                      <div class="card-block">
+                        <p class="card-text">{{service.description}}</p>
+                      </div>
+                    </div>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="large-vehicle-list">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th></th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each largeVehicleServices as |service|}}
+                    <tr>
+                      <td>
+                        <button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                      </td>
+                      <td>
+                        <span class="glyphicon glyphicon-info-sign pin-info" {{action 'displayDescription' service.id}}></span>
+                      </td>
+                      <td>{{service.price}}</td>
+                    </tr>
+                    <div id="{{service.id}}" class="card service-info">
+                      <h3 class="card-header"><p>x</p></h3>
+                      <div class="card-block">
+                        <p class="card-text">{{service.description}}</p>
+                      </div>
+                    </div>
                     {{/each}}
                   </tbody>
                 </table>
@@ -72,26 +109,11 @@
               <div class="container">
                 <div class="schedule">
                   <div class="calendar-view">
-                    {{full-calendar
-                      header=header
-                      aspectRatio=1
-                      viewName=viewName
-                      fixedWeekCount=false
-                      businessHours=businessHours
-                      dayClick=(action 'handleCalendarDayClick')
-                    }}
+                    {{full-calendar header=header aspectRatio=1 viewName=viewName fixedWeekCount=false businessHours=businessHours dayClick=(action 'handleCalendarDayClick') }}
                   </div>
-                  {{#if selectTime}}
-                    {{appointment-time-selection
-                      selectTime=selectTime
-                      selectedDate=selectedDate
-                      model=appointment
-                      listOfEmployees=employees
-                      businessHours=businessHours
-                    }}
-                  {{/if}}
+                  {{#if selectTime}} {{appointment-time-selection selectTime=selectTime selectedDate=selectedDate model=appointment listOfEmployees=employees businessHours=businessHours }} {{/if}}
                   <div class="authors"></div>
-                   <div class="calendar-times col-6">
+                  <div class="calendar-times col-6">
                   </div>
                 </div>
               </div>
@@ -114,7 +136,8 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-3 client-information" for="personal-info-email"><span>Email Address</span></label>
+                    <label class="col-3 client-information" for="personal-info-email"><span>Email Address</span>
+                    </label>
                     <div class="col-9">
                       <input type="email" class="form-control" id="personal-info-email" placeholder="Email">
                     </div>
@@ -153,9 +176,12 @@
                         Service
                       </div>
                       <div class="card-block">
-                        <strong>Service:</strong> Engine degrease<br>
-                        <strong>Duration:</strong> 90 min<br>
-                        <strong>Price:</strong> $100<br>
+                        <strong>Service:</strong> Engine degrease
+                        <br>
+                        <strong>Duration:</strong> 90 min
+                        <br>
+                        <strong>Price:</strong> $100
+                        <br>
                       </div>
                     </div>
                   </div>
@@ -165,10 +191,12 @@
                         Booking Date
                       </div>
                       <div class="card-block">
-                        <strong>Date:</strong><br>
-                        Jan 1, 2017<br>
-                        <strong>Time:</strong><br>
-                        11:00 AM<br>
+                        <strong>Date:</strong>
+                        <br> Jan 1, 2017
+                        <br>
+                        <strong>Time:</strong>
+                        <br> 11:00 AM
+                        <br>
                       </div>
                     </div>
                   </div>
@@ -178,12 +206,14 @@
                         Personal Information
                       </div>
                       <div class="card-block">
-                        <strong>Leann Labelle:</strong><br>
-                        leann@gmail.com<br>
-                        123 Street Street<br>
-                        613 213 - 4567<br>
-                        <strong>Comments:</strong><br>
-                        Hi<br>
+                        <strong>Leann Labelle:</strong>
+                        <br> leann@gmail.com
+                        <br> 123 Street Street
+                        <br> 613 213 - 4567
+                        <br>
+                        <strong>Comments:</strong>
+                        <br> Hi
+                        <br>
                       </div>
                     </div>
                   </div>

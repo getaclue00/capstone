@@ -1,14 +1,15 @@
 class ServicesController < ApplicationController
-	
+
   before_action :authenticate_user_from_token!
-  
+
   def index
 
     if params[:filter].present?
       if  params[:filter][:vehicle_size].present?
          services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
-      else params[:filter][:displayable].present?
-         services_array = Service.where('displayable = ?', params[:filter][:displayable]).all
+        if params[:filter][:displayable].present?
+           services_array = services_array.where('displayable = ?', params[:filter][:displayable]).all
+         end
       end
     else
       services_array=Service.all
@@ -20,7 +21,7 @@ class ServicesController < ApplicationController
       render json: { error: 'No services exist' }, status: :bad_request
     end
   end
-  
+
   def show
     begin
       service=Service.find params[:id]
