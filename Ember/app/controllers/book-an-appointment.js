@@ -22,16 +22,6 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    displayDescription(serviceId){
-      if (document.getElementById(this.get('previousDescription'))) {
-        document.getElementById(this.get('previousDescription')).style.display = 'none';
-        document.getElementById(serviceId).style.display = 'block';
-      } else {
-        document.getElementById(serviceId).style.display = 'block';
-      }
-      this.set('previousDescription', serviceId);
-    },
-
     selectService(service) {
       if(!Ember.isEmpty(service)){
         this.get('appointment').set('service', service);

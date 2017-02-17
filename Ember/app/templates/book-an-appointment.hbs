@@ -51,19 +51,15 @@
                     {{#each smallVehicleServices as |service|}}
                     <tr>
                       <td>
-                        <button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                        <button class="btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
                       </td>
                       <td>
-                        <span class="glyphicon glyphicon-info-sign pin-info" {{action 'displayDescription' service.id}}></span>
+                        <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="top" data-content="{{service.description}}">
+                          <span class="glyphicon glyphicon-info-sign" ></span>
+                        </a>
                       </td>
                       <td>{{service.price}}</td>
                     </tr>
-                    <div id="{{service.id}}" class="card service-info">
-                      <h3 class="card-header"><p>x</p></h3>
-                      <div class="card-block">
-                        <p class="card-text">{{service.description}}</p>
-                      </div>
-                    </div>
                     {{/each}}
                   </tbody>
                 </table>
@@ -84,16 +80,12 @@
                         <button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
                       </td>
                       <td>
-                        <span class="glyphicon glyphicon-info-sign pin-info" {{action 'displayDescription' service.id}}></span>
+                        <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}} " viewport=>
+                          <span class="glyphicon glyphicon-info-sign" ></span>
+                        </a>
                       </td>
                       <td>{{service.price}}</td>
                     </tr>
-                    <div id="{{service.id}}" class="card service-info">
-                      <h3 class="card-header"><p>x</p></h3>
-                      <div class="card-block">
-                        <p class="card-text">{{service.description}}</p>
-                      </div>
-                    </div>
                     {{/each}}
                   </tbody>
                 </table>

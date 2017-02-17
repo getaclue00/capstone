@@ -41,9 +41,16 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     });
   },
 
+  enablePopovers () {
+    Ember.$("a[rel=popover]").popover().click(function(e) {
+      e.preventDefault();
+    });
+  },
+
   actions: {
     didTransition() {
       Ember.run.next(this, 'renderSmartWizard');
+      Ember.run.next(this, 'enablePopovers');
     }
   }
 });
