@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 moduleFor('controller:my-calendar/appointments/new', 'Unit | Controller | my calendar/appointments/new', {
   // Specify the other units that are required for this test.
@@ -11,10 +12,10 @@ test('#saveAppointment transitions to my-calendar', function(assert) {
   const ctrl = this.subject({
       appointment: Ember.Object.create({
       	save() {
-          return new Ember.RSVP.Promise(function(resolve) {
+          return new RSVP.Promise(function(resolve) {
             resolve(true);
           });
-        }   
+        }
       }),
       transitionToRoute(route) {
       	assert.equal(route, 'my-calendar');
@@ -30,7 +31,7 @@ test('#saveAppointment throws as error following a failed creation', function(as
   let ctrl = this.subject({
       appointment: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
+          return new RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not create a record' });
           });
         }

@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 const flashMessagesStub = Ember.Service.extend({
   success(message) {
@@ -26,7 +27,7 @@ test('#createUser transitions to employees', function(assert) {
 
   let userStub = Ember.Object.create({
     save() {
-      return new Ember.RSVP.Promise(function(resolve) {
+      return new RSVP.Promise(function(resolve) {
         resolve(true);
       });
     }
@@ -51,7 +52,7 @@ test('#createUser throws an error following a failed creation (passwords match)'
     confirm: 'password',
     password: 'password',
     save() {
-      return new Ember.RSVP.Promise(function(resolve, reject) {
+      return new RSVP.Promise(function(resolve, reject) {
         reject({ error: 'could not create a record' });
       });
     }
@@ -76,7 +77,7 @@ test('#createUser throws an error following a failed creation (passwords do not 
     confirm: 'password1',
     password: 'password',
     save() {
-      return new Ember.RSVP.Promise(function(resolve, reject) {
+      return new RSVP.Promise(function(resolve, reject) {
         reject({ error: 'could not create a record' });
       });
     }

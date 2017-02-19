@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 const flashMessagesStub = Ember.Service.extend({
   success(message) {
@@ -28,11 +29,11 @@ test('#updateAccountInfo does NOT transition away from my-account ', function(as
 
       let mockEmployee = Ember.Object.create({
         save() {
-          return Ember.RSVP.resolve();
+          return RSVP.resolve();
         }
       });
 
-      return Ember.RSVP.resolve(mockEmployee);
+      return RSVP.resolve(mockEmployee);
     }
   });
 
@@ -60,11 +61,11 @@ test('#updateAccountInfo throws an error following a failed update', function(as
       let mockEmployee = Ember.Object.create({
         save() {
           let errorMsg = { error: 'could not update a record' };
-          return Ember.RSVP.reject(errorMsg);
+          return RSVP.reject(errorMsg);
         }
       });
 
-      return Ember.RSVP.resolve(mockEmployee);
+      return RSVP.resolve(mockEmployee);
     }
   });
 
@@ -88,7 +89,7 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords match
     password: 'password',
 
     save() {
-      return Ember.RSVP.resolve();
+      return RSVP.resolve();
     }
   });
 
@@ -113,7 +114,7 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords do no
     password: 'pass1word',
 
     save() {
-      return Ember.RSVP.resolve();
+      return RSVP.resolve();
     }
   });
 
@@ -139,7 +140,7 @@ test('#updateLoginInfo throws an error following a failed update', function(asse
 
     save() {
       let errorMsg = { error: 'could not update a record' };
-      return Ember.RSVP.reject(errorMsg);
+      return RSVP.reject(errorMsg);
     }
   });
 

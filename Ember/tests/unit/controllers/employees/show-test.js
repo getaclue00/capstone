@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 moduleFor('controller:employees/show', 'Unit | Controller | employees/show', {
   // Specify the other units that are required for this test.
@@ -11,7 +12,7 @@ test('#updateEmployee transitions to employees', function(assert) {
   const ctrl = this.subject({
       model: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve) {
+          return new RSVP.Promise(function(resolve) {
             resolve(true);
           });
         }
@@ -30,7 +31,7 @@ test('#updateEmployee throws as error following a failed update', function(asser
   let ctrl = this.subject({
       model: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
+          return new RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not update a record' });
           });
         }

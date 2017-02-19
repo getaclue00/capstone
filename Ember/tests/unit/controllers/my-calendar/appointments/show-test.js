@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 moduleFor('controller:my-calendar/appointments/show', 'Unit | Controller | my calendar/appointments/show', {
 });
@@ -9,7 +10,7 @@ test('#deleteAppointment transitionsTo my-calendar', function(assert) {
   let ctrl = this.subject({
       appointment: Ember.Object.create({
         destroyRecord() {
-          return new Ember.RSVP.Promise(function(resolve) {
+          return new RSVP.Promise(function(resolve) {
             resolve(true);
           });
         }
@@ -29,7 +30,7 @@ test('#deleteAppointment throws an error following a failed delete', function(as
   let ctrl = this.subject({
       appointment: Ember.Object.create({
         destroyRecord() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
+          return new RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not destroy a record' });
           });
         }
@@ -44,7 +45,7 @@ test('#saveAppointment transitionsTo my-calendar', function(assert) {
   let ctrl = this.subject({
       appointment: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve) {
+          return new RSVP.Promise(function(resolve) {
             resolve(true);
           });
         }
@@ -62,7 +63,7 @@ test('#saveAppointment throws an error following a failed update', function(asse
   let ctrl = this.subject({
       appointment: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
+          return new RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not update a record' });
           });
         }

@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 moduleFor('controller:employees/delete', 'Unit | Controller | employees/delete', {
   // Specify the other units that are required for this test.
@@ -20,14 +21,14 @@ test('#deleteEmployee deletes and redirects to employees page', function(assert)
   const ctrl = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
-          return new Ember.RSVP.Promise(function(resolve) {
+          return new RSVP.Promise(function(resolve) {
             resolve(true);
           });
         }
       }),
       transitionToRoute(route) {
       	assert.equal(route, 'employees');
-      	done();	
+      	done();
       }
   });
 
@@ -41,12 +42,12 @@ test('#deleteEmployee throws an error following a failed deletion', function(ass
   const ctrl = this.subject({
       model: Ember.Object.create({
         destroyRecord() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
+          return new RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not destroy a record' });
           });
         }
       })
   });
-  assert.throws(ctrl.send('deleteEmployee'),  		
+  assert.throws(ctrl.send('deleteEmployee'),
     "throws with just a message, not using the 'expected' argument");
 });

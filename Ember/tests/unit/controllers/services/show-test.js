@@ -1,5 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 moduleFor('controller:services/show', 'Unit | Controller | services/show', {
   // Specify the other units that are required for this test.
@@ -11,7 +12,7 @@ test('#saveService transitions to services', function(assert) {
   let ctrl = this.subject({
       model: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve) {
+          return new RSVP.Promise(function(resolve) {
             resolve(true);
           });
         }
@@ -30,14 +31,14 @@ test('#saveService throws an error following a failed update', function(assert) 
   let ctrl = this.subject({
       model: Ember.Object.create({
         save() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
+          return new RSVP.Promise(function(resolve, reject) {
             reject({ error: 'could not update a record' });
           });
         }
       })
   });
 
-  assert.throws(ctrl.send('updateService'), 
+  assert.throws(ctrl.send('updateService'),
   	"throws with just a message, not using the 'expected' argument");
 
 });

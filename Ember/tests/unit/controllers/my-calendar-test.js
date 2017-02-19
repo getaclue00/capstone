@@ -78,6 +78,9 @@ test('#handleCalendarEventClick redirects to my-calendar.appointments.show page'
         assert.equal(route, 'my-calendar.appointments.show');
       }
   });
-  ctrl.send('handleCalendarEventClick', 2); //eg. calendar event id is 2
+
+  const calEvent = Ember.Object.create({ id: 2 });
+  ctrl.send('handleCalendarEventClick', calEvent);
+
   assert.ok(ctrl);
 });
