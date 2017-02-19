@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h2 class="text-center">Booking Information</h2>
+  <h4 class="text-center client-booking-title">Booking an Appointment</h4>
   <div class="row">
     <div class="col-12">
       <div id="smartwizard" class="wizard_horizontal col-12">
@@ -31,6 +31,7 @@
         </ul>
         <div>
           <div id="step-1">
+            <h6>Select a Service <hr></h6>
             <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item"><a href="#small-vehicle-list" data-toggle="tab" class="nav-link active">Small Vehicles</a>
               </li>
@@ -157,22 +158,18 @@
           <div id="step-4">
             <div class="row">
               <div class="col-sm-12">
-                <div class="text-center">
-                  <h3>Your Booking Overview</h3>
-                </div>
-                <hr>
                 <div class="row justify-content-between">
                   <div class="col-sm-3">
                     <div class="card booking-confirm-card">
                       <div class="card-header">
-                        Service
+                        <h4 class="text-center">Your Booking Overview</h4>
                       </div>
                       <div class="card-block">
-                        <strong>Service:</strong> Engine degrease
+                        <strong>Service:</strong> {{appointment.service.name}}
                         <br>
-                        <strong>Duration:</strong> 90 min
+                        <strong>Duration:</strong> {{appointment.service.duration}} minutes
                         <br>
-                        <strong>Price:</strong> $100
+                        <strong>Price:</strong> ${{appointment.service.price}}
                         <br>
                       </div>
                     </div>

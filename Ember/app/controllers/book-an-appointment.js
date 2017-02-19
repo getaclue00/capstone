@@ -25,6 +25,8 @@ export default Ember.Controller.extend({
     selectService(service) {
       if(!Ember.isEmpty(service)){
         this.get('appointment').set('service', service);
+        Ember.$('.service-selection-btn').removeClass("active");
+        Ember.$(event.target).addClass("active");
       }
     },
 
