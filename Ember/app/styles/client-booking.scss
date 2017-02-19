@@ -130,6 +130,11 @@ $breakpoint-alpha: 768px;
     margin: 15px 0px;
 }
 
+.appointment-time-label {
+  text-transform: uppercase;
+  padding: 0px 15px;
+}
+
 //Styling for computer
 @media (min-width: $breakpoint-alpha) {
 

@@ -4,6 +4,7 @@ import moment from 'moment';
 export default Ember.Controller.extend({
   selectTime: false,
   selectedDate: null,
+  selectedTime: null,
   previousDescription: null,
 
   viewName: 'month',

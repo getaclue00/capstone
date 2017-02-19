@@ -4,9 +4,9 @@
       <div class="modal-header">
         <h6 class="modal-title" id="appointment-time-selection-show">Time Selection for: {{selectedDate}}</h6>
       </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="form-group">
+      <div>
+        <div>
+          <div class="form-group" style="padding: 0px 15px;">
             <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Please Choice a Staff Member:</label>
             <div class="col-xs-12">
               {{#power-select
@@ -23,17 +23,17 @@
             </div>
           </div>
           {{#if wasEmployeeSelected}}
-            <label for="appointment-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Available Times:</label>
+            <label for="appointment-time" class="col-xs-12 col-form-label font-weight-bold appointment-time-label">Available Times:</label>
             <div class="available-time-choices" style="text-align: center">
-              {{#each availableTimes as |t|}}
-                <button type="button" class="btn btn-outline-info col-3 time-button">{{t}}</button>
+              {{#each availableTimes as |time|}}
+                <button type="button" class="btn btn-outline-info col-3 time-button" {{action 'confirmSelection' time}}>{{time}}</button>
               {{/each}}
           </div>
           {{/if}}
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" {{action 'resetForm'}}>Cancel</button>
+        <button type="button" class="btn btn-danger" {{action 'cancelSelection'}}>Cancel</button>
       </div>
     </div>
   </div>

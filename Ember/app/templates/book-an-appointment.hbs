@@ -95,16 +95,24 @@
           </div>
           <div id="step-2">
             <div class="row">
-              <div class="col-12 text-center">
-                <h3>Enter Date Selections</h3>
-                <hr>
+              <div class="col-12">
+                <h6>Select a Date <hr></h6>
               </div>
               <div class="container">
                 <div class="schedule">
                   <div class="calendar-view">
                     {{full-calendar header=header aspectRatio=1 viewName=viewName fixedWeekCount=false businessHours=businessHours dayClick=(action 'handleCalendarDayClick') }}
                   </div>
-                  {{#if selectTime}} {{appointment-time-selection selectTime=selectTime selectedDate=selectedDate model=appointment listOfEmployees=employees businessHours=businessHours }} {{/if}}
+                  {{#if selectTime}}
+                    {{appointment-time-selection
+                      selectTime= selectTime
+                      selectedDate= selectedDate
+                      appointment= appointment
+                      listOfEmployees= employees
+                      businessHours= businessHours
+                      selectedTime= selectedTime
+                    }}
+                  {{/if}}
                   <div class="authors"></div>
                   <div class="calendar-times col-6">
                   </div>
@@ -159,50 +167,34 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="row justify-content-between">
-                  <div class="col-sm-3">
+                  <div class="col-12">
                     <div class="card booking-confirm-card">
                       <div class="card-header">
                         <h4 class="text-center">Your Booking Overview</h4>
                       </div>
                       <div class="card-block">
-                        <strong>Service:</strong> {{appointment.service.name}}
-                        <br>
-                        <strong>Duration:</strong> {{appointment.service.duration}} minutes
-                        <br>
-                        <strong>Price:</strong> ${{appointment.service.price}}
-                        <br>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="card booking-confirm-card">
-                      <div class="card-header">
-                        Booking Date
-                      </div>
-                      <div class="card-block">
-                        <strong>Date:</strong>
-                        <br> Jan 1, 2017
-                        <br>
-                        <strong>Time:</strong>
-                        <br> 11:00 AM
-                        <br>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="card booking-confirm-card">
-                      <div class="card-header">
-                        Personal Information
-                      </div>
-                      <div class="card-block">
-                        <strong>Leann Labelle:</strong>
-                        <br> leann@gmail.com
-                        <br> 123 Street Street
-                        <br> 613 213 - 4567
-                        <br>
-                        <strong>Comments:</strong>
-                        <br> Hi
-                        <br>
+                        <h5><strong>Service Information</strong></h5> {{appointment.service.name}}
+                        <br />
+                        <div>
+                          <p>Duration: {{appointment.service.duration}} minutes</p>
+                          <p>Price: ${{appointment.service.price}}</p>
+                          <p>Employee: {{appointment.employee.fullName}}</p>
+                        </div>
+                        <hr>
+                        <h5><strong>Date and Time</strong></h5>
+                        <p>{{selectedDate}} {{selectedTime}}</p>
+                        <hr>
+                        <h5><strong>Your Information</strong></h5>
+                        <div>
+                          <p>Email</p>
+                          <p>Address</p>
+                          <p>Phone Number</p>
+                          <strong>Comments:</strong>
+                        </div>
+                        <br />
+                        <div class="text-center">
+                          <button class="btn btn btn-primary btn-large">Confirm</button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -3,28 +3,28 @@ import moment from 'moment';
 
 export default Ember.Component.extend({
 
-  availableTimes: Ember.computed('params.[]', function(){
+  availableTimes: Ember.computed('availableTimes', function(){
     var arrayTime = [];
     var start = this.get('businessHours.start');
     var end = this.get('businessHours.end');
-    var timeDiff = moment(end,"HH:mm").diff(moment(start,"HH:mm"));
+    var timeDiff = moment(end,"h:mm A").diff(moment(start,"h:mm A"));
     var time = start;
 
     for(var i = 0 ; i < timeDiff; i+=1800000){
 
-      arrayTime.push(moment(time, "HH:mm").format("HH:mm"));
-      time = moment(time, "HH:mm").add(30, 'minutes');
+      arrayTime.push(moment(time, "h:mm A").format("h:mm A"));
+      time = moment(time, "h:mm A").add(30, 'minutes');
     }
 
     return arrayTime;
   }),
 
-  aSelectedEmployee: Ember.computed('model.employee', function(){
-    return this.get('model.employee');
+  aSelectedEmployee: Ember.computed('appointment.employee', function(){
+    return this.get('appointment.employee');
   }),
 
-  wasEmployeeSelected: Ember.computed('model.employee', function(){
-    let employee = this.get('model.employee');
+  wasEmployeeSelected: Ember.computed('appointment.employee', function(){
+    let employee = this.get('appointment.employee');
 
     if (employee) {
       if (employee.get('firstName') && employee.get('lastName')) {
@@ -47,14 +47,19 @@ export default Ember.Component.extend({
 
   actions: {
 
-    resetForm(){
-      this.get('model').set('employee', null);
+    cancelSelection() {
+      this.get('appointment').set('employee', null);
       this.set('selectTime', false);
+    },
+
+    confirmSelection(time) {
+      this.set('selectedTime', time);
+      Ember.$('#appointment-time-selection').modal('hide');
     },
 
     selectEmployee(employee) {
       if(!Ember.isEmpty(employee)){
-        this.get('model').set('employee', employee);
+        this.get('appointment').set('employee', employee);
       }
     },
   }
