@@ -107,7 +107,6 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords match
 });
 
 test('#updateLoginInfo does NOT transition away from my-account (passwords do not match)', function(assert) {
-  let done = assert.async();
 
   let userStub = Ember.Object.create({
     confirm: 'password',
@@ -123,16 +122,12 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords do no
   });
 
   controller.send('updateLoginInfo');
-
-  setTimeout(function() {
-    assert.ok(controller);
-    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
-    done();
-  }, 500);
+  //setTimeout in not needed because the save is not trying to execute in the actual code
+  assert.ok(controller);
+  assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
 });
 
 test('#updateLoginInfo throws an error following a failed update', function(assert) {
-  let done = assert.async();
 
   let userStub = Ember.Object.create({
     confirm: 'password',
@@ -148,11 +143,5 @@ test('#updateLoginInfo throws an error following a failed update', function(asse
     model: userStub
   });
 
-  controller.send('updateLoginInfo');
-
-  setTimeout(function() {
-    assert.ok(controller);
-    assert.throws(controller.send('updateLoginInfo'), "throws with just a message, not using the 'expected' argument");
-    done();
-  }, 500);
+  assert.throws(controller.send('updateLoginInfo'), "throws with just a message, not using the 'expected' argument");
 });

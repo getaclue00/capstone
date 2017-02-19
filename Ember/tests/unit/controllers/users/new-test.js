@@ -71,8 +71,6 @@ test('#createUser throws an error following a failed creation (passwords match)'
 });
 
 test('#createUser throws an error following a failed creation (passwords do not match)', function(assert) {
-  let done = assert.async();
-
   let userStub = Ember.Object.create({
     confirm: 'password1',
     password: 'password',
@@ -88,10 +86,7 @@ test('#createUser throws an error following a failed creation (passwords do not 
   });
 
   ctrl.send('createUser');
-  setTimeout(function() {
-    assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
-    done();
-  }, 500);
+  assert.ok(ctrl);
+  assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
 });
 

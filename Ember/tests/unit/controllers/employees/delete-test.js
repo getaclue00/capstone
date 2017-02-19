@@ -43,11 +43,13 @@ test('#deleteEmployee throws an error following a failed deletion', function(ass
       model: Ember.Object.create({
         destroyRecord() {
           return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not destroy a record' });
+            reject({ error:'could not destroy a record' });
           });
         }
       })
   });
+
   assert.throws(ctrl.send('deleteEmployee'),
     "throws with just a message, not using the 'expected' argument");
+
 });
