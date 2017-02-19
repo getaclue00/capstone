@@ -7,6 +7,12 @@ export default Ember.Component.extend({
      });
   },
   employeeCollection: Ember.computed('collection', function() {
-  return this.get('collection') === 'employees';
-  })
+    return this.get('collection') === 'employees';
+  }),
+
+  actions: {
+    viewOperations(row){
+      this.$( 'tr.' + row + ' td div.management-operation').toggle( "slow");
+    }
+  }
 });

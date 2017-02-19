@@ -2,48 +2,55 @@
   <thead>
     <tr>
       {{#each headers as |header|}}
-        <th><h1>{{header}}</h1></th>
+        <th>
+          <h1>{{header}}</h1>
+        </th>
       {{/each}}
       {{#if employeeCollection}}
-        <th><h1>User Account</h1></th>
+        <th>
+          <h1>User Account</h1>
+        </th>
       {{/if}}
       <th></th>
+      <th></th>
+      <th class="toggle-operations"></th>
     </tr>
   </thead>
   <tbody class="management-table-body">
     {{#each model as |collection|}}
-      <tr class="management-table-row">
-        {{#each-in attributes as |key value|}}
-        <td class="management-column" data-th="{{value}}">
-          {{get collection key}}
-        </td>
-        {{/each-in}}
-        {{#if employeeCollection}}
-          <td>
-            <div class='management-operation'>
-          {{#if collection.user}}
-            {{#link-to 'users.show' collection.user.id class="management-icon"}}
+    <tr class="management-table-row {{collection.id}}">
+      {{#each-in attributes as |key value|}}
+      <td class="management-column" data-th="{{value}}">
+        {{get collection key}}
+      </td>
+      {{/each-in}}
+      {{#if employeeCollection}}
+        <td class="operation-div">
+          <div class="management-operation">
+            {{#if collection.user}}
+              {{#link-to 'users.show' collection.user.id class="management-icon"}}
               <span class="glyphicon glyphicon-user"></span>
-            {{/link-to}}
-          {{else}}
-            {{#link-to 'users.new' collection.id class="management-icon"}}
+              {{/link-to}}
+            {{else}}
+              {{#link-to 'users.new' collection.id class="management-icon"}}
               <span class="glyphicon glyphicon-plus"></span>
-            {{/link-to}}
-          {{/if}}
-        </div>
-          </td>
-        {{/if}}
-        <td class='management-buttons'>
-        {{#each-in operations as |key value|}}
-         <div class='management-operation'>
-          {{#link-to key  collection.id class="management-icon"}}
-            <span class="glyphicon {{value}}"></span>
-          {{/link-to}}
-         </div>
-        {{/each-in}}
+              {{/link-to}}
+            {{/if}}
+          </div>
         </td>
-      </tr>
-      <br />
+      {{/if}}
+      {{#each-in operations as |key value|}}
+      <td class="operation-div">
+        <div class="management-operation">
+          {{#link-to key  collection.id class="management-icon"}}
+          <span class="glyphicon {{value}}"></span>
+          {{/link-to}}
+        </div>
+      </td >
+      {{/each-in}}
+      <td class="toggle-operations" {{action 'viewOperations' collection.id}}><span class=" glyphicon glyphicon-hand-up"></span></td>
+    </tr>
+    <br />
     {{/each}}
   </tbody>
 </table>
