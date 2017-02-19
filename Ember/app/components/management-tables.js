@@ -11,8 +11,8 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    viewOperations(row){
-      this.$( 'tr.' + row + ' td div.management-operation').toggle( "slow");
+    viewOperations(id){
+      Ember.$( 'tr.' + id + ' td div.management-operation').toggle( "slow");
     }
   }
 });
