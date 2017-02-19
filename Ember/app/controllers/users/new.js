@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
 	    }else{
 	    	window.scrollTo(0,0);
         flashMessages.danger('Passwords do not match!');
-	    }   
+	    }
     }
   }
 });
