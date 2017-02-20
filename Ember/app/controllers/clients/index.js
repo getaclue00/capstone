@@ -6,8 +6,7 @@ export default Ember.Controller.extend({
     attributes: {"fullName": "Name", "id" : "Client ID:", "email": "Email", "phoneNumber" : "Phone"
                 },
 
-    // operations: {'clients.show': 'glyphicon-pencil', 'clients.delete': 'glyphicon-remove'},
-    operations: {'clients.show': 'glyphicon-pencil'},
+    operations: {'clients.show': 'glyphicon-pencil', 'clients.delete': 'glyphicon-remove'},
 
     collection: 'clients'
 });
