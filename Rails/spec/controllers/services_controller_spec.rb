@@ -54,8 +54,8 @@ RSpec.describe ServicesController, :type => :controller do
         attr = result["data"]["attributes"];
 
         expect(attr["name"]).to eq("serviceA")
-        expect(attr["price_small"].to_f).to eq(120.0)
-        expect(attr["price_large"].to_f).to eq(250.0)
+        expect(attr["price"].to_f).to eq(120.0)
+        expect(attr["vehicle_size"]).to eq("Small")
         expect(attr["duration"].to_f).to eq(2.0)
         expect(attr["description"]).to eq("This is a description")
         expect(attr["active"]).to eq(true)
@@ -95,8 +95,8 @@ RSpec.describe ServicesController, :type => :controller do
           "data": {
               "attributes": {
                 "name":"name",
-                "price_small":120.0,
-                "price_large":250.0,
+                "price":120.0,
+                "vehicle_size":"Small",
                 "duration":1.5,
                 "description":"This is a description",
                 "active":true,
@@ -123,8 +123,8 @@ RSpec.describe ServicesController, :type => :controller do
           "data": {
               "attributes": {
                 #name is mandatory
-                "price_small":"f",
-                "price_large":"rr",
+                "price":"f",
+                "vehicle_size":"rr",
                 "duration":"ww",
                 "description":"This is a description",
                 "active":0,
@@ -192,8 +192,8 @@ RSpec.describe ServicesController, :type => :controller do
       it "responds successfully" do
         service = FactoryGirl.create :service_with_appointment
         service.name = "Testing Update of an existent service"
-        service.price_small = 34.0
-        service.price_large = 201.95
+        service.price = 34.0
+        service.vehicle_size = "Large"
         service.duration = 2.5
         service.description = "This is a test"
         service.active = true
@@ -212,8 +212,8 @@ RSpec.describe ServicesController, :type => :controller do
         expect(parsed_response['data']['id'].to_i).to eq(service.id)
         attributes = parsed_response['data']['attributes']
         expect(attributes['name']).to eq(service.name)
-        expect(attributes['price_small'].to_f).to eq(service.price_small)
-        expect(attributes['price_large'].to_f).to eq(service.price_large)
+        expect(attributes['price'].to_f).to eq(service.price)
+        expect(attributes['vehicle_size']).to eq(service.vehicle_size)
         expect(attributes['duration'].to_f).to eq(service.duration)
         expect(attributes['description']).to eq(service.description)
         expect(attributes['active']).to eq(service.active)
