@@ -2,9 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   type: "client",
+  flashMessages: Ember.inject.service(),
   actions: {
     deleteClient() {
-
+      var flashMessages = this.get('flashMessages');
       var self = this;
       let client = this.get('model');
 
@@ -16,8 +17,9 @@ export default Ember.Controller.extend({
         self.transitionToRoute('clients');
       }
 
-      function onError(error) {
-        throw error.message;
+      function onError() {
+        window.scrollTo(0,0);
+        flashMessages.danger("Client was not successfully deleted");
       }
 
       if (client) {
