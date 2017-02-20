@@ -50,6 +50,10 @@ export default Ember.Component.extend({
       if(!Ember.isEmpty(service)){
         this.get('model').set('service', service);
       }
+    },
+
+    toggleShowLocationMap() {
+      this.toggleProperty('showLocationMap');
     }
   }
 });
