@@ -52,7 +52,7 @@ RSpec.describe ClientsController, :type => :controller do
         expect(response).to have_http_status(:ok)
 
         attr = result["data"]["attributes"];
-        
+
         expect(attr["last_name"]).to eq("test")
         expect(attr["first_name"]).to eq("test")
         expect(attr["phone_number"]).to eq("000-000-0000")
@@ -98,7 +98,7 @@ RSpec.describe ClientsController, :type => :controller do
               },
               "type":"clients"
               }
-      
+
             }
 
         params = JSON.parse(data.to_json)
@@ -116,8 +116,8 @@ RSpec.describe ClientsController, :type => :controller do
               "attributes": {
               	#last_name is required
                 "first_name": "Nada",
-                "email": "test@test.com", #appended n to make it unique
-                "phone_number": "345",
+                "email": "test@t.",
+                "phone_number": "789",
                 "street_number": "tt",
                 "street_name": "Bank street",
                 "city": "Ottawa",
@@ -126,7 +126,7 @@ RSpec.describe ClientsController, :type => :controller do
               },
               "type":"clients"
               }
-      
+
             }
         params = JSON.parse(data.to_json)
 
@@ -135,9 +135,8 @@ RSpec.describe ClientsController, :type => :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:bad_request)
-        expect(result['error']).to eq({"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
+        expect(result['error']).to eq({"email"=>["Please enter a valid email address"],"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]}
 )
-        
       end
     end
    end
@@ -196,12 +195,12 @@ RSpec.describe ClientsController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: client.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
         expect(parsed_response['data']['id'].to_i).to eq(client.id)
-        attr = parsed_response['data']['attributes']      
+        attr = parsed_response['data']['attributes']
         expect(attr["last_name"]).to eq(client.last_name)
         expect(attr["first_name"]).to eq(client.first_name)
         expect(attr["phone_number"]).to eq(client.phone_number)
@@ -235,7 +234,7 @@ RSpec.describe ClientsController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: client.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
