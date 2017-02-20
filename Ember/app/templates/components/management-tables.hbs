@@ -14,7 +14,6 @@
       {{#each-in operations as |key value|}}
         <th></th>
       {{/each-in}}
-      <th class="toggle-operations"></th>
     </tr>
   </thead>
   <tbody class="management-table-body">
@@ -49,7 +48,9 @@
           </div>
         </td >
       {{/each-in}}
-      <td class="toggle-operations" {{action 'viewOperations' collection.id}}><span class=" glyphicon glyphicon-hand-up"></span></td>
+      <button type="button" class="btn toggle-operations"{{action 'viewOperations' collection.id}}>
+        <span class="glyphicon glyphicon-option-vertical"></span>
+      </button>
     </tr>
     <br />
     {{/each}}
