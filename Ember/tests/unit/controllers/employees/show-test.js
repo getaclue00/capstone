@@ -9,14 +9,13 @@ moduleFor('controller:employees/show', 'Unit | Controller | employees/show', {
 
 test('#updateEmployee transitions to employees', function(assert) {
   var done = assert.async(); //Tell QUnit to wait for the done() call inside the timeout.
+  const employeeStub = Ember.Object.create({
+    save() {
+      return RSVP.resolve();
+    }
+  });
   const ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      model: employeeStub,
       transitionToRoute(route) {
       	assert.equal(route, 'employees');
       	done();
@@ -28,17 +27,16 @@ test('#updateEmployee transitions to employees', function(assert) {
 });
 
 test('#updateEmployee throws as error following a failed update', function(assert) {
+  const employeeStub = Ember.Object.create({
+    save() {
+      let errorMsg = { error: 'could not update a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not update a record' });
-          });
-        }
-      })
+      model: employeeStub
   });
 
   assert.throws(ctrl.send('updateEmployee'),
    "throws with just a message, not using the 'expected' argument");
-
 });

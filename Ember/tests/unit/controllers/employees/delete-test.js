@@ -18,14 +18,13 @@ test('checking type', function(assert) {
 
 test('#deleteEmployee deletes and redirects to employees page', function(assert) {
   var done = assert.async(); //Tell QUnit to wait for the done() call inside the timeout.
+  const employeeStub = Ember.Object.create({
+    destroyRecord() {
+      return RSVP.resolve();
+    }
+  });
   const ctrl = this.subject({
-      model: Ember.Object.create({
-        destroyRecord() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      model: employeeStub,
       transitionToRoute(route) {
       	assert.equal(route, 'employees');
       	done();
@@ -39,17 +38,16 @@ test('#deleteEmployee deletes and redirects to employees page', function(assert)
 
 
 test('#deleteEmployee throws an error following a failed deletion', function(assert) {
+  const employeeStub = Ember.Object.create({
+    destroyRecord() {
+      let errorMsg = { error: 'could not destroy a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   const ctrl = this.subject({
-      model: Ember.Object.create({
-        destroyRecord() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error:'could not destroy a record' });
-          });
-        }
-      })
+      model: employeeStub
   });
 
   assert.throws(ctrl.send('deleteEmployee'),
     "throws with just a message, not using the 'expected' argument");
-
 });

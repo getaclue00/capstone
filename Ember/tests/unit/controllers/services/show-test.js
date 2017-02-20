@@ -9,14 +9,13 @@ moduleFor('controller:services/show', 'Unit | Controller | services/show', {
 
 test('#saveService transitions to services', function(assert) {
   var done = assert.async();
+  const serviceStub = Ember.Object.create({
+    save() {
+      return RSVP.resolve();
+    }
+  });
   let ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      model: serviceStub,
       transitionToRoute(route) {
         assert.equal(route, 'services');
         done();
@@ -28,14 +27,14 @@ test('#saveService transitions to services', function(assert) {
 });
 
 test('#saveService throws an error following a failed update', function(assert) {
+  const serviceStub = Ember.Object.create({
+    save() {
+      let errorMsg = { error: 'could not update a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not update a record' });
-          });
-        }
-      })
+      model: serviceStub
   });
 
   assert.throws(ctrl.send('updateService'),

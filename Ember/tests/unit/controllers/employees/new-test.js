@@ -9,14 +9,13 @@ moduleFor('controller:employees/new', 'Unit | Controller | employees/new', {
 
 test('#saveEmployee transitions to employees', function(assert) {
   var done = assert.async(); //Tell QUnit to wait for the done() call inside the timeout.
+  const employeeStub = Ember.Object.create({
+    save() {
+      return RSVP.resolve();
+    }
+  });
   const ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      model: employeeStub,
       transitionToRoute(route) {
       	assert.equal(route, 'employees');
       	done();
@@ -28,14 +27,14 @@ test('#saveEmployee transitions to employees', function(assert) {
 });
 
 test('#saveEmployee throws as error following a failed creation', function(assert) {
+  const employeeStub = Ember.Object.create({
+    save() {
+      let errorMsg = { error: 'could not create a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not create a record' });
-          });
-        }
-      })
+      model: employeeStub
   });
 
   assert.throws(ctrl.send('saveEmployee'),

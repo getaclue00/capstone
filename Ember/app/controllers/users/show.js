@@ -5,8 +5,8 @@ export default Ember.Controller.extend({
 	actions: {
 
     updateUser() {
-      var flashMessages = this.get('flashMessages');
       var self = this;
+      var flashMessages = self.get('flashMessages');
 
       function onSuccessful() {
         self.transitionToRoute('employees');
@@ -23,7 +23,10 @@ export default Ember.Controller.extend({
 	    }else{
 	    	window.scrollTo(0,0);
         flashMessages.danger('Passwords do not match!');
-	    }   
+	    }
     }
   }
 });
+
+
+

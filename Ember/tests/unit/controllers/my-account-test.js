@@ -13,14 +13,13 @@ const flashMessagesStub = Ember.Service.extend({
 });
 
 moduleFor('controller:my-account', 'Unit | Controller | my account', {
-  beforeEach() {
-    this.register('service:flash-messages', flashMessagesStub);
-    this.inject.service('flash-messages', { as: 'flashMessages' });
-  }
 });
 
 
 test('#updateAccountInfo does NOT transition away from my-account ', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   var done = assert.async();
 
   let userStub = Ember.Object.create({
@@ -52,6 +51,9 @@ test('#updateAccountInfo does NOT transition away from my-account ', function(as
 });
 
 test('#updateAccountInfo throws an error following a failed update', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   var done = assert.async();
 
   let userStub = Ember.Object.create({
@@ -82,6 +84,9 @@ test('#updateAccountInfo throws an error following a failed update', function(as
 });
 
 test('#updateLoginInfo does NOT transition away from my-account (passwords match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   let done = assert.async();
 
   let userStub = Ember.Object.create({
@@ -107,6 +112,8 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords match
 });
 
 test('#updateLoginInfo does NOT transition away from my-account (passwords do not match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
 
   let userStub = Ember.Object.create({
     confirm: 'password',

@@ -9,14 +9,13 @@ moduleFor('controller:my-calendar/appointments/new', 'Unit | Controller | my cal
 
 test('#saveAppointment transitions to my-calendar', function(assert) {
   var done = assert.async(); //Tell QUnit to wait for the done() call inside the timeout.
+  const appointmentStub = Ember.Object.create({
+    save() {
+      return RSVP.resolve();
+    }
+  });
   const ctrl = this.subject({
-      appointment: Ember.Object.create({
-      	save() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      appointment: appointmentStub,
       transitionToRoute(route) {
       	assert.equal(route, 'my-calendar');
       	done();
@@ -28,17 +27,16 @@ test('#saveAppointment transitions to my-calendar', function(assert) {
 });
 
 test('#saveAppointment throws as error following a failed creation', function(assert) {
+  const appointmentStub = Ember.Object.create({
+    save() {
+      let errorMsg = { error: 'could not create a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let ctrl = this.subject({
-      appointment: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not create a record' });
-          });
-        }
-      })
+      appointment: appointmentStub
    });
 
   assert.throws(ctrl.send('saveAppointment'),
    "throws with just a message, not using the 'expected' argument");
-
 });

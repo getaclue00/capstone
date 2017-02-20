@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
 
       function failure(error) {
         // handle the error
-        throw(error.message);
+        throw error.message;
       }
 
       service.save().then(transitionToPost).catch(failure);

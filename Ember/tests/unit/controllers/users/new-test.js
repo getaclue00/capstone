@@ -15,10 +15,6 @@ const flashMessagesStub = Ember.Service.extend({
 moduleFor('controller:users/new', 'Unit | Controller | users/new', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
-  beforeEach() {
-    this.register('service:flash-messages', flashMessagesStub);
-    this.inject.service('flash-messages', { as: 'flashMessages' });
-  }
 });
 
 
@@ -27,9 +23,7 @@ test('#createUser transitions to employees', function(assert) {
 
   let userStub = Ember.Object.create({
     save() {
-      return new RSVP.Promise(function(resolve) {
-        resolve(true);
-      });
+      return RSVP.resolve();
     }
   });
   let controller = this.subject({
@@ -46,15 +40,17 @@ test('#createUser transitions to employees', function(assert) {
 });
 
 test('#createUser throws an error following a failed creation (passwords match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   let done = assert.async();
 
   let userStub = Ember.Object.create({
     confirm: 'password',
     password: 'password',
     save() {
-      return new RSVP.Promise(function(resolve, reject) {
-        reject({ error: 'could not create a record' });
-      });
+      let errorMsg = { error: 'could not create a record' };
+      return RSVP.reject(errorMsg);
     }
   });
 
@@ -71,13 +67,15 @@ test('#createUser throws an error following a failed creation (passwords match)'
 });
 
 test('#createUser throws an error following a failed creation (passwords do not match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   let userStub = Ember.Object.create({
     confirm: 'password1',
     password: 'password',
     save() {
-      return new RSVP.Promise(function(resolve, reject) {
-        reject({ error: 'could not create a record' });
-      });
+      let errorMsg = { error: 'could not create a record' };
+      return RSVP.reject(errorMsg);
     }
   });
 

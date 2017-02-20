@@ -9,5 +9,5 @@ test('checking default values for variables', function(assert) {
   assert.expect(1);
   const ctrl = this.subject();
 
-  assert.equal(ctrl.get('remember_me'), false, 'remember_me default value properly set');
+  assert.deepEqual(ctrl.get('remember_me'), false, 'remember_me default value properly set');
 });

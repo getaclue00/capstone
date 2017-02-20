@@ -3,10 +3,6 @@ import Ember from 'ember';
 import RSVP from 'rsvp';
 
 const flashMessagesStub = Ember.Service.extend({
-  success(message) {
-    this.set('calledWithMessage', message);
-  },
-
   danger(message) {
     this.set('calledWithMessage', message);
   }
@@ -15,19 +11,13 @@ const flashMessagesStub = Ember.Service.extend({
 moduleFor('controller:users/show', 'Unit | Controller | users/show', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
-  beforeEach() {
-    this.register('service:flash-messages', flashMessagesStub);
-    this.inject.service('flash-messages', { as: 'flashMessages' });
-  }
 });
 
 test('#updateUser transitions to employees', function(assert) {
   var done = assert.async();
   let userStub = Ember.Object.create({
     save() {
-      return new RSVP.Promise(function(resolve) {
-        resolve(true);
-      });
+      return RSVP.resolve();
     }
   });
   let ctrl = this.subject({
@@ -44,15 +34,17 @@ test('#updateUser transitions to employees', function(assert) {
 });
 
 test('#updateUser throws an error following a failed creation (passwords match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   let done = assert.async();
 
   let userStub = Ember.Object.create({
     confirm: 'password',
     password: 'password',
     save() {
-      return new RSVP.Promise(function(resolve, reject) {
-        reject({ error: 'could not update a record' });
-      });
+      let errorMsg = { error: 'could not update a record' };
+      return RSVP.reject(errorMsg);
     }
   });
 
@@ -69,13 +61,15 @@ test('#updateUser throws an error following a failed creation (passwords match)'
 });
 
 test('#updateUser throws an error following a failed creation (passwords do not match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
   let userStub = Ember.Object.create({
     confirm: 'password1',
     password: 'password',
     save() {
-      return new RSVP.Promise(function(resolve, reject) {
-        reject({ error: 'could not update a record' });
-      });
+      let errorMsg = { error: 'could not update a record' };
+      return RSVP.reject(errorMsg);
     }
   });
 

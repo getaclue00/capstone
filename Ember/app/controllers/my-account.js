@@ -29,6 +29,7 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
       var flashMessages = this.get('flashMessages');
 
       function onSuccessful() {
+        window.scrollTo(0,0);
         flashMessages.success('Password successfully changed!');
       }
 

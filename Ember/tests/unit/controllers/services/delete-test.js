@@ -16,14 +16,13 @@ test('checking type', function(assert) {
 
 test('#deleteServices deletes and redirects to services page', function(assert) {
   var done = assert.async();
+  const serviceStub = Ember.Object.create({
+    destroyRecord() {
+      return RSVP.resolve();
+    }
+  });
   let controller = this.subject({
-      model: Ember.Object.create({
-        destroyRecord() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      model: serviceStub,
       transitionToRoute(route) {
         assert.equal(route, 'services');
         done();
@@ -35,14 +34,14 @@ test('#deleteServices deletes and redirects to services page', function(assert) 
 });
 
 test('#deleteService throws an error following a failed deletion', function(assert) {
+  const serviceStub = Ember.Object.create({
+    destroyRecord() {
+      let errorMsg = { error: 'could not destroy a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let controller = this.subject({
-      model: Ember.Object.create({
-        destroyRecord() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not destroy a record' });
-          });
-        }
-      })
+      model: serviceStub
     });
   assert.throws(controller.send('deleteService'),
    "throws with just a message, not using the 'expected' argument");

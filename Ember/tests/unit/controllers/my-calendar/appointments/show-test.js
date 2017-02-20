@@ -7,14 +7,13 @@ moduleFor('controller:my-calendar/appointments/show', 'Unit | Controller | my ca
 
 test('#deleteAppointment transitionsTo my-calendar', function(assert) {
   var done = assert.async();
+  const appointmentStub = Ember.Object.create({
+    destroyRecord() {
+      return RSVP.resolve();
+    }
+  });
   let ctrl = this.subject({
-      appointment: Ember.Object.create({
-        destroyRecord() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      appointment: appointmentStub,
       transitionToRoute(route) {
         assert.equal(route, 'my-calendar');
         done();
@@ -27,14 +26,14 @@ test('#deleteAppointment transitionsTo my-calendar', function(assert) {
 });
 
 test('#deleteAppointment throws an error following a failed delete', function(assert) {
+  const appointmentStub = Ember.Object.create({
+    destroyRecord() {
+      let errorMsg = { error: 'could not destroy a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let ctrl = this.subject({
-      appointment: Ember.Object.create({
-        destroyRecord() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not destroy a record' });
-          });
-        }
-      })
+      appointment: appointmentStub
   });
 
   assert.throws(ctrl.send('deleteAppointment'), "throws with just a message, not using the 'expected' argument");
@@ -42,14 +41,13 @@ test('#deleteAppointment throws an error following a failed delete', function(as
 
 test('#saveAppointment transitionsTo my-calendar', function(assert) {
   var done = assert.async();
+  const appointmentStub = Ember.Object.create({
+    save() {
+      return RSVP.resolve();
+    }
+  });
   let ctrl = this.subject({
-      appointment: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      appointment: appointmentStub,
       transitionToRoute(route) {
         assert.equal(route, 'my-calendar');
         done();
@@ -60,14 +58,14 @@ test('#saveAppointment transitionsTo my-calendar', function(assert) {
 });
 
 test('#saveAppointment throws an error following a failed update', function(assert) {
+  const appointmentStub = Ember.Object.create({
+    save() {
+      let errorMsg = { error: 'could not destroy a record' };
+      return RSVP.reject(errorMsg);
+    }
+  });
   let ctrl = this.subject({
-      appointment: Ember.Object.create({
-        save() {
-          return new RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not update a record' });
-          });
-        }
-      })
+      appointment: appointmentStub
   });
   assert.throws(ctrl.send('saveAppointment'), "throws with just a message, not using the 'expected' argument");
 });
