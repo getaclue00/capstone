@@ -7,12 +7,11 @@ moduleForModel('service', 'Unit | Model | service', {
 });
 
 test('checking default values for variables', function(assert) {
-  assert.expect(6);
+  assert.expect(5);
   const ctrl = this.subject();
 
   assert.equal(ctrl.get('duration'), 60.0, 'duration default value properly set');
-  assert.equal(ctrl.get('price_small'), 100.0, 'price_small default value properly set');
-  assert.equal(ctrl.get('price_large'), 120.0, 'price_large default value properly set');
+  assert.equal(ctrl.get('price'), 100.0, 'price default value properly set');
   assert.equal(ctrl.get('description'), '...', 'description default value properly set');
   assert.equal(ctrl.get('active'), false, 'active default value properly set');
   assert.equal(ctrl.get('displayable'), false, 'displayable default value properly set');
