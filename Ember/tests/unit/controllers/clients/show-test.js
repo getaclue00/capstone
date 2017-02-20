@@ -1,27 +1,28 @@
 import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
+import RSVP from 'rsvp';
+
+const flashMessagesStub = Ember.Service.extend({
+  danger(message) {
+    this.set('calledWithMessage', message);
+  }
+});
 
 moduleFor('controller:clients/show', 'Unit | Controller | clients/show', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
-  needs: ['service:flash-messages'],
-  beforeEach() {
-    //We have to register any types we expect to use in this component
-    const typesUsed = ['danger'];
-    Ember.getOwner(this).lookup('service:flash-messages').registerTypes(typesUsed);
-  }
 });
 
 test('#updateClient transitions to clients', function(assert) {
-  var done = assert.async();
+  let done = assert.async();
+
+  const clientStub = Ember.Object.create({
+    save() {
+      return new RSVP.resolve(true);
+    }
+  });
   let ctrl = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new Ember.RSVP.Promise(function(resolve) {
-            resolve(true);
-          });
-        }
-      }),
+      model: clientStub,
       transitionToRoute(route) {
         assert.equal(route, 'clients');
         done();
@@ -34,16 +35,25 @@ test('#updateClient transitions to clients', function(assert) {
 });
 
 test('#updateClient throws an error following a failed update', function(assert) {
-  let controller = this.subject({
-      model: Ember.Object.create({
-        save() {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
-            reject({ error: 'could not update a record' });
-          });
-        }
-      })
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let done = assert.async();
+  const clientStub = Ember.Object.create({
+    save() {
+      let rejectMsg = { error:'could not update a record' };
+      return new RSVP.reject(rejectMsg);
+    }
   });
 
-  assert.throws(controller.send('updateClient'), "throws with just a message, not using the 'expected' argument");
+  let ctrl = this.subject({
+    model: clientStub
+  });
 
+  ctrl.send('updateClient');
+  setTimeout(function() {
+    assert.ok(ctrl);
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Client was not successfully updated', 'danger flashMessages fired');
+    done();
+  }, 500);
 });

@@ -12,10 +12,9 @@ export default Ember.Controller.extend({
 	        	self.transitionToRoute('clients');
 	      	}
 
-	      	function onError(error) {
+	      	function onError() {
 	        	window.scrollTo(0,0);
         		flashMessages.danger("Client was not successfully updated");
-        		throw error.message;
 	      	}
 
 	      	this.get('model').save().then(onSuccessful).catch(onError);

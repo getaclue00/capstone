@@ -16,10 +16,9 @@ export default Ember.Controller.extend({
         self.transitionToRoute('clients');
       }
 
-      function failure(error) {
+      function failure() {
         window.scrollTo(0,0);
         flashMessages.danger("Client was not successfully created");
-        throw error.message;
       }
 
       client.save().then(transitionToPost).catch(failure);
