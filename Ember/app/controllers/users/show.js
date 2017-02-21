@@ -12,10 +12,9 @@ export default Ember.Controller.extend({
         self.transitionToRoute('employees');
       }
 
-      function onError(error) {
+      function onError() {
         window.scrollTo(0,0);
         flashMessages.danger('Account was not updated');
-        throw error.message;
       }
 
       if (this.get('model').get('confirm') === this.get('model').get('password')){

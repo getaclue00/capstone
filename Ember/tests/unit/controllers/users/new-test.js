@@ -61,7 +61,7 @@ test('#createUser throws an error following a failed creation (passwords match)'
   ctrl.send('createUser');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not created', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not successfully created', 'danger flashMessages fired');
     done();
   }, 500);
 });

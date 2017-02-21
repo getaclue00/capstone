@@ -1,22 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  flashMessages: Ember.inject.service(),
   actions: {
     saveAppointment() {
-      let appointment = this.get('appointment');
+      var self = this;
+
+      var flashMessages = self.get('flashMessages');
+      let appointment = self.get('appointment');
 
       appointment.save().then(transitionToPost).catch(failure);
-
-      var self = this;
 
       function transitionToPost() {
         Ember.$('#myModal').modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
-      function failure(error) {
-        // handle the error
-        throw error.message;
+      function failure() {
+        window.scrollTo(0,0);
+        flashMessages.danger('Appointment was not successfully created');
       }
 
     }

@@ -2,6 +2,12 @@ import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 import RSVP from 'rsvp';
 
+const flashMessagesStub = Ember.Service.extend({
+  danger(message) {
+    this.set('calledWithMessage', message);
+  }
+});
+
 moduleFor('controller:services/delete', 'Unit | Controller | services/delete', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
@@ -34,15 +40,24 @@ test('#deleteServices deletes and redirects to services page', function(assert) 
 });
 
 test('#deleteService throws an error following a failed deletion', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let done = assert.async();
   const serviceStub = Ember.Object.create({
     destroyRecord() {
       let errorMsg = { error: 'could not destroy a record' };
       return RSVP.reject(errorMsg);
     }
   });
-  let controller = this.subject({
+  let ctrl = this.subject({
       model: serviceStub
     });
-  assert.throws(controller.send('deleteService'),
-   "throws with just a message, not using the 'expected' argument");
+
+  ctrl.send('deleteService');
+  setTimeout(function() {
+    assert.ok(ctrl);
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Service was not successfully deleted', 'danger flashMessages fired');
+    done();
+  }, 500);
 });

@@ -2,6 +2,12 @@ import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 import RSVP from 'rsvp';
 
+const flashMessagesStub = Ember.Service.extend({
+  danger(message) {
+    this.set('calledWithMessage', message);
+  }
+});
+
 moduleFor('controller:employees/show', 'Unit | Controller | employees/show', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
@@ -27,6 +33,10 @@ test('#updateEmployee transitions to employees', function(assert) {
 });
 
 test('#updateEmployee throws as error following a failed update', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let done = assert.async();
   const employeeStub = Ember.Object.create({
     save() {
       let errorMsg = { error: 'could not update a record' };
@@ -37,6 +47,10 @@ test('#updateEmployee throws as error following a failed update', function(asser
       model: employeeStub
   });
 
-  assert.throws(ctrl.send('updateEmployee'),
-   "throws with just a message, not using the 'expected' argument");
+  ctrl.send('updateEmployee');
+  setTimeout(function() {
+    assert.ok(ctrl);
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Employee was not successfully updated', 'danger flashMessages fired');
+    done();
+  }, 500);
 });

@@ -14,10 +14,9 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
         flashMessages.success('Successfully saved!');
       }
 
-      function onError(error) {
+      function onError() {
         window.scrollTo(0,0);
         flashMessages.danger("Account information was not saved");
-        throw error.message;
       }
 
       this.get('model').get('employee').then((e) => {
@@ -33,15 +32,16 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
         flashMessages.success('Password successfully changed!');
       }
 
-      function onError(error) {
-       throw error.message;
+      function onError() {
+        window.scrollTo(0,0);
+        flashMessages.danger('Password not successfully changed');
       }
 
       if (this.get('model').get('confirm') === this.get('model').get('password')) {
         this.get('model').save().then(onSuccessful).catch(onError);
       } else {
         window.scrollTo(0,0);
-        flashMessages.danger("Passwords do not match!");
+        flashMessages.danger("Passwords do not match");
       }
     }
   }

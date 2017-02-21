@@ -6,19 +6,18 @@ export default Ember.Controller.extend({
 	actions: {
     // Action for saving a new service
     createUser() {
-      var flashMessages = this.get('flashMessages');
-      let user = this.get('model');
-
       var self = this;
+
+      var flashMessages = self.get('flashMessages');
+      let user = self.get('model');
 
       function onSuccessful() {
         self.transitionToRoute('employees');
       }
 
-      function onError(error) {
+      function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Account was not created');
-        throw error.message;
+        flashMessages.danger('Account was not successfully created');
       }
 
       if (this.get('model').get('confirm') === this.get('model').get('password')){

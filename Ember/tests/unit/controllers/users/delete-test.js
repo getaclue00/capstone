@@ -2,6 +2,12 @@ import { moduleFor, test } from 'ember-qunit';
 import Ember from 'ember';
 import RSVP from 'rsvp';
 
+const flashMessagesStub = Ember.Service.extend({
+  danger(message) {
+    this.set('calledWithMessage', message);
+  }
+});
+
 moduleFor('controller:users/delete', 'Unit | Controller | users/delete', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
@@ -22,28 +28,43 @@ test('#deleteUser remains on employees page following a deletion', function(asse
       return RSVP.resolve();
     }
   });
-  let controller = this.subject({
+  let ctrl = this.subject({
       model: userStub,
       transitionToRoute(route) {
         assert.equal(route, 'employees');
         done();
       }
   });
-  controller.send('deleteUser');
+  ctrl.send('deleteUser');
 
-  assert.ok(controller);
+  assert.ok(ctrl);
 });
 
 test('#deleteUser throws an error following a failed deletion', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let done = assert.async();
   let userStub = Ember.Object.create({
     destroyRecord() {
       let errorMsg = { error: 'could not destroy a record' };
       return RSVP.reject(errorMsg);
     }
   });
-  let controller = this.subject({
+  let ctrl = this.subject({
       model: userStub
   });
-  assert.throws(controller.send('deleteUser'), "throws with just a message, not using the 'expected' argument");
+
+  ctrl.send('deleteUser');
+  setTimeout(function() {
+    assert.ok(ctrl);
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not successfully deleted', 'danger flashMessages fired');
+    done();
+  }, 500);
 
 });
+
+
+
+
+
