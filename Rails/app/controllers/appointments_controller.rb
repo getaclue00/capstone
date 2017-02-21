@@ -39,10 +39,11 @@ class AppointmentsController < ApplicationController
         sanitized_params[:employee_id] = 0
       end
 
-      appointment=Appointment.new(sanitized_params)
+      @appointment = Appointment.new(sanitized_params)
 
-      if appointment.save!
-        render json: appointment, status: :created
+      if @appointment.save!
+        AppointmentsMailer.new_appointment_created.deliver_later!(wait: 10.seconds)
+        render json: @appointment, status: :created
       else
         render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
       end
@@ -51,7 +52,7 @@ class AppointmentsController < ApplicationController
     rescue ActiveRecord::StatementInvalid => e
       render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
     rescue ActiveRecord::RecordInvalid => e
-      render json: { error: appointment.errors.messages}, status: :bad_request
+      render json: { error: @appointment.errors.messages}, status: :bad_request
     end
   end
 
