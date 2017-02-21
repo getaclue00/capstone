@@ -4,21 +4,24 @@
       <h2>Login</h2>
     </div>
 
-    <label for="inputEmail">Email Address</label>
-    <br />
+    <div class="form-group">
+      <label for="inputEmail">Email Address</label>
+      <br />
+      {{input value=model.email id="inputEmail" class="form-control" required=true autofocus=true}}
+    </div>
 
-    {{input value=model.email id="inputEmail" class="form-control" required=true autofocus=true}}
-
-    <label for="inputPassword">Password</label>
-    <br />
-
-    {{input value=model.password type="password" id="inputPassword" class="form-control" required=true}}
+    <div class="form-group">
+      <label for="inputPassword">Password</label>
+      <br />
+      {{input value=model.password type="password" id="inputPassword" class="form-control" required=true}}
+    </div>
 
     <div class="checkbox">
       <label>
         {{input type="checkbox" checked=model.remember_me}} Remember me
       </label>
     </div>
-    <button type="submit">SIGN IN</button>
+    <br />
+    <button type="submit" class="btn btn-danger">SIGN IN</button>
   </form>
 </div>
