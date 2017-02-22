@@ -8,13 +8,13 @@ moduleForModel('service', 'Unit | Model | service', {
 
 test('checking default values for variables', function(assert) {
   assert.expect(5);
-  const ctrl = this.subject();
+  const model = this.subject();
 
-  assert.deepEqual(ctrl.get('duration'), '60.00', 'duration default value properly set');
-  assert.deepEqual(ctrl.get('price'), "100.00", 'price default value properly set');
-  assert.deepEqual(ctrl.get('description'), '...', 'description default value properly set');
-  assert.deepEqual(ctrl.get('active'), false, 'active default value properly set');
-  assert.deepEqual(ctrl.get('displayable'), false, 'displayable default value properly set');
+  assert.deepEqual(model.get('duration'), '60.00', 'duration default value properly set');
+  assert.deepEqual(model.get('price'), "100.00", 'price default value properly set');
+  assert.deepEqual(model.get('description'), '...', 'description default value properly set');
+  assert.deepEqual(model.get('active'), false, 'active default value properly set');
+  assert.deepEqual(model.get('displayable'), false, 'displayable default value properly set');
 });
 
 test('should own appointments', function(assert) {

@@ -8,22 +8,20 @@ moduleForModel('employee', 'Unit | Model | employee', {
 
 test('checking fullName', function(assert) {
   assert.expect(1);
-  const ctrl = this.subject({firstName: 'Bruce', lastName: 'Wayne'});
-  assert.deepEqual(ctrl.get('fullName'), 'Bruce Wayne', 'fullName properly computed');
+  const model = this.subject({firstName: 'Bruce', lastName: 'Wayne'});
+  assert.deepEqual(model.get('fullName'), 'Bruce Wayne', 'fullName properly computed');
 });
 
 test('checking address', function(assert) {
   assert.expect(1);
-  const ctrl = this.subject({streetNumber: '23', streetName: 'Bank Street', city: 'Ottawa' , postalCode: "R3T 5E5"});
-  assert.deepEqual(ctrl.get('address'), '23-Bank Street, Ottawa, undefined, R3T 5E5', 'address properly computed');
+  const model = this.subject({streetNumber: '23', streetName: 'Bank Street', city: 'Ottawa' , postalCode: "R3T 5E5"});
+  assert.deepEqual(model.get('address'), '23-Bank Street, Ottawa, undefined, R3T 5E5', 'address properly computed');
 });
 
 test('checking formattedStartDate', function(assert) {
   assert.expect(1);
-  const ctrl = this.subject({startDate: "11/11/2016"});
-
-  var re = /(\d){4}-(\d){2}-(\d){2}T(\d){2}:(\d){2}/g;
-  assert.ok(re.test(ctrl.get('formattedStartDate')));
+  const model = this.subject({startDate: "11/11/2016"});
+  assert.deepEqual(model.get('formattedStartDate'), '2016-11-11T00:00', 'value properly returned upon set');
 });
 
 test('should own appointments', function(assert) {

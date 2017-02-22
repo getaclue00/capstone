@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     deleteService() {
       var self = this;
       var flashMessages = self.get('flashMessages');
-      let service = this.get('model');
+      let service = self.get('model');
 
       function transitionToPost() {
         self.transitionToRoute('services');

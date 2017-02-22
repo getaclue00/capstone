@@ -8,10 +8,10 @@ moduleForModel('user', 'Unit | Model | user', {
 
 test('checking default values for variables', function(assert) {
   assert.expect(2);
-  const ctrl = this.subject();
+  const model = this.subject();
 
-  assert.deepEqual(ctrl.get('email'), "not setup", 'email default value properly set');
-  assert.deepEqual(ctrl.get('admin'), false, 'admin default value properly set');
+  assert.deepEqual(model.get('email'), "not setup", 'email default value properly set');
+  assert.deepEqual(model.get('admin'), false, 'admin default value properly set');
 });
 
 test('should belong to an employee', function (assert){

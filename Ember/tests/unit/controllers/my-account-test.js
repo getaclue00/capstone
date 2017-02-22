@@ -118,10 +118,6 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords do no
   let userStub = Ember.Object.create({
     confirm: 'password',
     password: 'pass1word',
-
-    save() {
-      return RSVP.resolve();
-    }
   });
 
   let controller = this.subject({
