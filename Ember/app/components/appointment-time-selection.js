@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     let employee = this.get('appointment.employee');
 
     if (employee) {
-      if (employee.get('firstName') && employee.get('lastName')) {
+      if (employee.get('fullName')) {
         return true;
       }
     } else {

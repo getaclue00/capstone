@@ -6,10 +6,11 @@ class ServicesController < ApplicationController
 
     if params[:filter].present?
       if  params[:filter][:vehicle_size].present?
-         services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
         if params[:filter][:displayable].present?
-           services_array = services_array.where('displayable = ?', params[:filter][:displayable]).all
-         end
+          services_array = Service.where('vehicle_size = ? AND displayable = ?', params[:filter][:vehicle_size], params[:filter][:displayable]).all
+        else
+          services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
+        end
       end
     else
       services_array=Service.all
