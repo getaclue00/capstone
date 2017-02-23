@@ -8,7 +8,7 @@
 
 #used in appointments table to reference a deleted employee/car/service and cannot be deleted if referenced by appointments
 Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
-Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'default@test.com', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
 Service.create({id: '0', name: 'DEFAULT', active: false, displayable: false})
 
 Appointment.create({title: 'Batman Appointment', client_id: '0', service_id: '0'}) #employee_id can be null

@@ -8,7 +8,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return Ember.RSVP.hash({
       appointment: this.get('store').findRecord('appointment', id),
       services: this.get('store').findAll('service'),
-      employees: this.get('store').findAll('employee')
+      employees: this.get('store').findAll('employee'),
+      clients: this.get('store').findAll('client'),
     });
   },
 

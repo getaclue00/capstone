@@ -22,6 +22,10 @@ export default Ember.Component.extend({
     return this.get('model.employee');
   }),
 
+  aSelectedClient: Ember.computed('model.client', function(){
+    return this.get('model.client');
+  }),
+
   didInsertElement() {
     this._super(...arguments);
     Ember.$('#myModal').modal('show');
@@ -37,6 +41,12 @@ export default Ember.Component.extend({
     selectService(service) {
       if(!Ember.isEmpty(service)){
         this.get('model').set('service', service);
+      }
+    },
+
+    selectClient(client) {
+      if(!Ember.isEmpty(client)){
+        this.get('model').set('client', client);
       }
     }
   }
