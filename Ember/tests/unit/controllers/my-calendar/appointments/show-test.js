@@ -38,8 +38,7 @@ test('#deleteAppointment throws an error following a failed delete', function(as
   let done = assert.async();
   const appointmentStub = Ember.Object.create({
     destroyRecord() {
-      let errorMsg = { error: 'could not destroy a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({
@@ -79,8 +78,7 @@ test('#saveAppointment throws an error following a failed update', function(asse
   let done = assert.async();
   const appointmentStub = Ember.Object.create({
     save() {
-      let errorMsg = { error: 'could not destroy a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({

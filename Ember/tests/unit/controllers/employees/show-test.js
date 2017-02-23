@@ -39,8 +39,7 @@ test('#updateEmployee throws as error following a failed update', function(asser
   let done = assert.async();
   const employeeStub = Ember.Object.create({
     save() {
-      let errorMsg = { error: 'could not update a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({

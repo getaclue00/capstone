@@ -62,8 +62,7 @@ test('#updateAccountInfo throws an error msg following a failed update', functio
 
       let mockEmployee = Ember.Object.create({
         save() {
-          let errorMsg = { error: 'could not update a record' };
-          return RSVP.reject(errorMsg);
+          return RSVP.reject();
         }
       });
 
@@ -141,8 +140,7 @@ test('#updateLoginInfo throws an error following a failed update', function(asse
     password: 'password',
 
     save() {
-      let errorMsg = { error: 'could not update a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
 

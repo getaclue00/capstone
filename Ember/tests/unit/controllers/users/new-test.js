@@ -49,8 +49,7 @@ test('#createUser throws an error following a failed creation (passwords match)'
     confirm: 'password',
     password: 'password',
     save() {
-      let errorMsg = { error: 'could not create a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
 
@@ -74,8 +73,7 @@ test('#createUser throws an error following a failed creation (passwords do not 
     confirm: 'password1',
     password: 'password',
     save() {
-      let errorMsg = { error: 'could not create a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
 
@@ -87,4 +85,3 @@ test('#createUser throws an error following a failed creation (passwords do not 
   assert.ok(ctrl);
   assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
 });
-

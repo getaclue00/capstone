@@ -47,8 +47,7 @@ test('#deleteUser throws an error following a failed deletion', function(assert)
   let done = assert.async();
   let userStub = Ember.Object.create({
     destroyRecord() {
-      let errorMsg = { error: 'could not destroy a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({
@@ -63,8 +62,3 @@ test('#deleteUser throws an error following a failed deletion', function(assert)
   }, 500);
 
 });
-
-
-
-
-

@@ -39,8 +39,7 @@ test('#saveAppointment throws as error following a failed creation', function(as
   let done = assert.async();
   const appointmentStub = Ember.Object.create({
     save() {
-      let errorMsg = { error: 'could not create a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({

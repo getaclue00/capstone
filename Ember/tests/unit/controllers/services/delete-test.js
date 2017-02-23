@@ -46,8 +46,7 @@ test('#deleteService throws an error following a failed deletion', function(asse
   let done = assert.async();
   const serviceStub = Ember.Object.create({
     destroyRecord() {
-      let errorMsg = { error: 'could not destroy a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({

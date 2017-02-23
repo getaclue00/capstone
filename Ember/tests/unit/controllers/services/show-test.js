@@ -39,8 +39,7 @@ test('#saveService throws an error following a failed update', function(assert) 
   let done = assert.async();
   const serviceStub = Ember.Object.create({
     save() {
-      let errorMsg = { error: 'could not update a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({

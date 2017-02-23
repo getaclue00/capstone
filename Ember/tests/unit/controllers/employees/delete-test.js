@@ -50,8 +50,7 @@ test('#deleteEmployee throws an error following a failed deletion', function(ass
   let done = assert.async();
   const employeeStub = Ember.Object.create({
     destroyRecord() {
-      let errorMsg = { error: 'could not destroy a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   const ctrl = this.subject({

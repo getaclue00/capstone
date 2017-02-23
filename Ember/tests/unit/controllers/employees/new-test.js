@@ -39,8 +39,7 @@ test('#saveEmployee throws as error following a failed creation', function(asser
   let done = assert.async();
   const employeeStub = Ember.Object.create({
     save() {
-      let errorMsg = { error: 'could not create a record' };
-      return RSVP.reject(errorMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({
