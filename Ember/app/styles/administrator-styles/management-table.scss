@@ -4,47 +4,48 @@ $breakpoint-alpha: 660px;
 
 @media (min-width: $breakpoint-alpha) {
 
+  .management-div {
+    margin: 0 auto;
+  }
+
   .management-table {
 
     text-align: center;
-    overflow: hidden;
+    width: 100%;
     font-size: 1.25vw;
 
     td:nth-child(1) {
       font-weight: bold;
     }
+  }
+  .management-table th h1 {
+    font-weight: bold;
+    font-size: 1.40em;
+    text-align: center;
+    color: #fffaef;
+  }
 
-    th h1 {
-      font-weight: bold;
-      font-size: 1.75vw;
-      text-align: center;
-      color: #fffaef;
-    }
+  .dataTables_length {
+    float: left;
+  }
 
-    .dataTables_length {
-      float: left;
-    }
+  .dataTables_filter {
+    float: right;
+  }
 
-    .dataTables_filter {
-      float: right;
-    }
+  .management-table tr:hover {
+    background-color: #36454f !important;
+    color: #fffaef;
+  }
 
-    .management-table tr:hover {
-      background-color: #36454f !important;
-      color: #fffaef;
-    }
+  .management-operation:hover {
+    background-color: #fffaef;
+    color: #EE2C2C;
+  }
 
-    .management-operation:hover {
-      background-color: #fffaef;
-      color: #EE2C2C;
-    }
-
-   .management-operation {
-      display: inline-block;
-      margin: .1em;
-      padding: 8px;
-      text-align: center;
-    }
+ .management-operation {
+    padding: 1em 2em;
+    text-align: center;
   }
 
   .dataTables_wrapper {
@@ -55,72 +56,71 @@ $breakpoint-alpha: 660px;
     padding-left: 2%;
     padding-right: 2%;
   }
+
+  .toggle-operations {
+    display: none;
+  }
+
 }
 
 //Styling for when on mobile device
 
 @media (max-width: $breakpoint-alpha) {
 
-  .management-table {
+  text-align: left;
+  font-size: 1em;
 
-    text-align: left;
-    font-size: 2.75vw;
+  thead {
+    display: none;
+  }
 
-    thead {
-      display: none;
+  .management-operation {
+    display: none;
+    padding: 1em 1.25em;
+    border: 1px solid grey;
+  }
+
+  .operation-div {
+    text-align: center;
+  }
+
+  .management-operation:hover {
+    background: #36454f;
+  }
+
+  th {
+    display: none;
+  }
+
+  .management-column {
+    display: none;
+    margin: 0px;
+  }
+
+  .management-table-body{
+
+    tr td:nth-child(1) {
+      width: 70%;
+      font-size: 1em;
+      font-weight: bold;
+      display: block;
+      margin: 0px 0px 0px 16px;;
     }
 
-    .management-operation {
-      border: 1px solid black;
-      display: inline-block;
-      margin: .1em;
-      padding: 8px;
-      float: right;
-      text-align: center;
-      border-radius: 10px;
-      background: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
-      background: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-      background: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-      background: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
-    }
+    tr td:nth-child(2) {
+      display: block;
+      font-size: 0.5em;
+      width: 75%;
+      margin: 0px 0px 0px 16px;
 
-    .management-operation:hover {
-      background: #36454f;
-    }
-
-    th {
-      display: none;
-    }
-
-    .management-column {
-      display: none;
-      margin: 0px;
-    }
-
-    .management-table-body{
-      tr td:nth-child(1) {
-        width: 70%;
-        font-size: 3.5vw;
-        font-weight: bold;
-        display: block;
-        margin: 0px 0px 0px 16px;;
-      }
-
-      tr td:nth-child(2) {
-        display: block;
-        font-size: 2.4vw;
-        width: 75%;
-        margin: 0px 0px 0px 16px;
-
-        &:before {
-          content: attr(data-th);
-        }
+      &:before {
+        content: attr(data-th);
       }
     }
+  }
 
-    .management-buttons {
-      width: 65%;
-    }
+  .toggle-operations {
+    background-color: inherit;
   }
 
 }
@@ -195,11 +195,6 @@ $breakpoint-alpha: 660px;
   background-color: #d30b07;
 }
 
-.management-toggle-menu {
-  padding: 20%;
-  font-size: 1.5vw;
-}
-
 .management-table {
   th, td {
     margin: 1em 1em;
@@ -211,8 +206,6 @@ $breakpoint-alpha: 660px;
 }
 
 .management-icon {
-  padding: 10px 30px;
-  white-space: nowrap;
 
   span {
     color: #d30b07;
@@ -233,8 +226,4 @@ table.dataTable thead .sorting_asc_disabled {
 }
 table.dataTable thead .sorting_desc_disabled {
   background-image: url("/assets/images/sort_desc_disabled.png");
-}
-
-.management-button {
-  margin-bottom: 2%;
 }
