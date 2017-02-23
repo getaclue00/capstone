@@ -1,5 +1,9 @@
 $breakpoint-alpha: 768px;
 
+.sw-container{
+  height: auto !important;
+}
+
 #smartwizard .loader, #smartwizard .msgBox {
     display: none;
 }
