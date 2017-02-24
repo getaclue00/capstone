@@ -89,17 +89,17 @@ $breakpoint-alpha: 768px;
       color: purple;
       font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
 
-    &:before {
-        content: "+";
-        font-size: 1.5em;
-        line-height:0.5em;
-        float: right;
-      }
+      &:before {
+          content: "+";
+          font-size: 1.5em;
+          line-height:0.5em;
+          float: right;
+        }
 
-      &:hover {
-        text-decoration: none;
+        &:hover {
+          text-decoration: none;
+        }
       }
-    }
 
     .button-line {
       border-top: 2px solid #e5e5e5;
