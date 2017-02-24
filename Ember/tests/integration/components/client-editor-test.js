@@ -61,7 +61,7 @@ const EmployeeStub = Ember.Object.extend({
 
   getPostalCode() {
     return this.get('postalCode');
-  } 
+  }
 
 });
 
@@ -94,18 +94,18 @@ test('it renders a view with a model', function(assert) {
   }}`);
 
   // Test in correct inputs bar are present
-  assert.equal(this.$('input[type="number"]').length, 1, 'should be only 1 input number field for streetNumber');
-  assert.equal(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
-  assert.equal(this.$('input[type="text"]').length, 7, 'should be only 1 text area for the notes');
+  assert.deepEqual(this.$('input[type="number"]').length, 1, 'should be only 1 input number field for streetNumber');
+  assert.deepEqual(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
+  assert.deepEqual(this.$('input[type="text"]').length, 7, 'should be only 1 text area for the notes');
 
   // Test if proper values are placed into form
-  assert.equal(this.$('input[id="client-first-name"]').val(), this.get('model.firstName'), 'firstNames should match');
-  assert.equal(this.$('input[id="client-last-name"]').val(), this.get('model.lastName'), 'lastName should match');
-  assert.equal(this.$('input[id="client-phone-number"]').val(), this.get('model.phoneNumber'), 'phoneNumber should match');
-  assert.equal(this.$('input[id="client-street-number"]').val(), this.get('model.streetNumber'), 'streetNumber for large car should match');
-  assert.equal(this.$('input[id="client-street-name"]').val(), this.get('model.streetName'), 'streetName should match');
-  assert.equal(this.$('input[id="client-city"]').val(), this.get('model.city'), 'city should match');
-  assert.equal(this.$('input[id="client-province"]').val(), this.get('model.province'), 'province should match');
-  assert.equal(this.$('input[id="client-postal-code"]').val(), this.get('model.postalCode'), 'postalCode should match');
-  assert.equal(this.$('input[id="client-email"]').val(), this.get('model.email'), 'email should match');
+  assert.deepEqual(this.$('input[id="client-first-name"]').val(), this.get('model.firstName'), 'firstNames should match');
+  assert.deepEqual(this.$('input[id="client-last-name"]').val(), this.get('model.lastName'), 'lastName should match');
+  assert.deepEqual(this.$('input[id="client-phone-number"]').val(), this.get('model.phoneNumber'), 'phoneNumber should match');
+  assert.deepEqual(this.$('input[id="client-street-number"]').val(), this.get('model.streetNumber'), 'streetNumber for large car should match');
+  assert.deepEqual(this.$('input[id="client-street-name"]').val(), this.get('model.streetName'), 'streetName should match');
+  assert.deepEqual(this.$('input[id="client-city"]').val(), this.get('model.city'), 'city should match');
+  assert.deepEqual(this.$('input[id="client-province"]').val(), this.get('model.province'), 'province should match');
+  assert.deepEqual(this.$('input[id="client-postal-code"]').val(), this.get('model.postalCode'), 'postalCode should match');
+  assert.deepEqual(this.$('input[id="client-email"]').val(), this.get('model.email'), 'email should match');
 });

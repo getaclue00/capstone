@@ -24,7 +24,7 @@ test('#deleteClient deletes and redirects to clients page', function(assert) {
   let done = assert.async();
   const clientStub = Ember.Object.create({
     destroyRecord() {
-      return new RSVP.resolve(true);
+      return RSVP.resolve();
     }
   });
   let ctrl = this.subject({
@@ -45,8 +45,7 @@ test('#deleteService throws an error following a failed deletion', function(asse
   let done = assert.async();
   const userStub = Ember.Object.create({
     destroyRecord() {
-      let rejectMsg = { error:'could not destroy a record' };
-      return new RSVP.reject(rejectMsg);
+      return RSVP.reject();
     }
   });
   let ctrl = this.subject({

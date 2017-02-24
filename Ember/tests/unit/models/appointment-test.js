@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 moduleForModel('appointment', 'Unit | Model | appointment', {
   // Specify the other units that are required for this test.
-  needs: ['model:service', 'model:employee']
+  needs: ['model:service', 'model:employee', 'model:client']
 });
 
 test('checking default values for variables', function(assert) {

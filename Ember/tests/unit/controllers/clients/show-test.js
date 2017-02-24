@@ -18,7 +18,7 @@ test('#updateClient transitions to clients', function(assert) {
 
   const clientStub = Ember.Object.create({
     save() {
-      return new RSVP.resolve(true);
+      return RSVP.resolve();
     }
   });
   let ctrl = this.subject({
@@ -41,8 +41,7 @@ test('#updateClient throws an error following a failed update', function(assert)
   let done = assert.async();
   const clientStub = Ember.Object.create({
     save() {
-      let rejectMsg = { error:'could not update a record' };
-      return new RSVP.reject(rejectMsg);
+      return RSVP.reject();
     }
   });
 
