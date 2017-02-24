@@ -51,3 +51,17 @@ test('it renders a view with a model', function(assert) {
   assert.deepEqual(this.$('input[type="password"]')[0].value, this.get('model.password').toString(), 'password should match');
   assert.deepEqual(this.$('input[type="password"]')[1].value, this.get('model.confirm').toString(), 'password should match');
 });
+
+test('should update user admin on click', function(assert) {
+  this.set('model', user);
+  assert.expect(2);
+
+  this.render(hbs`{{
+    user-account-editor
+    model=model
+  }}`);
+
+  assert.equal(this.$('input[id="user-admin"]').is(":checked"), this.get('model.admin'), 'Whether a user is admin should match');
+  this.$('div#admin-switch')[0].click();
+  assert.equal(this.$('input[id="user-admin"]').is(":checked"), !!(this.get('model.admin')), 'Whether a user is admin should match');
+});

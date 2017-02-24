@@ -75,3 +75,31 @@ test('it renders a view with a model', function(assert) {
   assert.deepEqual(this.$('input[id="service-displayable"]').is("checked"), this.get('model.displayable'), 'Whether a service is displayable should match');
   assert.deepEqual(this.$('textarea').val(), this.get('model.description'), 'the textarea should be filled in with the model description');
 });
+
+test('should update service displayable on click', function(assert) {
+  this.set('model', service);
+  assert.expect(2);
+
+  this.render(hbs`{{
+    service-editor
+    model=model
+  }}`);
+
+  assert.equal(this.$('input[id="service-displayable"]').is(":checked"), this.get('model.displayable'), 'Whether a service is displayable should match');
+  this.$('div#displayable-switch')[0].click();
+  assert.equal(this.$('input[id="service-displayable"]').is(":checked"), !!(this.get('model.displayable')), 'Whether a service is displayable should match');
+});
+
+test('should update service active on click', function(assert) {
+  this.set('model', service);
+  assert.expect(2);
+
+  this.render(hbs`{{
+    service-editor
+    model=model
+  }}`);
+
+  assert.equal(this.$('input[id="service-active"]').is(":checked"), this.get('model.active'), 'Whether a service is active should match');
+  this.$('div#active-switch')[0].click();
+  assert.equal(this.$('input[id="service-active"]').is(":checked"), !!(this.get('model.active')), 'Whether a service is active should match');
+});
