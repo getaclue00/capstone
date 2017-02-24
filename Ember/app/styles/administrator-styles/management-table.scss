@@ -8,10 +8,9 @@ $breakpoint-alpha: 660px;
     margin: 0 auto;
   }
 
-  .management-table{
+  .management-table {
 
     text-align: center;
-    overflow: hidden;
     width: 100%;
     font-size: 1.25vw;
 
@@ -21,7 +20,7 @@ $breakpoint-alpha: 660px;
   }
   .management-table th h1 {
     font-weight: bold;
-    font-size: 1.75vw;
+    font-size: 1.40em;
     text-align: center;
     color: #fffaef;
   }
@@ -45,9 +44,7 @@ $breakpoint-alpha: 660px;
   }
 
  .management-operation {
-    display: inline-block;
-    margin: .1em;
-    padding: 8px;
+    padding: 1em 2em;
     text-align: center;
   }
 
@@ -60,6 +57,10 @@ $breakpoint-alpha: 660px;
     padding-right: 2%;
   }
 
+  .toggle-operations {
+    display: none;
+  }
+
 }
 
 //Styling for when on mobile device
@@ -67,24 +68,20 @@ $breakpoint-alpha: 660px;
 @media (max-width: $breakpoint-alpha) {
 
   text-align: left;
-  font-size: 2.75vw;
+  font-size: 1em;
 
   thead {
     display: none;
   }
 
   .management-operation {
-    border: 1px solid black;
-    display: inline-block;
-    margin: .1em;
-    padding: 8px;
-    float: right;
+    display: none;
+    padding: 1em 1.25em;
+    border: 1px solid grey;
+  }
+
+  .operation-div {
     text-align: center;
-    border-radius: 10px;
-    background: linear-gradient(to bottom, #fffaef 0%, #ffffff 100%);
-    background: -webkit-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background: -o-linear-gradient(top, #fffaef 0%, #ffffff 100%);
-    background: -webkit-gradient(linear, left top, left bottom, from(#fffaef), to(#ffffff));
   }
 
   .management-operation:hover {
@@ -101,9 +98,10 @@ $breakpoint-alpha: 660px;
   }
 
   .management-table-body{
+
     tr td:nth-child(1) {
       width: 70%;
-      font-size: 3.5vw;
+      font-size: 1em;
       font-weight: bold;
       display: block;
       margin: 0px 0px 0px 16px;;
@@ -111,7 +109,7 @@ $breakpoint-alpha: 660px;
 
     tr td:nth-child(2) {
       display: block;
-      font-size: 2.4vw;
+      font-size: 0.5em;
       width: 75%;
       margin: 0px 0px 0px 16px;
 
@@ -121,9 +119,10 @@ $breakpoint-alpha: 660px;
     }
   }
 
-  .management-buttons {
-    width: 65%;
+  .toggle-operations {
+    background-color: inherit;
   }
+
 }
 
 // Styling for both mobile and computer
@@ -196,11 +195,6 @@ $breakpoint-alpha: 660px;
   background-color: #d30b07;
 }
 
-.management-toggle-menu {
-  padding: 20%;
-  font-size: 1.5vw;
-}
-
 .management-table {
   th, td {
     margin: 1em 1em;
@@ -212,8 +206,6 @@ $breakpoint-alpha: 660px;
 }
 
 .management-icon {
-  padding: 10px 30px;
-  white-space: nowrap;
 
   span {
     color: #d30b07;

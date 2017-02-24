@@ -5,8 +5,15 @@ moduleFor('controller:application', 'Unit | Controller | application', {
   // needs: ['controller:foo']
 });
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
+test('#handleNewAppointment redirects to my-calendar.appointments.new page', function(assert) {
+
+  let ctrl = this.subject({
+      transitionToRoute(route) {
+        assert.equal(route, 'my-calendar.appointments.new');
+      }
+  });
+
+  ctrl.send('handleAddNewAppointment');
+
+  assert.ok(ctrl);
 });

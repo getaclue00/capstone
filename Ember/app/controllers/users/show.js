@@ -1,24 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  flashMessages: Ember.inject.service(),
 	actions: {
 
     updateUser() {
       var self = this;
+      var flashMessages = self.get('flashMessages');
 
       function onSuccessful() {
         self.transitionToRoute('employees');
       }
 
-      function onError(error) {
-        throw error.message;
+      function onError() {
+        window.scrollTo(0,0);
+        flashMessages.danger('Account was not updated');
       }
 
       if (this.get('model').get('confirm') === this.get('model').get('password')){
 	    	this.get('model').save().then(onSuccessful).catch(onError);
-	  }else{
-	    	console.log("Passwords dont match");
-	  }   
+	    }else{
+	    	window.scrollTo(0,0);
+        flashMessages.danger('Passwords do not match!');
+	    }
     }
   }
 });
+
+
+
