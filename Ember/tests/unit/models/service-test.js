@@ -33,6 +33,6 @@ test('should own appointments', function(assert) {
   const Service = this.store().modelFor('service');
   const relationship = Ember.get(Service, 'relationshipsByName').get('appointments');
 
-  assert.equal(relationship.key, 'appointments', 'has relationship with appointments');
-  assert.equal(relationship.kind, 'hasMany', 'kind of relationship is hasMany');
+  assert.deepEqual(relationship.key, 'appointments', 'has relationship with appointments');
+  assert.deepEqual(relationship.kind, 'hasMany', 'kind of relationship is hasMany');
 });

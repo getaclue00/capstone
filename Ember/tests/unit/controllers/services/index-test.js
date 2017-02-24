@@ -9,7 +9,7 @@ test('checking arrays and hash maps', function(assert) {
   assert.expect(3);
   const ctrl = this.subject();
 
-  assert.deepEqual(ctrl.get('headers'), 		
+  assert.deepEqual(ctrl.get('headers'),
 	[
 	  "Name of Service",
 	  "Duration (minutes)",
@@ -19,7 +19,7 @@ test('checking arrays and hash maps', function(assert) {
 	],
   	'header properly set');
 
-  assert.deepEqual(ctrl.get('attributes'), 
+  assert.deepEqual(ctrl.get('attributes'),
 	{
 	  "duration": "Duration (minutes):",
 	  "formattedActive": "Active",
@@ -29,7 +29,7 @@ test('checking arrays and hash maps', function(assert) {
 	},
     'attributes properly set');
 
-  assert.deepEqual(ctrl.get('operations'), 		
+  assert.deepEqual(ctrl.get('operations'),
 	{
 	  "services.delete": "glyphicon-remove",
 	  "services.show": "glyphicon-pencil"

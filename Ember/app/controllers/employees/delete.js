@@ -1,23 +1,25 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  flashMessages: Ember.inject.service(),
   type: "employee",
   actions: {
     deleteEmployee() {
-
       var self = this;
-      let employee = this.get('model');
+
+      var flashMessages = self.get('flashMessages');
+      let employee = self.get('model');
 
       function onSuccessful() {
-        console.log('Successfully deleted');
         transitionToPost();
       }
       function transitionToPost() {
         self.transitionToRoute('employees');
       }
 
-      function onError(error) {
-        throw error.message;
+      function onError() {
+        window.scrollTo(0,0);
+        flashMessages.danger('Employee was not successfully deleted');
       }
 
       if (employee) {
