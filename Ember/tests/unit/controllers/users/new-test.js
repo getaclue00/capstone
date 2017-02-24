@@ -1,44 +1,87 @@
-// import { moduleFor, test } from 'ember-qunit';
-// import Ember from 'ember';
+import { moduleFor, test } from 'ember-qunit';
+import Ember from 'ember';
+import RSVP from 'rsvp';
 
-// moduleFor('controller:users/new', 'Unit | Controller | users/new', {
-//   // Specify the other units that are required for this test.
-//   // needs: ['controller:foo']
-// });
+const flashMessagesStub = Ember.Service.extend({
+  success(message) {
+    this.set('calledWithMessage', message);
+  },
 
-// test('#createUser transitions to employees', function(assert) {
-//   let controller = this.subject({
-//       model: Ember.Object.create({
-//         save() {
-//           return new Ember.RSVP.Promise(function(resolve) {
-//             resolve(true);
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'employees');
-//       }
-//   });
+  danger(message) {
+    this.set('calledWithMessage', message);
+  }
+});
 
-//   controller.send('createUser');
+moduleFor('controller:users/new', 'Unit | Controller | users/new', {
+  // Specify the other units that are required for this test.
+  // needs: ['controller:foo']
+});
 
-//   assert.ok(controller);
-// });
 
-// test('#createUser will NOT transition to employees', function(assert) {
-//   let controller = this.subject({
-//       model: Ember.Object.create({
-//         save() {
-//           return new Ember.RSVP.Promise(function(resolve, reject) {
-//             reject({ error: 'Password dont match' });
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'user');
-//       }
-//   });
+test('#createUser transitions to employees', function(assert) {
+  var done = assert.async();
 
-//   assert.throws(controller.send('createUser'), "throws with just a message, not using the 'expected' argument");
+  let userStub = Ember.Object.create({
+    save() {
+      return RSVP.resolve();
+    }
+  });
+  let controller = this.subject({
+      model: userStub,
+      transitionToRoute(route) {
+        assert.equal(route, 'employees');
+        done();
+      }
+  });
 
-// });
+  controller.send('createUser');
+
+  assert.ok(controller);
+});
+
+test('#createUser throws an error following a failed creation (passwords match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let done = assert.async();
+
+  let userStub = Ember.Object.create({
+    confirm: 'password',
+    password: 'password',
+    save() {
+      return RSVP.reject();
+    }
+  });
+
+  let ctrl = this.subject({
+      model: userStub
+  });
+
+  ctrl.send('createUser');
+  setTimeout(function() {
+    assert.ok(ctrl);
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not successfully created', 'danger flashMessages fired');
+    done();
+  }, 500);
+});
+
+test('#createUser throws an error following a failed creation (passwords do not match)', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let userStub = Ember.Object.create({
+    confirm: 'password1',
+    password: 'password',
+    save() {
+      return RSVP.reject();
+    }
+  });
+
+  let ctrl = this.subject({
+      model: userStub
+  });
+
+  ctrl.send('createUser');
+  assert.ok(ctrl);
+  assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
+});

@@ -1,28 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  flashMessages: Ember.inject.service(),
+
 	actions: {
     // Action for saving a new service
     createUser() {
-      let user = this.get('model');
-
       var self = this;
 
+      var flashMessages = self.get('flashMessages');
+      let user = self.get('model');
+
       function onSuccessful() {
-        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('employees');
       }
 
-      function onError(reason) {
-        console.error('There was an error saving the user: ');
-        console.error(reason);
+      function onError() {
+        window.scrollTo(0,0);
+        flashMessages.danger('Account was not successfully created');
       }
 
       if (this.get('model').get('confirm') === this.get('model').get('password')){
           user.save().then(onSuccessful).catch(onError);
-	  }else{
-	    	console.log("Passwords dont match");
-	  }   
+	    }else{
+	    	window.scrollTo(0,0);
+        flashMessages.danger('Passwords do not match!');
+	    }
     }
   }
 });

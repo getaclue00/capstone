@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  flashMessages: Ember.inject.service(),
   type: "user",
   actions: {
     deleteUser() {
-
       var self = this;
+
+      var flashMessages = self.get('flashMessages');
       let user = self.get('model');
 
       function onSuccessful() {
@@ -15,8 +17,9 @@ export default Ember.Controller.extend({
         self.transitionToRoute('employees');
       }
 
-      function onError(error) {
-        throw error.message;
+      function onError() {
+        window.scrollTo(0,0);
+        flashMessages.danger('Account was not successfully deleted');
       }
 
       if (user) {
