@@ -28,7 +28,11 @@ class ServicesController < ApplicationController
   def create
     if current_user && current_user.admin?
       begin
-        service=Service.new(service_sanitized_params)
+        sanitized_params = service_sanitized_params
+        if sanitized_params[:vehicle_size] == nil
+          sanitized_params[:vehicle_size] = 'Small'
+        end
+        service=Service.new(sanitized_params)
         if service.save!
           render json: service, status: :created
         else
