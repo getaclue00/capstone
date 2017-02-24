@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    begin 
+    begin
       user=User.find params[:id]
       render json: user, status: :ok
     rescue ActiveRecord::RecordNotFound => e
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
         render json: { error: 'User creation failed. No parameters sent.'}, status: :bad_request
       rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
         render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
-      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
         render json: { error: user.errors.messages}, status: :bad_request
     end
   end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       render json: { error: 'User update failed. No parameters sent.'}, status: :bad_request
     rescue ActiveRecord::RecordNotFound => e
       render json: { error: 'No such user exists' }, status: :not_found
-    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
       render json: { error: user.errors.messages}, status: :bad_request
     rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
       render json: { error: 'User update failed. Check your data.'}, status: :bad_request
@@ -75,11 +75,11 @@ class UsersController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def user_sanitized_params
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password, :admin, :employee] )
   end
 end
 
-    
+

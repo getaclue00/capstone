@@ -3,10 +3,8 @@ class ServicesController < ApplicationController
 
   def index
 
-    if params[:filter].present?
-      if  params[:filter][:vehicle_size].present?
-         services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
-      end
+    if params[:filter].present? && params[:filter][:vehicle_size].present?
+      services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
     else
       services_array=Service.all
     end
