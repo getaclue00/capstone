@@ -7,6 +7,9 @@
         </button>
         <h4 class="modal-title" id="user-account-editor-show">Modify User Account</h4>
       </div>
+      {{#each flashMessages.queue as |flash|}}
+        {{flash-message flash=flash messageStyle='bootstrap'}}
+      {{/each}}
       <div class="modal-body">
         <div class="container-fluid">
           {{
@@ -15,12 +18,16 @@
           }}
         </div>
       </div>
-      <div class="modal-footer">
-        {{#link-to 'users.delete' model.id}}
-          <button type="button" class="btn btn-tertiary btn-danger btn-md btn-block" >Delete Account</button>
-        {{/link-to}}
-        <button type="button" class="btn btn-secondary" {{action 'goBackToListOfEmployees'}}>Close</button>
-        <button type="button" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>
+      <div class="modal-footer user-show-editor">
+        <div>
+          <button type="button" class="btn btn-secondary" {{action 'goBackToListOfEmployees'}}>Close</button>
+          <button type="button" class="btn btn-primary" {{action 'updateUser'}}>Save changes</button>
+        </div>
+        <div class="delete-user-link">
+          {{#link-to 'users.delete' model.id}}
+            <button type="button" class="btn btn-tertiary btn-danger btn-md btn-block" >Delete Account</button>
+          {{/link-to}}
+        </div>
       </div>
     </div>
   </div>

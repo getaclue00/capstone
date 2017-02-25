@@ -41,20 +41,25 @@ class EmployeesController < ApplicationController
   end
 
   def update
-    if current_user && current_user.admin?
-      begin
-        employee=Employee.find params[:id]
-        if employee.update!(employee_sanitized_params)
-          render json: employee, status: :ok
-        else
-          render json: { error: 'Employee update failed. Check your data.'}, status: :bad_request
+    if current_user
+      params_employee_id = params[:id].to_i
+      if current_user.employee_id == params_employee_id || current_user.admin?
+        begin
+          employee=Employee.find(params_employee_id)
+          if employee.update!(employee_sanitized_params)
+            render json: employee, status: :ok
+          else
+            render json: { error: 'Employee update failed. Check your data.'}, status: :bad_request
+          end
+        rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+          render json: { error: 'Employee update failed. No parameters sent.'}, status: :bad_request
+        rescue ActiveRecord::RecordNotFound => e
+          render json: { error: 'No such employee exists' }, status: :not_found
+        rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
+          render json: { error: employee.errors.messages}, status: :bad_request
         end
-      rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-        render json: { error: 'Employee update failed. No parameters sent.'}, status: :bad_request
-      rescue ActiveRecord::RecordNotFound => e
-        render json: { error: 'No such employee exists' }, status: :not_found
-      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-        render json: { error: employee.errors.messages}, status: :bad_request
+      else
+        render json: { error: 'Not Authorized' }, status: 401
       end
     else
       render json: { error: 'Not Authorized' }, status: 401

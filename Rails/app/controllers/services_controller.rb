@@ -1,8 +1,21 @@
 class ServicesController < ApplicationController
+
   before_action :authenticate_user_from_token!
 
   def index
-    services_array=Service.all
+
+    if params[:filter].present?
+      if  params[:filter][:vehicle_size].present?
+        if params[:filter][:displayable].present?
+          services_array = Service.where('vehicle_size = ? AND displayable = ?', params[:filter][:vehicle_size], params[:filter][:displayable]).all
+        else
+          services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
+        end
+      end
+    else
+      services_array=Service.all
+    end
+
     if services_array && !services_array.empty?
       render json: services_array, status: :ok
     else
@@ -79,6 +92,6 @@ class ServicesController < ApplicationController
       #can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
       # whereas the "safe" version simply returns an empty hash.
       #this changes from JSONAPI to json
-      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:name, :price_small, :price_large, :duration, :description, :active, :displayable] )
+      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:name, :price, :vehicle_size, :duration, :description, :active, :displayable] )
     end
 end

@@ -89,17 +89,17 @@ $breakpoint-alpha: 768px;
       color: purple;
       font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
 
-    &:before {
-        content: "+";
-        font-size: 1.5em;
-        line-height:0.5em;
-        float: right;
-      }
+      &:before {
+          content: "+";
+          font-size: 1.5em;
+          line-height:0.5em;
+          float: right;
+        }
 
-      &:hover {
-        text-decoration: none;
+        &:hover {
+          text-decoration: none;
+        }
       }
-    }
 
     .button-line {
       border-top: 2px solid #e5e5e5;
@@ -113,10 +113,6 @@ $breakpoint-alpha: 768px;
 
     .card-block {
       padding: 0px;
-    }
-
-    .button-color {
-      margin-bottom: 20px;
     }
 
     .control-label {
@@ -309,7 +305,41 @@ $breakpoint-alpha: 768px;
   }
 }
 
+//Styling for both computer and laptop
 .settings-read-only {
   border: none;
   text-align: center;
 }
+
+.button-color {
+  border: none;
+  background-color:#EE2C2C;
+  margin: 0px 0px 40px 0px;
+}
+
+.button-color:hover {
+  border: none;
+  background-color:#EE2C2C;
+  margin: 0px 0px 40px 0px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.my-information{
+  padding: 10px;
+  text-align: center;
+}
+
+.my-information label {
+  display: block;
+  margin: 0px 0px 30px 0px;
+}
+
+.my-information label > span{
+  width: 100px;
+  font-weight: bold;
+  padding-top: 8px;
+  padding-right: 5px;
+  padding-left: 10px;
+}
+
