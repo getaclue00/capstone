@@ -6,6 +6,7 @@
     "fullcalendar": "^3.0.0",
     "fullcalendar-scheduler": "^1.4.0",
     "datatables.net": "^1.10.13",
-    "datatables.net-dt": "^3.2.2"
+    "datatables.net-dt": "^3.2.2",
+    "smartwizard": "^4.1.5"
   }
 }

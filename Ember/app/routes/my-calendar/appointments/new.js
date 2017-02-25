@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import moment from 'moment';
+import RSVP from 'rsvp';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model() {
     let time = moment().format('YYYY-MM-DDTHH:mm');
 
-    return Ember.RSVP.hash({
+    return RSVP.hash({
       appointment: this.get('store').createRecord('appointment', {
         start: time,
         end: time,

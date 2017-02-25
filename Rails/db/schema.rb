@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211154840) do
+ActiveRecord::Schema.define(version: 20170223203348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170211154840) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-02-18'
+    t.date     "start_date",               default: '2017-02-19'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20170211154840) do
     t.boolean  "displayable",                           default: false,   null: false
     t.decimal  "price",        precision: 10, scale: 2
     t.string   "vehicle_size",                          default: "Small"
+    t.index ["displayable"], name: "index_services_on_displayable", using: :btree
     t.index ["vehicle_size"], name: "index_services_on_vehicle_size", using: :btree
   end
 

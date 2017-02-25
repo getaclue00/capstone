@@ -5,8 +5,9 @@ moduleForModel('login-data', 'Unit | Model | login data', {
   needs: []
 });
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+test('checking default values for variables', function(assert) {
+  assert.expect(1);
+  const model = this.subject();
+
+  assert.deepEqual(model.get('remember_me'), false, 'remember_me default value properly set');
 });
