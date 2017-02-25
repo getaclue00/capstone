@@ -26,7 +26,8 @@ module.exports = function(defaults) {
   app.import('bower_components/glyphicons/styles/glyphicons.css');
   app.import('bower_components/datatables.net/js/jquery.dataTables.js');
   app.import('bower_components/datatables.net-dt/css/jquery.dataTables.min.css');
+  app.import('bower_components/smartwizard/css/smart_wizard.css');
+  app.import('bower_components/smartwizard/js/jquery.smartWizard.js');
   app.import('vendor/gmaps.js');
-
   return app.toTree();
 };

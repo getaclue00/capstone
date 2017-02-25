@@ -1,42 +1,62 @@
-// import { moduleFor, test } from 'ember-qunit';
-// import Ember from 'ember';
+import { moduleFor, test } from 'ember-qunit';
+import Ember from 'ember';
+import RSVP from 'rsvp';
 
-// moduleFor('controller:services/delete', 'Unit | Controller | services/delete', {
-//   // Specify the other units that are required for this test.
-//   // needs: ['controller:foo']
-// });
+const flashMessagesStub = Ember.Service.extend({
+  danger(message) {
+    this.set('calledWithMessage', message);
+  }
+});
 
-// test('#deleteService remains on services page following a deletion', function(assert) {
-//   let controller = this.subject({
-//       model: Ember.Object.create({
-//         destroyRecord() {
-//           return new Ember.RSVP.Promise(function(resolve) {
-//             resolve(true);
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'services');
-//       }
-//   });
-//   controller.send('deleteService');
+moduleFor('controller:services/delete', 'Unit | Controller | services/delete', {
+  // Specify the other units that are required for this test.
+  // needs: ['controller:foo']
+});
 
-//   assert.ok(controller);
-// });
+test('checking type', function(assert) {
+  assert.expect(1);
+  const ctrl = this.subject();
 
-// test('#deleteService remains on service page following a failed deletion', function(assert) {
-//   let controller = this.subject({
-//       model: Ember.Object.create({
-//         destroyRecord() {
-//           return new Ember.RSVP.Promise(function(resolve, reject) {
-//             reject({ error: 'could not destroy a record' });
-//           });
-//         }
-//       }),
-//       transitionToRoute(route) {
-//         assert.equal(route, 'service');
-//       }
-//   });
-//   assert.throws(controller.send('deleteService'), "throws with just a message, not using the 'expected' argument");
+  assert.equal(ctrl.get('type'), 'service', 'type properly set');
+});
 
-// });
+test('#deleteServices deletes and redirects to services page', function(assert) {
+  var done = assert.async();
+  const serviceStub = Ember.Object.create({
+    destroyRecord() {
+      return RSVP.resolve();
+    }
+  });
+  let controller = this.subject({
+      model: serviceStub,
+      transitionToRoute(route) {
+        assert.equal(route, 'services');
+        done();
+      }
+  });
+  controller.send('deleteService');
+
+  assert.ok(controller);
+});
+
+test('#deleteService throws an error following a failed deletion', function(assert) {
+  this.register('service:flash-messages', flashMessagesStub);
+  this.inject.service('flash-messages', { as: 'flashMessages' });
+
+  let done = assert.async();
+  const serviceStub = Ember.Object.create({
+    destroyRecord() {
+      return RSVP.reject();
+    }
+  });
+  let ctrl = this.subject({
+      model: serviceStub
+    });
+
+  ctrl.send('deleteService');
+  setTimeout(function() {
+    assert.ok(ctrl);
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Service was not successfully deleted', 'danger flashMessages fired');
+    done();
+  }, 500);
+});
