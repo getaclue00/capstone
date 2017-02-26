@@ -4,7 +4,7 @@
       {{#if (and wasServiceSelected showLocationMapDiv)}}
         <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
           <label for="appointment-location-map" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Show Map:</label>
-          <div class="switch" {{action 'toggleShowLocationMap'}}>
+          <div class="admin-switch" {{action 'toggleShowLocationMap'}}>
             {{input type="checkbox" id="appointment-location-map" class="checkbox" checked=showLocationMap}}
             <div class="slider round"></div>
           </div>
