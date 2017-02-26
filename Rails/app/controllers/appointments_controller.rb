@@ -35,7 +35,7 @@ class AppointmentsController < ApplicationController
     begin
       sanitized_params = appointment_sanitized_params
       #setting employee to default employee
-      if sanitized_params[:employee_id] == nil
+      if sanitized_params[:employee_id].nil?
         sanitized_params[:employee_id] = 0
       end
 

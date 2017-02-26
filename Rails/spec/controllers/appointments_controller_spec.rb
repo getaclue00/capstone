@@ -177,7 +177,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq({"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"], "service"=>["must exist"], "employee"=>["must exist"]}
+        expect(result['error']).to eq({"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"], "service"=>["must exist"], "employee"=>["must exist"], "client"=>["must exist"]}
 )
         expect(response).to have_http_status(:bad_request)
       end
@@ -211,7 +211,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"]}
+        expect(result['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"], "client"=>["must exist"]}
 )
         expect(response).to have_http_status(:bad_request)
       end
@@ -355,7 +355,7 @@ RSpec.describe AppointmentsController, :type => :controller do
         patch :update, params: {id: appointment.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"]}
+        expect(parsed_response['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"], "client"=>["must exist"]}
 )
 
         expect(response).to have_http_status(:bad_request)

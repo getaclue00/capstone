@@ -10,23 +10,23 @@ test('checking default values for variables', function(assert) {
   assert.expect(5);
   const ctrl = this.subject();
 
-  assert.equal(ctrl.get('duration'), 60.0, 'duration default value properly set');
-  assert.equal(ctrl.get('price'), 100.0, 'price_small default value properly set');
-  assert.equal(ctrl.get('description'), '...', 'description default value properly set');
-  assert.equal(ctrl.get('active'), false, 'active default value properly set');
-  assert.equal(ctrl.get('displayable'), false, 'displayable default value properly set');
+  assert.deepEqual(ctrl.get('duration'), "60.00", 'duration default value properly set');
+  assert.deepEqual(ctrl.get('price'), "100.00", 'price_small default value properly set');
+  assert.deepEqual(ctrl.get('description'), '...', 'description default value properly set');
+  assert.deepEqual(ctrl.get('active'), false, 'active default value properly set');
+  assert.deepEqual(ctrl.get('displayable'), false, 'displayable default value properly set');
 });
 
 test('checking formattedActive', function(assert) {
   assert.expect(1);
   const ctrl = this.subject({active: true});
-  assert.equal(ctrl.get('formattedActive'), "Yes", 'formattedActive works properly');
+  assert.deepEqual(ctrl.get('formattedActive'), "Yes", 'formattedActive works properly');
 });
 
 test('checking formattedDisplayable', function(assert) {
   assert.expect(1);
   const ctrl = this.subject({displayable: false});
-  assert.equal(ctrl.get('formattedDisplayable'), "No", 'formattedDisplayable works properly');
+  assert.deepEqual(ctrl.get('formattedDisplayable'), "No", 'formattedDisplayable works properly');
 });
 
 test('should own appointments', function(assert) {

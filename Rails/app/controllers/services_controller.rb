@@ -29,7 +29,7 @@ class ServicesController < ApplicationController
     if current_user && current_user.admin?
       begin
         sanitized_params = service_sanitized_params
-        if sanitized_params[:vehicle_size] == nil
+        if sanitized_params[:vehicle_size].nil?
           sanitized_params[:vehicle_size] = 'Small'
         end
         service=Service.new(sanitized_params)

@@ -11,8 +11,10 @@ Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', phone_nu
 Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'default@test.com', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
 Service.create({id: '0', name: 'DEFAULT', active: false, displayable: false})
 
-Appointment.create({title: 'Batman Appointment', client_id: '0', service_id: '0'}) #employee_id can be null
-Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', client_id: '0', service_id: '0'})
+Client.create({ id: '1', last_name: 'Testing', first_name: 'Tester', email: 'test@test.com', phone_number: '111-111-1111', street_number: '1', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+
+Appointment.create({title: 'Batman Appointment', client_id: '1', service_id: '0'}) #employee_id can be null
+Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', client_id: '1', service_id: '0'})
 Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', client_id: '0', service_id: '0'})
 Appointment.create({title: 'Appointment With Employee, Car, and Service', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', client_id: 0, service_id: 0, employee_id: 0})
 
