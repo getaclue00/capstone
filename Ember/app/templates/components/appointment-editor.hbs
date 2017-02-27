@@ -43,6 +43,22 @@
          {{employee.fullName}}
         {{/power-select}}
       </div>
+      <div class="form-group">
+          <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Client:</label>
+          <div class="col-xs-12">
+            {{#power-select
+              options=listOfClients
+              selected=aSelectedClient
+              renderInPlace=true
+              searchField="fullName"
+              placeholder="Select a client"
+              onchange=(action "selectClient")
+              as |client|
+            }}
+             {{client.fullName}}
+            {{/power-select}}
+          </div>
+        </div>
       {{#if wasServiceSelected}}
         <div class="form-group">
           <label for="appointment-cost" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Cost:</label>

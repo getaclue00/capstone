@@ -42,6 +42,10 @@ export default Ember.Component.extend({
     return this.get('model.employee');
   }),
 
+  aSelectedClient: Ember.computed('model.client', function(){
+    return this.get('model.client');
+  }),
+
   didInsertElement() {
     this._super(...arguments);
     Ember.$('#myModal').modal('show');
@@ -60,6 +64,11 @@ export default Ember.Component.extend({
       }
     },
 
+    selectClient(client) {
+      if(!Ember.isEmpty(client)){
+        this.get('model').set('client', client);
+      }
+    },
     selectAppointmentStatus(status) {
       if(!Ember.isEmpty(status)) {
         this.get('model').set('status', status);

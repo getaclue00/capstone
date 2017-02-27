@@ -5,7 +5,7 @@ RSpec.describe ServicesController, :type => :controller do
   include Devise::Test::ControllerHelpers
 
   describe 'GET Services#index' do
-    context 'when there are no services' do
+    context 'when there are no services and no filter' do
       it "returns an error" do
         get :index
 
@@ -16,13 +16,65 @@ RSpec.describe ServicesController, :type => :controller do
       end
     end
 
-    context 'when there are services' do
+    context 'when different param and services are not present' do
+      it "returns an error" do
+        get :index, {:params => {:sort => 'title'}}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq('No services exist')
+        expect(response).to have_http_status(400)
+      end
+    end
+
+    context 'when there are services but no filter' do
       it "returns with a successful response and the services" do
         FactoryGirl.create_list(:service_with_appointment, 5)
         get :index
         result = JSON.parse(response.body)
         expect(result['data'].length).to eq(5)
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when different param and users are present' do
+      it "returns with a successful response and the services" do
+        FactoryGirl.create_list(:service, 5)
+        get :index, {:params => {:sort => 'title'}}
+        result = JSON.parse(response.body)
+        expect(result['data'].length).to eq(5)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when filter and services are not present' do
+      it "returns an error" do
+        get :index, {:params => {:filter => {:vehicle_size => ''}}}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq('No services exist')
+        expect(response).to have_http_status(400)
+      end
+    end
+
+    context 'when acceptable filter and services are present' do
+      it "returns with a successful response and the services" do
+        FactoryGirl.create_list(:service, 5)
+        get :index, {:params => {:filter => {:vehicle_size => 'Small'}}}
+        result = JSON.parse(response.body)
+        expect(result['data'].length).to eq(5)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when unacceptable filter and services are present' do
+      it "returns an error" do
+        FactoryGirl.create_list(:user, 5)
+        get :index, {:params => {:filter => {:vehicle_size => 'huge'}}}
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('No services exist')
+        expect(response).to have_http_status(400)
       end
     end
   end

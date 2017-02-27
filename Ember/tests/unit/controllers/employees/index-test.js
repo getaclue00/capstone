@@ -5,8 +5,25 @@ moduleFor('controller:employees/index', 'Unit | Controller | employees/index', {
   // needs: ['controller:foo']
 });
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
-  assert.ok(controller);
+test('checking arrays and hash maps', function(assert) {
+  assert.expect(4);
+  const ctrl = this.subject();
+
+  assert.deepEqual(ctrl.get('headers'), 
+  	["Name", "Employee ID", "Phone",
+            "Start Date", "End Date"],
+  	'header properly set');
+
+  assert.deepEqual(ctrl.get('attributes'), 
+  	{"fullName": "Name", "id" : "Employee ID:", "phoneNumber" : "Phone",
+                "startDate": "Start Date", "endDate": "End Date"},
+    'attributes properly set');
+
+  assert.deepEqual(ctrl.get('operations'), 
+  	{'employees.show': 'glyphicon-pencil', 'employees.delete': 'glyphicon-remove'},
+   'operations properly set');
+
+  assert.equal(ctrl.get('collection'), 
+  	'employees',
+   'operations properly set');
 });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223203348) do
+ActiveRecord::Schema.define(version: 20170226055523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20170223203348) do
     t.datetime "start",                                default: '2016-10-23 09:10:00',     null: false
     t.datetime "end",                                  default: '2016-12-31 09:10:00',     null: false
     t.text     "notes"
-    t.integer  "car_id"
     t.integer  "service_id",                                                               null: false
     t.integer  "employee_id",                          default: 0,                         null: false
     t.integer  "week_number",                          default: 0
     t.decimal  "cost",        precision: 10, scale: 2, default: "0.0"
     t.integer  "year",                                 default: 2017
     t.string   "location",                             default: "174 Bank St, Ottawa, On"
-    t.index ["car_id"], name: "index_appointments_on_car_id", using: :btree
+    t.integer  "client_id",                                                                null: false
+    t.index ["client_id"], name: "index_appointments_on_client_id", using: :btree
     t.index ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
     t.index ["service_id"], name: "index_appointments_on_service_id", using: :btree
     t.index ["week_number", "year"], name: "index_appointments_on_week_number_and_year", using: :btree
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170223203348) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-02-19'
+    t.date     "start_date",               default: '2017-02-27'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20170223203348) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "appointments", "cars"
+  add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
   add_foreign_key "cars", "clients"
