@@ -1,0 +1,40 @@
+<div class="modal fade" id="appointment-time-selection" tabindex="-1" role="dialog" aria-labelledby="appointment-time-selection-show" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="appointment-time-selection-show">Time Selection for: {{selectedDate}}</h6>
+      </div>
+      <div>
+        <div>
+          <div class="form-group" style="padding: 0px 15px;">
+            <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Please Choose a Staff Member:</label>
+            <div class="col-xs-12">
+              {{#power-select
+                options=listOfEmployees
+                selected=aSelectedEmployee
+                renderInPlace=true
+                searchField="fullName"
+                placeholder="Select a staff member"
+                onchange=(action "selectEmployee")
+                as |employee|
+              }}
+               {{employee.fullName}}
+              {{/power-select}}
+            </div>
+          </div>
+          {{#if wasEmployeeSelected}}
+            <label for="appointment-time" class="col-xs-12 col-form-label font-weight-bold appointment-time-label">Available Times:</label>
+            <div class="available-time-choices" style="text-align: center">
+              {{#each availableTimes as |time|}}
+                <button type="button" class="btn btn-outline-info col-3 time-button" {{action 'confirmSelection' time}}>{{time}}</button>
+              {{/each}}
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" {{action 'cancelSelection'}}>Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

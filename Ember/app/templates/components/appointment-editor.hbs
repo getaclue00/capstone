@@ -1,39 +1,49 @@
 {{#if (and model listOfServices listOfEmployess)}}
   <div class="row">
-    <div class="col-12">
-        <div class="form-group">
-          <label for="service" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Service:</label>
-          <div class="col-xs-12">
-            {{#power-select
-              options=listOfServices
-              selected=aSelectedService
-              renderInPlace=true
-              searchField="name"
-              placeholder="Select a service"
-              onchange=(action "selectService")
-              as |service|
-            }}
-             {{service.name}} - ${{service.price_small}} - ${{service.price_large}}
-            {{/power-select}}
+    <div class="col-12" style="padding-right: 0px; padding-left: 0px;">
+      {{#if (and wasServiceSelected showLocationMapDiv)}}
+        <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+          <label for="appointment-location-map" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Show Map:</label>
+          <div class="admin-switch" {{action 'toggleShowLocationMap'}}>
+            {{input type="checkbox" id="appointment-location-map" class="checkbox" checked=showLocationMap}}
+            <div class="slider round"></div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Staff:</label>
-          <div class="col-xs-12">
-            {{#power-select
-              options=listOfEmployess
-              selected=aSelectedEmployee
-              renderInPlace=true
-              searchField="fullName"
-              placeholder="Select a staff member"
-              onchange=(action "selectEmployee")
-              as |employee|
-            }}
-             {{employee.fullName}}
-            {{/power-select}}
+        {{#if showLocationMap}}
+          <div class="form-group">
+            {{location-map location=model.location}}
           </div>
-        </div>
-        <div class="form-group">
+        {{/if}}
+      {{/if}}
+      <div class="form-group">
+        <label for="service" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Service:</label>
+        {{#power-select
+          options=listOfServices
+          selected=aSelectedService
+          renderInPlace=true
+          searchField="name"
+          placeholder="Select a service"
+          onchange=(action "selectService")
+          as |service|
+        }}
+         {{service.name}} - ${{service.price}}
+        {{/power-select}}
+      </div>
+      <div class="form-group">
+        <label for="staff" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Staff:</label>
+        {{#power-select
+          options=listOfEmployess
+          selected=aSelectedEmployee
+          renderInPlace=true
+          searchField="fullName"
+          placeholder="Select a staff member"
+          onchange=(action "selectEmployee")
+          as |employee|
+        }}
+         {{employee.fullName}}
+        {{/power-select}}
+      </div>
+      <div class="form-group">
           <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Client:</label>
           <div class="col-xs-12">
             {{#power-select
@@ -49,35 +59,31 @@
             {{/power-select}}
           </div>
         </div>
-        {{#if wasServiceSelected}}
-          <div class="form-group">
-            <label for="appointment-cost" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Cost:</label>
-            <div class="col-xs-12">
-              <div class="input-group">
-                <span class="input-group-addon">$</span>
-                {{input type="number" pattern="\d*" class="form-control" id="appointment-cost" value=model.cost placeholder="Please enter the cost"}}
-              </div>
-            </div>
+      {{#if wasServiceSelected}}
+        <div class="form-group">
+          <label for="appointment-cost" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Cost:</label>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            {{input type="number" pattern="\d*" class="form-control" id="appointment-cost" value=model.cost placeholder="Please enter the cost"}}
           </div>
-          <div class="form-group">
-            <label for="appointment-start-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
-            <div class="col-xs-12">
-              {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart}}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="appointment-end-time" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Ends:</label>
-            <div class="col-xs-12">
-              {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="appointment-notes" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
-            <div class="col-xs-12">
-              {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
-            </div>
-          </div>
-        {{/if}}
+        </div>
+        <div class="form-group">
+          <label for="appointment-location" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Location:</label>
+          {{input type="text" class="form-control" id="appointment-location" value=model.location placeholder="ex: 174 Bank St, Ottawa, On"}}
+        </div>
+        <div class="form-group">
+          <label for="appointment-start-time" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
+          {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart}}
+        </div>
+        <div class="form-group">
+          <label for="appointment-end-time" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Ends:</label>
+          {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
+        </div>
+        <div class="form-group">
+          <label for="appointment-notes" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
+          {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
+        </div>
+      {{/if}}
     </div>
   </div>
 {{else}}

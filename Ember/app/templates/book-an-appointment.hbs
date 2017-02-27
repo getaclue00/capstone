@@ -1,0 +1,209 @@
+<div class="container-fluid">
+  <h4 class="text-center client-booking-title">Booking an Appointment</h4>
+  <div class="row">
+    <div class="col-12">
+      <div id="smartwizard" class="wizard_horizontal col-12">
+        <ul class="wizard_steps col-12">
+          <li class="col-2.4">
+            <a href="#step-1">
+              <span class="step_no">1</span>
+              <span class="step_descr">Service</span>
+            </a>
+          </li>
+          <li class="col-2.4">
+            <a href="#step-2">
+              <span class="step_no">2</span>
+              <span class="step_descr">Date</span>
+            </a>
+          </li>
+          <li class="col-2.4">
+            <a href="#step-3">
+              <span class="step_no">3</span>
+              <span class="step_descr">Your Info</span>
+            </a>
+          </li>
+          <li class="col-2.4">
+            <a href="#step-4">
+              <span class="step_no">4</span>
+              <span class="step_descr">Confirm</span>
+            </a>
+          </li>
+        </ul>
+        <div>
+          <div id="step-1">
+            <h6>Select a Service <hr></h6>
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item"><a href="#small-vehicle-list" data-toggle="tab" class="nav-link active">Small Vehicles</a>
+              </li>
+              <li class="nav-item"><a href="#large-vehicle-list" data-toggle="tab" class="nav-link">Large Vehicles</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="small-vehicle-list">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th></th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each smallVehicleServices as |service|}}
+                    <tr>
+                      <td>
+                        <button class="btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                      </td>
+                      <td>
+                        <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}}">
+                          <span class="glyphicon glyphicon-info-sign" ></span>
+                        </a>
+                      </td>
+                      <td>{{service.price}}</td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="large-vehicle-list">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th></th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each largeVehicleServices as |service|}}
+                    <tr>
+                      <td>
+                        <button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                      </td>
+                      <td>
+                        <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}} ">
+                          <span class="glyphicon glyphicon-info-sign" ></span>
+                        </a>
+                      </td>
+                      <td>{{service.price}}</td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="step-2">
+            <div class="row">
+              <div class="col-12">
+                <h6>Select a Date <hr></h6>
+              </div>
+              <div class="container">
+                <div class="schedule">
+                  <div class="calendar-view">
+                    {{full-calendar header=header aspectRatio=1 viewName=viewName fixedWeekCount=false businessHours=businessHours dayClick=(action 'handleCalendarDayClick') }}
+                  </div>
+                  {{#if selectTime}}
+                    {{appointment-time-selection
+                      selectTime= selectTime
+                      selectedDate= selectedDate
+                      appointment= appointment
+                      listOfEmployees= employees
+                      businessHours= businessHours
+                      selectedTime= selectedTime
+                    }}
+                  {{/if}}
+                  <div class="authors"></div>
+                  <div class="calendar-times col-6">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="step-3">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h3>Please Fill in the Information</h3>
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <form>
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-name">Name</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control" id="personal-info-name" placeholder="Name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-email"><span>Email Address</span>
+                    </label>
+                    <div class="col-9">
+                      <input type="email" class="form-control" id="personal-info-email" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-address">Address</label>
+                    <div class="col-9">
+                      <input type="text" class="form-control" id="personal-info-address" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-3 client-information" for="personal-info-phone-number">Phone number</label>
+                    <div class="col-9">
+                      <input type='tel' class="form-control" id="personal-info-phone-number" pattern='\d{3}[\-]\d{3}[\-]\d{4}' placeholder='Format: 000-000-0000'>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="personal-info-comments">Comments</label>
+                    <textarea class="form-control" id="personal-info-comments" rows="3" placeholder="Comments"></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div id="step-4">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row justify-content-between">
+                  <div class="col-12">
+                    <div class="card booking-confirm-card">
+                      <div class="card-header">
+                        <h4 class="text-center">Your Booking Overview</h4>
+                      </div>
+                      <div class="card-block">
+                        <h5><strong>Service Information</strong></h5> {{appointment.service.name}}
+                        <br />
+                        <div>
+                          <p>Duration: {{appointment.service.duration}} minutes</p>
+                          <p>Price: ${{appointment.service.price}}</p>
+                          <p>Employee: {{appointment.employee.fullName}}</p>
+                        </div>
+                        <hr>
+                        <h5><strong>Date and Time</strong></h5>
+                        <p>{{selectedDate}} {{selectedTime}}</p>
+                        <hr>
+                        <h5><strong>Your Information</strong></h5>
+                        <div>
+                          <p>Email</p>
+                          <p>Address</p>
+                          <p>Phone Number</p>
+                          <strong>Comments:</strong>
+                        </div>
+                        <br />
+                        <div class="text-center">
+                          <button class="btn btn btn-primary btn-large">Confirm</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

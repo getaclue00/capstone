@@ -120,7 +120,7 @@ test('it renders a complete view upon service selection', function(assert) {
     wasServiceSelected=true
   }}`);
 
-  assert.deepEqual($('.form-group').length, 7, 'should be 7 rows on initial render');
+  assert.deepEqual($('.form-group').length, 8, 'should be 8 rows on initial render');
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
   assert.deepEqual($($('.ember-power-select-placeholder')[2]).text(), 'Select a client', 'placeholder text to select a client');

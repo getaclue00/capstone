@@ -32,12 +32,12 @@ Router.map(function() {
   });
   this.route('login');
   this.route('appointment-history');
-
   this.route('users', function() {
     this.route('show', { path: "/:users_id" });
     this.route('new', { path: "/:employees_id" });
     this.route('delete', { path: "/delete/:users_id" });
   });
+  this.route('book-an-appointment');
 });
 
 export default Router;

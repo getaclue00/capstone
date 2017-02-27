@@ -1,10 +1,14 @@
 class ServicesController < ApplicationController
+
   before_action :authenticate_user_from_token!
 
   def index
-
     if params[:filter].present? && params[:filter][:vehicle_size].present?
-      services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
+        if params[:filter][:displayable].present?
+          services_array = Service.where('vehicle_size = ? AND displayable = ?', params[:filter][:vehicle_size], params[:filter][:displayable]).all
+        else
+          services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
+        end
     else
       services_array=Service.all
     end
