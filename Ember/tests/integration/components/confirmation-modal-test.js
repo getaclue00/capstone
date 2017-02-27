@@ -54,6 +54,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{confirmation-modal model=model type='service'}}`);
 
-  assert.equal(this.$().text().trim(), 'Delete the following service?' + '\n  Clean Car');
+  assert.deepEqual(this.$().text().trim(), 'Delete the following service?' + '\n  Clean Car');
 
 });

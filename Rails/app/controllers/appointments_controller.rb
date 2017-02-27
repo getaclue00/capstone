@@ -35,7 +35,7 @@ class AppointmentsController < ApplicationController
     begin
       sanitized_params = appointment_sanitized_params
       #setting employee to default employee
-      if sanitized_params[:employee_id] == nil
+      if sanitized_params[:employee_id].nil?
         sanitized_params[:employee_id] = 0
       end
 
@@ -100,7 +100,7 @@ class AppointmentsController < ApplicationController
     #take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that
     #can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
     # whereas the "safe" version simply returns an empty hash.
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :car, :service, :employee, :week_number, :cost, :location] )
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :client, :service, :employee, :week_number, :cost, :location] )
   end
 
 end

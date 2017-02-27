@@ -8,10 +8,10 @@ FactoryGirl.define do
     active true
     #default displayable is false
 
-  factory :service_with_appointment do
-    after(:create) do |service|
-      create(:appointment, service: service)
+    factory :service_with_appointment do
+      after(:create) do |service|
+        create(:appointment, service: service)
+      end
     end
-  end
   end
 end
