@@ -13,6 +13,7 @@ export default Model.extend({
   start:      attr('isodate'),
   end:        attr('isodate'),
   cost:       attr('number'),
+  location:   attr('string', { defaultValue: '' }),
   notes:      attr('string', { defaultValue: '' }),
   status:     attr('string', { defaultValue: 'pending' }),
   weekNumber: attr('number'),

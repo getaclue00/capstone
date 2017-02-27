@@ -10,6 +10,18 @@ export default Ember.Component.extend({
     "cancelled"
   ],
 
+  showLocationMap: false,
+
+  showLocationMapDiv: Ember.computed('model.location', function() {
+    let location = this.get('model.location');
+    if (Ember.isEmpty(location)) {
+      this.set('showLocationMap', false);
+      return false;
+    } else {
+      return true;
+    }
+  }),
+
   wasServiceSelected: Ember.computed('model.service', function(){
     let service = this.get('model.service');
 
@@ -52,6 +64,10 @@ export default Ember.Component.extend({
       if(!Ember.isEmpty(status)) {
         this.get('model').set('status', status);
       }
+    },
+
+    toggleShowLocationMap() {
+      this.toggleProperty('showLocationMap');
     }
   }
 });
