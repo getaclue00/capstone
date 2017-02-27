@@ -1,12 +1,11 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{stringThatIsUsedForModalIdInTemplate}}" tabindex="-1" role="dialog" aria-labelledby="{{stringThatIsUsedForModalIdInTemplate}}Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" {{action 'goBackToCalendar'}}>
+        <button type="button" class="close" aria-label="Close" {{action 'goBackToCalendar'}}>
           <span aria-hidden="true">&times;</span>
         </button>
-        <button type="button" class="btn btn-outline-success btn-sm" {{action 'markAppointmentAsCompleted'}}>Mark Completed</button>
-        <button type="button" class="btn btn-outline-danger btn-sm" {{action 'deleteAppointment'}}>Delete</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" {{action 'deleteAppointment'}}>Delete Appointment</button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -19,9 +18,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <div class="btn-group" role="group" aria-label="Appointment control buttons" style="width: 100%">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" {{action 'saveAppointment'}} style="width: 50%;">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'goBackToCalendar'}} style="width: 50%;">Close</button>
+        <div class="btn-group" role="group" aria-label="Appointment control buttons">
+          <button type="button" class="btn btn-primary" {{action 'saveAppointment'}}>Save changes</button>
+          <button type="button" class="btn btn-secondary" {{action 'goBackToCalendar'}}>Close</button>
         </div>
       </div>
     </div>
