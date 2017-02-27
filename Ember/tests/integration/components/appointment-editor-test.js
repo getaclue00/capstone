@@ -106,7 +106,7 @@ test('it renders a complete view upon service selection', function(assert) {
     wasServiceSelected=true
   }}`);
 
-  assert.deepEqual($('.form-group').length, 6, 'should be 6 rows on initial render');
+  assert.deepEqual($('.form-group').length, 7, 'should be 7 rows on initial render');
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
   assert.equal(this.$('input[type="number"]').attr('placeholder'), 'Please enter the cost');
