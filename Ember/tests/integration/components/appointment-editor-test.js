@@ -61,8 +61,8 @@ test('it renders a default view', function(assert) {
 
   this.set('services', [{
     name: 'Service 1',
-    price_small: 99,
-    price_large: 100
+    price: 99,
+    vehicleSize: 'Small'
   }]);
 
   this.set('employees', [{
@@ -106,6 +106,6 @@ test('it renders a complete view upon service selection', function(assert) {
   assert.deepEqual($('.form-group').length, 8, 'should be 8 rows on initial render');
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
-  assert.equal(this.$('input[type="number"]').attr('placeholder'), 'Please enter the cost');
-  assert.equal(this.$('textarea').attr('rows'), 3, 'notes section');
+  assert.deepEqual(this.$('input[type="number"]').attr('placeholder'), 'Please enter the cost');
+  assert.deepEqual(this.$('textarea').attr('rows'), '3', 'notes section');
 });

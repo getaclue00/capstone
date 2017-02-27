@@ -23,7 +23,7 @@ test('#deleteAppointment transitionsTo my-calendar', function(assert) {
 
   let ctrl = this.subject({
       appointment: appointmentStub,
-      modalIdName: modalId,
+      stringThatIsUsedForModalIdInTemplate: modalId,
       transitionToRoute(route) {
         assert.equal(route, 'my-calendar');
         done();
@@ -33,7 +33,7 @@ test('#deleteAppointment transitionsTo my-calendar', function(assert) {
   ctrl.send('deleteAppointment');
 
   assert.ok(ctrl);
-  assert.deepEqual(ctrl.get('modalIdName'), modalId);
+  assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
 });
 
 test('#deleteAppointment throws an error following a failed delete', function(assert) {
@@ -50,7 +50,7 @@ test('#deleteAppointment throws an error following a failed delete', function(as
   const modalId = `myModal`;
 
   let ctrl = this.subject({
-    modalIdName: modalId,
+    stringThatIsUsedForModalIdInTemplate: modalId,
     appointment: appointmentStub
   });
 
@@ -58,7 +58,7 @@ test('#deleteAppointment throws an error following a failed delete', function(as
   setTimeout(function() {
     assert.ok(ctrl);
     assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Appointment was not successfully deleted', 'danger flashMessages fired');
-    assert.deepEqual(ctrl.get('modalIdName'), modalId);
+    assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
     done();
   }, 500);
 });
@@ -76,7 +76,7 @@ test('#saveAppointment transitionsTo my-calendar', function(assert) {
   const modalId = `myModal`;
 
   let ctrl = this.subject({
-    modalIdName: modalId,
+    stringThatIsUsedForModalIdInTemplate: modalId,
     appointment: appointmentStub,
     transitionToRoute(route) {
       assert.equal(route, 'my-calendar');
@@ -87,7 +87,7 @@ test('#saveAppointment transitionsTo my-calendar', function(assert) {
   ctrl.send('saveAppointment');
 
   assert.ok(ctrl);
-  assert.deepEqual(ctrl.get('modalIdName'), modalId);
+  assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
 });
 
 test('#saveAppointment throws an error following a failed update', function(assert) {
@@ -104,7 +104,7 @@ test('#saveAppointment throws an error following a failed update', function(asse
   const modalId = `myModal`;
 
   let ctrl = this.subject({
-    modalIdName: modalId,
+    stringThatIsUsedForModalIdInTemplate: modalId,
     appointment: appointmentStub
   });
 
@@ -112,7 +112,7 @@ test('#saveAppointment throws an error following a failed update', function(asse
   setTimeout(function() {
     assert.ok(ctrl);
     assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Appointment was not successfully updated', 'danger flashMessages fired');
-    assert.deepEqual(ctrl.get('modalIdName'), modalId);
+    assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
     done();
   }, 500);
 });
