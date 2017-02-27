@@ -2,6 +2,21 @@ $break-small: 320px;
 $break-large: 1024px;
 
 .calendar-view {
+  .fc-row .fc-content-skeleton td {
+    border-color: inherit;
+  }
+
+  .fc-unthemed td.fc-today {
+    background: inherit;
+  }
+
+  .fc-ltr .fc-basic-view .fc-today .fc-day-number {
+    background: red;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: white;
+  }
+
   .fc button {
     @media (min-width: $break-small) {
       height: auto;
