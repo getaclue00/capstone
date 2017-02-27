@@ -20,6 +20,7 @@ RSpec.describe AppointmentsMailer, type: :mailer do
     admin_user = FactoryGirl.create(:user)
     service = FactoryGirl.create(:service)
     appointment = FactoryGirl.create(:appointment, service: service)
+    user = FactoryGirl.create(:user, email: 'lol@email.com', employee: appointment.employee)
 
     perform_enqueued_jobs do
       AppointmentsMailer.new_appointment_created(appointment).deliver_later
@@ -27,9 +28,11 @@ RSpec.describe AppointmentsMailer, type: :mailer do
     end
 
     to = ActionMailer::Base.deliveries.last.to[0]
+    bcc = ActionMailer::Base.deliveries.last.bcc[0]
     from = ActionMailer::Base.deliveries.last.from[0]
 
     expect(to).to eq("info@radetailing.ca")
+    expect(bcc).to eq("lol@email.com")
     expect(from).to eq("no-reply@radetailing.ca")
   end
 
