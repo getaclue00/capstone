@@ -26,7 +26,7 @@
           onchange=(action "selectService")
           as |service|
         }}
-         {{service.name}} - ${{service.price}}
+         {{service.name}} - {{service.vehicleSize}} - ${{service.price}}
         {{/power-select}}
       </div>
       <div class="form-group">
@@ -79,6 +79,22 @@
           <label for="appointment-end-time" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Ends:</label>
           {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
         </div>
+        <div class="form-group">
+            <label for="appointment-status" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Status:</label>
+            <div class="col-xs-12">
+              {{#power-select
+                options=listOfAppointmentStatuses
+                selected=model.status
+                renderInPlace=true
+                searchEnabled=false
+                placeholder="Appointment Status"
+                onchange=(action "selectAppointmentStatus")
+                as |status|
+              }}
+               {{status}}
+              {{/power-select}}
+            </div>
+          </div>
         <div class="form-group">
           <label for="appointment-notes" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
           {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}

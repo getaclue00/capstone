@@ -2,7 +2,6 @@ import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import RSVP from 'rsvp';
 
-
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model(params) {
     let id = params.appointments_id;
@@ -22,19 +21,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     goBackToCalendar() {
       // check if any attributes have been changed
       let appointment = this.get('controller.appointment');
+      let modalId = this.get('controller.stringThatIsUsedForModalIdInTemplate');
 
       if (appointment.get('hasDirtyAttributes')) {
         // remove any changes since they would be commited via Save button
         // this would be a good place to prompt user to see if they want to save the changes
         appointment.rollbackAttributes();
       }
-
+      Ember.$(`#${modalId}`).modal('hide');
       this.transitionTo('my-calendar');
-    },
-
-    markAppointmentAsCompleted() {
-      let appointment = this.get('controller.appointment');
-      appointment.set('status', "completed");
     }
   }
 });

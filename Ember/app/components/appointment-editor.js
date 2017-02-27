@@ -2,6 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  listOfAppointmentStatuses: [
+    "pending",
+    "confirmed",
+    "new time proposed",
+    "completed",
+    "cancelled"
+  ],
+
   showLocationMap: false,
 
   showLocationMapDiv: Ember.computed('model.location', function() {
@@ -59,6 +67,11 @@ export default Ember.Component.extend({
     selectClient(client) {
       if(!Ember.isEmpty(client)){
         this.get('model').set('client', client);
+      }
+    },
+    selectAppointmentStatus(status) {
+      if(!Ember.isEmpty(status)) {
+        this.get('model').set('status', status);
       }
     },
 
