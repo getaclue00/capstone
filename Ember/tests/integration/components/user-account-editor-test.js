@@ -41,13 +41,27 @@ test('it renders a view with a model', function(assert) {
   }}`);
 
   // // Test in correct inputs bar are present
-  assert.equal(this.$('input[type="password"]').length, 2, 'should be only 2 input password field - new and confirm password');
-  assert.equal(this.$('input[id="user-admin"]').length, 1, 'should be only 1 input switch for user admin');
-  assert.equal(this.$('input[type="text"]').length, 2, 'should be only 2 input name field - email and employee id');
+  assert.deepEqual(this.$('input[type="password"]').length, 2, 'should be only 2 input password field - new and confirm password');
+  assert.deepEqual(this.$('input[id="user-admin"]').length, 1, 'should be only 1 input switch for user admin');
+  assert.deepEqual(this.$('input[type="text"]').length, 2, 'should be only 2 input name field - email and employee id');
 
   // Test if proper values are placed into form
-  assert.equal(this.$('input[type="text"]')[1].value, this.get('model.email'), 'names should match');
+  assert.deepEqual(this.$('input[type="text"]')[1].value, this.get('model.email'), 'names should match');
+  assert.deepEqual(this.$('input[id="user-admin"]').is(":checked"), this.get('model.admin'), 'Whether a user is admin should match');
+  assert.deepEqual(this.$('input[type="password"]')[0].value, this.get('model.password').toString(), 'password should match');
+  assert.deepEqual(this.$('input[type="password"]')[1].value, this.get('model.confirm').toString(), 'password should match');
+});
+
+test('should update user admin on click', function(assert) {
+  this.set('model', user);
+  assert.expect(2);
+
+  this.render(hbs`{{
+    user-account-editor
+    model=model
+  }}`);
+
   assert.equal(this.$('input[id="user-admin"]').is(":checked"), this.get('model.admin'), 'Whether a user is admin should match');
-  assert.equal(this.$('input[type="password"]')[0].value, this.get('model.password').toString(), 'password should match');
-  assert.equal(this.$('input[type="password"]')[1].value, this.get('model.confirm').toString(), 'password should match');
+  this.$('div#admin-switch')[0].click();
+  assert.equal(this.$('input[id="user-admin"]').is(":checked"), !!(this.get('model.admin')), 'Whether a user is admin should match');
 });

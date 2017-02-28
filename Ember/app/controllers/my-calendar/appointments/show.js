@@ -4,14 +4,17 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   flashMessages: Ember.inject.service(),
+  stringThatIsUsedForModalIdInTemplate: `myModal`,
+
   actions: {
     deleteAppointment() {
       var self = this;
       var flashMessages = self.get('flashMessages');
-      let appointment = this.get('appointment');
+      let appointment = self.get('appointment');
 
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
+        let modalId = self.get('stringThatIsUsedForModalIdInTemplate');
+        Ember.$(`#${modalId}`).modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
@@ -31,7 +34,8 @@ export default Controller.extend({
       var flashMessages = self.get('flashMessages');
 
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
+        let modalId = self.get('stringThatIsUsedForModalIdInTemplate');
+        Ember.$(`#${modalId}`).modal('hide');
         self.transitionToRoute('my-calendar');
       }
 

@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="client-first-name" class="col-4 col-form-label">First Name</label>
+      <div class="col-8">
+        {{input class="form-control" value=model.firstName id="client-first-name"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-last-name" class="col-4 col-form-label">Last Name</label>
+      <div class="col-8">
+        {{input class="form-control" value=model.lastName id="client-last-name"}}
+      </div>
+    </div>
+     <div class="form-group row">
+      <label for="client-email" class="col-4 col-form-label">Email</label>
+      <div class="col-8">
+        {{input type="text" class="form-control" value=model.email id="client-email"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-phone-number" class="col-4 col-form-label">Phone Number</label>
+      <div class="col-8">
+        {{input type="tel" class="form-control" value=model.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-street-number" class="col-4 col-form-label">Street Number</label>
+      <div class="col-8">
+        {{input type="number" pattern="\d*" class="form-control" value=model.streetNumber id="client-street-number"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-street-name" class="col-4 col-form-label">Street Name</label>
+      <div class="col-8">
+        {{input type="text" class="form-control" value=model.streetName id="client-street-name"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-city" class="col-4 col-form-label">City</label>
+      <div class="col-8">
+        {{input type="text" class="form-control" value=model.city id="client-city"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-province" class="col-4 col-form-label">Province</label>
+      <div class="col-8">
+        {{input type="text" class="form-control" value=model.province id="client-province"}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="client-postal-code" class="col-4 col-form-label">Postal Code</label>
+      <div class="col-8">
+        {{input type="text" class="form-control" value=model.postalCode id="client-postal-code" placeholder="Please use K1K 1K1 as format"}}
+      </div>
+    </div>
+  </div>
+</div>
+

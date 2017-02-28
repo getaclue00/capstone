@@ -78,11 +78,11 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     context 'when unacceptable filter and users are present' do
-      it "returns with a successful response and the users" do
+      it "returns an error" do
         FactoryGirl.create_list(:user, 5)
         get :index, {:params => {:filter => {:user_type => 'batman'}}}
         result = JSON.parse(response.body)
-        expect(result['error']).to eq('No users exist') 
+        expect(result['error']).to eq('No users exist')
         expect(response).to have_http_status(400)
       end
     end
@@ -105,7 +105,7 @@ RSpec.describe UsersController, :type => :controller do
       it 'returns the user data' do
         user = FactoryGirl.create :user
         employee_id = user.employee.id
-        
+
         get :show, params: { id: user.id }
 
         result = JSON.parse(response.body)
@@ -118,10 +118,10 @@ RSpec.describe UsersController, :type => :controller do
         expect(attr["admin"]).to eq(true)
         #VERIFYING USER POINTS TO EMPLOYEE
         expect(result["data"]["relationships"]["employee"]["data"]["id"].to_i).to eq(employee_id)
-        
+
         #VERIFYING THAT EMPLOYEE POINT TO USER
         expect(Employee.find(employee_id).user.id).to eq (user.id)
-        
+
       end
     end
   end
@@ -138,7 +138,7 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to have_http_status(:bad_request)
       end
     end
-  
+
 
    context 'when the data is there and is correct' do
       it 'returns a succesful response' do
@@ -152,7 +152,7 @@ RSpec.describe UsersController, :type => :controller do
                 "admin":true
             },
             "relationships": {
-              "employee":{"data":{"type":"employees", "id": employee.id}} 
+              "employee":{"data":{"type":"employees", "id": employee.id}}
             }
           }
         }
@@ -164,7 +164,7 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to have_http_status(:created)
       end
     end
-                  
+
 
     context 'when the data is there but not correct' do
       it 'returns a bad response' do
@@ -178,8 +178,8 @@ RSpec.describe UsersController, :type => :controller do
                 "admin":true
               },
               "relationships": {
-                "employee":{"data":{"type":"employees", "id": employee.id}} 
-              }  
+                "employee":{"data":{"type":"employees", "id": employee.id}}
+              }
           }
         }
 
@@ -232,7 +232,7 @@ RSpec.describe UsersController, :type => :controller do
                 "admin":true
             },
             "relationships": {
-              "employee":{"data":{"type":"employees", "id": 77}} 
+              "employee":{"data":{"type":"employees", "id": 77}}
             }
           }
         }
@@ -298,13 +298,13 @@ RSpec.describe UsersController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: user.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
 
         expect(parsed_response['data']['id'].to_i).to eq(user.id)
-        attr = parsed_response['data']['attributes']     
+        attr = parsed_response['data']['attributes']
         expect(attr["email"]).to eq(user.email)
         expect(attr["password"]).to eq(nil) #we dont return password
         expect(attr["admin"]).to eq(user.admin)
@@ -325,7 +325,7 @@ RSpec.describe UsersController, :type => :controller do
         serialization = ActiveModelSerializers::Adapter.create(serializer)
         #converts to JSON API format
         params = JSON.parse(serialization.to_json)
-       
+
         patch :update, params: {id: user.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)

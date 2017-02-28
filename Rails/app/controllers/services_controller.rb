@@ -3,15 +3,12 @@ class ServicesController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def index
-
-    if params[:filter].present?
-      if  params[:filter][:vehicle_size].present?
+    if params[:filter].present? && params[:filter][:vehicle_size].present?
         if params[:filter][:displayable].present?
           services_array = Service.where('vehicle_size = ? AND displayable = ?', params[:filter][:vehicle_size], params[:filter][:displayable]).all
         else
           services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
         end
-      end
     else
       services_array=Service.all
     end
@@ -35,7 +32,11 @@ class ServicesController < ApplicationController
   def create
     if current_user && current_user.admin?
       begin
-        service=Service.new(service_sanitized_params)
+        sanitized_params = service_sanitized_params
+        if sanitized_params[:vehicle_size].nil?
+          sanitized_params[:vehicle_size] = 'Small'
+        end
+        service=Service.new(sanitized_params)
         if service.save!
           render json: service, status: :created
         else

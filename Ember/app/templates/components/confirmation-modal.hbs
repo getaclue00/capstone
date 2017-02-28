@@ -2,7 +2,7 @@
 {{#if (eq type "service")}}
   <h3>Delete the following {{type}}?</h3>
   <h4 style="text-align: center">{{model.name}}</h4>
-{{else if (eq type "employee")}}
+{{else if (or eq type "client"  eq type "employee")}}
   <h3>Delete the following {{type}}?</h3>
   <h4 style="text-align: center">{{model.fullName}}</h4>
 {{else if (eq type "user")}}

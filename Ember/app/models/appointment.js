@@ -19,6 +19,7 @@ export default Model.extend({
   weekNumber: attr('number'),
   service:    belongsTo('service'),
   employee:   belongsTo('employee'),
+  client:     belongsTo('client'),
   formattedStart: computed('start', {
     get() {
       return moment(this.get('start')).format('YYYY-MM-DDTHH:mm');
