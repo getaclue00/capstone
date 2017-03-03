@@ -39,7 +39,7 @@ test('checking computedTotal', function(assert) {
 
   const modelArray = [Ember.Object.create({ cost: 2 }) ,Ember.Object.create({ cost: 1 })];
 
-  ctrl.set('model', modelArray);
+  ctrl.set('appointments', modelArray);
   assert.equal(ctrl.get('computedTotal'), '$3', 'total is calculated correctly');
 });
 
@@ -47,24 +47,30 @@ test('checking computedEvents', function(assert) {
   assert.expect(1);
   const ctrl = this.subject();
 
+  const serviceStubs_001 = Ember.Object.create({
+    name: 'Service'
+  });
+
   const modelArray = [
     Ember.Object.create({
       id: 1,
       formattedStart: "11/11/2016",
       formattedEnd: "12/12/2016",
       color: "#ff8000",
-      textColor: "#ff8000"
+      textColor: "#ff8000",
+      service: serviceStubs_001
     }),
     Ember.Object.create({
       id: 2,
       formattedStart: "10/10/2016",
       formattedEnd: "11/11/2016",
       color: "#fa6400",
-      textColor: "#fd5300"
+      textColor: "#fd5300",
+      service: serviceStubs_001
     })
   ];
 
-  ctrl.set('model', modelArray);
+  ctrl.set('appointments', modelArray);
 
   const expectedComputedEvents = [{
      "color": "#ff8000",
