@@ -122,44 +122,16 @@
           </div>
           <div id="step-3">
             <div class="row">
-              <div class="col-12 text-center">
-                <h3>Please Fill in the Information</h3>
-                <hr>
+              <div class="col-12">
+                <h6>Please Fill in the Information<hr></h6>
               </div>
             </div>
             <div class="row">
               <div class="col-12">
-                <form>
-                  <div class="form-group row">
-                    <label class="col-3 client-information" for="personal-info-name">Name</label>
-                    <div class="col-9">
-                      <input type="text" class="form-control" id="personal-info-name" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-3 client-information" for="personal-info-email"><span>Email Address</span>
-                    </label>
-                    <div class="col-9">
-                      <input type="email" class="form-control" id="personal-info-email" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-3 client-information" for="personal-info-address">Address</label>
-                    <div class="col-9">
-                      <input type="text" class="form-control" id="personal-info-address" placeholder="Address">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-3 client-information" for="personal-info-phone-number">Phone number</label>
-                    <div class="col-9">
-                      <input type='tel' class="form-control" id="personal-info-phone-number" pattern='\d{3}[\-]\d{3}[\-]\d{4}' placeholder='Format: 000-000-0000'>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="personal-info-comments">Comments</label>
-                    <textarea class="form-control" id="personal-info-comments" rows="3" placeholder="Comments"></textarea>
-                  </div>
-                </form>
+                {{
+                  client-information-form
+                  appointment= appointment
+                }}
               </div>
             </div>
           </div>

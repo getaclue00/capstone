@@ -150,11 +150,18 @@ $breakpoint-alpha: 768px;
   }
 }
 
+// Styling for mobile
 @media (max-width: $breakpoint-alpha){
 
   .service-selection-btn{
     white-space: inherit;
     text-align: left;
+  }
+
+  .client-information-form {
+    label {
+      display: none;
+    }
   }
 
 }
