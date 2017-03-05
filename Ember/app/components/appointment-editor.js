@@ -2,6 +2,26 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  listOfAppointmentStatuses: [
+    "pending",
+    "confirmed",
+    "new time proposed",
+    "completed",
+    "cancelled"
+  ],
+
+  showLocationMap: false,
+
+  showLocationMapDiv: Ember.computed('model.location', function() {
+    let location = this.get('model.location');
+    if (Ember.isEmpty(location)) {
+      this.set('showLocationMap', false);
+      return false;
+    } else {
+      return true;
+    }
+  }),
+
   wasServiceSelected: Ember.computed('model.service', function(){
     let service = this.get('model.service');
 
@@ -22,6 +42,10 @@ export default Ember.Component.extend({
     return this.get('model.employee');
   }),
 
+  aSelectedClient: Ember.computed('model.client', function(){
+    return this.get('model.client');
+  }),
+
   didInsertElement() {
     this._super(...arguments);
     Ember.$('#myModal').modal('show');
@@ -38,6 +62,21 @@ export default Ember.Component.extend({
       if(!Ember.isEmpty(service)){
         this.get('model').set('service', service);
       }
+    },
+
+    selectClient(client) {
+      if(!Ember.isEmpty(client)){
+        this.get('model').set('client', client);
+      }
+    },
+    selectAppointmentStatus(status) {
+      if(!Ember.isEmpty(status)) {
+        this.get('model').set('status', status);
+      }
+    },
+
+    toggleShowLocationMap() {
+      this.toggleProperty('showLocationMap');
     }
   }
 });

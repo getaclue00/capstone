@@ -18,8 +18,12 @@ test('#deleteAppointment transitionsTo my-calendar', function(assert) {
       return RSVP.resolve();
     }
   });
+
+  const modalId = `myModal`;
+
   let ctrl = this.subject({
       appointment: appointmentStub,
+      stringThatIsUsedForModalIdInTemplate: modalId,
       transitionToRoute(route) {
         assert.equal(route, 'my-calendar');
         done();
@@ -29,6 +33,7 @@ test('#deleteAppointment transitionsTo my-calendar', function(assert) {
   ctrl.send('deleteAppointment');
 
   assert.ok(ctrl);
+  assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
 });
 
 test('#deleteAppointment throws an error following a failed delete', function(assert) {
@@ -41,34 +46,48 @@ test('#deleteAppointment throws an error following a failed delete', function(as
       return RSVP.reject();
     }
   });
+
+  const modalId = `myModal`;
+
   let ctrl = this.subject({
-      appointment: appointmentStub
+    stringThatIsUsedForModalIdInTemplate: modalId,
+    appointment: appointmentStub
   });
 
   ctrl.send('deleteAppointment');
   setTimeout(function() {
     assert.ok(ctrl);
     assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Appointment was not successfully deleted', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
     done();
   }, 500);
 });
 
 test('#saveAppointment transitionsTo my-calendar', function(assert) {
+
   var done = assert.async();
+
   const appointmentStub = Ember.Object.create({
     save() {
       return RSVP.resolve();
     }
   });
+
+  const modalId = `myModal`;
+
   let ctrl = this.subject({
-      appointment: appointmentStub,
-      transitionToRoute(route) {
-        assert.equal(route, 'my-calendar');
-        done();
-      }
+    stringThatIsUsedForModalIdInTemplate: modalId,
+    appointment: appointmentStub,
+    transitionToRoute(route) {
+      assert.equal(route, 'my-calendar');
+      done();
+    }
   });
+
   ctrl.send('saveAppointment');
+
   assert.ok(ctrl);
+  assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
 });
 
 test('#saveAppointment throws an error following a failed update', function(assert) {
@@ -81,14 +100,19 @@ test('#saveAppointment throws an error following a failed update', function(asse
       return RSVP.reject();
     }
   });
+
+  const modalId = `myModal`;
+
   let ctrl = this.subject({
-      appointment: appointmentStub
+    stringThatIsUsedForModalIdInTemplate: modalId,
+    appointment: appointmentStub
   });
 
   ctrl.send('saveAppointment');
   setTimeout(function() {
     assert.ok(ctrl);
     assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Appointment was not successfully updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('stringThatIsUsedForModalIdInTemplate'), modalId);
     done();
   }, 500);
 });

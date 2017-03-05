@@ -67,13 +67,6 @@ $breakpoint-alpha: 660px;
 
 @media (max-width: $breakpoint-alpha) {
 
-  text-align: left;
-  font-size: 1em;
-
-  thead {
-    display: none;
-  }
-
   .management-operation {
     display: none;
     padding: 1em 1.25em;
@@ -88,13 +81,19 @@ $breakpoint-alpha: 660px;
     background: #36454f;
   }
 
-  th {
-    display: none;
-  }
-
   .management-column {
     display: none;
     margin: 0px;
+  }
+
+  #has-datatable_wrapper {
+    thead {
+      display: none;
+    }
+
+    th {
+      display: none;
+    }
   }
 
   .management-table-body{

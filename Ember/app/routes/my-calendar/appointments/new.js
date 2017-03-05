@@ -14,7 +14,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         weekNumber: Number(moment(time).format('w'))
       }),
       services: this.get('store').findAll('service'),
-      employees: this.get('store').findAll('employee')
+      employees: this.get('store').findAll('employee'),
+      clients: this.get('store').findAll('client')
     });
   },
 

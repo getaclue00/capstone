@@ -38,14 +38,14 @@
     </div>
     <div class="form-group row">
       <label for="service-active" class="col-5 col-form-label">Active</label>
-      <div class="admin-switch" {{action 'selectActive'}}>
+      <div class="admin-switch" id="active-switch" {{action 'selectActive'}}>
         {{input type="checkbox" id="service-active" class="checkbox" checked=model.active}}
         <div class="slider round"></div>
       </div>
     </div>
     <div class="form-group row">
       <label for="service-displayable" class="col-5 col-form-label">Displayable</label>
-      <div class="admin-switch" {{action 'selectDisplayable'}}>
+      <div class="admin-switch" id="displayable-switch" {{action 'selectDisplayable'}}>
         {{input type="checkbox" id="service-displayable" class="checkbox" checked=model.displayable}}
         <div class="slider round"></div>
       </div>

@@ -2,6 +2,15 @@ $break-small: 320px;
 $break-large: 1024px;
 
 .calendar-view {
+  .fc-row .fc-content-skeleton td {
+    border-color: inherit;
+  }
+
+  .fc-unthemed td.fc-today {
+    background: red;
+    color: white;
+  }
+
   .fc button {
     @media (min-width: $break-small) {
       height: auto;
@@ -59,4 +68,16 @@ $break-large: 1024px;
 .total-cost-this-week {
   text-transform: uppercase;
   text-align: center;
+}
+
+.modal-footer {
+  .btn-group {
+    width: 100%;
+    .btn.btn-primary {
+      width: 50%;
+    }
+    .btn.btn-secondary {
+      width: 50%;
+    }
+  }
 }

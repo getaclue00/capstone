@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 moduleForModel('appointment', 'Unit | Model | appointment', {
   // Specify the other units that are required for this test.
-  needs: ['model:service', 'model:employee']
+  needs: ['model:service', 'model:employee', 'model:client']
 });
 
 test('checking default values for variables', function(assert) {
@@ -59,5 +59,13 @@ test('should belong to a service', function(assert) {
   const relationship = Ember.get(Appointment, 'relationshipsByName').get('service');
 
   assert.deepEqual(relationship.key, 'service', 'has relationship with service');
+  assert.deepEqual(relationship.kind, 'belongsTo', 'kind of relationship is belongsTo');
+});
+
+test('should belong to a client', function(assert) {
+  const Appointment = this.store().modelFor('appointment');
+  const relationship = Ember.get(Appointment, 'relationshipsByName').get('client');
+
+  assert.deepEqual(relationship.key, 'client', 'has relationship with client');
   assert.deepEqual(relationship.kind, 'belongsTo', 'kind of relationship is belongsTo');
 });
