@@ -12,7 +12,6 @@ export default Ember.Controller.extend({
       appointment.save().then(transitionToPost).catch(failure);
 
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
