@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h4 class="text-center client-booking-title">Booking an Appointment</h4>
-  <div class="row">
+  <div class="row client-booking">
     <div class="col-12">
       <div id="smartwizard" class="wizard_horizontal col-12">
         <ul class="wizard_steps col-12">
@@ -52,7 +52,7 @@
                     {{#each smallVehicleServices as |service|}}
                     <tr>
                       <td>
-                        <button class="btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                        <button class="btn btn-outline-info service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
                       </td>
                       <td>
                         <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}}">
@@ -78,7 +78,7 @@
                     {{#each largeVehicleServices as |service|}}
                     <tr>
                       <td>
-                        <button class="btn btn btn-outline-primary service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                        <button class="btn btn btn-outline-info service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
                       </td>
                       <td>
                         <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}} ">
@@ -91,6 +91,9 @@
                   </tbody>
                 </table>
               </div>
+            </div>
+            <div class="buttons">
+              <a href="#step-2"><button class="btn btn-primary btn-md col-4" id="move-to-date-selection" disabled="disabled">Next</button></a>
             </div>
           </div>
           <div id="step-2">
@@ -113,11 +116,17 @@
                       selectedTime= selectedTime
                     }}
                   {{/if}}
-                  <div class="authors"></div>
-                  <div class="calendar-times col-6">
-                  </div>
                 </div>
               </div>
+            </div>
+            <br />
+            <div class="buttons">
+              <a href="#step-1">
+                <button class="btn btn-outline-secondary btn-md col-4">Prev</button>
+              </a>
+              <a href="#step-3">
+                <button class="btn btn-primary btn-md col-4" disabled="disabled" id="move-to-information-input">Next</button>
+              </a>
             </div>
           </div>
           <div id="step-3">
@@ -130,9 +139,17 @@
               <div class="col-12">
                 {{
                   client-information-form
-                  appointment= appointment
+                  client=client
                 }}
               </div>
+            </div>
+            <div class="buttons">
+              <a href="#step-2">
+              <button class="btn btn-outline-secondary btn-md col-4" onclick="">Prev</button>
+              </a>
+              <a href="#step-4">
+                <button class="btn btn-primary btn-md col-4" id="move-to-confirmation" disabled="disabled">Next</button>
+              </a>
             </div>
           </div>
           <div id="step-4">
@@ -158,16 +175,23 @@
                         <hr>
                         <h5><strong>Your Information</strong></h5>
                         <div>
-                          <p>Email</p>
-                          <p>Address</p>
-                          <p>Phone Number</p>
+                          <p>Name: {{client.fullName}}</p>
+                          <p>Email: {{client.email}}</p>
+                          <p>Address: {{client.address}}</p>
+                          <p>Phone Number {{client.phoneNumber}}</p>
                           <strong>Comments:</strong>
                         </div>
                         <br />
                         <div class="text-center">
-                          <button class="btn btn btn-primary btn-large">Confirm</button>
+                          <button class="btn btn btn-danger btn-md">Confirm</button>
                         </div>
                       </div>
+                    </div>
+                    <br />
+                    <div class="buttons">
+                      <a href="#step-3">
+                      <button class="btn btn-outline-secondary btn-md col-4" onclick="">Prev</button>
+                      </a>
                     </div>
                   </div>
                 </div>

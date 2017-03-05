@@ -1,142 +1,149 @@
 $breakpoint-alpha: 768px;
 
-.sw-container{
-  height: auto !important;
-}
-
-#smartwizard .loader, #smartwizard .msgBox {
-    display: none;
-}
-
-.booking-confirm-panel-body {
-  min-height: 170px;
-}
-
-.wizard_horizontal {
-  padding: 0px;
-}
-
-/*! The form wizard styles were taken and modified from the Gentelella template: https://github.com/puikinsh/gentelella */
-.wizard_horizontal ul.wizard_steps {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    list-style: none;
-    position: relative;
-    width: 100%;
-    margin: 0 0 20px;
-    padding: 0;
-}
-.wizard_horizontal ul.wizard_steps li {
-    text-align: center;
-    display: block;
-    flex: 2 1 auto;
-    list-style-type: none;
-}
-.wizard_horizontal ul.wizard_steps li a,
-.wizard_horizontal ul.wizard_steps li:hover {
-    display: block;
-    position: relative;
-    -moz-opacity: 1;
-    filter: alpha(opacity=100);
-    opacity: 1;
-    color: #666;
-    text-decoration: none;
-    margin: 0px;
-}
-.wizard_horizontal ul.wizard_steps li a:before {
-    content: "";
-    position: absolute;
-    height: 4px;
-    background: #ccc;
-    top: 20px;
-    width: 100%;
-    z-index: 4;
-    left: 0;
-}
-.wizard_horizontal ul.wizard_steps li.disabled  a.step_no {
-    background: #ccc;
-}
-.wizard_horizontal ul.wizard_steps li a .step_no {
-    width: 2.5em;
-    height: 2.5em;
-    line-height: 2.5em;
-    border-radius: 100px;
-    display: block;
-    margin: 0 auto 5px;
-    font-size: 0.8em;
-    text-align: center;
-    position: relative;
-    z-index: 5;
-}
-
-.wizard_horizontal ul.wizard_steps li.active a .step_descr {
-    color: #34495E;
-}
-
-.wizard_horizontal ul.wizard_steps li a .step_descr {
-    font-size: 0.75em;
-}
-
-
-.wizard_horizontal ul.wizard_steps li.selected a:before,
-.step_no {
-    background: #34495E;
-    color: #fff;
-}
-.wizard_horizontal ul.wizard_steps li.done a:before,
-.wizard_horizontal ul.wizard_steps li.active a:before,
-.wizard_horizontal ul.wizard_steps li.done a .step_no {
-    background: #34495E;
-    color: #fff;
-}
-
-.wizard_horizontal ul.wizard_steps li.active a .step_no,
-.wizard_horizontal ul.wizard_steps li.active a:before {
-  background: #ff3333;
-}
-
-.wizard_horizontal ul.wizard_steps li.done a:after,
-.wizard_horizontal ul.wizard_steps li a:after  {
-    display: none;
-}
-
-.wizard_horizontal ul.wizard_steps li:first-child a:before {
-    left: 50%;
-}
-.wizard_horizontal ul.wizard_steps li:last-child a:before {
-    right: 50%;
-    width: 50%;
-    left: auto;
-}
-
-.btn-circle {
-  margin: 0.2em;
-}
-
-.time-button {
-  margin: 5px;
-}
-
-
-.popover-button {
-
-  color: #696969;
-
-  :hover {
-    background-color: #d3d3d3;
-    cursor: pointer;
+.client-booking {
+  .sw-container{
+    height: auto !important;
   }
 
-}
+  #smartwizard .loader, #smartwizard .msgBox {
+      display: none;
+  }
 
-.client-booking-title {
-    margin: 15px 0px;
-}
+  .booking-confirm-panel-body {
+    min-height: 170px;
+  }
 
-.appointment-time-label {
-  text-transform: uppercase;
-  padding: 0px 15px;
+  .wizard_horizontal {
+    padding: 0px;
+    box-shadow: none;
+  }
+
+  /*! The form wizard styles were taken and modified from the Gentelella template: https://github.com/puikinsh/gentelella */
+  .wizard_horizontal ul.wizard_steps {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      list-style: none;
+      position: relative;
+      width: 100%;
+      margin: 0 0 20px;
+      padding: 0;
+  }
+  .wizard_horizontal ul.wizard_steps li {
+      text-align: center;
+      display: block;
+      flex: 2 1 auto;
+      list-style-type: none;
+  }
+  .wizard_horizontal ul.wizard_steps li a,
+  .wizard_horizontal ul.wizard_steps li:hover {
+      display: block;
+      position: relative;
+      -moz-opacity: 1;
+      filter: alpha(opacity=100);
+      opacity: 1;
+      color: #666;
+      text-decoration: none;
+      margin: 0px;
+  }
+  .wizard_horizontal ul.wizard_steps li a:before {
+      content: "";
+      position: absolute;
+      height: 4px;
+      background: #ccc;
+      top: 20px;
+      width: 100%;
+      z-index: 4;
+      left: 0;
+  }
+  .wizard_horizontal ul.wizard_steps li.disabled  a.step_no {
+      background: #ccc;
+  }
+  .wizard_horizontal ul.wizard_steps li a .step_no {
+      width: 2.5em;
+      height: 2.5em;
+      line-height: 2.5em;
+      border-radius: 100px;
+      display: block;
+      margin: 0 auto 5px;
+      font-size: 0.8em;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+  }
+
+  .wizard_horizontal ul.wizard_steps li.active a .step_descr {
+      color: #34495E;
+  }
+
+  .wizard_horizontal ul.wizard_steps li a .step_descr {
+      font-size: 0.75em;
+  }
+
+
+  .wizard_horizontal ul.wizard_steps li.selected a:before,
+  .step_no {
+      background: #34495E;
+      color: #fff;
+  }
+  .wizard_horizontal ul.wizard_steps li.done a:before,
+  .wizard_horizontal ul.wizard_steps li.active a:before,
+  .wizard_horizontal ul.wizard_steps li.done a .step_no {
+      background: #34495E;
+      color: #fff;
+  }
+
+  .wizard_horizontal ul.wizard_steps li.active a .step_no,
+  .wizard_horizontal ul.wizard_steps li.active a:before {
+    background: #ff3333;
+  }
+
+  .wizard_horizontal ul.wizard_steps li.done a:after,
+  .wizard_horizontal ul.wizard_steps li a:after  {
+      display: none;
+  }
+
+  .wizard_horizontal ul.wizard_steps li:first-child a:before {
+      left: 50%;
+  }
+  .wizard_horizontal ul.wizard_steps li:last-child a:before {
+      right: 50%;
+      width: 50%;
+      left: auto;
+  }
+
+  .btn-circle {
+    margin: 0.2em;
+  }
+
+  .time-button {
+    margin: 5px;
+  }
+
+
+  .popover-button {
+
+    color: #696969;
+
+    :hover {
+      background-color: #d3d3d3;
+      cursor: pointer;
+    }
+
+  }
+
+  .client-booking-title {
+      margin: 15px 0px;
+  }
+
+  .appointment-time-label {
+    text-transform: uppercase;
+    padding: 0px 15px;
+  }
+
+  .buttons {
+    text-align: right;
+  }
 }
 
 //Styling for computer

@@ -14,6 +14,9 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
         end: time,
         weekNumber: Number(moment(time).format('w'))
       }),
+      client: this.get('store').createRecord('client', {
+
+      }),
       smallVehicleServices: this.get('store').query('service', {
         filter: {
           displayable: true,
@@ -36,7 +39,9 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
 
   renderSmartWizard() {
     Ember.$('#smartwizard').smartWizard({
-      reverseButtonsOrder: true,
+      toolbarSettings: {
+        toolbarPosition: 'none'
+      }
     });
   },
 

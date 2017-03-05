@@ -1,4 +1,5 @@
 <div class="row">
+<p>{{appointment}}</p>
   <div class="col-12">
     <form class="form-horizontal form-label-left input_mask client-information-form">
       <div class="form-group row">
@@ -6,7 +7,7 @@
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-            {{input required="required" class="form-control" value=appointment.firstName id="client-first-name" placeholder="First Name"}}
+            {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name"}}
           </div>
         </div>
       </div>
@@ -14,7 +15,7 @@
         <label for="client-last-name" class="col-3 col-form-label">Last Name</label>
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
-            {{input required="required" class="form-control" value=appointment.lastName id="client-last-name" placeholder="Last Name"}}
+            {{input required="required" class="form-control" value=client.lastName id="client-last-name" placeholder="Last Name"}}
             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
           </div>
         </div>
@@ -24,7 +25,7 @@
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-              {{input required="required" type="text" class="form-control" value=appointment.email id="client-email" placeholder="E-mail"}}
+              {{input required="required" type="text" class="form-control" value=client.email id="client-email" placeholder="E-mail"}}
           </div>
         </div>
       </div>
@@ -33,38 +34,42 @@
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
-            {{input type="tel" class="form-control" value=appointment.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format"}}
+            {{input type="tel" class="form-control" value=client.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format"}}
           </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="client-street-name" class="col-4 col-form-label">Street</label>
+        <label for="client-street" class="col-3 col-form-label">Street</label>
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-road"></span></span>
-            {{input required="required" type="text" class="form-control" value=appointment.street id="client-street-name" placeholder="Street"}}
+            {{input required="required" type="text" class="form-control" value=client.street id="client-street" placeholder="Street"}}
           </div>
         </div>
       </div>
       <div class="form-group row">
         <label for="client-city" class="col-4 col-form-label">City</label>
-        <div class="col-8">
-          {{input required="required" type="text" class="form-control" value=appointment.city id="client-city"}}
+        <div class="col-lg-9 col-md-9">
+          {{input required="required" type="text" class="form-control" value=client.city id="client-city"}}
         </div>
       </div>
       <div class="form-group row">
         <label for="client-province" class="col-4 col-form-label">Province</label>
-        <div class="col-8">
-          {{input required="required" type="text" class="form-control" value=appointment.province id="client-province"}}
+        <div class="col-lg-9 col-md-9">
+          {{input required="required" type="text" class="form-control" value=client.province id="client-province"}}
         </div>
       </div>
       <div class="form-group row">
         <label for="client-postal-code" class="col-4 col-form-label">Postal Code</label>
-        <div class="col-8">
-          {{input required="required" type="text" class="form-control" value=appointment.postalCode id="client-postal-code" placeholder="Please use K1K 1K1 as format"}}
+        <div class="col-lg-9 col-md-9">
+          {{input required="required" type="text" class="form-control" value=client.postalCode id="client-postal-code" placeholder="Postal Code: use A#A #A# as format"}}
         </div>
       </div>
+      <div class="text-center">
+        <button class="btn btn-success" type="submit" {{action 'verifyInformation'}}>Verify</button>
+      </div>
     </form>
+    <br />
   </div>
 </div>
 

@@ -54,7 +54,8 @@ export default Ember.Component.extend({
 
     confirmSelection(time) {
       this.set('selectedTime', time);
-      Ember.$('#appointment-time-selection').modal('hide');
+      this.set('selectTime', false);
+      Ember.$('#move-to-information-input').removeAttr('disabled');
     },
 
     selectEmployee(employee) {
