@@ -7,19 +7,10 @@ moduleForComponent('client-information-form', 'Integration | Component | client 
 
 test('it renders', function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  assert.expect(2);
 
-  this.render(hbs`{{client-information-form}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#client-information-form}}
-      template block text
-    {{/client-information-form}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+   this.render(hbs`{{client-information-form}}`);
+  // Test in correct inputs bar are present
+  assert.deepEqual(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
+  assert.deepEqual(this.$('input[type="text"]').length, 7, 'should be only 1 text area for the notes');
 });

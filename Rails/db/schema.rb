@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170226055523) do
+ActiveRecord::Schema.define(version: 20170305150214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,17 +52,16 @@ ActiveRecord::Schema.define(version: 20170226055523) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "last_name",                null: false
-    t.string   "first_name",               null: false
-    t.string   "email",                    null: false
-    t.string   "phone_number",  limit: 12, null: false
-    t.integer  "street_number",            null: false
-    t.string   "street_name",              null: false
+    t.string   "last_name",               null: false
+    t.string   "first_name",              null: false
+    t.string   "email",                   null: false
+    t.string   "phone_number", limit: 12, null: false
     t.string   "city"
     t.string   "province"
-    t.string   "postal_code",   limit: 7,  null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "postal_code",  limit: 7,  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "street",                  null: false
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
   end
 
@@ -75,7 +74,7 @@ ActiveRecord::Schema.define(version: 20170226055523) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-02-27'
+    t.date     "start_date",               default: '2017-03-05'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"

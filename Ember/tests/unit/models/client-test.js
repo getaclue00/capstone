@@ -14,8 +14,8 @@ test('checking fullName', function(assert) {
 
 test('checking address', function(assert) {
   assert.expect(1);
-  const ctrl = this.subject({streetNumber: '23', streetName: 'Bank Street', city: 'Ottawa' , postalCode: "R3T 5E5"});
-  assert.deepEqual(ctrl.get('address'), '23-Bank Street, Ottawa, undefined, R3T 5E5', 'address properly computed');
+  const ctrl = this.subject({street: '23 Bank Street', city: 'Ottawa' , postalCode: "R3T 5E5"});
+  assert.deepEqual(ctrl.get('address'), '23 Bank Street, Ottawa, undefined, R3T 5E5', 'address properly computed');
 });
 
 test('should own appointments', function(assert) {

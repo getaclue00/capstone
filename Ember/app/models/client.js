@@ -8,8 +8,7 @@ export default DS.Model.extend({
   firstName:    attr('string'),
   email:        attr('string'),
   phoneNumber:  attr('string'),
-  streetNumber: attr('number'),
-  streetName:   attr('string'),
+  street:       attr('string'),
   city:         attr('string'),
   province:     attr('string'),
   postalCode:   attr('string'),
@@ -17,8 +16,8 @@ export default DS.Model.extend({
   fullName: Ember.computed('lastName', 'firstName', function(){
     return `${this.get('firstName')} ${this.get('lastName')}`;
   }),
-  address: Ember.computed('streetNumber', 'streetName', 'city', 'province', 'postalCode', function(){
-    return `${this.get('streetNumber')}-${this.get('streetName')}, ${this.get('city')}, \
+  address: Ember.computed('street', 'city', 'province', 'postalCode', function(){
+    return `${this.get('street')}, ${this.get('city')}, \
 ${this.get('province')}, ${this.get('postalCode')}`;
  })
 });

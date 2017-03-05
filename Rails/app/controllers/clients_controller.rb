@@ -12,7 +12,7 @@ class ClientsController < ApplicationController
 	end
 
 	def show
-		begin 
+		begin
 			client=Client.find params[:id]
 			render json: client, status: :ok
 		rescue ActiveRecord::RecordNotFound => e
@@ -32,7 +32,7 @@ class ClientsController < ApplicationController
 	      render json: { error: 'Client creation failed. No parameters sent.'}, status: :bad_request
 	    rescue ActiveRecord::StatementInvalid => e
 	      render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
-	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
 	      render json: { error: client.errors.messages}, status: :bad_request
 		end
 	end
@@ -49,7 +49,7 @@ class ClientsController < ApplicationController
 	        render json: { error: 'Client update failed. No parameters sent.'}, status: :bad_request
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such client exists' }, status: :not_found
-		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated 
+		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
 	      render json: { error: client.errors.messages}, status: :bad_request
 		end
 	end
@@ -66,14 +66,14 @@ class ClientsController < ApplicationController
 
 
 	#anything beneath the key word private is private
-	private 
+	private
 
 	def client_sanitized_params
-		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that 
+		#take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that
 		#can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
 		# whereas the "safe" version simply returns an empty hash.
-		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street_number, :street_name, :city, :province, :postal_code] )
+		ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :email, :phone_number, :street, :city, :province, :postal_code] )
 	end
 end
 
-  
+
