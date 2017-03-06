@@ -51,16 +51,6 @@ export default Ember.Component.extend({
     Ember.$('.modal').modal('show');
   },
 
-  willDestroyElement() {
-    let model = this.get('model');
-
-    if (model.get('hasDirtyAttributes')) {
-      model.rollbackAttributes();
-    }
-
-    Ember.$('.modal').modal('hide');
-  },
-
   actions: {
     selectEmployee(employee) {
       if(!Ember.isEmpty(employee)){

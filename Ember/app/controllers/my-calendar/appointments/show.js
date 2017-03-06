@@ -4,6 +4,7 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   flashMessages: Ember.inject.service(),
+  stringThatIsUsedForModalIdInTemplate: `myModal`,
 
   actions: {
     deleteAppointment() {
