@@ -159,6 +159,9 @@
                 <div class="row justify-content-between">
                   <div class="col-12">
                     <div class="card booking-confirm-card">
+                    {{#each flashMessages.queue as |flash|}}
+                      {{flash-message flash=flash messageStyle='bootstrap'}}
+                    {{/each}}
                       <div class="card-header">
                         <h4 class="text-center">Your Booking Overview</h4>
                       </div>
@@ -184,7 +187,7 @@
                         </div>
                         <br />
                         <div class="text-center">
-                          <button class="btn btn btn-danger btn-md">Confirm</button>
+                          <button class="btn btn btn-danger btn-md" {{action 'bookAppointment'}}>Confirm</button>
                         </div>
                       </div>
                     </div>

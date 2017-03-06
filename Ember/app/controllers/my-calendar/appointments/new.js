@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
 
       var flashMessages = self.get('flashMessages');
       let appointment = self.get('appointment');
+      console.log(appointment);
 
       appointment.save().then(transitionToPost).catch(failure);
 
