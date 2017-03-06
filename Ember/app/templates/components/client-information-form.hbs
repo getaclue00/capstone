@@ -1,13 +1,15 @@
 <div class="row">
-<p>{{appointment}}</p>
   <div class="col-12">
+  {{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash messageStyle='bootstrap'}}
+{{/each}}
     <form class="form-horizontal form-label-left input_mask client-information-form">
       <div class="form-group row">
         <label for="client-first-name" class="col-3 col-form-label">First Name</label>
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-            {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name"}}
+            {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name" name="First Name"}}
           </div>
         </div>
       </div>
@@ -15,7 +17,7 @@
         <label for="client-last-name" class="col-3 col-form-label">Last Name</label>
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
-            {{input required="required" class="form-control" value=client.lastName id="client-last-name" placeholder="Last Name"}}
+            {{input required="required" class="form-control" value=client.lastName id="client-last-name" placeholder="Last Name" name="Last Name"}}
             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
           </div>
         </div>
@@ -25,7 +27,7 @@
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-              {{input required="required" type="text" class="form-control" value=client.email id="client-email" placeholder="E-mail"}}
+              {{input required="required" type="text" class="form-control" value=client.email id="client-email" placeholder="E-mail" name="E-mail"}}
           </div>
         </div>
       </div>
@@ -34,7 +36,7 @@
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
-            {{input type="tel" class="form-control" value=client.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format"}}
+            {{input type="tel" class="form-control" value=client.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format" name="Phone Number"}}
           </div>
         </div>
       </div>
@@ -43,30 +45,43 @@
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-road"></span></span>
-            {{input required="required" type="text" class="form-control" value=client.street id="client-street" placeholder="Street"}}
+            {{input required="required" type="text" class="form-control" value=client.street id="client-street" placeholder="Street" name="Street Information"}}
           </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="client-city" class="col-4 col-form-label">City</label>
+        <label for="client-city" class="col-3 col-form-label">City</label>
         <div class="col-lg-9 col-md-9">
-          {{input required="required" type="text" class="form-control" value=client.city id="client-city"}}
+          <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+            {{input required="required" type="text" class="form-control" value=client.city id="client-city" placeholder="City" name="City"}}
+          </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="client-province" class="col-4 col-form-label">Province</label>
+        <label for="client-province" class="col-3 col-form-label">Province</label>
         <div class="col-lg-9 col-md-9">
-          {{input required="required" type="text" class="form-control" value=client.province id="client-province"}}
+          <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+            {{input required="required" type="text" class="form-control" value=client.province id="client-province" placeholder="Province" name="Province" list="provinces"}}
+            <datalist id="provinces">
+              <option value="Ontario" />
+              <option value="Quebec" />
+            </datalist>
+          </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="client-postal-code" class="col-4 col-form-label">Postal Code</label>
+        <label for="client-postal-code" class="col-3 col-form-label">Postal Code</label>
         <div class="col-lg-9 col-md-9">
-          {{input required="required" type="text" class="form-control" value=client.postalCode id="client-postal-code" placeholder="Postal Code: use A#A #A# as format"}}
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+            {{input required="required" type="text" class="form-control" value=client.postalCode id="client-postal-code" placeholder="Postal Code: use A#A #A# as format" name="Postal Code"}}
+          </div>
         </div>
       </div>
       <div class="text-center">
-        <button class="btn btn-success" type="submit" {{action 'verifyInformation'}}>Verify</button>
+        <button class="btn btn-success" type="button" {{action 'verifyInformation'}}>Verify</button>
       </div>
     </form>
     <br />

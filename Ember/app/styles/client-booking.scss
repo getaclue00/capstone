@@ -142,8 +142,13 @@ $breakpoint-alpha: 768px;
   }
 
   .buttons {
-    text-align: right;
+    text-align: center;
+
+    .btn-primary {
+      margin-left: 25px;
+    }
   }
+
 }
 
 //Styling for computer
