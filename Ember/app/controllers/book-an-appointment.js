@@ -42,33 +42,38 @@ export default Ember.Controller.extend({
     },
 
     bookAppointment() {
+      var self = this;
+      var flashMessages = self.get('flashMessages');
+      var appointment = self.get('appointment');
+      var service = self.get('appointment.service');
+      var client = self.get('client');
+      var time = self.get('selectedTime');
+      var date = self.get('selectedDate');
+      var duration = self.get('appointment.service.duration');
 
-      var flashMessages = this.get('flashMessages');
-      let appointment = this.get('appointment');
-      let service = this.get('appointment.service');
-      let client = this.get('client');
-      let time = this.get('selectedTime');
-      let date = this.get('selectedDate');
-      let duration = this.get('appointment.service.duration');
+      var startTime = moment(date + " " + time,'MMMM D, YYYY h:mm A' ).format('YYYY-MM-DD HH:mm:ss');
+      var endTime = moment(date + " " + moment(time, 'h:mm A').add(duration, 'minutes').format('h:mm A')).format('YYYY-MM-DD HH:mm:ss');
+      client.save().then(saveAppointment).catch(failure);
 
-      let startTime = moment(date + " " + time,'MMMM D, YYYY h:mm A' ).format('YYYY-MM-DD HH:mm:ss');
-      let endTime = moment(date + " " + moment(time, 'h:mm A').add(duration, 'minutes').format('h:mm A')).format('YYYY-MM-DD HH:mm:ss');
-
-      client.save().catch(failure);
-      this.get('appointment').set('client', client);
-      this.get('appointment').set('status', 'pending');
-      this.get('appointment').set('start', startTime);
-      this.get('appointment').set('end', endTime);
-
-      appointment.save().then(transitionToPost).catch(failure);
 
       function transitionToPost() {
-        flashMessages.danger('Appointment was booked');
+        flashMessages.success('Appointment was booked');
       }
 
       function failure() {
         window.scrollTo(0,0);
         flashMessages.danger('Appointment was not successfully created');
+      }
+
+      function saveAppointment(){
+
+        self.get('appointment').set('client', client);
+        self.get('appointment').set('status', 'pending');
+        self.get('appointment').set('start', startTime);
+        self.get('appointment').set('end', endTime);
+        self.get('appointment').set('weekNumber', moment(date, 'MMMM D, YYYY').week());
+
+        appointment.save().then(transitionToPost).catch(failure);
       }
 
     }
