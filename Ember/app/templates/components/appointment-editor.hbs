@@ -1,4 +1,4 @@
-{{#if (and model listOfServices listOfEmployess)}}
+{{#if (and model listOfServices listOfEmployess onSaveAction onCancelAction onDidInsertElementAction)}}
   <div class="row">
     <div class="col-12" style="padding-right: 0px; padding-left: 0px;">
       {{#if (and wasServiceSelected showLocationMapDiv)}}
@@ -98,6 +98,16 @@
         <div class="form-group">
           <label for="appointment-notes" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
           {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
+        </div>
+        <div class="form-group">
+          <div class="btn-group" role="group" aria-label="Appointment control buttons">
+            <button type="button" class="btn btn-primary" {{action 'onSaveClick'}}>Save</button>
+            <button type="button" class="btn btn-secondary" {{action 'onCancelClick'}}>Cancel</button>
+          </div>
+        </div>
+      {{else}}
+        <div class="form-group">
+          <button type="button" class="btn btn-secondary btn-block" {{action 'onCancelClick'}}>Cancel</button>
         </div>
       {{/if}}
     </div>

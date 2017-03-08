@@ -33,10 +33,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         // this would be a good place to prompt user to see if they want to save the changes
         appointment.rollbackAttributes();
       }
-    },
-
-    goBackToCalendar() {
-      this.transitionTo('my-calendar');
     }
   }
 });

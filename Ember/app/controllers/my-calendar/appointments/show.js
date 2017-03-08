@@ -47,6 +47,25 @@ export default Controller.extend({
       appointment.save()
        .then(transitionToPost)
        .catch(failure);
+    },
+
+    goBackToCalendar() {
+      // check if any attributes have been changed
+      let appointment = this.get('appointment');
+      let modalId = this.get('stringThatIsUsedForModalIdInTemplate');
+
+      if (appointment.get('hasDirtyAttributes')) {
+        // remove any changes since they would be commited via Save button
+        // this would be a good place to prompt user to see if they want to save the changes
+        appointment.rollbackAttributes();
+      }
+      Ember.$(`#${modalId}`).modal('hide');
+      this.transitionToRoute('my-calendar');
+    },
+
+    showModal() {
+      let modalId = this.get('stringThatIsUsedForModalIdInTemplate');
+      Ember.$(`#${modalId}`).modal('show');
     }
   }
 });

@@ -81,3 +81,15 @@ $break-large: 1024px;
     }
   }
 }
+
+.form-group {
+  .btn-group {
+    width: 100%;
+    .btn.btn-primary {
+      width: 50%;
+    }
+    .btn.btn-secondary {
+      width: 50%;
+    }
+  }
+}
