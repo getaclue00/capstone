@@ -225,7 +225,7 @@ RSpec.describe UsersController, :type => :controller do
         employee = FactoryGirl.create :employee
         data = {
           "data": {
-            "type": "cars",
+            "type": "users",
             "attributes": {
                 "email":"test@test.com",
                 "password":"password",
