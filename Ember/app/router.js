@@ -31,7 +31,7 @@ Router.map(function() {
     this.route('delete', { path: "/delete/:employees_id" });
   });
   this.route('login');
-  this.route('appointment-history');
+  this.route('booking-history');
   this.route('users', function() {
     this.route('show', { path: "/:users_id" });
     this.route('new', { path: "/:employees_id" });

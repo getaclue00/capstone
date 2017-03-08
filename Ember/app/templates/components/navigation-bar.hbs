@@ -16,6 +16,7 @@
         </li>
         {{#if session.isAuthenticated}}
           <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
+          <li class="nav-item">{{#link-to 'booking-history' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-book"></span> Booking History{{/link-to}}</li>
           <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
           <li class="nav-item">{{#link-to 'employees' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Staff{{/link-to}}</li>
           <li class="nav-item">{{#link-to 'services' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-tag"></span> Services{{/link-to}}</li>
