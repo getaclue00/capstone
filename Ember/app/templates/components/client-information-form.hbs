@@ -1,16 +1,18 @@
 <div class="row">
   <div class="col-12">
-    {{#each flashMessages.queue as |flash|}}
-      {{flash-message flash=flash messageStyle='bootstrap'}}
-    {{/each}}
     <form class="form-horizontal form-label-left input_mask client-information-form">
       <div class="form-group row">
         <label for="client-first-name" class="col-3 col-form-label">First Name</label>
         <div class="col-lg-9 col-md-9">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-            {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name" name="First Name"}}
+            {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name" name="First Name" focus-out=(action (mut showFirstNameError) true)}}
           </div>
+          {{#if showFirstNameError}}
+          <div class="error">
+            {{v-get client 'firstName' 'message'}}
+          </div>
+          {{/if}}
         </div>
       </div>
       <div class="form-group row">
@@ -80,8 +82,11 @@
           </div>
         </div>
       </div>
-      <div class="text-center">
-        <button class="btn btn-success" type="button" {{action 'verifyInformation'}}>Verify</button>
+     <div class="buttons">
+        <a href="#step-2">
+        <button class="btn btn-outline-secondary btn-md col-4" type="button">Prev</button>
+        </a>
+          <button class="btn btn-primary btn-md col-4" id="move-to-confirmation" type="button" {{action 'verifyInformation'}}>Next</button>
       </div>
     </form>
     <br />

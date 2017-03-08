@@ -1,26 +1,24 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  flashMessages: Ember.inject.service(),
+  client: null,
+  classNames: ['client-information-form'],
   didInsertElement() {
     this._super(...arguments);
   },
 
   actions: {
     verifyInformation(){
-      var flashMessages = this.get('flashMessages');
-      var isValid = true;
-      Ember.$('input').each(function() {
-        if (Ember.$(this).val() === ''){
-            isValid = false;
-            flashMessages.danger("Please Enter Your " + Ember.$(this)[0].name);
-          }
-        });
+      let client = this.get('client');
+      client.validate()
+        .then(({validations}) => {
+          console.log(validations.get('isValid'));
+          if(validations.get('isValid')){
+             window.location.href = "#step-4";
+          } else {
 
-      if(isValid){
-         Ember.$('#move-to-confirmation').removeAttr('disabled');
-         flashMessages.success("Information entered correctly");
-      }
+          }
+      });
     }
   }
 });
