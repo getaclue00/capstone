@@ -1,95 +1,89 @@
-<div class="row">
-  <div class="col-12">
-    <form class="form-horizontal form-label-left input_mask client-information-form">
-      <div class="form-group row">
-        <label for="client-first-name" class="col-3 col-form-label">First Name</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-            {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name" name="First Name" focus-out=(action (mut showFirstNameError) true)}}
-          </div>
-          {{#if showFirstNameError}}
-          <div class="error">
-            {{v-get client 'firstName' 'message'}}
-          </div>
-          {{/if}}
+
+<div class="col-12">
+  <form class="form-horizontal form-label-left input_mask client-information-form">
+    <div class="form-group">
+      <label for="client-first-name" class="col-form-label">First Name</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+        {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name" name="First Name" focus-out=(action (mut showError) true)}}
+      </div>
+      {{#if showError}}
+        <div class="error">
+          {{v-get client 'firstName' 'message'}}
         </div>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      <label for="client-last-name" class="col-form-label">Last Name</label>
+      <div class="input-group">
+        {{input required="required" class="form-control" value=client.lastName id="client-last-name" placeholder="Last Name" name="Last Name" focus-out=(action (mut showError) true)}}
+        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
       </div>
-      <div class="form-group row">
-        <label for="client-last-name" class="col-3 col-form-label">Last Name</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            {{input required="required" class="form-control" value=client.lastName id="client-last-name" placeholder="Last Name" name="Last Name"}}
-            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-          </div>
+      {{#if showError}}
+        <div class="error">
+          {{v-get client 'lastName' 'message'}}
         </div>
+      {{/if}}
+    </div>
+     <div class="form-group">
+      <label for="client-email" class="col-form-label">Email</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+          {{input required="required" type="text" class="form-control" value=client.email id="client-email" placeholder="E-mail" name="E-mail" focus-out=(action (mut showError) true)}}
       </div>
-       <div class="form-group row">
-        <label for="client-email" class="col-3 col-form-label">Email</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-              {{input required="required" type="text" class="form-control" value=client.email id="client-email" placeholder="E-mail" name="E-mail"}}
-          </div>
+      {{#if showError}}
+        <div class="error">
+          {{v-get client 'email' 'message'}}
         </div>
+      {{/if}}
+    </div>
+    <div class="form-group">
+      <label for="client-phone-number" class="col-form-label">Phone Number</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+        {{input type="tel" class="form-control" value=client.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format" name="Phone Number"}}
       </div>
-      <div class="form-group row">
-        <label for="client-phone-number" class="col-3 col-form-label">Phone Number</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
-            {{input type="tel" class="form-control" value=client.phoneNumber id="client-phone-number" required="required" placeholder="Please use 000-000-0000 as format" name="Phone Number"}}
-          </div>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="client-street" class="col-form-label">Street</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-road"></span></span>
+        {{input required="required" type="text" class="form-control" value=client.street id="client-street" placeholder="Street" name="Street Information"}}
       </div>
-      <div class="form-group row">
-        <label for="client-street" class="col-3 col-form-label">Street</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-road"></span></span>
-            {{input required="required" type="text" class="form-control" value=client.street id="client-street" placeholder="Street" name="Street Information"}}
-          </div>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="client-city" class=" col-form-label">City</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+        {{input required="required" type="text" class="form-control" value=client.city id="client-city" placeholder="City" name="City"}}
       </div>
-      <div class="form-group row">
-        <label for="client-city" class="col-3 col-form-label">City</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
-            {{input required="required" type="text" class="form-control" value=client.city id="client-city" placeholder="City" name="City"}}
-          </div>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="client-province" class="col-form-label">Province</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+        {{input required="required" type="text" class="form-control" value=client.province id="client-province" placeholder="Province" name="Province" list="provinces"}}
+        <datalist id="provinces">
+          <option value="Ontario" />
+          <option value="Quebec" />
+        </datalist>
       </div>
-      <div class="form-group row">
-        <label for="client-province" class="col-3 col-form-label">Province</label>
-        <div class="col-lg-9 col-md-9">
-          <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
-            {{input required="required" type="text" class="form-control" value=client.province id="client-province" placeholder="Province" name="Province" list="provinces"}}
-            <datalist id="provinces">
-              <option value="Ontario" />
-              <option value="Quebec" />
-            </datalist>
-          </div>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="client-postal-code" class="col-form-label">Postal Code</label>
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+        {{input required="required" type="text" class="form-control" value=client.postalCode id="client-postal-code" placeholder="Postal Code: use A#A #A# as format" name="Postal Code"}}
       </div>
-      <div class="form-group row">
-        <label for="client-postal-code" class="col-3 col-form-label">Postal Code</label>
-        <div class="col-lg-9 col-md-9">
-        <div class="input-group">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
-            {{input required="required" type="text" class="form-control" value=client.postalCode id="client-postal-code" placeholder="Postal Code: use A#A #A# as format" name="Postal Code"}}
-          </div>
-        </div>
-      </div>
-     <div class="buttons">
-        <a href="#step-2">
-        <button class="btn btn-outline-secondary btn-md col-4" type="button">Prev</button>
-        </a>
-          <button class="btn btn-primary btn-md col-4" id="move-to-confirmation" type="button" {{action 'verifyInformation'}}>Next</button>
-      </div>
-    </form>
-    <br />
-  </div>
+    </div>
+   <div class="buttons">
+      <a href="#step-2">
+      <button class="btn btn-outline-secondary btn-md col-4" type="button">Prev</button>
+      </a>
+      <button class="btn btn-primary btn-md col-4" id="move-to-confirmation" type="button" {{action 'verifyInformation'}}>Next</button>
+    </div>
+  </form>
+  <br />
 </div>
+
 
