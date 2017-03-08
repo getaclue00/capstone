@@ -3,8 +3,12 @@ class ClientsController < ApplicationController
 	#render is implicit for all actions since name of action and view are the same
 
 	def index
-		clients_array=Client.all
-		if clients_array && !clients_array.empty?
+    if params[:filter].present? && params[:filter][:email].present?
+      clients_array = Client.where('email = ?', params[:filter][:email]).all
+    else
+      clients_array=Client.all
+    end
+		if (clients_array && !clients_array.empty?) || params[:filter][:email].present?
       		render json: clients_array, status: :ok
     	else
       		render json: { error: 'No clients exist' }, status: :bad_request
