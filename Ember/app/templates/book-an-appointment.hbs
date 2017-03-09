@@ -1,194 +1,158 @@
-<div>
-  <br />
-  <h4 class="text-center client-booking-title">Booking an Appointment</h4>
-  <div class="client-booking">
-    <div id="smartwizard" class="wizard_horizontal col-12">
-      <ul class="wizard_steps col-12">
-        <li class="col-2.4">
-          <a href="#step-1">
-            <span class="step_no">1</span>
-            <span class="step_descr">Service</span>
-          </a>
-        </li>
-        <li class="col-2.4">
-          <a href="#step-2">
-            <span class="step_no">2</span>
-            <span class="step_descr">Date</span>
-          </a>
-        </li>
-        <li class="col-2.4">
-          <a href="#step-3">
-            <span class="step_no">3</span>
-            <span class="step_descr">Your Info</span>
-          </a>
-        </li>
-        <li class="col-2.4">
-          <a href="#step-4">
-            <span class="step_no">4</span>
-            <span class="step_descr">Confirm</span>
-          </a>
-        </li>
-      </ul>
-      <div>
-        <div id="step-1">
-          <div class="smart-wizard-step">
-            <h6 class="wizard-header">Select a Service</h6>
-            <ul class="nav nav-tabs" role="tablist">
-              <li class="nav-item"><a href="#small-vehicle-list" data-toggle="tab" class="nav-link active">Small Vehicles</a>
-              </li>
-              <li class="nav-item"><a href="#large-vehicle-list" data-toggle="tab" class="nav-link">Large Vehicles</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane fade show active" id="small-vehicle-list">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Service</th>
-                      <th></th>
-                      <th>Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each smallVehicleServices as |service|}}
-                    <tr>
-                      <td>
-                        <button class="btn btn-outline-info service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
-                      </td>
-                      <td>
-                        <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}}">
-                          <span class="glyphicon glyphicon-info-sign" ></span>
-                        </a>
-                      </td>
-                      <td>{{service.price}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
-              <div class="tab-pane fade" id="large-vehicle-list">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Service</th>
-                      <th></th>
-                      <th>Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#each largeVehicleServices as |service|}}
-                    <tr>
-                      <td>
-                        <button class="btn btn btn-outline-info service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
-                      </td>
-                      <td>
-                        <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}} ">
-                          <span class="glyphicon glyphicon-info-sign" ></span>
-                        </a>
-                      </td>
-                      <td>{{service.price}}</td>
-                    </tr>
-                    {{/each}}
-                  </tbody>
-                </table>
-              </div>
+<div class="client-booking">
+<h4 class="text-center client-booking-title">Booking an Appointment</h4>
+  <div id="smartwizard" class="wizard_horizontal col-12">
+    <ul class="wizard_steps col-12">
+      <li class="col-2.4">
+        <a href="#step-1">
+          <span class="step_no">1</span>
+          <span class="step_descr">Service</span>
+        </a>
+      </li>
+      <li class="col-2.4">
+        <a href="#step-2">
+          <span class="step_no">2</span>
+          <span class="step_descr">Date</span>
+        </a>
+      </li>
+      <li class="col-2.4">
+        <a href="#step-3">
+          <span class="step_no">3</span>
+          <span class="step_descr">Your Info</span>
+        </a>
+      </li>
+      <li class="col-2.4">
+        <a href="#step-4">
+          <span class="step_no">4</span>
+          <span class="step_descr">Confirm</span>
+        </a>
+      </li>
+    </ul>
+    <div>
+      <div id="step-1">
+        <div class="smart-wizard-step">
+          <h6 class="wizard-header">Select a Service</h6>
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item"><a href="#small-vehicle-list" data-toggle="tab" class="nav-link active">Small Vehicles</a>
+            </li>
+            <li class="nav-item"><a href="#large-vehicle-list" data-toggle="tab" class="nav-link">Large Vehicles</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="small-vehicle-list">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Service</th>
+                    <th></th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each smallVehicleServices as |service|}}
+                  <tr>
+                    <td>
+                      <button class="btn btn-outline-info service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                    </td>
+                    <td>
+                      <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}}">
+                        <span class="glyphicon glyphicon-info-sign" ></span>
+                      </a>
+                    </td>
+                    <td>{{service.price}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
             </div>
-            <div class="buttons">
-              <a href="#step-2"><button class="btn btn-primary btn-md col-4" id="move-to-date-selection" disabled="disabled">Next</button></a>
+            <div class="tab-pane fade" id="large-vehicle-list">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Service</th>
+                    <th></th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each largeVehicleServices as |service|}}
+                  <tr>
+                    <td>
+                      <button class="btn btn btn-outline-info service-selection-btn" {{action 'selectService' service}}>{{service.name}}</button>
+                    </td>
+                    <td>
+                      <a href="#" class="popover-button" rel="popover" data-container="body" data-toggle="popover" data-placement="left" data-content="{{service.description}} ">
+                        <span class="glyphicon glyphicon-info-sign" ></span>
+                      </a>
+                    </td>
+                    <td>{{service.price}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
             </div>
+          </div>
+          <div class="buttons">
+            <a href="#step-2"><button class="btn btn-next btn-md col-4" id="move-to-date-selection" disabled="disabled">Next</button></a>
           </div>
         </div>
-        <div id="step-2">
-          <div class="smart-wizard-step">
-            <h6 class="wizard-header">Select a Date</h6>
-            <div class="container">
-              <div class="schedule">
-                <div class="calendar-view">
-                  {{full-calendar header=header aspectRatio=1 viewName=viewName fixedWeekCount=false businessHours=businessHours dayClick=(action 'handleCalendarDayClick') }}
-                </div>
-                {{#if selectTime}}
-                  {{appointment-time-selection
-                    selectTime= selectTime
-                    selectedDate= selectedDate
-                    appointment= appointment
-                    listOfEmployees= employees
-                    businessHours= businessHours
-                    selectedTime= selectedTime
-                  }}
-                {{/if}}
+      </div>
+      <div id="step-2">
+        <div class="smart-wizard-step">
+          <h6 class="wizard-header">Select a Date</h6>
+          <div class="container">
+            <div class="schedule">
+              <div class="calendar-view">
+                {{full-calendar header=header aspectRatio=1 viewName=viewName fixedWeekCount=false businessHours=businessHours dayClick=(action 'handleCalendarDayClick') }}
               </div>
+              {{#if selectTime}}
+                {{appointment-time-selection
+                  selectTime= selectTime
+                  selectedDate= selectedDate
+                  appointment= appointment
+                  listOfEmployees= employees
+                  businessHours= businessHours
+                  selectedTime= selectedTime
+                }}
+              {{/if}}
             </div>
           </div>
-          <br />
           <div class="buttons">
             <a href="#step-1">
-              <button class="btn btn-outline-secondary btn-md col-4">Prev</button>
+              <button class="btn btn-prev btn-md col-4">Prev</button>
             </a>
             <a href="#step-3">
-              <button class="btn btn-primary btn-md col-4" disabled="disabled" id="move-to-information-input">Next</button>
+              <button class="btn btn-next btn-md col-4" disabled="disabled" id="move-to-information-input">Next</button>
             </a>
           </div>
         </div>
-        <div id="step-3">
-          <div class="smart-wizard-step">
-            <h6 class="wizard-header">Please Fill in the Information</h6>
-            <div class="col-12">
-              {{
-                client-information-form
-                client=client
-                appointment=appointment
-              }}
-            </div>
+      </div>
+      <div id="step-3">
+        <div class="smart-wizard-step">
+          <h6 class="wizard-header">Please Fill in the Information</h6>
+          <div class="col-12">
+            {{
+              client-information-form
+              client=client
+              appointment=appointment
+            }}
           </div>
         </div>
-        <div id="step-4">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="row justify-content-between">
-                <div class="col-12">
-                  <div class="card booking-confirm-card">
-                  {{#each flashMessages.queue as |flash|}}
-                    {{flash-message flash=flash messageStyle='bootstrap'}}
-                  {{/each}}
-                    <div class="card-header">
-                      <h4 class="text-center">Your Booking Overview</h4>
-                    </div>
-                    <div class="card-block">
-                      <h5><strong>Service Information</strong></h5> {{appointment.service.name}}
-                      <br />
-                      <div>
-                        <p>Duration: {{appointment.service.duration}} minutes</p>
-                        <p>Price: ${{appointment.service.price}}</p>
-                        <p>Employee: {{appointment.employee.fullName}}</p>
-                      </div>
-                      <hr>
-                      <h5><strong>Date and Time</strong></h5>
-                      <p>{{selectedDate}} {{selectedTime}}</p>
-                      <hr>
-                      <h5><strong>Your Information</strong></h5>
-                      <div>
-                        <p>Name: {{client.fullName}}</p>
-                        <p>Email: {{client.email}}</p>
-                        <p>Address: {{client.address}}</p>
-                        <p>Phone Number {{client.phoneNumber}}</p>
-                        <strong>Comments:</strong>
-                        <p>{{appointment.notes}}</p>
-                      </div>
-                      <br />
-                      <div class="text-center">
-                        <button class="btn btn btn-danger btn-md" {{action 'bookAppointment'}}>Confirm</button>
-                      </div>
-                    </div>
-                  </div>
-                  <br />
-                  <div class="buttons">
-                    <a href="#step-3">
-                    <button class="btn btn-outline-secondary btn-md col-4">Prev</button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div id="step-4">
+        <div class="smart-wizard-step">
+          {{
+            client-booking-overview
+            appointment=appointment
+            client=client
+            flashMessages=flashMessages
+            selectedDate=selectedDate
+            selectedTime=selectedTime
+          }}
+           <div class="buttons">
+            <a href="#step-3">
+              <button class="btn btn-prev btn-md col-5">Prev</button>
+            </a>
+            <button class="btn btn btn-danger btn-md col-5" {{action 'bookAppointment'}}>Confirm</button>
           </div>
         </div>
       </div>

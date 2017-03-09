@@ -79,8 +79,7 @@ export default DS.Model.extend(Validations,{
     return `${this.get('firstName')} ${this.get('lastName')}`;
   }),
   address: Ember.computed('street', 'city', 'province', 'postalCode', function(){
-    return `${this.get('street')}, ${this.get('city')}, \
-    ${this.get('province')}, ${this.get('postalCode')}`;
+    return `${this.get('street')}, ${this.get('city')}, ${this.get('province')}, ${this.get('postalCode')}`;
   })
 });
 

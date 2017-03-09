@@ -2,31 +2,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
-// moduleForComponent('client-editor', 'Integration | Component | client editor', {
-//   integration: true
-// });
-
-// test('it renders', function(assert) {
-
-//   // Set any properties with this.set('myProperty', 'value');
-//   // Handle any actions with this.on('myAction', function(val) { ... });
-
-//   this.render(hbs`{{client-editor}}`);
-
-//   assert.equal(this.$().text().trim(), '');
-
-//   // Template block usage:
-//   this.render(hbs`
-//     {{#client-editor}}
-//       template block text
-//     {{/client-editor}}
-//   `);
-
-//   assert.equal(this.$().text().trim(), 'template block text');
-// });
-
-
-const EmployeeStub = Ember.Object.extend({
+const ClientStub = Ember.Object.extend({
   getFirstName() {
     return this.get('firstName');
   },
@@ -61,7 +37,7 @@ const EmployeeStub = Ember.Object.extend({
 
 });
 
-let employee = EmployeeStub.create({
+let client = ClientStub.create({
   firstName: 'Bruce',
   lastName: 'Wayne',
   email: 'testing@test.com',
@@ -79,7 +55,7 @@ moduleForComponent('client-editor', 'Integration | Component | client editor', {
 test('it renders a view with a model', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
-  this.set('model', employee);
+  this.set('model', client);
 
   assert.expect(10);
 

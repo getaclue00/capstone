@@ -1,0 +1,27 @@
+
+  {{#each flashMessages.queue as |flash|}}
+    {{flash-message flash=flash messageStyle='bootstrap'}}
+  {{/each}}
+  <h4 class="overview-header text-center">Your Booking Overview</h4>
+  <div class="card-block">
+    <h5><strong>Service Information</strong></h5> {{appointment.service.name}}
+    <div>
+      <p>Duration: {{appointment.service.duration}} minutes</p>
+      <p>Price: ${{appointment.service.price}}</p>
+      <p>Employee: {{appointment.employee.fullName}}</p>
+    </div>
+    <hr>
+    <h5><strong>Date and Time</strong></h5>
+    <p>{{selectedDate}} {{selectedTime}}</p>
+    <hr>
+    <h5><strong>Your Information</strong></h5>
+    <div>
+      <p>Name: {{client.fullName}}</p>
+      <p>Email: {{client.email}}</p>
+      <p>Address: {{client.address}}</p>
+      <p>Phone Number: {{client.phoneNumber}}</p>
+      <strong>Comments:</strong>
+      <p>{{appointment.notes}}</p>
+    </div>
+  </div>
+

@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 moduleForModel('client', 'Unit | Model | client', {
   // Specify the other units that are required for this test.
-  needs: ['model:appointment']
+  needs: ['model:appointment', 'validator:presence', 'validator:format']
 });
 
 test('checking fullName', function(assert) {

@@ -2,6 +2,53 @@ $breakpoint-alpha: 768px;
 
 .client-booking {
 
+  .client-booking-title {
+    background: linear-gradient(to bottom, #d30b07 0%, #7a2828 80%);
+    background: -webkit-linear-gradient(top, #d30b07 0%, #7a2828 80%);
+    background: -o-linear-gradient(top, #d30b07 0%, #ff3333 80%);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff3333), to(#7a2828));
+    font-family: 'EB Garamond', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    color: #fff;
+    font-style:normal;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+    padding: 15px 0px;
+
+    &::before, &::after {
+      content: "§";
+      display: inline-block;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      opacity: 0.4;
+      margin: 0 0.6em;
+      font-size: 0.5em;
+    }
+  }
+
+  .nav .nav-item .active {
+    background-color: #d30b07;
+    color: #f9f9f9;
+    border-top: 0.1em solid #34495E;
+    border-left: 0.1em solid #34495E;
+    border-right: 0.1em solid #34495E;
+  }
+
+  .nav .nav-item a {
+    color: #34495E;
+    border-top: 0.1em solid black;
+    border-left: 0.1em solid black;
+    border-right: 0.1em solid black;
+  }
+
+  .nav .nav-item a:hover {
+    border: 0.1em solid red;
+  }
+
   .sw-container{
     height: auto !important;
   }
@@ -117,10 +164,6 @@ $breakpoint-alpha: 768px;
       left: auto;
   }
 
-  .btn-circle {
-    margin: 0.2em;
-  }
-
   .time-button {
     margin: 5px;
   }
@@ -137,20 +180,26 @@ $breakpoint-alpha: 768px;
 
   }
 
-  .client-booking-title {
-      margin: 15px 0px;
-  }
-
   .appointment-time-label {
     text-transform: uppercase;
     padding: 0px 15px;
   }
 
   .buttons {
+    padding-bottom: 1em;
     text-align: center;
+    margin-top: 1em;
 
-    .btn-primary {
-      margin-left: 25px;
+    .btn-prev {
+      margin-right: 2em;
+      background-color: #3C6478;
+      color: #fffaef;
+    }
+
+    .btn-next {
+      margin-left: 2em;
+      background-color: #AD2A1A;
+      color: #fffaef;
     }
 
     a {
@@ -161,6 +210,7 @@ $breakpoint-alpha: 768px;
   .error {
     text-align: center;
     color: #cc0000;
+    font-size: 0.8em;
   }
 
   .fc-view-container {
@@ -190,6 +240,18 @@ $breakpoint-alpha: 768px;
       border-bottom:1px solid #34495E;
     }
 
+    .overview-header {
+      padding: 20px 40px;
+      display: block;
+      color: #FFF;
+      background: #34495E;
+      text-shadow: 1px 1px 1px #949494;
+      border-radius: 5px 5px 0px 0px;
+      -webkit-border-radius: 5px 5px 0px 0px;
+      -moz-border-radius: 5px 5px 0px 0px;
+      border-bottom:1px solid #34495E;
+    }
+
     input, textarea {
       color: #555;
       width: 100%;
@@ -206,7 +268,6 @@ $breakpoint-alpha: 768px;
       height:100px;
       padding-top: 10px;
     }
-
   }
 }
 

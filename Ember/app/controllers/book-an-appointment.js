@@ -68,6 +68,7 @@ export default Ember.Controller.extend({
       });
 
       function transitionToPost() {
+        window.scrollTo(0,0);
         flashMessages.success('Appointment was booked');
       }
 
@@ -79,6 +80,8 @@ export default Ember.Controller.extend({
       function saveAppointment(){
 
         self.get('appointment').set('client', client);
+        self.get('appointment').set('cost', service.get('price'));
+        self.get('appointment').set('location', client.get('address'));
         self.get('appointment').set('start', startTime);
         self.get('appointment').set('end', endTime);
         self.get('appointment').set('weekNumber', moment(date, 'MMMM D, YYYY').week());
