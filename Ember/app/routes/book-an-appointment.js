@@ -39,6 +39,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
 
   renderSmartWizard() {
     Ember.$('#smartwizard').smartWizard({
+      keyNavigation: false,
       toolbarSettings: {
         toolbarPosition: 'none'
       }

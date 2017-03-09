@@ -5,6 +5,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const { attr, hasMany } = DS;
 const Validations = buildValidations({
   email: {
+    description: 'E-mail',
     validators: [
       validator('presence', true),
       validator('format', {
@@ -13,26 +14,53 @@ const Validations = buildValidations({
     ]
   },
   firstName: {
+    description: 'First name',
     validators: [
       validator('presence', true),
     ]
   },
   lastName: {
+    description: 'Last name',
     validators: [
       validator('presence', true),
     ]
   },
   phoneNumber: {
+    description: 'Phone number',
     validators: [
       validator('presence', true),
-      // validator('format', {
-      //   regex: '((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}'
-      // })
+      validator('format', {
+        regex: /^[1-9]\d{2}-\d{3}-\d{4}/,
+        message: 'Use ###-###-#### format'
+      })
     ]
   },
   street: {
+    description: 'Street',
     validators: [
       validator('presence', true),
+    ]
+  },
+  city: {
+    description: 'City',
+    validators: [
+      validator('presence', true),
+    ]
+  },
+  province: {
+    description: 'Province',
+    validators: [
+      validator('presence', true),
+    ]
+  },
+  postalCode: {
+    description: 'Postal code',
+    validators: [
+      validator('presence', true),
+      validator('format', {
+        regex: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/,
+        message: 'Use A#A #A#A format'
+      })
     ]
   },
 });

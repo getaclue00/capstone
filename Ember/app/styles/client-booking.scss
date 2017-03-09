@@ -1,6 +1,7 @@
 $breakpoint-alpha: 768px;
 
 .client-booking {
+
   .sw-container{
     height: auto !important;
   }
@@ -18,6 +19,11 @@ $breakpoint-alpha: 768px;
     box-shadow: none;
   }
 
+  .sw-theme-default .step-content {
+      padding: 5px;
+    }
+
+
   /*! The form wizard styles were taken and modified from the Gentelella template: https://github.com/puikinsh/gentelella */
   .wizard_horizontal ul.wizard_steps {
       display: flex;
@@ -26,7 +32,6 @@ $breakpoint-alpha: 768px;
       list-style: none;
       position: relative;
       width: 100%;
-      margin: 0 0 20px;
       padding: 0;
   }
   .wizard_horizontal ul.wizard_steps li {
@@ -153,6 +158,56 @@ $breakpoint-alpha: 768px;
     }
   }
 
+  .error {
+    text-align: center;
+    color: #cc0000;
+  }
+
+  .fc-view-container {
+    background-color: #fff;
+  }
+
+
+  .smart-wizard-step {
+
+    margin-left:auto;
+    margin-right:auto;
+    background: #F8F8F8;
+    color: #666;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+
+    .wizard-header {
+      padding: 20px 0px 20px 40px;
+      display: block;
+      color: #FFF;
+      background: #34495E;
+      text-shadow: 1px 1px 1px #949494;
+      border-radius: 5px 5px 0px 0px;
+      -webkit-border-radius: 5px 5px 0px 0px;
+      -moz-border-radius: 5px 5px 0px 0px;
+      border-bottom:1px solid #34495E;
+    }
+
+    input, textarea {
+      color: #555;
+      width: 100%;
+      padding: 0px 0px 0px 10px;
+      border: 1px solid #E5E5E5;
+      background: #FBFBFB;
+      outline: 0;
+      -webkit-box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+      box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+      font: normal 14px/14px Arial, Helvetica, sans-serif;
+    }
+
+    textarea{
+      height:100px;
+      padding-top: 10px;
+    }
+
+  }
 }
 
 //Styling for computer
@@ -181,3 +236,4 @@ $breakpoint-alpha: 768px;
   }
 
 }
+

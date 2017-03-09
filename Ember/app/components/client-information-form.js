@@ -15,7 +15,14 @@ export default Ember.Component.extend({
           if(validations.get('isValid')){
              window.location.href = "#step-4";
           } else {
-             this.set('showError', true);
+             this.set('showFirstNameError', true);
+             this.set('showLastNameError', true);
+             this.set('showEmailError', true);
+             this.set('showPhoneError', true);
+             this.set('showStreetError', true);
+             this.set('showCityError', true);
+             this.set('showProvinceError', true);
+             this.set('showPostalCodeError', true);
           }
       });
     }
