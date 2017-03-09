@@ -7,7 +7,7 @@ class Appointment < ApplicationRecord
   belongs_to :client
 
   def is_valid?
-    self.service != nil && self.employee != nil && self.service.id != 0 && self.employee.id != 0
+    self.employee != nil && self.service.id != 0
   end
 
 end
