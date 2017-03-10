@@ -1,5 +1,5 @@
-class Employee < ActiveRecord::Base
-    before_destroy :get_associated_objects 
+class Employee < ApplicationRecord
+    before_destroy :get_associated_objects
 
     validates :phone_number, format: { with: /\d{3}-\d{3}-\d{4}/,
     message: "Please enter a valid phone number 000-000-0000" }, :allow_blank => true
@@ -12,7 +12,7 @@ class Employee < ActiveRecord::Base
     has_one :user, dependent: :destroy
 
     def get_associated_objects
-        apts_array = Employee.find(self[:id]).appointment_ids 
+        apts_array = Employee.find(self[:id]).appointment_ids
         for i in 0.. apts_array.size-1
             Appointment.update(apts_array[i], :employee_id => '0')
         end
