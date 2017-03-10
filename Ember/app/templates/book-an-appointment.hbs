@@ -99,23 +99,18 @@
       <div id="step-2">
         <div class="smart-wizard-step">
           <h6 class="wizard-header">Select a Date</h6>
-          <div class="container">
-            <div class="schedule">
-              <div class="calendar-view">
-                {{full-calendar header=header aspectRatio=1 viewName=viewName fixedWeekCount=false businessHours=businessHours dayClick=(action 'handleCalendarDayClick') }}
-              </div>
-              {{#if selectTime}}
-                {{appointment-time-selection
-                  selectTime= selectTime
-                  selectedDate= selectedDate
-                  appointment= appointment
-                  listOfEmployees= employees
-                  businessHours= businessHours
-                  selectedTime= selectedTime
-                }}
-              {{/if}}
-            </div>
-          </div>
+            {{bootstrap-datepicker-inline value=expiresAt todayHighlight=true daysOfWeekDisabled="0,6" changeDate="changeDateAction"}}
+            {{#if selectTime}}
+              {{appointment-time-selection
+                selectTime= selectTime
+                selectEmployee= selectEmployee
+                selectedDate= selectedDate
+                appointment= appointment
+                listOfEmployees= employees
+                businessHours= businessHours
+                selectedTime= selectedTime
+              }}
+            {{/if}}
           <div class="buttons">
             <a href="#step-1">
               <button class="btn btn-prev btn-md col-4">Prev</button>

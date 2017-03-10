@@ -4,6 +4,7 @@ import moment from 'moment';
 export default Ember.Controller.extend({
   flashMessages: Ember.inject.service(),
   selectTime: false,
+  selectEmployee: false,
   selectedDate: null,
   selectedTime: null,
   previousDescription: null,
@@ -33,11 +34,11 @@ export default Ember.Controller.extend({
       }
     },
 
-    handleCalendarDayClick(date) {
-      if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
-        if(this.get('businessHours.dow').indexOf(parseInt(date.format('e'), 10)) > -1){
-          this.set('selectedDate', moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY'));
-          this.set('selectTime', true);        }
+    changeDateAction(date) {
+      console.log(date);
+      if (moment().format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD') || moment(date).isAfter(moment())) {
+        this.set('selectedDate', moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY'));
+        this.set('selectTime', true);
       }
     },
 
