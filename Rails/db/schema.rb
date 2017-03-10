@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170226055523) do
+ActiveRecord::Schema.define(version: 20170310170103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,18 +39,6 @@ ActiveRecord::Schema.define(version: 20170226055523) do
     t.index ["week_number"], name: "index_appointments_on_week_number", using: :btree
   end
 
-  create_table "cars", force: :cascade do |t|
-    t.string   "make",       null: false
-    t.string   "model",      null: false
-    t.string   "size",       null: false
-    t.string   "interior",   null: false
-    t.string   "colour",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "client_id"
-    t.index ["client_id"], name: "index_cars_on_client_id", using: :btree
-  end
-
   create_table "clients", force: :cascade do |t|
     t.string   "last_name",                null: false
     t.string   "first_name",               null: false
@@ -75,7 +63,7 @@ ActiveRecord::Schema.define(version: 20170226055523) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-02-27'
+    t.date     "start_date",               default: '2017-03-06'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
@@ -118,9 +106,18 @@ ActiveRecord::Schema.define(version: 20170226055523) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+  end
+
   add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
-  add_foreign_key "cars", "clients"
   add_foreign_key "users", "employees"
 end
