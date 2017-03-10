@@ -14,7 +14,6 @@ export default Ember.Controller.extend({
       appointment.save().then(transitionToPost).catch(failure);
 
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
@@ -26,8 +25,6 @@ export default Ember.Controller.extend({
     },
 
     goBackToCalendar() {
-      let modalId = this.get('stringThatIsUsedForModalIdInTemplate');
-      Ember.$(`#${modalId}`).modal('hide');
       this.transitionToRoute('my-calendar');
     },
 

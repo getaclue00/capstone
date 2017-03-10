@@ -13,8 +13,6 @@ export default Controller.extend({
       let appointment = self.get('appointment');
 
       function transitionToPost() {
-        let modalId = self.get('stringThatIsUsedForModalIdInTemplate');
-        Ember.$(`#${modalId}`).modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
@@ -34,8 +32,6 @@ export default Controller.extend({
       var flashMessages = self.get('flashMessages');
 
       function transitionToPost() {
-        let modalId = self.get('stringThatIsUsedForModalIdInTemplate');
-        Ember.$(`#${modalId}`).modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
@@ -52,14 +48,13 @@ export default Controller.extend({
     goBackToCalendar() {
       // check if any attributes have been changed
       let appointment = this.get('appointment');
-      let modalId = this.get('stringThatIsUsedForModalIdInTemplate');
 
       if (appointment.get('hasDirtyAttributes')) {
         // remove any changes since they would be commited via Save button
         // this would be a good place to prompt user to see if they want to save the changes
         appointment.rollbackAttributes();
       }
-      Ember.$(`#${modalId}`).modal('hide');
+
       this.transitionToRoute('my-calendar');
     },
 

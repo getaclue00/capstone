@@ -15,5 +15,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   setupController(controller, models) {
     controller.setProperties(models);
+  },
+
+  actions: {
+    willTransition() {
+      let appointment = this.get('controller.appointment');
+      let modalId = this.get('controller.stringThatIsUsedForModalIdInTemplate');
+
+      if (appointment.get('hasDirtyAttributes')) {
+        appointment.rollbackAttributes();
+      }
+
+      Ember.$(`#${modalId}`).modal('hide');
+    }
   }
 });
