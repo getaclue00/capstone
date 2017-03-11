@@ -1,7 +1,6 @@
 @import 'bootstrap';
 
 @import "administrator-styles/admin-editors";
-@import "administrator-styles/appointment-history";
 @import "administrator-styles/manage-clients";
 @import "administrator-styles/management-table";
 @import "administrator-styles/settings";
@@ -51,13 +50,6 @@ body {
   cursor: pointer;
   cursor: hand;
   opacity: 0.75;
-}
-
-.admin-container{
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 2%;
-  padding-right: 2%;
 }
 
 @import "ember-power-select";
