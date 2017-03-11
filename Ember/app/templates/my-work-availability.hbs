@@ -19,14 +19,21 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="monday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Monday:</label>
-              <div class="admin-switch" {{action 'toggleDay' 'showMonday'}}>
-                {{input type="checkbox" id="monday" class="checkbox" checked=model.showMonday}}
+              <div class="admin-switch col-3" {{action 'toggleMonday' model}}>
+                {{input type="checkbox" id="monday" class="checkbox" checked=model.workMonday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center" style="color: #3c763d; transition: .4s">
+                {{#if model.workMonday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showMonday}}
+        {{#if model.workMonday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.mondayOpen id="monday-start" class="form-control"}}
@@ -40,14 +47,21 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="tuesday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Tuesday:</label>
-              <div class="admin-switch">
-                {{input type="checkbox" id="tuesday" class="checkbox" checked=model.showTuesday}}
+              <div class="admin-switch col-3" {{action 'toggleTuesday' model}}>
+                {{input type="checkbox" id="tuesday" class="checkbox" checked=model.workTuesday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center" style="color: #3c763d; transition: .4s">
+                {{#if model.workTuesday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showTuesday}}
+        {{#if model.workTuesday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.tuesdayOpen id="tuesday-start" class="form-control"}}
@@ -61,14 +75,14 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="wednesday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Wednesday:</label>
-              <div class="admin-switch">
-                {{input type="checkbox" id="wednesday" class="checkbox" checked=model.showWednesday}}
+              <div class="admin-switch" {{action 'toggleWednesday' model}}>
+                {{input type="checkbox" id="wednesday" class="checkbox" checked=model.workWednesday}}
                 <div class="slider round"></div>
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showWednesday}}
+        {{#if model.workWednesday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.wednesdayOpen id="wednesday-start" class="form-control"}}
@@ -82,14 +96,14 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="thursday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Thursday:</label>
-              <div class="admin-switch">
-                {{input type="checkbox" id="thursday" class="checkbox" checked=model.showThursday}}
+              <div class="admin-switch" {{action 'toggleThursday' model}}>
+                {{input type="checkbox" id="thursday" class="checkbox" checked=model.workThursday}}
                 <div class="slider round"></div>
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showThursday}}
+        {{#if model.workThursday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.thursdayOpen id="thursday-start" class="form-control"}}
@@ -103,14 +117,14 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="friday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Friday:</label>
-              <div class="admin-switch">
-                {{input type="checkbox" id="friday" class="checkbox" checked=model.showFriday}}
+              <div class="admin-switch" {{action 'toggleFriday' model}}>
+                {{input type="checkbox" id="friday" class="checkbox" checked=model.workFriday}}
                 <div class="slider round"></div>
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showFriday}}
+        {{#if model.workFriday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.fridayOpen id="friday-start" class="form-control"}}
@@ -124,14 +138,14 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="saturday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Saturday:</label>
-              <div class="admin-switch">
-                {{input type="checkbox" id="saturday" class="checkbox" checked=model.showSaturday}}
+              <div class="admin-switch" {{action 'toggleSaturday' model}}>
+                {{input type="checkbox" id="saturday" class="checkbox" checked=model.workSaturday}}
                 <div class="slider round"></div>
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showSaturday}}
+        {{#if model.workSaturday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.saturdayOpen id="saturday-start" class="form-control"}}
@@ -145,14 +159,14 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="sunday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Sunday:</label>
-              <div class="admin-switch">
-                {{input type="checkbox" id="sunday" class="checkbox" checked=model.showSunday}}
+              <div class="admin-switch" {{action 'toggleSunday' model}}>
+                {{input type="checkbox" id="sunday" class="checkbox" checked=model.workSunday}}
                 <div class="slider round"></div>
               </div>
             </div>
           </div>
         </div>
-        {{#if model.showSunday}}
+        {{#if model.workSunday}}
           <div class="row">
             <div class="col-6">
               {{input type="time" value=model.sundayOpen id="sunday-start" class="form-control"}}
