@@ -1,4 +1,5 @@
 class Appointment < ApplicationRecord
+  has_paper_trail :on => [:update, :destroy]#needed to track versions, create events are useless
 
 	validates :status, inclusion: { in: %w(pending confirmed new\ time\ proposed completed cancelled),
     message: "Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled" }

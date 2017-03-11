@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user_from_token!
+  before_action :set_paper_trail_whodunnit #monitor who created/modified/deleted appointment in versions table
 
   def index
     # TODO:
@@ -101,6 +102,10 @@ class AppointmentsController < ApplicationController
     #can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
     # whereas the "safe" version simply returns an empty hash.
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :client, :service, :employee, :week_number, :cost, :location] )
+  end
+
+   def user_for_paper_trail
+       current_user.email
   end
 
 end
