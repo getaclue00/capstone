@@ -95,6 +95,7 @@ class AppointmentsController < ApplicationController
     end
   end
 
+
   private
 
   def appointment_sanitized_params
@@ -105,7 +106,7 @@ class AppointmentsController < ApplicationController
   end
 
    def user_for_paper_trail
-       current_user.email
+      current_user
   end
 
 end
