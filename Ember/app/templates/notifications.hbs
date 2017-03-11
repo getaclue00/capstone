@@ -1,1 +1,65 @@
-{{outlet}}
+<div class="card text-center" style="border-bottom-width: 0px;">
+  <div class="card-header" style="font-size: 2em;">
+    <div class="row">
+      <div class="col-2">
+        {{#link-to 'my-account'}}
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        {{/link-to}}
+      </div>
+      <div class="col-10">
+        <span class="glyphicon glyphicon-envelope"></span>
+        Notifications
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <h4 class="card-title">Appointments</h4>
+    <p class="card-text">
+      <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+        <label for="on-appointment-create" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">on create:</label>
+        <div class="admin-switch">
+          {{input type="checkbox" id="on-appointment-create" class="checkbox"}}
+          <div class="slider round"></div>
+        </div>
+      </div>
+      <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+        <label for="on-appointment-update" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">on update:</label>
+        <div class="admin-switch">
+          {{input type="checkbox" id="on-appointment-update" class="checkbox"}}
+          <div class="slider round"></div>
+        </div>
+      </div>
+      <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+        <label for="on-appointment-delete" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">on delete:</label>
+        <div class="admin-switch">
+          {{input type="checkbox" id="on-appointment-delete" class="checkbox"}}
+          <div class="slider round"></div>
+        </div>
+      </div>
+    </p>
+    <h4 class="card-title">Clients</h4>
+    <p class="card-text">
+      <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+        <label for="on-clients-create" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">on create:</label>
+        <div class="admin-switch">
+          {{input type="checkbox" id="on-clients-create" class="checkbox"}}
+          <div class="slider round"></div>
+        </div>
+      </div>
+      <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+        <label for="on-clients-update" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">on update:</label>
+        <div class="admin-switch">
+          {{input type="checkbox" id="on-clients-update" class="checkbox"}}
+          <div class="slider round"></div>
+        </div>
+      </div>
+      <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
+        <label for="on-clients-delete" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">on delete:</label>
+        <div class="admin-switch">
+          {{input type="checkbox" id="on-clients-delete" class="checkbox"}}
+          <div class="slider round"></div>
+        </div>
+      </div>
+    </p>
+  </div>
+</div>
