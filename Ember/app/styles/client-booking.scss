@@ -3,43 +3,25 @@ $breakpoint-alpha: 768px;
 .client-booking {
 
   .client-booking-title {
-    background: linear-gradient(to bottom, #d30b07 0%, #7a2828 80%);
-    background: -webkit-linear-gradient(top, #d30b07 0%, #7a2828 80%);
-    background: -o-linear-gradient(top, #d30b07 0%, #ff3333 80%);
-    background: -webkit-gradient(linear, left top, left bottom, from(#ff3333), to(#7a2828));
+    background: #292b2c !important;
     font-family: 'EB Garamond', serif;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
     display: block;
     color: #fff;
     font-style:normal;
     text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
     padding: 15px 0px;
-
-    &::before, &::after {
-      content: "§";
-      display: inline-block;
-      -webkit-transform: rotate(90deg);
-      -moz-transform: rotate(90deg);
-      -o-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-      transform: rotate(90deg);
-      opacity: 0.4;
-      margin: 0 0.6em;
-      font-size: 0.5em;
-    }
   }
 
   .nav .nav-item .active {
     background-color: #d30b07;
     color: #f9f9f9;
-    border-top: 0.1em solid #34495E;
-    border-left: 0.1em solid #34495E;
-    border-right: 0.1em solid #34495E;
+    border-top: 0.1em solid #323232;
+    border-left: 0.1em solid #323232;
+    border-right: 0.1em solid #323232;
   }
 
   .nav .nav-item a {
-    color: #34495E;
+    color: #323232;
     border-top: 0.1em solid black;
     border-left: 0.1em solid black;
     border-right: 0.1em solid black;
@@ -125,7 +107,7 @@ $breakpoint-alpha: 768px;
   }
 
   .wizard_horizontal ul.wizard_steps li.active a .step_descr {
-      color: #34495E;
+      color: #323232;
   }
 
   .wizard_horizontal ul.wizard_steps li a .step_descr {
@@ -135,13 +117,13 @@ $breakpoint-alpha: 768px;
 
   .wizard_horizontal ul.wizard_steps li.selected a:before,
   .step_no {
-      background: #34495E;
+      background: #323232;
       color: #fff;
   }
   .wizard_horizontal ul.wizard_steps li.done a:before,
   .wizard_horizontal ul.wizard_steps li.active a:before,
   .wizard_horizontal ul.wizard_steps li.done a .step_no {
-      background: #34495E;
+      background: #323232;
       color: #fff;
   }
 
@@ -192,7 +174,7 @@ $breakpoint-alpha: 768px;
 
     .btn-prev {
       margin-right: 2em;
-      background-color: #3C6478;
+      background-color: #323232;
       color: #fffaef;
     }
 
@@ -238,24 +220,24 @@ $breakpoint-alpha: 768px;
       padding: 20px 0px 20px 40px;
       display: block;
       color: #FFF;
-      background: #34495E;
+      background: #323232;
       text-shadow: 1px 1px 1px #949494;
       border-radius: 5px 5px 0px 0px;
       -webkit-border-radius: 5px 5px 0px 0px;
       -moz-border-radius: 5px 5px 0px 0px;
-      border-bottom:1px solid #34495E;
+      border-bottom:1px solid #323232;
     }
 
     .overview-header {
       padding: 20px 40px;
       display: block;
       color: #FFF;
-      background: #34495E;
+      background: #323232;
       text-shadow: 1px 1px 1px #949494;
       border-radius: 5px 5px 0px 0px;
       -webkit-border-radius: 5px 5px 0px 0px;
       -moz-border-radius: 5px 5px 0px 0px;
-      border-bottom:1px solid #34495E;
+      border-bottom:1px solid #323232;
     }
 
     input, textarea {
