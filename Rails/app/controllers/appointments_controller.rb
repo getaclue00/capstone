@@ -2,18 +2,17 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :set_paper_trail_whodunnit #monitor who created/modified/deleted appointment in versions table
 
-  def index
-    # TODO:
-    # load the appointments based on the current week number
-    # thus, appointments need a weeknumber attribute
+    def index
 
-    equality = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
-
-    if equality
+    select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
+    current_week = params[:filter].present? && params[:filter][:week].present?
+    if select_week_year
       appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
-    else
+    elsif current_week
       current_week = Time.now.strftime("%U").to_i
       appointments_array=Appointment.where('week_number = ?', current_week).all
+    else
+      appointments_array=Appointment.all
     end
 
     if appointments_array && !appointments_array.empty?
