@@ -1,6 +1,6 @@
 class AppointmentsMailer < ApplicationMailer
   def new_appointment_created(appointment)
-    @user = User.create(email: 'info@radetailing.ca')
+    @user = User.create(email: 'alex.kluew@gmail.com')
     @appointment = appointment
     @employee_user = User.where('employee_id = ?', appointment.employee.id).first
 
