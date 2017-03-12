@@ -1,17 +1,17 @@
 import Ember from 'ember';
 
-const { $, Controller, computed, isEmpty } = Ember;
+const { $, Controller, computed, isEmpty, isBlank } = Ember;
 
 export default Controller.extend({
 
   viewName: 'month',
   viewName2: 'listWeek',
 
-  computedTotal: computed('model.@each.cost', function() {
-    const model = this.get('model');
+  computedTotal: computed('appointments.@each.cost', function() {
+    const appointments = this.get('appointments');
     var sum = 0;
-    if(model) {
-      model.forEach(function(item) {
+    if(!isBlank(appointments)) {
+      appointments.forEach(function(item) {
         let price = item.get('cost');
         sum += Number(price);
       });
@@ -35,14 +35,16 @@ export default Controller.extend({
     right:  'prev,next'
   },
 
-  computedEvents: computed('model.[]', 'model.@each.start', 'model.@each.end', function() {
+  computedEvents: computed('appointments.[]', 'appointments.@each.start', 'appointments.@each.end', 'appointments.@each.service', function() {
     let events = [];
-    let model = this.get('model');
+    let appointments = this.get('appointments');
 
-    model.forEach(function(item) {
+    appointments.forEach(function(item) {
+      let serviceName = item.get('service.name');
+
       events.pushObject({
         id    : item.get('id'),
-        title : 'Service',
+        title : serviceName,
         start : item.get('formattedStart'),
         end   : item.get('formattedEnd'),
         color : item.get('color'),
@@ -76,19 +78,22 @@ export default Controller.extend({
           let events = [];
 
           results.forEach(function(item) {
+            let serviceName = item.get('service.name');
+
             events.pushObject({
               id    : item.get('id'),
+              title : serviceName,
               start : item.get('formattedStart'),
               end   : item.get('formattedEnd'),
               color : item.get('color'),
               textColor: item.get('textColor')
             });
           });
-          self.set('model', results);
+          self.set('appointments', results);
           $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
           self.set('computedEvents', events);
         } else {
-          self.set('model', undefined);
+          self.set('appointments', undefined);
           $('.week-view .full-calendar').fullCalendar( 'gotoDate', date );
           self.set('computedEvents', []);
         }

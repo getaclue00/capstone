@@ -3,6 +3,7 @@ dist: trusty
 
 services:
   - postgresql
+  - redis-server
 
 language: ruby
 
