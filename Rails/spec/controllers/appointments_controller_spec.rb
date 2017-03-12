@@ -16,7 +16,18 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
 
-    context 'when there are appointments' do
+    context 'when different param and appointments are not present' do
+      it "returns an error" do
+        get :index, {:params => {:sort => 'title'}}
+
+        result = JSON.parse(response.body)
+
+        expect(result['data']).to be_empty
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when there are appointments but no filter' do
       it "returns with a successful response and the appointments" do
         FactoryGirl.create_list(:appointment, 5)
         get :index
@@ -25,6 +36,47 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         expect(result['data'].length).to eq(5)
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when different param and appointments are present' do
+      it "returns with a successful response and the services" do
+        FactoryGirl.create_list(:appointment, 5)
+        get :index, {:params => {:sort => 'title'}}
+        result = JSON.parse(response.body)
+        expect(result['data'].length).to eq(5)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when filter and appointments are not present' do
+      it "returns an error" do
+        get :index, {:params => {:filter => {:week => ''}}}
+
+        result = JSON.parse(response.body)
+
+        expect(result['data']).to be_empty
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when acceptable filter week and appointments are present' do
+      it "returns with a successful response and the services" do
+        FactoryGirl.create_list(:appointment, 5)
+        get :index, {:params => {:filter => {:week => 'Time.now.strftime("%U").to_i'}}}
+        result = JSON.parse(response.body)
+        expect(result['data'].length).to eq(5)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when acceptable filter week+year and appointments are present' do
+      it "returns with a successful response and the services" do
+        FactoryGirl.create_list(:appointment, 5)
+        get :index, {:params => {:filter => {:week => '6', :year => '2006'}}}
+        result = JSON.parse(response.body)
+        expect(result['data']).to be_empty
+        expect(response).to have_http_status(200)
       end
     end
   end
