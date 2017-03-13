@@ -23,7 +23,7 @@
                 {{input type="checkbox" id="monday" class="checkbox" checked=model.workMonday}}
                 <div class="slider round"></div>
               </div>
-              <div class="col-4 d-flex justify-content-center align-items-center" style="color: #3c763d; transition: .4s">
+              <div class="col-4 d-flex justify-content-center align-items-center">
                 {{#if model.workMonday}}
                   <strong class="badge badge-success">Available</strong>
                 {{else}}
@@ -51,7 +51,7 @@
                 {{input type="checkbox" id="tuesday" class="checkbox" checked=model.workTuesday}}
                 <div class="slider round"></div>
               </div>
-              <div class="col-4 d-flex justify-content-center align-items-center" style="color: #3c763d; transition: .4s">
+              <div class="col-4 d-flex justify-content-center align-items-center">
                 {{#if model.workTuesday}}
                   <strong class="badge badge-success">Available</strong>
                 {{else}}
@@ -75,9 +75,16 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="wednesday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Wednesday:</label>
-              <div class="admin-switch" {{action 'toggleWednesday' model}}>
+              <div class="admin-switch col-3" {{action 'toggleWednesday' model}}>
                 {{input type="checkbox" id="wednesday" class="checkbox" checked=model.workWednesday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                {{#if model.workWednesday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -96,9 +103,16 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="thursday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Thursday:</label>
-              <div class="admin-switch" {{action 'toggleThursday' model}}>
+              <div class="admin-switch col-3" {{action 'toggleThursday' model}}>
                 {{input type="checkbox" id="thursday" class="checkbox" checked=model.workThursday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                {{#if model.workThursday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -117,9 +131,16 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="friday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Friday:</label>
-              <div class="admin-switch" {{action 'toggleFriday' model}}>
+              <div class="admin-switch col-3" {{action 'toggleFriday' model}}>
                 {{input type="checkbox" id="friday" class="checkbox" checked=model.workFriday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                {{#if model.workFriday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -138,9 +159,16 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="saturday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Saturday:</label>
-              <div class="admin-switch" {{action 'toggleSaturday' model}}>
+              <div class="admin-switch col-3" {{action 'toggleSaturday' model}}>
                 {{input type="checkbox" id="saturday" class="checkbox" checked=model.workSaturday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                {{#if model.workSaturday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -159,9 +187,16 @@
           <div class="col">
             <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
               <label for="sunday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Sunday:</label>
-              <div class="admin-switch" {{action 'toggleSunday' model}}>
+              <div class="admin-switch col-3" {{action 'toggleSunday' model}}>
                 {{input type="checkbox" id="sunday" class="checkbox" checked=model.workSunday}}
                 <div class="slider round"></div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                {{#if model.workSunday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
