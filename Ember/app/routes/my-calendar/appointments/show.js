@@ -17,8 +17,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.setProperties(models);
   },
 
-  actions: {
-    goBackToCalendar() {
+actions: {
+  willTransition() {
       // check if any attributes have been changed
       let appointment = this.get('controller.appointment');
       let modalId = this.get('controller.stringThatIsUsedForModalIdInTemplate');
@@ -29,6 +29,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         appointment.rollbackAttributes();
       }
       Ember.$(`#${modalId}`).modal('hide');
+    },
+
+    goBackToCalendar() {
       this.transitionTo('my-calendar');
     }
   }

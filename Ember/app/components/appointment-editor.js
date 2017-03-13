@@ -48,7 +48,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    Ember.$('#myModal').modal('show');
+    Ember.$('.modal').modal('show');
   },
 
   actions: {
