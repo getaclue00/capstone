@@ -60,4 +60,25 @@ body {
   padding-right: 2%;
 }
 
+.modal {
+  .modal-body {
+    .container-fluid {
+      .row {
+        .remove-padding-left {
+          padding-left: 0px;
+        }
+        .remove-padding-right {
+          padding-right: 0px;
+        }
+        .remove-margin-left {
+          margin-left: 0px;
+        }
+        .remove-margin-right {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+}
+
 @import "ember-power-select";
