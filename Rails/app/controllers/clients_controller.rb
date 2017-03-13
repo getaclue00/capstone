@@ -11,9 +11,9 @@ class ClientsController < ApplicationController
     end
 		if (clients_array && !clients_array.empty?) || email_filter
       		render json: clients_array, status: :ok
-    	else
-      		render json: { error: 'No clients exist' }, status: :bad_request
-    	end
+  	else
+    		render json: { error: 'No clients exist' }, status: :bad_request
+  	end
 	end
 
 	def show

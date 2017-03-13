@@ -167,7 +167,7 @@ test('it renders with complete appointment information', function(assert) {
     client=client
   }}`);
 
-  assert.deepEqual(this.$('p').length, 11, 'should be 10 <p></p> tags for various confirmation details');
+  assert.deepEqual(this.$('p').length, 10, 'should be 10 <p></p> tags for various confirmation details');
   assert.deepEqual(this.$('p[id="appointment-service-name"]')[0].innerHTML, this.get('appointment.service.name'), 'Appointment name should match');
   assert.deepEqual(this.$('p[id="appointment-duration"]')[0].innerHTML, "Duration: " + this.get('appointment.service.duration') + " minutes", 'Appointment duration should match');
   assert.deepEqual(this.$('p[id="appointment-service-price"]')[0].innerHTML, "Price: $" + this.get('appointment.service.price'), 'Appointment price should match');

@@ -8,12 +8,23 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    moveToPreviousPage(){
+      Ember.$('#step-3').hide();
+      Ember.$('#li-3').removeClass('active');
+      Ember.$('#step-2').show();
+      Ember.$('#li-2').addClass('active');
+    },
+
     verifyInformation(){
       let client = this.get('client');
       client.validate()
         .then(({validations}) => {
           if(validations.get('isValid')){
-             window.location.href = "#step-4";
+            Ember.$('#step-3').hide();
+            Ember.$('#li-3').addClass('done');
+            Ember.$('#li-3').removeClass('active');
+            Ember.$('#step-4').show();
+            Ember.$('#li-4').addClass('active');
           } else {
              this.set('showFirstNameError', true);
              this.set('showLastNameError', true);

@@ -31,7 +31,7 @@ const Validations = buildValidations({
       validator('presence', true),
       validator('format', {
         regex: /^[1-9]\d{2}-\d{3}-\d{4}/,
-        message: 'Use ###-###-#### format'
+        message: '613-312-3321 is an example'
       })
     ]
   },
@@ -59,7 +59,7 @@ const Validations = buildValidations({
       validator('presence', true),
       validator('format', {
         regex: /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/,
-        message: 'Use A#A #A#A format'
+        message: 'K1K 1K1 is an example'
       })
     ]
   },

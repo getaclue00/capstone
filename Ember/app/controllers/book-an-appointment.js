@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   selectedDate: null,
   selectedTime: null,
   previousDescription: null,
+  currentDate: moment().format('MM/DD/YYYY'),
 
   viewName: 'month',
   businessHours: {
@@ -35,11 +36,25 @@ export default Ember.Controller.extend({
     },
 
     changeDateAction(date) {
-      console.log(date);
       if (moment().format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD') || moment(date).isAfter(moment())) {
         this.set('selectedDate', moment(date, 'YYYY-MM-DD').format('MMMM D, YYYY'));
         this.set('selectTime', true);
       }
+    },
+
+    moveToNextPage(currentPage){
+      Ember.$('#step-' + currentPage).hide();
+      Ember.$('#li-' + currentPage).addClass('done');
+      Ember.$('#li-' + currentPage).removeClass('active');
+      Ember.$('#step-' + (currentPage + 1)).show();
+      Ember.$('#li-' + (currentPage + 1)).addClass('active');
+    },
+
+    moveToPreviousPage(currentPage){
+      Ember.$('#step-' + currentPage).hide();
+      Ember.$('#li-' + currentPage).removeClass('active');
+      Ember.$('#step-' + (currentPage - 1)).show();
+      Ember.$('#li-' + (currentPage - 1)).addClass('active');
     },
 
     bookAppointment() {
@@ -75,7 +90,7 @@ export default Ember.Controller.extend({
 
       function failure() {
         window.scrollTo(0,0);
-        flashMessages.danger('Appointment was not successfully created');
+        flashMessages.danger('Appointment was not successfully booked');
       }
 
       function saveAppointment(){
