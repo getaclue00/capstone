@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308194646) do
+ActiveRecord::Schema.define(version: 20170313195038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,34 @@ ActiveRecord::Schema.define(version: 20170308194646) do
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
   end
 
+  create_table "company_preferences", force: :cascade do |t|
+    t.boolean  "workMonday",     default: false,      null: false
+    t.string   "mondayOpen",     default: "08:00:00", null: false
+    t.string   "mondayClose",    default: "17:00:00", null: false
+    t.boolean  "workTuesday",    default: false,      null: false
+    t.string   "tuesdayOpen",    default: "08:00:00", null: false
+    t.string   "tuesdayClose",   default: "17:00:00", null: false
+    t.boolean  "workWednesday",  default: false,      null: false
+    t.string   "wednesdayOpen",  default: "08:00:00", null: false
+    t.string   "wednesdayClose", default: "17:00:00", null: false
+    t.boolean  "workThursday",   default: false,      null: false
+    t.string   "thursdayOpen",   default: "08:00:00", null: false
+    t.string   "thursdayClose",  default: "17:00:00", null: false
+    t.boolean  "workFriday",     default: false,      null: false
+    t.string   "fridayOpen",     default: "08:00:00", null: false
+    t.string   "fridayClose",    default: "17:00:00", null: false
+    t.boolean  "workSaturday",   default: false,      null: false
+    t.string   "saturdayOpen",   default: "08:00:00", null: false
+    t.string   "saturdayClose",  default: "17:00:00", null: false
+    t.boolean  "workSunday",     default: false,      null: false
+    t.string   "sundayOpen",     default: "08:00:00", null: false
+    t.string   "sundayClose",    default: "17:00:00", null: false
+    t.integer  "employee_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["employee_id"], name: "index_company_preferences_on_employee_id", using: :btree
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string   "last_name"
     t.string   "first_name"
@@ -63,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170308194646) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-03-06'
+    t.date     "start_date",               default: '2017-03-13'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
@@ -109,5 +137,6 @@ ActiveRecord::Schema.define(version: 20170308194646) do
   add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
+  add_foreign_key "company_preferences", "employees"
   add_foreign_key "users", "employees"
 end

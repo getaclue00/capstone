@@ -12,6 +12,17 @@ module Detailing
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # as per http://stackoverflow.com/a/28344328
+
+    config.generators do |g|
+      g.test_framework :rspec, views: false
+      g.assets false
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+      g.template_engine false
+    end
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'

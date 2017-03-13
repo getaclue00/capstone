@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :employees, constraints: ApiConstraint.new
   resources :services, constraints: ApiConstraint.new
   resources :appointments, constraints: ApiConstraint.new
+  resources :company_preferences, constraints: ApiConstraint.new
 
   get "users", to: 'users#index', constraints: ApiConstraint.new
   get "users/:id", to: 'users#show', constraints: ApiConstraint.new

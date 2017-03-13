@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-const { Model, attr } = DS;
+const { Model, attr, belongsTo } = DS;
 
 export default Model.extend({
   workMonday:     attr('boolean', { defaultValue: false }),
@@ -22,5 +22,6 @@ export default Model.extend({
   saturdayClose:  attr('string', { defaultValue: '17:00:00' }),
   workSunday:     attr('boolean', { defaultValue: false }),
   sundayOpen:     attr('string', { defaultValue: '08:00:00' }),
-  sundayClose:    attr('string', { defaultValue: '17:00:00' })
+  sundayClose:    attr('string', { defaultValue: '17:00:00' }),
+  employee:       belongsTo('employee')
 });
