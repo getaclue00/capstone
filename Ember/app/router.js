@@ -40,7 +40,6 @@ Router.map(function() {
   this.route('book-an-appointment');
   this.route('my-work-availability');
   this.route('company-business-hours');
-  this.route('notifications');
 });
 
 export default Router;
