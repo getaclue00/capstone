@@ -1,5 +1,5 @@
 class CompanyPreferencesController < ApplicationController
-  before_action :set_company_preference, only: [:show, :edit, :update, :destroy]
+  before_action :set_company_preference, only: [:show, :update]
 
   # GET /company_preferences
   def index
@@ -15,9 +15,9 @@ class CompanyPreferencesController < ApplicationController
   # PATCH/PUT /company_preferences/1
   def update
     if @company_preference.update(company_preference_params)
-      redirect_to @company_preference, notice: 'Company preference was successfully updated.'
+      render json: @company_preference, status: :updated
     else
-      render :edit
+      render json: { error: 'not updated' }, status: :notok
     end
   end
 
@@ -29,6 +29,6 @@ class CompanyPreferencesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_preference_params
-      params.require(:company_preference).permit(:workMonday, :mondayOpen, :mondayClose, :workTuesday, :tuesdayOpen, :tuesdayClose, :workWednesday, :wednesdayOpen, :wednesdayClose, :workThursday, :thursdayOpen, :thursdayClose, :workFriday, :fridayOpen, :fridayClose, :workSaturday, :saturdayOpen, :saturdayClose, :workSunday, :sundayOpen, :sundayClose, :employee_id)
+      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:work_monday, :monday_open, :monday_close, :work_tuesday, :tuesday_open, :tuesday_close, :work_wednesday, :wednesday_open, :wednesday_close, :work_thursday, :thursday_open, :thursday_close, :work_friday, :friday_open, :friday_close, :work_saturday, :saturday_open, :saturday_close, :work_sunday, :sunday_open, :sunday_close, :employee])
     end
 end

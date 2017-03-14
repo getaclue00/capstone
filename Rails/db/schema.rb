@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313195038) do
+ActiveRecord::Schema.define(version: 20170314163023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,30 +55,30 @@ ActiveRecord::Schema.define(version: 20170313195038) do
   end
 
   create_table "company_preferences", force: :cascade do |t|
-    t.boolean  "workMonday",     default: false,      null: false
-    t.string   "mondayOpen",     default: "08:00:00", null: false
-    t.string   "mondayClose",    default: "17:00:00", null: false
-    t.boolean  "workTuesday",    default: false,      null: false
-    t.string   "tuesdayOpen",    default: "08:00:00", null: false
-    t.string   "tuesdayClose",   default: "17:00:00", null: false
-    t.boolean  "workWednesday",  default: false,      null: false
-    t.string   "wednesdayOpen",  default: "08:00:00", null: false
-    t.string   "wednesdayClose", default: "17:00:00", null: false
-    t.boolean  "workThursday",   default: false,      null: false
-    t.string   "thursdayOpen",   default: "08:00:00", null: false
-    t.string   "thursdayClose",  default: "17:00:00", null: false
-    t.boolean  "workFriday",     default: false,      null: false
-    t.string   "fridayOpen",     default: "08:00:00", null: false
-    t.string   "fridayClose",    default: "17:00:00", null: false
-    t.boolean  "workSaturday",   default: false,      null: false
-    t.string   "saturdayOpen",   default: "08:00:00", null: false
-    t.string   "saturdayClose",  default: "17:00:00", null: false
-    t.boolean  "workSunday",     default: false,      null: false
-    t.string   "sundayOpen",     default: "08:00:00", null: false
-    t.string   "sundayClose",    default: "17:00:00", null: false
+    t.boolean  "work_monday",     default: false,      null: false
+    t.string   "monday_open",     default: "08:00:00", null: false
+    t.string   "monday_close",    default: "17:00:00", null: false
+    t.boolean  "work_tuesday",    default: false,      null: false
+    t.string   "tuesday_open",    default: "08:00:00", null: false
+    t.string   "tuesday_close",   default: "17:00:00", null: false
+    t.boolean  "work_wednesday",  default: false,      null: false
+    t.string   "wednesday_open",  default: "08:00:00", null: false
+    t.string   "wednesday_close", default: "17:00:00", null: false
+    t.boolean  "work_thursday",   default: false,      null: false
+    t.string   "thursday_open",   default: "08:00:00", null: false
+    t.string   "thursday_close",  default: "17:00:00", null: false
+    t.boolean  "work_friday",     default: false,      null: false
+    t.string   "friday_open",     default: "08:00:00", null: false
+    t.string   "friday_close",    default: "17:00:00", null: false
+    t.boolean  "work_saturday",   default: false,      null: false
+    t.string   "saturday_open",   default: "08:00:00", null: false
+    t.string   "saturday_close",  default: "17:00:00", null: false
+    t.boolean  "work_sunday",     default: false,      null: false
+    t.string   "sunday_open",     default: "08:00:00", null: false
+    t.string   "sunday_close",    default: "17:00:00", null: false
     t.integer  "employee_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.index ["employee_id"], name: "index_company_preferences_on_employee_id", using: :btree
   end
 
