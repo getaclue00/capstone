@@ -2,6 +2,7 @@ import DS from 'ember-data';
 const { Model, attr, belongsTo } = DS;
 
 export default Model.extend({
+  isHirable:      attr('boolean', { defaultValue: false }),
   workMonday:     attr('boolean', { defaultValue: false }),
   mondayOpen:     attr('string', { defaultValue: '08:00:00' }),
   mondayClose:    attr('string', { defaultValue: '17:00:00' }),

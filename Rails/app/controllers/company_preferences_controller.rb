@@ -20,6 +20,7 @@ class CompanyPreferencesController < ApplicationController
       if current_user.employee.company_preference.id == company_preference_id || current_user.admin?
         begin
           if @company_preference.update!(company_preference_params)
+            byebug
             render json: @company_preference, status: :ok
           else
             render json: { error: 'not updated' }, status: :bad_request
@@ -45,6 +46,6 @@ class CompanyPreferencesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_preference_params
-      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:work_monday, :monday_open, :monday_close, :work_tuesday, :tuesday_open, :tuesday_close, :work_wednesday, :wednesday_open, :wednesday_close, :work_thursday, :thursday_open, :thursday_close, :work_friday, :friday_open, :friday_close, :work_saturday, :saturday_open, :saturday_close, :work_sunday, :sunday_open, :sunday_close, :employee])
+      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:is_hirable, :work_monday, :monday_open, :monday_close, :work_tuesday, :tuesday_open, :tuesday_close, :work_wednesday, :wednesday_open, :wednesday_close, :work_thursday, :thursday_open, :thursday_close, :work_friday, :friday_open, :friday_close, :work_saturday, :saturday_open, :saturday_close, :work_sunday, :sunday_open, :sunday_close, :employee])
     end
 end
