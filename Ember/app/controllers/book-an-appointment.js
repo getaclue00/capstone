@@ -79,6 +79,8 @@ export default Ember.Controller.extend({
           client = existingClient;
           saveAppointment();
         } else {
+          var phoneNum = client.get('phoneNumber').match(new RegExp('.{1,4}$|.{1,3}', 'g')).join("-");
+          client.set('phoneNumber', phoneNum);
           client.save().then(saveAppointment).catch(failure);
         }
       });
