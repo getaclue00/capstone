@@ -14,6 +14,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
         end: time,
         weekNumber: Number(moment(time).format('w'))
       }),
+      client: this.get('store').createRecord('client'),
       smallVehicleServices: this.get('store').query('service', {
         filter: {
           displayable: true,
@@ -36,7 +37,12 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
 
   renderSmartWizard() {
     Ember.$('#smartwizard').smartWizard({
-      reverseButtonsOrder: true,
+      keyNavigation: false,
+      enableAllSteps: false,
+      useURLhash: false,
+      toolbarSettings: {
+        toolbarPosition: 'none'
+      }
     });
   },
 
@@ -63,6 +69,9 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     didTransition() {
       Ember.run.next(this, 'renderSmartWizard');
       Ember.run.next(this, 'enablePopovers');
+      Ember.run.schedule('afterRender', this, () => {
+        Ember.$('#navigation-menu').toggle();
+      });
     }
   }
 });
