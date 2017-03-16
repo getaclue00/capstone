@@ -74,15 +74,24 @@ test('it renders a default view', function(assert) {
     fullName: 'John Smith'
   }]);
 
+  this.set('saveAppointment', function() {});
+
+  this.set('goBackToCalendar', function() {});
+
+  this.set('showModal', function() {});
+
   this.render(hbs`{{
     appointment-editor
     model=model
     listOfServices=services
     listOfEmployess=employees
     listOfClients=clients
+    onSaveAction=saveAppointment
+    onCancelAction=goBackToCalendar
+    onDidInsertElementAction=showModal
   }}`);
 
-  assert.deepEqual($('.form-group').length, 3, 'should be 3 rows on initial render');
+  assert.deepEqual($('.form-group').length, 4, 'should be 4 rows on initial render');
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
   assert.deepEqual($($('.ember-power-select-placeholder')[2]).text(), 'Select a client', 'placeholder text to select a client');
@@ -106,6 +115,12 @@ test('it renders a complete view upon service selection', function(assert) {
     fullName: 'John Smith'
   }]);
 
+  this.set('saveAppointment', function() {});
+
+  this.set('goBackToCalendar', function() {});
+
+  this.set('showModal', function() {});
+
   this.render(hbs`{{
     appointment-editor
     model=model
@@ -113,9 +128,12 @@ test('it renders a complete view upon service selection', function(assert) {
     listOfEmployess=employees
     listOfClients=clients
     wasServiceSelected=true
+    onSaveAction=saveAppointment
+    onCancelAction=goBackToCalendar
+    onDidInsertElementAction=showModal
   }}`);
 
-  assert.deepEqual($('.form-group').length, 9, 'should be 9 rows on initial render');
+  assert.deepEqual($('.form-group').length, 10, 'should be 10 rows on initial render');
   assert.deepEqual($($('.ember-power-select-placeholder')[0]).text(), 'Select a service', 'placeholder text to select a service');
   assert.deepEqual($($('.ember-power-select-placeholder')[1]).text(), 'Select a staff member', 'placeholder text to select a staff member');
   assert.deepEqual($($('.ember-power-select-placeholder')[2]).text(), 'Select a client', 'placeholder text to select a client');
