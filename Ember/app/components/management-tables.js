@@ -10,7 +10,6 @@ export default Ember.Component.extend({
     return this.get('collection') === 'employees';
   }),
 
-
   actions: {
     viewOperations(id){
       Ember.$(`tr.${id} td div.management-operation`).toggle( "slow");

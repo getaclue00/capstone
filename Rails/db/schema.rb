@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 20170310170103) do
     t.index ["week_number"], name: "index_appointments_on_week_number", using: :btree
   end
 
+  create_table "cars", force: :cascade do |t|
+    t.string   "make",       null: false
+    t.string   "model",      null: false
+    t.string   "size",       null: false
+    t.string   "interior",   null: false
+    t.string   "colour",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "client_id"
+    t.index ["client_id"], name: "index_cars_on_client_id", using: :btree
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string   "last_name",                null: false
     t.string   "first_name",               null: false
@@ -63,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170310170103) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-03-06'
+    t.date     "start_date",               default: '2017-03-16'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
@@ -119,5 +131,6 @@ ActiveRecord::Schema.define(version: 20170310170103) do
   add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "employees"
   add_foreign_key "appointments", "services"
+  add_foreign_key "cars", "clients"
   add_foreign_key "users", "employees"
 end

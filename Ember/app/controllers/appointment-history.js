@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
                 "formattedStart": "Start Time", "formattedEnd": "End Time", "cost": "Cost", "location": "Location",
                 "status": "Status", "notes": "Notes"},
 
-  operations: {'appointment-history': 'glyphicon-book'},
+  operations: {},
 
   collection: 'appointments'
 });
