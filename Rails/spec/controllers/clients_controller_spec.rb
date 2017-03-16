@@ -56,8 +56,7 @@ RSpec.describe ClientsController, :type => :controller do
         expect(attr["last_name"]).to eq("test")
         expect(attr["first_name"]).to eq("test")
         expect(attr["phone_number"]).to eq("000-000-0000")
-        expect(attr["street_number"].to_i).to eq(45)
-        expect(attr["street_name"]).to eq("test")
+        expect(attr["street"]).to eq("45 test")
         expect(attr["city"]).to eq("Ottawa")
         expect(attr["province"]).to eq("Ontario")
         expect(attr["postal_code"]).to eq("A0A 0A0")
@@ -90,8 +89,7 @@ RSpec.describe ClientsController, :type => :controller do
                 "first_name": "Nada",
                 "email": "test@test.com", #appended n to make it unique
                 "phone_number": "345-468-3444",
-                "street_number": 45,
-                "street_name": "Bank street",
+                "street": "45 Bank street",
                 "city": "Ottawa",
                 "province": "Ontario",
                 "postal_code": "H7H 5U5"
@@ -118,8 +116,7 @@ RSpec.describe ClientsController, :type => :controller do
                 "first_name": "Nada",
                 "email": "test@t.",
                 "phone_number": "789",
-                "street_number": "tt",
-                "street_name": "Bank street",
+                "street": "tt Bank street",
                 "city": "Ottawa",
                 "province": "Ontario",
                 "postal_code": "H7"
@@ -183,8 +180,7 @@ RSpec.describe ClientsController, :type => :controller do
         client.first_name = "updated firstName"
         client.email = "o@yahoo.com"
         client.phone_number = "111-111-1111"
-        client.street_number = 3
-        client.street_name = "Updated Street"
+        client.street = "3 Updated Street"
         client.city = "Updated city"
         client.province = "Updated province"
         client.postal_code = "J2J 9Q9"
@@ -205,8 +201,7 @@ RSpec.describe ClientsController, :type => :controller do
         expect(attr["first_name"]).to eq(client.first_name)
         expect(attr["phone_number"]).to eq(client.phone_number)
         expect(attr["email"]).to eq(client.email)
-        expect(attr["street_number"].to_i).to eq(client.street_number)
-        expect(attr["street_name"]).to eq(client.street_name)
+        expect(attr["street"]).to eq(client.street)
         expect(attr["city"]).to eq(client.city)
         expect(attr["province"]).to eq(client.province)
         expect(attr["postal_code"]).to eq(client.postal_code)
@@ -222,8 +217,7 @@ RSpec.describe ClientsController, :type => :controller do
         client.first_name = "updated firstName"
         client.email = "o@yahoo.com"
         client.phone_number = "111-1"
-        client.street_number = 3
-        client.street_name = "Updated Street"
+        client.street = "3 Updated Street"
         client.city = "Updated city"
         client.province = "Updated province"
         client.postal_code = "J"
