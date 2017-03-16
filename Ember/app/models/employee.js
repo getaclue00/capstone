@@ -19,6 +19,7 @@ export default Model.extend({
   appointments:         hasMany('appointment', { async: true }),
   user:                 belongsTo('user'),
   companyPreference:    belongsTo('company-preference'),
+  company:              belongsTo('company'),
   fullName: Ember.computed('lastName', 'firstName', function(){
     return `${this.get('firstName')} ${this.get('lastName')}`;
   }),

@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 moduleForModel('employee', 'Unit | Model | employee', {
   // Specify the other units that are required for this test.
-  needs: ['model:appointment', 'model:user', 'model:company-preference']
+  needs: ['model:appointment', 'model:user', 'model:company-preference', 'model:company']
 });
 
 test('checking fullName', function(assert) {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314203955) do
+ActiveRecord::Schema.define(version: 20170316175033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,35 @@ ActiveRecord::Schema.define(version: 20170314203955) do
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",                 default: "R & A DETAILING",                      null: false
+    t.boolean  "work_monday",          default: false,                                  null: false
+    t.string   "monday_open",          default: "08:00:00",                             null: false
+    t.string   "monday_close",         default: "17:00:00",                             null: false
+    t.boolean  "work_tuesday",         default: false,                                  null: false
+    t.string   "tuesday_open",         default: "08:00:00",                             null: false
+    t.string   "tuesday_close",        default: "17:00:00",                             null: false
+    t.boolean  "work_wednesday",       default: false,                                  null: false
+    t.string   "wednesday_open",       default: "08:00:00",                             null: false
+    t.string   "wednesday_close",      default: "17:00:00",                             null: false
+    t.boolean  "work_thursday",        default: false,                                  null: false
+    t.string   "thursday_open",        default: "08:00:00",                             null: false
+    t.string   "thursday_close",       default: "17:00:00",                             null: false
+    t.boolean  "work_friday",          default: false,                                  null: false
+    t.string   "friday_open",          default: "08:00:00",                             null: false
+    t.string   "friday_close",         default: "17:00:00",                             null: false
+    t.boolean  "work_saturday",        default: false,                                  null: false
+    t.string   "saturday_open",        default: "08:00:00",                             null: false
+    t.string   "saturday_close",       default: "17:00:00",                             null: false
+    t.boolean  "work_sunday",          default: false,                                  null: false
+    t.string   "sunday_open",          default: "08:00:00",                             null: false
+    t.string   "sunday_close",         default: "17:00:00",                             null: false
+    t.string   "contact_email",        default: "segradetailingcapstoneteam@gmail.com", null: false
+    t.string   "contact_phone_number"
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+  end
+
   create_table "company_preferences", force: :cascade do |t|
     t.boolean  "work_monday",     default: false,      null: false
     t.string   "monday_open",     default: "08:00:00", null: false
@@ -93,11 +122,13 @@ ActiveRecord::Schema.define(version: 20170314203955) do
     t.string   "city"
     t.string   "province"
     t.string   "postal_code",   limit: 7
-    t.date     "start_date",               default: '2017-03-13'
+    t.date     "start_date",               default: '2017-03-16'
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.date     "end_date"
     t.text     "notes"
+    t.integer  "company_id"
+    t.index ["company_id"], name: "index_employees_on_company_id", using: :btree
   end
 
   create_table "services", force: :cascade do |t|

@@ -3,4 +3,5 @@ class EmployeeSerializer < ActiveModel::Serializer
   has_many :appointments
   has_one :user
   has_one :company_preference
+  belongs_to :company
 end

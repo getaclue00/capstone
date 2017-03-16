@@ -15,12 +15,13 @@ module Detailing
     # as per http://stackoverflow.com/a/28344328
 
     config.generators do |g|
-      g.test_framework :rspec, views: false
+      g.test_framework :rspec, views: false, request_specs: false, routing_specs: false
       g.assets false
       g.stylesheets false
       g.javascripts false
       g.helper false
       g.template_engine false
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
     config.middleware.insert_before 0, Rack::Cors do

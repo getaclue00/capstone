@@ -4,9 +4,11 @@ class Employee < ActiveRecord::Base
     has_many :appointments, dependent: :nullify
     has_one :user, dependent: :destroy
     has_one :company_preference, dependent: :destroy
+    belongs_to :company
 
     after_create :create_company_preference
 
+    validates :company, presence: true
     validates :phone_number, format: { with: /\d{3}-\d{3}-\d{4}/,
     message: "Please enter a valid phone number 000-000-0000" }, :allow_blank => true
     validates :postal_code, format: { with: /[A-Z][0-9][A-Z](\s|)[0-9][A-Z][0-9]/,
