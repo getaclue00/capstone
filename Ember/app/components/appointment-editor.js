@@ -48,7 +48,10 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    Ember.$('#myModal').modal('show');
+    const insertElementAction = this.get('onDidInsertElementAction');
+    if (insertElementAction) {
+      insertElementAction();
+    }
   },
 
   actions: {
@@ -77,6 +80,14 @@ export default Ember.Component.extend({
 
     toggleShowLocationMap() {
       this.toggleProperty('showLocationMap');
+    },
+
+    onSaveClick() {
+      this.get('onSaveAction')();
+    },
+
+    onCancelClick() {
+      this.get('onCancelAction')();
     }
   }
 });

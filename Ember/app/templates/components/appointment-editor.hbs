@@ -1,9 +1,9 @@
-{{#if (and model listOfServices listOfEmployess)}}
+{{#if (and model listOfServices listOfEmployess onSaveAction onCancelAction onDidInsertElementAction)}}
   <div class="row">
-    <div class="col-12" style="padding-right: 0px; padding-left: 0px;">
+    <div class="col-12 remove-padding-left remove-padding-right">
       {{#if (and wasServiceSelected showLocationMapDiv)}}
-        <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-          <label for="appointment-location-map" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Show Map:</label>
+        <div class="form-group row remove-margin-left remove-margin-right">
+          <label for="appointment-location-map" class="col-5 col-form-label font-weight-bold text-uppercase remove-padding-left">Show Map:</label>
           <div class="admin-switch" {{action 'toggleShowLocationMap'}}>
             {{input type="checkbox" id="appointment-location-map" class="checkbox" checked=showLocationMap}}
             <div class="slider round"></div>
@@ -16,7 +16,7 @@
         {{/if}}
       {{/if}}
       <div class="form-group">
-        <label for="service" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Service:</label>
+        <label for="service" class="col-form-label font-weight-bold text-uppercase">Service:</label>
         {{#power-select
           options=listOfServices
           selected=aSelectedService
@@ -30,7 +30,7 @@
         {{/power-select}}
       </div>
       <div class="form-group">
-        <label for="staff" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Staff:</label>
+        <label for="staff" class="col-form-label font-weight-bold text-uppercase">Staff:</label>
         {{#power-select
           options=listOfEmployess
           selected=aSelectedEmployee
@@ -44,7 +44,7 @@
         {{/power-select}}
       </div>
       <div class="form-group">
-          <label for="staff" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Client:</label>
+          <label for="staff" class="col-xs-12 col-form-label font-weight-bold text-uppercase">Client:</label>
           <div class="col-xs-12">
             {{#power-select
               options=listOfClients
@@ -61,26 +61,26 @@
         </div>
       {{#if wasServiceSelected}}
         <div class="form-group">
-          <label for="appointment-cost" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Cost:</label>
+          <label for="appointment-cost" class="col-form-label font-weight-bold text-uppercase">Cost:</label>
           <div class="input-group">
             <span class="input-group-addon">$</span>
             {{input type="number" pattern="\d*" class="form-control" id="appointment-cost" value=model.cost placeholder="Please enter the cost"}}
           </div>
         </div>
         <div class="form-group">
-          <label for="appointment-location" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Location:</label>
+          <label for="appointment-location" class="col-form-label font-weight-bold text-uppercase">Location:</label>
           {{input type="text" class="form-control" id="appointment-location" value=model.location placeholder="ex: 174 Bank St, Ottawa, On"}}
         </div>
         <div class="form-group">
-          <label for="appointment-start-time" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Starts:</label>
+          <label for="appointment-start-time" class="col-form-label font-weight-bold text-uppercase">Starts:</label>
           {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart}}
         </div>
         <div class="form-group">
-          <label for="appointment-end-time" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Ends:</label>
+          <label for="appointment-end-time" class="col-form-label font-weight-bold text-uppercase">Ends:</label>
           {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
         </div>
         <div class="form-group">
-            <label for="appointment-status" class="col-xs-12 col-form-label font-weight-bold" style="text-transform: uppercase;">Status:</label>
+            <label for="appointment-status" class="col-xs-12 col-form-label font-weight-bold text-uppercase">Status:</label>
             <div class="col-xs-12">
               {{#power-select
                 options=listOfAppointmentStatuses
@@ -96,8 +96,18 @@
             </div>
           </div>
         <div class="form-group">
-          <label for="appointment-notes" class="col-form-label font-weight-bold" style="text-transform: uppercase;">Notes:</label>
+          <label for="appointment-notes" class="col-form-label font-weight-bold text-uppercase">Notes:</label>
           {{textarea class="form-control" id="appointment-notes" value=model.notes rows=3}}
+        </div>
+        <div class="form-group">
+          <div class="btn-group" role="group" aria-label="Appointment control buttons">
+            <button type="button" class="btn btn-primary" {{action 'onSaveClick'}}>Save</button>
+            <button type="button" class="btn btn-secondary" {{action 'onCancelClick'}}>Cancel</button>
+          </div>
+        </div>
+      {{else}}
+        <div class="form-group">
+          <button type="button" class="btn btn-outline-primary btn-block" {{action 'onCancelClick'}}>Cancel</button>
         </div>
       {{/if}}
     </div>
