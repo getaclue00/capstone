@@ -12,8 +12,8 @@ FactoryGirl.define do
     end_date "2015-11-19"
     notes "This is a note"
 
-    before(:create) do |a|
-      a.company = FactoryGirl.create(:company)
+    before(:create) do |employee|
+      employee.company = FactoryGirl.create(:company)
     end
 
     factory :employee_with_appointment do
