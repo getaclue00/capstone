@@ -23,18 +23,6 @@ export default Ember.Component.extend({
     return this.get('appointment.employee');
   }),
 
-  wasEmployeeSelected: Ember.computed('appointment.employee', function(){
-    let employee = this.get('appointment.employee');
-
-    if (employee) {
-      if (employee.get('fullName')) {
-        return true;
-      }
-    } else {
-      return false;
-    }
-  }),
-
  didInsertElement() {
     this._super(...arguments);
     Ember.$('#appointment-time-selection').modal('show');
@@ -48,18 +36,21 @@ export default Ember.Component.extend({
   actions: {
 
     cancelSelection() {
-      this.get('appointment').set('employee', null);
+      this.set('selectEmployee', false);
       this.set('selectTime', false);
     },
 
     confirmSelection(time) {
       this.set('selectedTime', time);
-      Ember.$('#appointment-time-selection').modal('hide');
+      this.set('selectTime', false);
+      this.set('selectEmployee', false);
+      Ember.$('#move-to-information-input').removeAttr('disabled');
     },
 
     selectEmployee(employee) {
       if(!Ember.isEmpty(employee)){
         this.get('appointment').set('employee', employee);
+        this.set('selectEmployee', true);
       }
     },
   }

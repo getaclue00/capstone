@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#used in appointments table to reference a deleted employee/car/service and cannot be deleted if referenced by appointments
+#used in appointments table to reference a deleted employee/client/service and cannot be deleted if referenced by appointments
 Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
-Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'default@test.com', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'default@test.com', phone_number: '000-000-0000', street: '0 DEFAULT', postal_code: 'A0A 0A0'})
 Service.create({id: '0', name: 'DEFAULT', active: false, displayable: false})
 
-Client.create({ id: '1', last_name: 'Testing', first_name: 'Tester', email: 'test@test.com', phone_number: '111-111-1111', street_number: '1', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+Client.create({ id: '1', last_name: 'Testing', first_name: 'Tester', email: 'test@test.com', phone_number: '111-111-1111', street: '1 DEFAULT', postal_code: 'A0A 0A0'})
 
 Appointment.create({title: 'Batman Appointment', client_id: '1', service_id: '0'}) #employee_id can be null
 Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', client_id: '1', service_id: '0'})

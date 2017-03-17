@@ -4,8 +4,7 @@ FactoryGirl.define do
 	  	first_name "test"
 	  	email {|n| "email#{n}@test.com"} #appended n to make it unique
 	 	  phone_number "000-000-0000"
-	  	street_number "45"
-	  	street_name "test"
+	  	street "45 test"
 	  	postal_code "A0A 0A0"
 	  	city "Ottawa"
 	  	province "Ontario"
