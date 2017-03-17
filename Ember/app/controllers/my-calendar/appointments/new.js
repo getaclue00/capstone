@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  stringThatIsUsedForModalIdInTemplate: `myModal`,
   flashMessages: Ember.inject.service(),
+
   actions: {
     saveAppointment() {
       var self = this;
@@ -12,7 +14,6 @@ export default Ember.Controller.extend({
       appointment.save().then(transitionToPost).catch(failure);
 
       function transitionToPost() {
-        Ember.$('#myModal').modal('hide');
         self.transitionToRoute('my-calendar');
       }
 
@@ -21,6 +22,15 @@ export default Ember.Controller.extend({
         flashMessages.danger('Appointment was not successfully created');
       }
 
+    },
+
+    goBackToCalendar() {
+      this.transitionToRoute('my-calendar');
+    },
+
+    showModal() {
+      let modalId = this.get('stringThatIsUsedForModalIdInTemplate');
+      Ember.$(`#${modalId}`).modal('show');
     }
   }
 });
