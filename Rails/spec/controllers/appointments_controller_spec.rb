@@ -61,7 +61,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     end
 
     context 'when acceptable filter week and appointments are present' do
-      it "returns with a successful response and the services" do
+      it "returns with a successful response and the appointments" do
         FactoryGirl.create_list(:appointment, 5)
         get :index, {:params => {:filter => {:week => 'Time.now.strftime("%U").to_i'}}}
         result = JSON.parse(response.body)
@@ -71,7 +71,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     end
 
     context 'when acceptable filter week+year and appointments are present' do
-      it "returns with a successful response and the services" do
+      it "returns with a successful response and the appointments" do
         FactoryGirl.create_list(:appointment, 5)
         get :index, {:params => {:filter => {:week => '6', :year => '2006'}}}
         result = JSON.parse(response.body)
