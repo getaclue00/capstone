@@ -20,7 +20,6 @@ class CompanyPreferencesController < ApplicationController
       if current_user.employee.company_preference.id == company_preference_id || current_user.admin?
         begin
           if @company_preference.update!(company_preference_params)
-            byebug
             render json: @company_preference, status: :ok
           else
             render json: { error: 'not updated' }, status: :bad_request

@@ -22,7 +22,8 @@ class EmployeesController < ApplicationController
   def create
     if current_user && current_user.admin?
       begin
-        employee=Employee.new(employee_sanitized_params)
+        employee = Employee.new(employee_sanitized_params)
+        employee.company = Company.find_by_name('R & A DETAILING')
         if employee.save!
           render json: employee, status: :created
         else

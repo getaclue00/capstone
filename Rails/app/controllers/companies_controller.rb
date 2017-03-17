@@ -14,7 +14,20 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1
   def update
-    if current_user
+    if current_user && current_user.admin?
+      begin
+        if @company.update!(company_params)
+          render json: @company, status: :ok
+        else
+          render json: { error: 'not updated' }, status: :bad_request
+        end
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { error: 'No record exists' }, status: :not_found
+      rescue ActiveRecord::RecordInvalid => e
+        render json: { error: @company.errors.messages}, status: :bad_request
+      rescue ActiveRecord::StatementInvalid => e
+        render json: { error: 'Update failed. Check your data.'}, status: :bad_request
+      end
     else
       render json: { error: 'Not authorized' }, status: :bad_request
     end

@@ -21,7 +21,6 @@ FactoryGirl.define do
     work_sunday false
     sunday_open "MyString"
     sunday_close "MyString"
-    employee nil
     contact_email "MyString"
     contact_phone_number "MyString"
   end
