@@ -10,11 +10,10 @@ Rails.application.routes.draw do
     sessions: 'sessions'
   }, skip: [:registrations, :passwords]
 
-  resources :clients
+  resources :clients, constraints: ApiConstraint.new
   resources :employees, constraints: ApiConstraint.new
-  resources :cars
   resources :services, constraints: ApiConstraint.new
-  resources :appointments, constraints: ApiConstraint.new
+  resources :appointments
 
   get "users", to: 'users#index', constraints: ApiConstraint.new
   get "users/:id", to: 'users#show', constraints: ApiConstraint.new

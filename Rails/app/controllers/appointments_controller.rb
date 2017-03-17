@@ -13,24 +13,25 @@ class AppointmentsController < ApplicationController
       current_week = Time.now.strftime("%U").to_i
       appointments_array=Appointment.where('week_number = ?', current_week).all
     elsif get_versions
-      appointment=Appointment.where('id = ?', params[:version][:id])[0] #to get appointment for which we require versions history
+      appointment=Appointment.find params[:version][:id] #to get appointment for which we require versions history
       prev=appointment.paper_trail.previous_version
-
       if prev #appointment has a previous version?
         appointments_array=Array.new(appointment.versions.length)
-        appointments_array[0]=prev
-        for i in 1..appointment.versions.length-1
-          appointments_array[i]=prev.paper_trail.previous_version
+        for i in 0..appointment.versions.length-1
+            appointments_array[i]=prev
+            prev=prev.paper_trail.previous_version
         end
       end
-
     else
       appointments_array=Appointment.all
     end
 
     if appointments_array && !appointments_array.empty?
-      puts json: appointments_array
-      render json: appointments_array, status: :ok
+      if get_versions
+        render json: appointments_array, adapter: :json, status: :ok
+      else
+        render json: appointments_array, status: :ok
+      end
     else
       render json: [], status: :ok
     end
