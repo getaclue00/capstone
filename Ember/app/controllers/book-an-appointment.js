@@ -85,7 +85,7 @@ export default Ember.Controller.extend({
 
       function transitionToPost() {
         window.scrollTo(0,0);
-        flashMessages.success('Appointment was booked');
+        self.transitionToRoute('booking-complete');
       }
 
       function failure() {
