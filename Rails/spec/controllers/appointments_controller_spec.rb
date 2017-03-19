@@ -49,14 +49,25 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
 
-    context 'when filter and appointments are not present' do
-      it "returns an error" do
-        get :index, {:params => {:filter => {:week => ''}}}
+    context 'when acceptable filter and appointments are not present' do
+      it "returns success with no data" do
+        get :index, {:params => {:filter => {:week => 'Time.now.strftime("%U").to_i'}}}
 
         result = JSON.parse(response.body)
 
         expect(result['data']).to be_empty
         expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when version requested and appointments are not present' do
+      it "returns error", :versioning => true do
+        get :index, {:params => {:version => {:id => 0}}}
+
+        result = JSON.parse(response.body)
+
+        expect(result['error']).to eq('No such appointment exists')
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -79,6 +90,31 @@ RSpec.describe AppointmentsController, :type => :controller do
         expect(response).to have_http_status(200)
       end
     end
+
+    context 'when versions of an appointment is requested and appointment present and does not have versions' do
+      it "returns with a successful response and empty array", :versioning => true do
+        expect(PaperTrail).to be_enabled
+        appointment = FactoryGirl.create :appointment
+
+        get :index, {:params => {:version => {:id => appointment.id}}}
+        result = JSON.parse(response.body)
+        expect(result).to eq("data" => [])
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when versions of an appointment is requested and appointment present and has versions' do
+      it "returns with a successful response and the appointment's versions", :versioning => true do
+        expect(PaperTrail).to be_enabled
+        appointment = FactoryGirl.create :appointment
+        appointment.update_attributes!(status: 'completed')
+
+        get :index, {:params => {:version => {:id => appointment.id}}}
+        result = JSON.parse(response.body)
+        expect(result['appointments'][0]['status']).to eq('pending')
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe 'GET Appointments#show' do
@@ -88,7 +124,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq('This appointment does not exist')
+        expect(result['error']).to eq('No such appointment exists')
         expect(response).to have_http_status(:not_found)
       end
     end

@@ -3,37 +3,41 @@ class AppointmentsController < ApplicationController
   before_action :set_paper_trail_whodunnit #monitor who created/modified/deleted appointment in versions table
 
     def index
+      begin
 
-    select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
-    current_week = params[:filter].present? && params[:filter][:week].present?
-    get_versions = params[:version].present? && params[:version][:id].present?
-    if select_week_year
-      appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
-    elsif current_week
-      current_week = Time.now.strftime("%U").to_i
-      appointments_array=Appointment.where('week_number = ?', current_week).all
-    elsif get_versions
-      appointment=Appointment.find params[:version][:id] #to get appointment for which we require versions history
-      prev=appointment.paper_trail.previous_version
-      if prev #appointment has a previous version?
-        appointments_array=Array.new(appointment.versions.length)
-        for i in 0..appointment.versions.length-1
-            appointments_array[i]=prev
-            prev=prev.paper_trail.previous_version
+        select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
+        current_week = params[:filter].present? && params[:filter][:week].present?
+        get_versions = params[:version].present? && params[:version][:id].present?
+        if select_week_year
+          appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
+        elsif current_week
+          current_week = Time.now.strftime("%U").to_i
+          appointments_array=Appointment.where('week_number = ?', current_week).all
+        elsif get_versions
+          appointment=Appointment.find params[:version][:id] #to get appointment for which we require versions history
+          prev=appointment.paper_trail.previous_version
+          if prev #appointment has a previous version?
+            appointments_array=Array.new(appointment.versions.length)
+            for i in 0..appointment.versions.length-1
+                appointments_array[i]=prev
+                prev=prev.paper_trail.previous_version
+            end
+          end
+        else
+          appointments_array=Appointment.all
         end
-      end
-    else
-      appointments_array=Appointment.all
-    end
 
-    if appointments_array && !appointments_array.empty?
-      if get_versions
-        render json: appointments_array, adapter: :json, status: :ok
-      else
-        render json: appointments_array, status: :ok
-      end
-    else
-      render json: [], status: :ok
+        if appointments_array && !appointments_array.empty?
+          if get_versions
+            render json: appointments_array, adapter: :json, status: :ok
+          else
+            render json: appointments_array, status: :ok
+          end
+        else
+          render json: [], status: :ok
+        end
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { error: 'No such appointment exists' }, status: :not_found
     end
   end
 
@@ -42,7 +46,7 @@ class AppointmentsController < ApplicationController
       appointment=Appointment.find params[:id]
       render json: appointment, status: :ok
     rescue ActiveRecord::RecordNotFound => e
-      render json: { error: 'This appointment does not exist' }, status: :not_found
+      render json: { error: 'No such appointment exists' }, status: :not_found
     end
   end
 
@@ -121,6 +125,7 @@ class AppointmentsController < ApplicationController
   end
 
    def user_for_paper_trail
+    # used for overriding the default "currentUser" and storing who did the change on the object
       current_user
   end
 
