@@ -128,6 +128,11 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "POST Users#create" do
 
+    before :each do
+      user = FactoryGirl.create :user, email: 'current@current.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when the data is empty' do
       it "returns an error" do
         post :create
@@ -250,8 +255,14 @@ RSpec.describe UsersController, :type => :controller do
    end
 
   describe 'PATCH User#update' do
+
+    before :each do
+      @user = FactoryGirl.create :user, email: 'current@current.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{@user.authentication_token}\", email=\"#{@user.email}\""
+    end
+
     context 'when no such user exists' do
-      it 'returns an error' do
+      it 'responds with not found, returns an error, and user is an admin'  do
 
         user = FactoryGirl.create :user
         user.password = "Updated password"
@@ -269,12 +280,69 @@ RSpec.describe UsersController, :type => :controller do
         expect(result['error']).to eq('No such user exists')
         expect(response).to have_http_status(:not_found)
       end
+
+      it 'responds with not found, returns an error, and user is the user but not an admin'  do
+
+        user = FactoryGirl.create :user
+        @user = user
+        @user.admin = false
+        @user.save
+
+        user.password = "Updated password"
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: { id: 777, data: params['data']}
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('No such user exists')
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'responds with not found, returns an error, and user is not the user and not an admin'  do
+        @user.admin = false
+        @user.save
+
+        user = FactoryGirl.create :user
+        user.password = "Updated password"
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: { id: 777, data: params['data']}
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('Not Authorized')
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
 
 
     context 'when the user exists and the update had no params sent' do
-      it "responds with a bad request" do
+      it "responds with a bad request (and user is an admin)" do
         user = FactoryGirl.create :user
+
+        patch :update, params: { id: user.id }
+
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('User update failed. No parameters sent.')
+        expect(response).to have_http_status(:bad_request)
+      end
+
+      it "responds with a bad request (and user is the user but not an admin)" do
+        user = FactoryGirl.create :user
+        @user = user
+        @user.admin = false
+        @user.save
 
         patch :update, params: { id: user.id }
 
@@ -284,7 +352,7 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
-    context 'when the user exists and the correct params were sent' do
+    context 'when the user exists and the correct params were sent (and user is an admin)' do
       it "responds successfully" do
         user = FactoryGirl.create :user
         user.email = "new@new.com"
@@ -312,8 +380,66 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
 
+     context 'when the user exists and the correct params were sent (and user is not the user nor an admin)' do
+      it "responds with unauthorized" do
+        @user.admin = false
+        @user.save
+
+        user = FactoryGirl.create :user
+        user.email = "new@new.com"
+        user.password = "password"
+        user.admin = true
+        # we made it such that employee for a given user cannot be updated
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: user.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['error']).to eq('Not Authorized')
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'when the user exists and the correct params were sent (and user is the user the user but not an admin)' do
+      it "responds with unauthorized" do
+
+        user = FactoryGirl.create :user
+        user.email = "new@new.com"
+        user.password = "password"
+        # we made it such that employee for a given user cannot be updated
+
+        @user=user
+        @user.save
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: user.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['data']['id'].to_i).to eq(user.id)
+        attr = parsed_response['data']['attributes']
+        expect(attr["email"]).to eq(user.email)
+        expect(attr["password"]).to eq(nil) #we dont return password
+        expect(attr["admin"]).to eq(user.admin)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
     context 'when the user exists and the incorrect params were sent' do
-      it "responds successfully" do
+      it "responds with a bad request when user is an admin" do
         user = FactoryGirl.create :user
         user.email = "new"
         user.password = "dd"
@@ -332,10 +458,38 @@ RSpec.describe UsersController, :type => :controller do
         expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
         expect(response).to have_http_status(:bad_request)
       end
+
+      it "responds with a bad request when user is the user but not an admin" do
+        user = FactoryGirl.create :user
+        user.email = "new"
+        user.password = "dd"
+
+        @user=user
+        @user.save
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: user.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
+        expect(response).to have_http_status(:bad_request)
+      end
     end
    end
 
    describe 'DELETE Users#destroy' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'current@current.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when there are no users by such an id' do
       it 'returns an error' do
         delete :destroy, params: { id: 999 }
