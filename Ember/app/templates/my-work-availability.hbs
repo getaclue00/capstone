@@ -1,8 +1,8 @@
 {{#each flashMessages.queue as |flash|}}
   {{flash-message flash=flash messageStyle='bootstrap'}}
 {{/each}}
-<div class="card text-center" style="border-bottom-width: 0px;">
-  <div class="card-header" style="font-size: 2em;">
+<div class="my-work-availability card text-center remove-border-bottom-width">
+  <div class="card-header">
     <div class="row">
       <div class="col-2">
         {{#link-to 'my-account'}}
@@ -21,8 +21,8 @@
         <form {{action "saveCompanyPreference" on="submit"}}>
           <div class="row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="monday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Monday:</label>
+              <div class="form-group row">
+                <label for="monday" class="col-5 col-form-label font-weight-bold label-transform">Monday:</label>
                 <div class="admin-switch col-3" {{action 'toggleMonday' model}}>
                   {{input type="checkbox" id="monday" class="checkbox" checked=model.workMonday}}
                   <div class="slider round"></div>
@@ -47,10 +47,10 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
+          <div class="row add-padding-to-row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="tuesday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Tuesday:</label>
+              <div class="form-group row remove-left-and-right-margin">
+                <label for="tuesday" class="col-5 col-form-label font-weight-bold label-transform">Tuesday:</label>
                 <div class="admin-switch col-3" {{action 'toggleTuesday' model}}>
                   {{input type="checkbox" id="tuesday" class="checkbox" checked=model.workTuesday}}
                   <div class="slider round"></div>
@@ -75,10 +75,10 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
+          <div class="row add-padding-to-row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="wednesday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Wednesday:</label>
+              <div class="form-group row remove-left-and-right-margin">
+                <label for="wednesday" class="col-5 col-form-label font-weight-bold label-transform">Wednesday:</label>
                 <div class="admin-switch col-3" {{action 'toggleWednesday' model}}>
                   {{input type="checkbox" id="wednesday" class="checkbox" checked=model.workWednesday}}
                   <div class="slider round"></div>
@@ -103,10 +103,10 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
+          <div class="row add-padding-to-row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="thursday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Thursday:</label>
+              <div class="form-group row remove-left-and-right-margin">
+                <label for="thursday" class="col-5 col-form-label font-weight-bold label-transform">Thursday:</label>
                 <div class="admin-switch col-3" {{action 'toggleThursday' model}}>
                   {{input type="checkbox" id="thursday" class="checkbox" checked=model.workThursday}}
                   <div class="slider round"></div>
@@ -131,10 +131,10 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
+          <div class="row add-padding-to-row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="friday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Friday:</label>
+              <div class="form-group row remove-left-and-right-margin">
+                <label for="friday" class="col-5 col-form-label font-weight-bold label-transform">Friday:</label>
                 <div class="admin-switch col-3" {{action 'toggleFriday' model}}>
                   {{input type="checkbox" id="friday" class="checkbox" checked=model.workFriday}}
                   <div class="slider round"></div>
@@ -159,10 +159,10 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
+          <div class="row add-padding-to-row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="saturday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Saturday:</label>
+              <div class="form-group row remove-left-and-right-margin">
+                <label for="saturday" class="col-5 col-form-label font-weight-bold label-transform">Saturday:</label>
                 <div class="admin-switch col-3" {{action 'toggleSaturday' model}}>
                   {{input type="checkbox" id="saturday" class="checkbox" checked=model.workSaturday}}
                   <div class="slider round"></div>
@@ -187,10 +187,10 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
+          <div class="row add-padding-to-row">
             <div class="col">
-              <div class="form-group row" style="margin-left: 0px; margin-right: 0px;">
-                <label for="sunday" class="col-5 col-form-label font-weight-bold" style="text-transform: uppercase; padding-left: 0px;">Sunday:</label>
+              <div class="form-group row remove-left-and-right-margin">
+                <label for="sunday" class="col-5 col-form-label font-weight-bold label-transform">Sunday:</label>
                 <div class="admin-switch col-3" {{action 'toggleSunday' model}}>
                   {{input type="checkbox" id="sunday" class="checkbox" checked=model.workSunday}}
                   <div class="slider round"></div>
@@ -215,8 +215,8 @@
               </div>
             </div>
           {{/if}}
-          <div class="row" style="padding-top: 1em;">
-             <div class="btn-group" role="group" style="width: 100%">
+          <div class="row add-padding-to-row">
+             <div class="btn-group full-width" role="group">
                <div class="col-6">
                  <button type="submit" class="btn btn-primary btn-block">Save</button>
                </div>
