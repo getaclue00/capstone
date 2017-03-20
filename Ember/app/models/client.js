@@ -30,8 +30,8 @@ const Validations = buildValidations({
     validators: [
       validator('presence', true),
       validator('format', {
-        regex: /^[1-9]\d{2}-\d{3}-\d{4}/,
-        message: '613-312-3321 is an example'
+        regex: /^\d{10}$/,
+        message: '6133123321 is an example'
       })
     ]
   },
