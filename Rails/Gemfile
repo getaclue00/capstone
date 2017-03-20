@@ -8,7 +8,6 @@ gem 'pg'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'devise'
 gem 'paper_trail'
-gem 'active_model_serializers', '~> 0.10.0'
 gem 'sidekiq'
 # active_model_serializers dependencies
 # as per https://github.com/rails-api/active_model_serializers/pull/1955

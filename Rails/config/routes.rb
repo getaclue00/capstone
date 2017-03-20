@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :clients, constraints: ApiConstraint.new
   resources :employees, constraints: ApiConstraint.new
   resources :services, constraints: ApiConstraint.new
-  resources :appointments
+  resources :appointments, constraints: ApiConstraint.new
 
   get "users", to: 'users#index', constraints: ApiConstraint.new
   get "users/:id", to: 'users#show', constraints: ApiConstraint.new
