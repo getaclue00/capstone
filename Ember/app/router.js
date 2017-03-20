@@ -41,7 +41,6 @@ Router.map(function() {
   this.route('booking-complete');
   this.route('my-work-availability');
   this.route('company-business-hours');
->>>>>>> master
 });
 
 export default Router;

@@ -259,6 +259,69 @@ $breakpoint-alpha: 768px;
   }
 }
 
+.booking-complete-style {
+
+  .top-thank-you-page {
+    padding-top: 50px;
+    background-color: #292b2c;
+  }
+
+  .thank-you {
+    position: absolute;
+    margin: auto;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: red;
+    background: -webkit-linear-gradient(left, #C0C0C0 , #808080 );
+    background: -o-linear-gradient(right, #C0C0C0, #808080 );
+    background: -moz-linear-gradient(right, #C0C0C0, #808080 );
+    background: linear-gradient(to right, #C0C0C0 , #808080 );
+
+    .thank-you-message {
+      font-family: 'EB Garamond', serif;
+      background-color: #f5f5f5;
+      margin: 100px auto auto auto;
+
+      .check-glyphicon {
+        font-size: 350%;
+        color: #00b200;
+        margin-top: 20px
+      }
+
+      h2 {
+        margin-top: 10px;
+        font-size: 2.25em;
+        text-transform: uppercase;
+        text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+
+          &::before, &::after {
+          content: "§";
+          display: inline-block;
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+          margin: 0 0.8em;
+          font-size: 0.75em;
+        }
+      }
+
+      .options-after-booking {
+        padding-bottom: 20px;
+
+      }
+
+      p {
+
+        color: #F20303;
+      }
+    }
+  }
+}
+
 //Styling for computer
 @media (min-width: $breakpoint-alpha) {
 
@@ -266,6 +329,12 @@ $breakpoint-alpha: 768px;
 
     .client-information{
       text-align: right;
+    }
+  }
+  .thank-you-message {
+
+    img {
+      width: 25%;
     }
   }
 }
@@ -284,5 +353,17 @@ $breakpoint-alpha: 768px;
     }
   }
 
+  .options-after-booking {
+
+    a {
+      font-size: 3.2vw;
+    }
+  }
+  .thank-you-message {
+
+    img {
+      width: 75%;
+    }
+  }
 }
 
