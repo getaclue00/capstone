@@ -65,8 +65,11 @@ export default Ember.Controller.extend({
       var client = self.get('client');
       var time = self.get('selectedTime');
       var date = self.get('selectedDate');
+      var location =  client.get('address');
+      var phoneNum = client.get('phoneNumber').match(new RegExp('.{1,4}$|.{1,3}', 'g')).join("-");
       var startTime = moment(date + " " + time,'MMMM D, YYYY h:mm A' ).format('YYYY-MM-DD HH:mm:ss');
-      var endTime = moment(date + " " + moment(time, 'h:mm A').add(service.get('duration'), 'minutes').format('h:mm A')).format('YYYY-MM-DD HH:mm:ss');
+      var endTime = moment(date + " " + moment(time, 'h:mm A')
+                    .add(service.get('duration') + service.get('bufferTime'), 'minutes').format('h:mm A')).format('YYYY-MM-DD HH:mm:ss');
 
       self.get('store').query('client', {
         filter: {
@@ -77,10 +80,10 @@ export default Ember.Controller.extend({
 
         if(existingClient) {
           client = existingClient;
-          saveAppointment();
-        } else {
-          client.save().then(saveAppointment).catch(failure);
         }
+
+        client.set('phoneNumber', phoneNum);
+        client.save().then(saveAppointment).catch(failure);
       });
 
       function transitionToPost() {
@@ -97,7 +100,7 @@ export default Ember.Controller.extend({
 
         self.get('appointment').set('client', client);
         self.get('appointment').set('cost', service.get('price'));
-        self.get('appointment').set('location', client.get('address'));
+        self.get('appointment').set('location', location);
         self.get('appointment').set('start', startTime);
         self.get('appointment').set('end', endTime);
         self.get('appointment').set('weekNumber', moment(date, 'MMMM D, YYYY').week());

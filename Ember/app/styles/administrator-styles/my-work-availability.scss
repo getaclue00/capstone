@@ -1,0 +1,28 @@
+.my-work-availability.card.text-center {
+  border-bottom-width: 0px;
+}
+.my-work-availability {
+  .card-header {
+    font-size: 2em;
+  }
+  .form-group.row {
+    margin-left: 0px;
+    margin-right: 0px;
+    .label-transform {
+      text-transform: uppercase;
+      padding-left: 0px;
+    }
+  }
+  .card-text {
+    .add-padding-to-row {
+      padding-top: 1em;
+      .remove-left-and-right-margin {
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+      .full-width {
+        width: 100%;
+      }
+    }
+  }
+}

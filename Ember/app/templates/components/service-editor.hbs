@@ -1,29 +1,35 @@
 <form class="row">
   <div class="col-12">
-    <div class="form-group row">
-      <label for="service-name" class="col-4 col-form-label">Service Name</label>
-      <div class="col-8">
+    <div class="form-group">
+      <label for="service-name" class="col-form-label editor-label">Service Name:</label>
+      <div>
         {{input type="text" class="form-control" value=model.name id="service-name"}}
       </div>
     </div>
-    <div class="form-group row">
-      <label for="service-duration" class="col-4 col-form-label">Duration (min)</label>
-      <div class="col-8">
+    <div class="form-group">
+      <label for="service-duration" class="col-form-label editor-label">Duration (min):</label>
+      <div>
         {{input type="text" class="form-control" value=model.duration id="service-duration"}}
       </div>
     </div>
-    <div class="form-group row">
-      <label for="service-price-vehicle" class="col-4 col-form-label">Price</label>
-      <div class="col-8">
+    <div class="form-group">
+      <label for="service-buffer" class="col-form-label editor-label">Buffer Time (min)</label>
+      <div>
+        {{input type="text" class="form-control" value=model.bufferTime id="service-buffer"}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="service-price-vehicle" class="col-form-label editor-label">Price:</label>
+      <div>
         <div class="input-group">
           <span class="input-group-addon">$</span>
           {{input type="number" pattern="\d*" class="form-control" id="service-price" value=model.price}}
         </div>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="service-vehicle-type" class="col-4 col-form-label">Vehicle</label>
-      <div class="col-8">
+    <div class="form-group">
+      <label for="service-vehicle-type" class="col-form-label editor-label">Vehicle: </label>
+      <div>
         {{#power-select
           options=sizes
           selected=model.vehicleSize
@@ -37,21 +43,21 @@
           </div>
     </div>
     <div class="form-group row">
-      <label for="service-active" class="col-5 col-form-label">Active</label>
+      <label for="service-active" class="col-5 col-form-label editor-label">Active: </label>
       <div class="admin-switch" id="active-switch" {{action 'selectActive'}}>
         {{input type="checkbox" id="service-active" class="checkbox" checked=model.active}}
         <div class="slider round"></div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="service-displayable" class="col-5 col-form-label">Displayable</label>
+      <label for="service-displayable" class="col-5 col-form-label editor-label">Displayable: </label>
       <div class="admin-switch" id="displayable-switch" {{action 'selectDisplayable'}}>
         {{input type="checkbox" id="service-displayable" class="checkbox" checked=model.displayable}}
         <div class="slider round"></div>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="service-description" class="col-12 col-form-label">Description</label>
+    <div class="form-group">
+      <label for="service-description" class="col-form-label editor-label">Description:</label>
       <div class="col-12">
         {{textarea class="form-control" id="service-description" value=model.description rows=3}}
       </div>

@@ -39,6 +39,9 @@ Router.map(function() {
   });
   this.route('book-an-appointment');
   this.route('booking-complete');
+  this.route('my-work-availability');
+  this.route('company-business-hours');
+>>>>>>> master
 });
 
 export default Router;

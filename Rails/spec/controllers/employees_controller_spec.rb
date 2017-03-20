@@ -181,7 +181,9 @@ RSpec.describe EmployeesController, :type => :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:bad_request)
-        expect(result['error']).to eq( {"phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]})
+        expect(result['error']).to eq({
+          "phone_number"=>["Please enter a valid phone number 000-000-0000"], "postal_code"=>["Please enter a valid postal code G5G 6T6"]
+          })
       end
     end
    end

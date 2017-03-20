@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  before_action :authenticate_user_from_token!
 	#actions
 	#render is implicit for all actions since name of action and view are the same
 
@@ -60,13 +61,17 @@ class ClientsController < ApplicationController
 	end
 
 	def destroy
-		begin
-			client=Client.find params[:id]
-			client.destroy
-			head :no_content
-		rescue ActiveRecord::RecordNotFound => e
-			render json: { error: 'No such client exists' }, status: :not_found
-		end
+    if current_user && current_user.admin?
+  		begin
+  			client=Client.find params[:id]
+  			client.destroy
+  			head :no_content
+  		rescue ActiveRecord::RecordNotFound => e
+  			render json: { error: 'No such client exists' }, status: :not_found
+  		end
+    else
+      render json: { error: 'Not Authorized' }, status: 401
+    end
 	end
 
 
