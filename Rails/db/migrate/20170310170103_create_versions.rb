@@ -21,8 +21,8 @@ class CreateVersions < ActiveRecord::Migration
       t.integer  :item_id,   null: false
       t.string   :event,     null: false
       t.string   :whodunnit
-      # t.json     :object
       t.text     :object, limit: TEXT_BYTES
+      t.text     :object_changes, limit: TEXT_BYTES
 
       # Known issue in MySQL: fractional second precision
       # -------------------------------------------------
