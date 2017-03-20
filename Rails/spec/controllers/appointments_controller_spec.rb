@@ -51,7 +51,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
     context 'when acceptable filter and appointments are not present' do
       it "returns success with no data" do
-        get :index, {:params => {:filter => {:week => 'Time.now.strftime("%U").to_i'}}}
+        get :index, {:params => {:filter => {:week => Time.now.strftime("%U").to_i, :year => Time.now.year}}}
 
         result = JSON.parse(response.body)
 
@@ -68,16 +68,6 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         expect(result['error']).to eq('No such appointment exists')
         expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context 'when acceptable filter week and appointments are present' do
-      it "returns with a successful response and the appointments" do
-        FactoryGirl.create_list(:appointment, 5)
-        get :index, {:params => {:filter => {:week => 'Time.now.strftime("%U").to_i'}}}
-        result = JSON.parse(response.body)
-        expect(result['data'].length).to eq(5)
-        expect(response).to have_http_status(:ok)
       end
     end
 

@@ -6,13 +6,9 @@ class AppointmentsController < ApplicationController
       begin
 
         select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
-        current_week = params[:filter].present? && params[:filter][:week].present?
         get_versions = params[:version].present? && params[:version][:id].present?
         if select_week_year
           appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
-        elsif current_week
-          current_week = Time.now.strftime("%U").to_i
-          appointments_array=Appointment.where('week_number = ?', current_week).all
         elsif get_versions
           appointment=Appointment.find params[:version][:id] #to get appointment for which we require versions history
           prev=appointment.paper_trail.previous_version

@@ -38,7 +38,7 @@ Router.map(function() {
     this.route('delete', { path: "/delete/:users_id" });
   });
   this.route('book-an-appointment');
-  this.route('appointment-history', { path: "/:appointments_id" });
+  this.route('appointment-history', { path: "/appointments/:appointments_id/history" });
 });
 
 export default Router;
