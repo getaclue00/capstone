@@ -16,8 +16,10 @@ export default Model.extend({
   startDate:    attr('isodate'),
   endDate:      attr('isodate'),
   notes:        attr('string'),
-  appointments: hasMany('appointment', { async: true }),
-  user:   belongsTo('user'),
+  appointments:         hasMany('appointment', { async: true }),
+  user:                 belongsTo('user'),
+  companyPreference:    belongsTo('company-preference'),
+  company:              belongsTo('company'),
   fullName: Ember.computed('lastName', 'firstName', function(){
     return `${this.get('firstName')} ${this.get('lastName')}`;
   }),
@@ -25,7 +27,6 @@ export default Model.extend({
     return `${this.get('streetNumber')}-${this.get('streetName')}, ${this.get('city')}, \
 ${this.get('province')}, ${this.get('postalCode')}`;
  }),
-
   formattedStartDate: Ember.computed('startDate', function(){
     return moment(this.get('startDate')).format('YYYY-MM-DDTHH:mm');
   })

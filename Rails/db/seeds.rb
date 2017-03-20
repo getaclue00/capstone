@@ -7,29 +7,31 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #used in appointments table to reference a deleted employee/client/service and cannot be deleted if referenced by appointments
-Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
-Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'default@test.com', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+company = Company.create({ contact_phone_number: '613-676-3723', contact_email: 'info@radetailing.ca' })
+Employee.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0', company: company })
+Client.create({ id: '0', last_name: 'DEFAULT', first_name: 'DEFAULT', email: 'default@test.com', phone_number: '000-000-0000', street: '0 DEFAULT', postal_code: 'A0A 0A0' })
+
 Service.create({id: '0', name: 'DEFAULT', active: false, displayable: false})
 
-Client.create({ id: '1', last_name: 'Testing', first_name: 'Tester', email: 'test@test.com', phone_number: '111-111-1111', street_number: '1', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+Client.create({ id: '1', last_name: 'Testing', first_name: 'Tester', email: 'test@test.com', phone_number: '111-111-1111', street: '1 DEFAULT', postal_code: 'A0A 0A0'})
 
 Appointment.create({title: 'Batman Appointment', client_id: '1', service_id: '0'}) #employee_id can be null
 Appointment.create({title: 'Someother Appointment', notes: 'Extra notes go here.', client_id: '1', service_id: '0'})
 Appointment.create({title: 'Wash Joes Car', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', client_id: '0', service_id: '0'})
 Appointment.create({title: 'Appointment With Employee, Car, and Service', notes: 'Car is super new. Needs special buffer compound. Window is tinted.', client_id: 0, service_id: 0, employee_id: 0})
 
-Employee.create({ id: '1', last_name: 'Testing', first_name: 'Tester', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
-Employee.create({ id: '2', last_name: 'Wayne', first_name: 'Bruce', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0'})
+Employee.create({ id: '1', last_name: 'Testing', first_name: 'Tester', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0', company: company})
+Employee.create({ id: '2', last_name: 'Wayne', first_name: 'Bruce', phone_number: '000-000-0000', street_number: '0', street_name: 'DEFAULT', postal_code: 'A0A 0A0', company: company})
 
 User.create({email: 'test@test.com', password: 'password', admin: true, employee_id: '1'})
 User.create({email: 'batman@batman.com', password: 'password', admin: false, employee_id: '2'})
 
-Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'Small', duration: '90', description: '...', active: true, displayable: true})
-Service.create({name: 'Platinum', price: '159', vehicle_size: 'Small', duration: '150', description: '...', active: true, displayable: true})
-Service.create({name: 'Silver', price: '90', vehicle_size: 'Small', duration: '99', description: '...', active: true, displayable: true})
-Service.create({name: 'Shampoo for Tough Stains and Spills', price: '100', vehicle_size: 'Small', duration: '90', description: '...', active: true, displayable: true})
+Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'Small', duration: '90', description: '...', active: true, displayable: true, buffer_time: '60'})
+Service.create({name: 'Platinum', price: '159', vehicle_size: 'Small', duration: '150', description: '...', active: true, displayable: true, buffer_time: '60'})
+Service.create({name: 'Silver', price: '90', vehicle_size: 'Small', duration: '99', description: '...', active: true, displayable: true, buffer_time: '60'})
+Service.create({name: 'Shampoo for Tough Stains and Spills', price: '100', vehicle_size: 'Small', duration: '90', description: '...', active: true, displayable: true, buffer_time: '60'})
 
-Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'Large', duration: '90', description: '...', active: true, displayable: true})
+Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'Large', duration: '90', description: '...', active: true, displayable: true, buffer_time: '60'})
 Service.create({name: 'Platinum', price: '179', vehicle_size: 'Large', duration: '150', description: '...', active: true, displayable: true})
-Service.create({name: 'Silver', price: '79', vehicle_size: 'Large', description: '...', active: true, displayable: true})
-Service.create({name: 'Shampoo for Tough Stains and Spills', price: '130', vehicle_size: 'Large', duration: '90', description: '...', active: true, displayable: true})
+Service.create({name: 'Silver', price: '79', vehicle_size: 'Large', description: '...', active: true, displayable: true, buffer_time: '60'})
+Service.create({name: 'Shampoo for Tough Stains and Spills', price: '130', vehicle_size: 'Large', duration: '90', description: '...', active: true, displayable: true, buffer_time: '60'})

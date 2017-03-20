@@ -4,11 +4,11 @@ class ServicesController < ApplicationController
 
   def index
     if params[:filter].present? && params[:filter][:vehicle_size].present?
-        if params[:filter][:displayable].present?
-          services_array = Service.where('vehicle_size = ? AND displayable = ?', params[:filter][:vehicle_size], params[:filter][:displayable]).all
-        else
-          services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
-        end
+      if params[:filter][:displayable].present?
+        services_array = Service.where('vehicle_size = ? AND displayable = ?', params[:filter][:vehicle_size], params[:filter][:displayable]).all
+      else
+        services_array = Service.where('vehicle_size = ?', params[:filter][:vehicle_size]).all
+      end
     else
       services_array=Service.all
     end
@@ -93,6 +93,6 @@ class ServicesController < ApplicationController
       #can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
       # whereas the "safe" version simply returns an empty hash.
       #this changes from JSONAPI to json
-      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:name, :price, :vehicle_size, :duration, :description, :active, :displayable] )
+      ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:name, :price, :vehicle_size, :duration, :description, :active, :displayable, :buffer_time] )
     end
 end

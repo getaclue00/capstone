@@ -1,0 +1,116 @@
+<form class="form-horizontal form-label-left input_mask client-information-form">
+  <p class="text-center"><strong>Personal Information</strong></p>
+  <div class="form-group">
+    <label for="client-first-name" class="col-form-label">First Name *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+      {{input required="required" class="form-control" value=client.firstName id="client-first-name" placeholder="First Name *" name="First Name" focus-out=(action (mut showFirstNameError) true)}}
+    </div>
+    {{#if showFirstNameError}}
+      <div class="error">
+        {{v-get client 'firstName' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label for="client-last-name" class="col-form-label">Last Name *</label>
+    <div class="input-group">
+      {{input required="required" class="form-control" value=client.lastName id="client-last-name" placeholder="Last Name *" name="Last Name" focus-out=(action (mut showLastNameError) true)}}
+      <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+    </div>
+    {{#if showLastNameError}}
+      <div class="error">
+        {{v-get client 'lastName' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label for="client-email" class="col-form-label">Email *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+        {{input required="required" type="text" class="form-control" value=client.email id="client-email" placeholder="E-mail *" name="E-mail" focus-out=(action (mut showEmailError) true)}}
+    </div>
+    {{#if showEmailError}}
+      <div class="error">
+        {{v-get client 'email' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label for="client-phone-number" class="col-form-label">Phone Number *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>
+      {{input type="tel" class="form-control" value=client.phoneNumber id="client-phone-number" required="required" placeholder="Phone *" name="Phone Number" focus-out=(action (mut showPhoneError) true)}}
+    </div>
+    {{#if showPhoneError}}
+      <div class="error">
+        {{v-get client 'phoneNumber' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <p class="text-center"><strong>Address</strong></p>
+  <div class="form-group">
+    <label for="client-street" class="col-form-label">Street *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-road"></span></span>
+      {{input required="required" type="text" class="form-control" value=client.street id="client-street" placeholder="Street *" name="Street Information" focus-out=(action (mut showStreetError) true)}}
+    </div>
+    {{#if showStreetError}}
+      <div class="error">
+        {{v-get client 'street' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label for="client-city" class=" col-form-label">City *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+      {{input required="required" type="text" class="form-control" value=client.city id="client-city" placeholder="City *" name="City" focus-out=(action (mut showCityError) true)}}
+    </div>
+    {{#if showCityError}}
+      <div class="error">
+        {{v-get client 'city' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label for="client-province" class="col-form-label">Province *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+      {{input required="required" type="text" class="form-control" value=client.province id="client-province" placeholder="Province *" name="Province" list="provinces" focus-out=(action (mut showProvinceError) true)}}
+      <datalist id="provinces">
+        <option value="Ontario" />
+        <option value="Quebec" />
+      </datalist>
+    </div>
+    {{#if showProvinceError}}
+      <div class="error">
+        {{v-get client 'province' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group">
+    <label for="client-postal-code" class="col-form-label">Postal Code *</label>
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+      {{input required="required" type="text" class="form-control" value=client.postalCode id="client-postal-code" placeholder="Postal Code *" name="Postal Code" focus-out=(action (mut showPostalCodeError) true)}}
+    </div>
+    {{#if showPostalCodeError}}
+      <div class="error">
+        {{v-get client 'postalCode' 'message'}}
+      </div>
+    {{/if}}
+  </div>
+  <p class="text-center"><strong>Comments</strong></p>
+  <div class="form-group">
+      {{textarea class="form-control" id="personal-info-comments" rows="3" placeholder="Any special instructions" value=appointment.notes}}
+  </div>
+  <div class="buttons">
+    <button class="btn btn-prev btn-md col-4" type="button" {{action 'moveToPreviousPage'}}>Prev</button>
+    <button class="btn btn-next btn-md col-4" id="move-to-confirmation" type="button" {{action 'verifyInformation'}}>Next</button>
+  </div>
+</form>
+<br />
+
+
+
