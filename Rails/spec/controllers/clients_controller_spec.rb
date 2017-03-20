@@ -241,6 +241,12 @@ RSpec.describe ClientsController, :type => :controller do
   end
 
   describe 'DELETE Clients#destroy' do
+
+    before :each do
+      user = FactoryGirl.create :user, email: 'test@test.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
+    end
+
     context 'when there are no clients by such an id' do
       it 'returns an error' do
         delete :destroy, params: { id: 999 }

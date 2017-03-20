@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170316175033) do
     t.boolean  "displayable",                           default: false,   null: false
     t.decimal  "price",        precision: 10, scale: 2
     t.string   "vehicle_size",                          default: "Small"
+    t.decimal  "buffer_time",  precision: 10, scale: 2
     t.index ["displayable"], name: "index_services_on_displayable", using: :btree
     t.index ["vehicle_size"], name: "index_services_on_vehicle_size", using: :btree
   end

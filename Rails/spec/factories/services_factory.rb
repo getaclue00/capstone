@@ -6,6 +6,7 @@ FactoryGirl.define do
     duration 2.0
     description "This is a description"
     active true
+    buffer_time 1.0
     #default displayable is false
 
     factory :service_with_appointment do

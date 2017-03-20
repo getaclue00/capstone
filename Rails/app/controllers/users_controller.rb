@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user_from_token!
+
   def index
     # change logic to check for admin vs not where isAdmin is obtained from employee table
 
@@ -30,48 +32,65 @@ class UsersController < ApplicationController
   end
 
   def create
-    begin
-          user=User.new(user_sanitized_params)
-          if user.save!
+    if current_user && current_user.admin?
+      begin
+        user=User.new(user_sanitized_params)
+        if user.save!
           render json: user, status: :created
         else
           render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
         end
-      rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-        render json: { error: 'User creation failed. No parameters sent.'}, status: :bad_request
-      rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
-        render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
-      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-        render json: { error: user.errors.messages}, status: :bad_request
+        rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+          render json: { error: 'User creation failed. No parameters sent.'}, status: :bad_request
+        rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
+          render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
+        rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
+          render json: { error: user.errors.messages}, status: :bad_request
+      end
+    else
+      render json: { error: 'Not Authorized' }, status: 401
     end
   end
 
   def update
-    begin
-      user=User.find params[:id]
-        if user.update!(user_sanitized_params)
-          render json: user, status: :ok
-        else
+    if current_user
+      params_user_id = params[:id].to_i
+      if current_user.id == params_user_id || current_user.admin?
+        begin
+          user=User.find params[:id]
+            if user.update!(user_sanitized_params)
+              render json: user, status: :ok
+            else
+              render json: { error: 'User update failed. Check your data.'}, status: :bad_request
+            end
+        rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
+          render json: { error: 'User update failed. No parameters sent.'}, status: :bad_request
+        rescue ActiveRecord::RecordNotFound => e
+          render json: { error: 'No such user exists' }, status: :not_found
+        rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
+          render json: { error: user.errors.messages}, status: :bad_request
+        rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
           render json: { error: 'User update failed. Check your data.'}, status: :bad_request
         end
-    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
-      render json: { error: 'User update failed. No parameters sent.'}, status: :bad_request
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { error: 'No such user exists' }, status: :not_found
-    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-      render json: { error: user.errors.messages}, status: :bad_request
-    rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
-      render json: { error: 'User update failed. Check your data.'}, status: :bad_request
+      else
+        render json: { error: 'Not Authorized' }, status: 401
+      end
+    else
+      render json: { error: 'Not Authorized' }, status: 401
     end
   end
 
   def destroy
+    if current_user && current_user.admin?
       begin
-      user=User.find params[:id]
-      user.destroy
-      head :no_content
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { error: 'No such user exists' }, status: :not_found
+        user=User.find params[:id]
+        user.destroy
+        head :no_content
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { error: 'No such user exists' }, status: :not_found
+      end
+    else
+      render json: { error: 'Not Authorized' }, status: 401
     end
   end
 
