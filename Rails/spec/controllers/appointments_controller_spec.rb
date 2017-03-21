@@ -5,6 +5,12 @@ RSpec.describe AppointmentsController, :type => :controller do
   include Devise::Test::ControllerHelpers
 
   describe 'GET Appointments#index' do
+
+    before :each do
+      @user = FactoryGirl.create :user, email: 'test@test.com'
+      controller.request.headers['Authorization'] = "Token token=\"#{@user.authentication_token}\", email=\"#{@user.email}\""
+    end
+
     context 'when there are no appointments' do
       it "returns an error" do
         get :index
@@ -27,7 +33,7 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
 
-    context 'when there are appointments but no filter' do
+    context 'when there are appointments but no filter (user admin)' do
       it "returns with a successful response and the appointments" do
         FactoryGirl.create_list(:appointment, 5)
         get :index
@@ -36,6 +42,19 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         expect(result['data'].length).to eq(5)
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when there are appointments but no filter (user not admin)' do
+      it "returns authorization failed" do
+        @user.admin=false
+        @user.save
+
+        FactoryGirl.create_list(:appointment, 5)
+        get :index
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('Not Authorized')
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
@@ -71,8 +90,21 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
 
-    context 'when acceptable filter week+year and appointments are present' do
+    context 'when acceptable filter week+year and appointments are present (user admin)' do
       it "returns with a successful response and the appointments" do
+        FactoryGirl.create_list(:appointment, 5)
+        get :index, {:params => {:filter => {:week => '6', :year => '2006'}}}
+        result = JSON.parse(response.body)
+        expect(result['data']).to be_empty
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when acceptable filter week+year and appointments are present (user not admin)' do
+      it "returns with a successful response and the appointments" do
+        @user.admin = false
+        @user.save
+
         FactoryGirl.create_list(:appointment, 5)
         get :index, {:params => {:filter => {:week => '6', :year => '2006'}}}
         result = JSON.parse(response.body)
@@ -93,7 +125,7 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
 
-    context 'when versions of an appointment is requested and appointment present and has versions' do
+    context 'when versions of an appointment is requested and appointment present and has versions (user admin)' do
       it "returns with a successful response and the appointment's versions", :versioning => true do
         expect(PaperTrail).to be_enabled
         appointment = FactoryGirl.create :appointment
@@ -103,6 +135,22 @@ RSpec.describe AppointmentsController, :type => :controller do
         result = JSON.parse(response.body)
         expect(result['appointments'][0]['status']).to eq('pending')
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'when versions of an appointment is requested and appointment present and has versions (user not admin)' do
+      it "returns authorization failed", :versioning => true do
+        @user.admin=false
+        @user.save
+
+        expect(PaperTrail).to be_enabled
+        appointment = FactoryGirl.create :appointment
+        appointment.update_attributes!(status: 'completed')
+
+        get :index, {:params => {:version => {:id => appointment.id}}}
+        result = JSON.parse(response.body)
+        expect(result['error']).to eq('Not Authorized')
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end
