@@ -8,8 +8,8 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     return this.get('store').findRecord('appointment', id);
   },
   afterModel(appointment) {
-    if(appointment.get('status')!='pending') {
-      window.location.href = "http://www.radetailing.ca/";;
+    if(appointment.get('status')!=='pending') {
+      window.location.href = "http://www.radetailing.ca/";
     } else {
       this.set('showPage', true);
     }
