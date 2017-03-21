@@ -7,13 +7,13 @@ export default Ember.Component.extend({
     var arrayTime = [];
     var start = this.get('businessHours.start');
     var end = this.get('businessHours.end');
-    var timeDiff = moment(end,"h:mm A").diff(moment(start,"h:mm A"));
+    var timeDiff = moment(end,"h:mm a").diff(moment(start,"h:mm a"));
     var time = start;
 
     for(var i = 0 ; i < timeDiff; i+=1800000){
 
-      arrayTime.push(moment(time, "h:mm A").format("h:mm A"));
-      time = moment(time, "h:mm A").add(30, 'minutes');
+      arrayTime.push(moment(time, "h:mm a").format("h:mm a"));
+      time = moment(time, "h:mm a").add(30, 'minutes');
     }
 
     return arrayTime;

@@ -10,20 +10,6 @@ export default Ember.Controller.extend({
   previousDescription: null,
   currentDate: moment().format('MM/DD/YYYY'),
 
-  viewName: 'month',
-  businessHours: {
-    // days of week. an array of zero-based day of week integers (0=Sunday)
-    dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday Friday
-
-    start: '9:00', // a start time (10am in this example)
-    end: '17:00',
-  },
-  header: {
-    left:   'today',
-    center: 'title',
-    right:  'prev,next'
-  },
-
   actions: {
 
     selectService(service) {
@@ -67,9 +53,10 @@ export default Ember.Controller.extend({
       var date = self.get('selectedDate');
       var location =  client.get('address');
       var phoneNum = client.get('phoneNumber').match(new RegExp('.{1,4}$|.{1,3}', 'g')).join("-");
-      var startTime = moment(date + " " + time,'MMMM D, YYYY h:mm A' ).format('YYYY-MM-DD HH:mm:ss');
-      var endTime = moment(date + " " + moment(time, 'h:mm A')
-                    .add(service.get('duration') + service.get('bufferTime'), 'minutes').format('h:mm A')).format('YYYY-MM-DD HH:mm:ss');
+      var startTime = moment(date + " " + time,'MMMM D, YYYY h:mm a' ).format('YYYY-MM-DD HH:mm:ss');
+      var endTime = moment(date + " " + moment(time, 'h:mm a')
+                    .add(service.get('duration') + service.get('bufferTime'), 'minutes')
+                    .format('h:mm a')).format('YYYY-MM-DD HH:mm:ss');
 
       self.get('store').query('client', {
         filter: {

@@ -117,7 +117,7 @@
       <div id="step-2">
         <div class="smart-wizard-step">
           <h6 class="wizard-header">Select a Date</h6>
-            {{bootstrap-datepicker-inline value=expiresAt todayHighlight=true startDate=currentDate daysOfWeekDisabled="0,6" changeDate="changeDateAction"}}
+            {{bootstrap-datepicker-inline value=expiresAt todayHighlight=true startDate=currentDate daysOfWeekDisabled=company.daysOfWeekNotWorking changeDate="changeDateAction"}}
             {{#if selectTime}}
               {{appointment-time-selection
                 selectTime= selectTime
@@ -125,7 +125,7 @@
                 selectedDate= selectedDate
                 appointment= appointment
                 listOfEmployees= employees
-                businessHours= businessHours
+                company= company
                 selectedTime= selectedTime
               }}
             {{/if}}
