@@ -37,7 +37,7 @@ RSpec.describe ServicesController, :type => :controller do
       end
     end
 
-    context 'when different param and users are present' do
+    context 'when different param and services are present' do
       it "returns with a successful response and the services" do
         FactoryGirl.create_list(:service, 5)
         get :index, {:params => {:sort => 'title'}}

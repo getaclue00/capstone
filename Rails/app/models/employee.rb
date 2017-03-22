@@ -1,4 +1,4 @@
-class Employee < ActiveRecord::Base
+class Employee < ApplicationRecord
     before_destroy :get_associated_objects
 
     has_many :appointments, dependent: :nullify

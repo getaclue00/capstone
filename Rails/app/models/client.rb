@@ -1,4 +1,4 @@
-class Client < ActiveRecord::Base
+class Client < ApplicationRecord
 	before_destroy :get_associated_objects
 	#ActiveRecord superclass provides setters and getters and methods to access & modify db table
 

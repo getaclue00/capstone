@@ -39,15 +39,17 @@
           </div>
         </td>
       {{/if}}
+
       {{#each-in operations as |key value|}}
         <td class="operation-div">
           <div class="management-operation">
             {{#link-to key  collection.id class="management-icon"}}
             <span class="glyphicon {{value}}"></span>
-            {{/link-to}}
-          </div>
+           {{/link-to}}
+         </div>
         </td >
-      {{/each-in}}
+     {{/each-in}}
+
       <button type="button" class="btn toggle-operations"{{action 'viewOperations' collection.id}}>
         <span class="glyphicon glyphicon-option-vertical"></span>
       </button>
