@@ -13,6 +13,7 @@ export default Model.extend({
   description:  attr('string', { defaultValue: '...' }),
   active:       attr('boolean', { defaultValue: false }),
   displayable:  attr('boolean', { defaultValue: false }),
+  bufferTime:   attr('number', { defaultValue: '60.00'}),
   appointments: hasMany('appointment', { async: true }),
   formattedActive: computed('active', function(){
       return this.get('active') ? 'Yes' : 'No';

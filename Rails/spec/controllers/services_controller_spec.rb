@@ -112,6 +112,7 @@ RSpec.describe ServicesController, :type => :controller do
         expect(attr["description"]).to eq("This is a description")
         expect(attr["active"]).to eq(true)
         expect(attr["displayable"]).to eq(false)
+        expect(attr["buffer_time"].to_f).to eq(1.0)
         #VERIFYING EMPLOYEE POINTS TO OBJECTS
         expect(result["data"]["relationships"]["appointments"]["data"][0]["id"].to_i).to eq(appointment_id)
         #VERIFYING THAT OBJECTS POINT TO EMPLOYEE
@@ -152,7 +153,8 @@ RSpec.describe ServicesController, :type => :controller do
                 "duration":1.5,
                 "description":"This is a description",
                 "active":true,
-                "displayable":true
+                "displayable":true,
+                "buffer_time":2.5
               },
               "type":"services"
               }
@@ -180,7 +182,8 @@ RSpec.describe ServicesController, :type => :controller do
                 "duration":"ww",
                 "description":"This is a description",
                 "active":0,
-                "displayable":9
+                "displayable":9,
+                "buffer_time":"dw"
               },
               "type":"services"
               }
@@ -250,6 +253,7 @@ RSpec.describe ServicesController, :type => :controller do
         service.description = "This is a test"
         service.active = true
         service.displayable = true
+        service.buffer_time = 1.5
 
         # Create a serializer instance
         serializer = ServiceSerializer.new(service)
@@ -270,6 +274,7 @@ RSpec.describe ServicesController, :type => :controller do
         expect(attributes['description']).to eq(service.description)
         expect(attributes['active']).to eq(service.active)
         expect(attributes['displayable']).to eq(service.displayable)
+        expect(attributes['buffer_time'].to_f).to eq(service.buffer_time)
 
         expect(response).to have_http_status(:ok)
       end

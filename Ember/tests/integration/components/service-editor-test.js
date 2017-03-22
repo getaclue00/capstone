@@ -28,6 +28,9 @@ const ServiceStub = Ember.Object.extend({
   getDisplayable() {
     return this.get('displayable');
   },
+  getBufferTime() {
+    return this.get('bufferTime');
+  },
 
 });
 
@@ -39,6 +42,7 @@ let service = ServiceStub.create({
   description: 'Cleaning the car',
   active: true,
   displayable: false,
+  bufferTime: '60',
 });
 
 moduleForComponent('service-editor', 'Integration | Component | service editor', {
@@ -50,7 +54,7 @@ test('it renders a view with a model', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', service);
 
-  assert.expect(14);
+  assert.expect(16);
 
   this.render(hbs`{{
     service-editor
@@ -64,6 +68,7 @@ test('it renders a view with a model', function(assert) {
   assert.deepEqual($($('.ember-power-select-selected-item')).length, 1, 'should be only 1 input for size of vehicle');
   assert.deepEqual(this.$('input[id="service-active"]').length, 1, 'should be only 1 input switch for service active');
   assert.deepEqual(this.$('input[id="service-displayable"]').length, 1, 'should be only 1 input switch for service displayable');
+  assert.deepEqual(this.$('input[id="service-buffer"]').length, 1, 'should be only 1 input for service buffer time');
   assert.deepEqual(this.$('textarea').length, 1, 'should be only 1 text area for the description');
 
   // Test if proper values are placed into form
@@ -74,6 +79,7 @@ test('it renders a view with a model', function(assert) {
   assert.deepEqual(this.$('input[id="service-active"]').is(":checked"), this.get('model.active'), 'Whether a service is active should match');
   assert.deepEqual(this.$('input[id="service-displayable"]').is("checked"), this.get('model.displayable'), 'Whether a service is displayable should match');
   assert.deepEqual(this.$('textarea').val(), this.get('model.description'), 'the textarea should be filled in with the model description');
+  assert.deepEqual(this.$('input[id="service-buffer"]').val(), this.get('model.bufferTime'), 'buffer time should match');
 });
 
 test('should update service displayable on click', function(assert) {

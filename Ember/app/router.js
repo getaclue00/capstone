@@ -39,6 +39,11 @@ Router.map(function() {
   });
   this.route('book-an-appointment');
   this.route('appointment-history', { path: "/appointments/:appointments_id/history" });
+  this.route('booking-complete', function() {
+    this.route('show', { path: "/:appointments_id" });
+  });
+  this.route('my-work-availability');
+  this.route('company-business-hours');
 });
 
 export default Router;

@@ -22,7 +22,8 @@ class EmployeesController < ApplicationController
   def create
     if current_user && current_user.admin?
       begin
-        employee=Employee.new(employee_sanitized_params)
+        employee = Employee.new(employee_sanitized_params)
+        employee.company = Company.find_by_name('R & A DETAILING')
         if employee.save!
           render json: employee, status: :created
         else
@@ -87,6 +88,6 @@ class EmployeesController < ApplicationController
     #take a Hash or an instance of ActionController::Parameters representing a JSON API payload, and return a hash that
     #can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
     # whereas the "safe" version simply returns an empty hash.
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :end_date, :notes])
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:last_name, :first_name, :phone_number, :street_number, :street_name, :city, :province, :postal_code, :start_date, :end_date, :notes, :company])
   end
 end
