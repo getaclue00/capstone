@@ -17,5 +17,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
     return this.get('ajax').request(url, options).then(result => {
       return result.appointments;
     });
+  },
+
+  setupController: function(controller, model) {
+    controller.set('model', model);
   }
 });
