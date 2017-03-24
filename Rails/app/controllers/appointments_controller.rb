@@ -1,33 +1,63 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user_from_token!
+  before_action :set_paper_trail_whodunnit #monitor who modified appointment in versions table
 
   def index
-    # TODO:
-    # load the appointments based on the current week number
-    # thus, appointments need a weeknumber attribute
+      begin
 
-    equality = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
+        select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
+        get_versions = params[:version].present? && params[:version][:id].present?
 
-    if equality
-      appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
-    else
-      current_week = Time.now.strftime("%U").to_i
-      appointments_array=Appointment.where('week_number = ?', current_week).all
+        # regardless of whether admin or not
+        if select_week_year
+          appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
+          if appointments_array && !appointments_array.empty?
+            render json: appointments_array, status: :ok
+          else
+            render json: [], status: :ok
+          end
+
+        # only admins can view all appointments (booking-history) or appointment versions
+        elsif current_user && current_user.admin?
+          if get_versions
+            appointment=Appointment.find params[:version][:id] #to get appointment for which we require versions history
+            prev=appointment.paper_trail.previous_version
+            if prev #appointment has a previous version?
+              appointments_array=Array.new(appointment.versions.length)
+              for i in 0..appointment.versions.length-1
+                  appointments_array[i]=prev
+                  prev=prev.paper_trail.previous_version
+              end
+            end
+            if appointments_array && !appointments_array.empty?
+              render json: appointments_array, adapter: :json, status: :ok
+            else
+              render json: [], status: :ok
+            end
+          else
+            appointments_array=Appointment.all
+            if appointments_array && !appointments_array.empty?
+              render json: appointments_array, status: :ok
+            else
+              render json: [], status: :ok
+            end
+          end
+
+        # not admin and not requesting to see appointments of certain week
+        else
+          render json: { error: 'Not Authorized' }, status: 401
+        end
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { error: 'No such appointment exists' }, status: :not_found
+      end
     end
-
-    if appointments_array && !appointments_array.empty?
-      render json: appointments_array, status: :ok
-    else
-      render json: [], status: :ok
-    end
-  end
 
   def show
     begin
       appointment=Appointment.find params[:id]
       render json: appointment, status: :ok
     rescue ActiveRecord::RecordNotFound => e
-      render json: { error: 'This appointment does not exist' }, status: :not_found
+      render json: { error: 'No such appointment exists' }, status: :not_found
     end
   end
 
@@ -95,6 +125,7 @@ class AppointmentsController < ApplicationController
     end
   end
 
+
   private
 
   def appointment_sanitized_params
@@ -102,6 +133,11 @@ class AppointmentsController < ApplicationController
     #can directly be used to create/update models. The ! version throws an InvalidDocument exception when parsing fails,
     # whereas the "safe" version simply returns an empty hash.
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:color, :text_color, :title, :start, :end, :notes, :status, :client, :service, :employee, :week_number, :cost, :location] )
+  end
+
+   def user_for_paper_trail
+    # used for overriding the default "currentUser" and storing who did the change on the object
+      current_user
   end
 
 end

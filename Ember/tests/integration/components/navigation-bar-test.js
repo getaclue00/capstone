@@ -48,16 +48,17 @@ test('it renders administrator\' s navigation bar', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.login();
-  assert.expect(6);
+  assert.expect(7);
   this.render(hbs`{{navigation-bar session=this.session currentUser=currentUser }}`);
 
   // Number of clickable links
-  assert.equal(this.$('.nav-item').length, 9, 'should have 9 nav-item items');
+  assert.equal(this.$('.nav-item').length, 11, 'should have 11 nav-item items');
 
   // Name of main nav menu links
   assert.deepEqual(this.$('.nav-list-item')[0].text, ' Schedule');
-  assert.deepEqual(this.$('.nav-list-item')[1].text, ' Customers');
-  assert.deepEqual(this.$('.nav-list-item')[2].text, ' Staff');
-  assert.deepEqual(this.$('.nav-list-item')[3].text, ' Services');
-  assert.deepEqual(this.$('.nav-list-item')[4].text, ' Settings');
+  assert.deepEqual(this.$('.nav-list-item')[1].text, ' Booking History');
+  assert.deepEqual(this.$('.nav-list-item')[2].text, ' Customers');
+  assert.deepEqual(this.$('.nav-list-item')[3].text, ' Staff');
+  assert.deepEqual(this.$('.nav-list-item')[4].text, ' Services');
+  assert.deepEqual(this.$('.nav-list-item')[5].text, ' Settings');
 });

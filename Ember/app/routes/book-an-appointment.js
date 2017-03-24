@@ -73,7 +73,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       Ember.run.next(this, 'renderSmartWizard');
       Ember.run.next(this, 'enablePopovers');
       Ember.run.schedule('afterRender', this, () => {
-        Ember.$('#navigation-menu').toggle();
+        Ember.$('#navigation-menu').hide();
       });
     }
   }
