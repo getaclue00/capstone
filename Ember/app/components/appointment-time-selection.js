@@ -46,12 +46,12 @@ export default Ember.Component.extend({
           var arrayTime = [];
           var employeeStart = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Open");
           var employeeEnd = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Close");
-          var timeDiff = moment(employeeEnd,"h:mm a").diff(moment(employeeStart,"h:mm a"));
+          var timeDiff = moment(employeeEnd,"h:mma").diff(moment(employeeStart,"h:mma"));
           var time = employeeStart;
 
           for(var i = 0 ; i < timeDiff; i+=1800000){
-            arrayTime.push(moment(time, "h:mm a").format("h:mm a"));
-            time = moment(time, "h:mm a").add(30, 'minutes');
+            arrayTime.push(moment(time, "h:mma").format("h:mma"));
+            time = moment(time, "h:mma").add(30, 'minutes');
           }
 
           self.set('availableTimes', arrayTime);
