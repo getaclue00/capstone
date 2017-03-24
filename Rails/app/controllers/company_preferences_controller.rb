@@ -4,8 +4,19 @@ class CompanyPreferencesController < ApplicationController
 
   # GET /company_preferences
   def index
-    @company_preferences = CompanyPreference.all
-    render json: @company_preferences, status: :ok
+    employee_filter = params[:filter].present? && params[:filter][:employee_id].present?
+    if employee_filter
+      company_preferences_array = CompanyPreference.where('employee_id = ?', params[:filter][:employee_id]).all
+    else
+      company_preferences_array=CompanyPreference.all
+    end
+    puts company_preferences_array
+    puts "poop"
+    if (company_preferences_array && !company_preferences_array.empty?) || email_filter
+          render json: company_preferences_array, status: :ok
+    else
+        render json: { error: 'No company company_preferences exist' }, status: :bad_request
+    end
   end
 
   # GET /company_preferences/1
