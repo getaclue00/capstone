@@ -33,6 +33,13 @@ export default Ember.Component.extend({
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("navbar-toggle-button-left-small-screen").style.display = "";
       document.body.style.backgroundColor = "";
+    },
+
+    handleAddNewClient() {
+      this.get('handleNewClient')();
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("navbar-toggle-button-left-small-screen").style.display = "";
+      document.body.style.backgroundColor = "";
     }
   }
 });

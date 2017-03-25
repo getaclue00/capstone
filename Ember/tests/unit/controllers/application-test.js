@@ -12,8 +12,17 @@ test('#handleNewAppointment redirects to my-calendar.appointments.new page', fun
         assert.equal(route, 'my-calendar.appointments.new');
       }
   });
-
   ctrl.send('handleAddNewAppointment');
+  assert.ok(ctrl);
+});
 
+test('#handleNewClient redirects to clients.new page', function(assert) {
+
+  let ctrl = this.subject({
+      transitionToRoute(route) {
+        assert.equal(route, 'clients.new');
+      }
+  });
+  ctrl.send('handleAddNewClient');
   assert.ok(ctrl);
 });

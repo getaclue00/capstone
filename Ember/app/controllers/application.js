@@ -8,6 +8,10 @@ export default Ember.Controller.extend({
   actions: {
     handleAddNewAppointment() {
       this.transitionToRoute('my-calendar.appointments.new');
+    },
+
+    handleAddNewClient() {
+      this.transitionToRoute('clients.new');
     }
   }
 });

@@ -31,13 +31,17 @@ Router.map(function() {
     this.route('delete', { path: "/delete/:employees_id" });
   });
   this.route('login');
-  this.route('appointment-history');
+  this.route('booking-history');
   this.route('users', function() {
     this.route('show', { path: "/:users_id" });
     this.route('new', { path: "/:employees_id" });
     this.route('delete', { path: "/delete/:users_id" });
   });
   this.route('book-an-appointment');
+  this.route('appointment-history', { path: "/appointments/:appointments_id/history" });
+  this.route('booking-complete', function() {
+    this.route('show', { path: "/:appointments_id" });
+  });
   this.route('my-work-availability');
   this.route('company-business-hours');
 });

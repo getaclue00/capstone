@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       sessions: 'sessions'
     }, skip: [:registrations, :passwords]
 
-    resources :clients
+    resources :clients, constraints: ApiConstraint.new
     resources :employees, constraints: ApiConstraint.new
     resources :services, constraints: ApiConstraint.new
     resources :appointments, constraints: ApiConstraint.new
