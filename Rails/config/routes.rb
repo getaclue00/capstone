@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :clients, constraints: ApiConstraint.new
     resources :employees, constraints: ApiConstraint.new
     resources :services, constraints: ApiConstraint.new
-    resources :appointments
+    resources :appointments, constraints: ApiConstraint.new
     resources :company_preferences, only: [:index, :show, :update], constraints: ApiConstraint.new
     resources :companies, only: [:index, :show, :update], constraints: ApiConstraint.new
 
