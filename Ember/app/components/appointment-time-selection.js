@@ -35,8 +35,8 @@ export default Ember.Component.extend({
 
     selectEmployee(employee) {
       if(!Ember.isEmpty(employee)){
-        this.get('appointment').set('employee', employee);
         var self = this;
+        self.get('appointment').set('employee', employee);
         var dayOfTheWeek = moment(self.get('selectedDate')).format('dddd');
         self.get('store').query('company-preference', {
           filter: {
@@ -46,12 +46,15 @@ export default Ember.Component.extend({
           var arrayTime = [];
           var employeeStart = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Open");
           var employeeEnd = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Close");
+          var employeeWorking = result.get('firstObject').get("work" + dayOfTheWeek);
           var timeDiff = moment(employeeEnd,"h:mma").diff(moment(employeeStart,"h:mma"));
           var time = employeeStart;
 
-          for(var i = 0 ; i < timeDiff; i+=1800000){
-            arrayTime.push(moment(time, "h:mma").format("h:mma"));
-            time = moment(time, "h:mma").add(30, 'minutes');
+          if(employeeWorking) {
+            for(var i = 0 ; i < timeDiff; i+=1800000){
+              arrayTime.push(moment(time, "h:mma").format("h:mma"));
+              time = moment(time, "h:mma").add(30, 'minutes');
+            }
           }
 
           self.set('availableTimes', arrayTime);

@@ -55,8 +55,8 @@ export default Ember.Controller.extend({
       var phoneNum = client.get('phoneNumber').match(new RegExp('.{1,4}$|.{1,3}', 'g')).join("-");
       var startTime = moment(date + " " + time,'MMMM D, YYYY h:mma' ).format('YYYY-MM-DD HH:mm:ss');
       var endTime = moment(date + " " + moment(time, 'h:mma')
-                    .add(service.get('duration') + service.get('bufferTime'), 'minutes')
-                    .format('h:mma')).format('YYYY-MM-DD HH:mm:ss');
+                   .add(service.get('duration') + service.get('bufferTime'), 'minutes')
+                   .format('h:mma'),'MMMM D, YYYY h:mma').format('YYYY-MM-DD HH:mm:ss');
 
       self.get('store').query('client', {
         filter: {
@@ -83,7 +83,6 @@ export default Ember.Controller.extend({
       }
 
       function saveAppointment(){
-
         self.get('appointment').set('client', client);
         self.get('appointment').set('cost', service.get('price'));
         self.get('appointment').set('location', location);
