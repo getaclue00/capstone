@@ -8,7 +8,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   model(params) {
     let id = params.appointments_id;
-    let url = `/appointments?version%5Bid%5D=${id}`;
+    let url = `https://radetailing.herokuapp.com/api/appointments?version%5Bid%5D=${id}`;
     let options = {
       beforeSend: function (xhr) {
         xhr.setRequestHeader("Accept", "application/vnd.api+json");
