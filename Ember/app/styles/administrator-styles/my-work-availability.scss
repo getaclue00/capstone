@@ -33,17 +33,17 @@ $breakpoint-alpha: 768px;
   .card-text {
     .add-padding-to-row {
       padding-top: 1em;
-      .btn-group {
-        width: 100%;
-      }
     }
+  }
+  .btn-group {
+    margin-top: 2em;
   }
 }
 
 //Styling for when on mobile
 
 @media (max-width: $breakpoint-alpha) {
-  .readonly-times {
+  input[readonly] {
     display: none;
   }
 }
