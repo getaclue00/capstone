@@ -4,6 +4,15 @@
 .company-business-hours {
   .card-header {
     font-size: 2em;
+
+    .glyphicon-chevron-left {
+      float: left;
+      top: 0.15em;
+    }
+
+    .glyphicon-calendar {
+      top: 0.10em
+    }
   }
   .form-group.row {
     margin-left: 0px;

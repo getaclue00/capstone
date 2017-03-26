@@ -1,28 +1,49 @@
+$breakpoint-alpha: 768px;
+
 .my-work-availability.card.text-center {
   border-bottom-width: 0px;
 }
 .my-work-availability {
   .card-header {
     font-size: 2em;
+
+    .glyphicon-chevron-left {
+      float: left;
+      top: 0.15em;
+    }
+
+    .glyphicon-calendar {
+      top: 0.10em
+    }
   }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+  }
+
   .form-group.row {
     margin-left: 0px;
     margin-right: 0px;
     .label-transform {
       text-transform: uppercase;
-      padding-left: 0px;
+      padding: 0px;
     }
   }
   .card-text {
     .add-padding-to-row {
       padding-top: 1em;
-      .remove-left-and-right-margin {
-        margin-left: 0px;
-        margin-right: 0px;
-      }
-      .full-width {
+      .btn-group {
         width: 100%;
       }
     }
+  }
+}
+
+//Styling for when on mobile
+
+@media (max-width: $breakpoint-alpha) {
+  .readonly-times {
+    display: none;
   }
 }
