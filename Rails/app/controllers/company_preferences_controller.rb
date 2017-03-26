@@ -10,9 +10,7 @@ class CompanyPreferencesController < ApplicationController
     else
       company_preferences_array=CompanyPreference.all
     end
-    puts company_preferences_array
-    puts "poop"
-    if (company_preferences_array && !company_preferences_array.empty?) || email_filter
+    if (company_preferences_array && !company_preferences_array.empty?)
           render json: company_preferences_array, status: :ok
     else
         render json: { error: 'No company company_preferences exist' }, status: :bad_request
