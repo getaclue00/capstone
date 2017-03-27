@@ -7,10 +7,22 @@ class AppointmentsController < ApplicationController
 
         select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
         get_versions = params[:version].present? && params[:version][:id].present?
+        date_filter = params[:filter].present? && params[:filter][:date].present?
 
         # regardless of whether admin or not
         if select_week_year
           appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
+          if appointments_array && !appointments_array.empty?
+            render json: appointments_array, status: :ok
+          else
+            render json: [], status: :ok
+          end
+
+        elsif date_filter
+          date = params[:filter][:date].split('-')
+          start_time = DateTime.new(date[0].to_i, date[1].to_i, date[2].to_i).beginning_of_day
+          end_time = DateTime.new(date[0].to_i, date[1].to_i, date[2].to_i).end_of_day
+          appointments_array=Appointment.where('start BETWEEN ? AND ?', start_time, end_time).all
           if appointments_array && !appointments_array.empty?
             render json: appointments_array, status: :ok
           else

@@ -43,22 +43,27 @@ export default Ember.Component.extend({
             employee_id: self.get('appointment.employee.id')
           }
         }).then(function(result) {
+
           var arrayTime = [];
           var employeeStart = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Open");
           var employeeEnd = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Close");
           var employeeWorking = result.get('firstObject').get("work" + dayOfTheWeek);
           var timeDiff = moment(employeeEnd,"h:mma").diff(moment(employeeStart,"h:mma"));
           var time = employeeStart;
-
-          if(employeeWorking) {
-            for(var i = 0 ; i < timeDiff; i+=1800000){
-              arrayTime.push(moment(time, "h:mma").format("h:mma"));
-              time = moment(time, "h:mma").add(30, 'minutes');
+          self.get('store').query('appointment', {
+            filter: {
+              date: moment(self.get('selectedDate'),'MMMM D, YYYY').format('YYYY-MM-DD')
             }
-          }
-
-          self.set('availableTimes', arrayTime);
-          self.set('selectEmployee', true);
+          }).then(function(result) {
+            if(employeeWorking) {
+              for(var i = 0 ; i < timeDiff; i+=1800000){
+                arrayTime.push(moment(time, "h:mma").format("h:mma"));
+                time = moment(time, "h:mma").add(30, 'minutes');
+              }
+            }
+            self.set('availableTimes', arrayTime);
+            self.set('selectEmployee', true);
+          });
         });
       }
     },
