@@ -148,6 +148,17 @@ $breakpoint-alpha: 768px;
 
   .time-button {
     margin: 5px;
+    background-color: #e8e7e2;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px #888888;
+    border: 1px #A9A9A9 solid;
+    color: #AD2A1A;
+
+    :hover {
+      background-color: #d3d3d3;
+      cursor: pointer;
+    }
+
   }
 
 
