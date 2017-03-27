@@ -3,21 +3,7 @@ import moment from 'moment';
 
 export default Ember.Component.extend({
 
-  availableTimes: Ember.computed('availableTimes', function(){
-    var arrayTime = [];
-    var start = this.get('businessHours.start');
-    var end = this.get('businessHours.end');
-    var timeDiff = moment(end,"h:mm A").diff(moment(start,"h:mm A"));
-    var time = start;
-
-    for(var i = 0 ; i < timeDiff; i+=1800000){
-
-      arrayTime.push(moment(time, "h:mm A").format("h:mm A"));
-      time = moment(time, "h:mm A").add(30, 'minutes');
-    }
-
-    return arrayTime;
-  }),
+  availableTimes: null,
 
   aSelectedEmployee: Ember.computed('appointment.employee', function(){
     return this.get('appointment.employee');
@@ -49,8 +35,31 @@ export default Ember.Component.extend({
 
     selectEmployee(employee) {
       if(!Ember.isEmpty(employee)){
-        this.get('appointment').set('employee', employee);
-        this.set('selectEmployee', true);
+        var self = this;
+        self.get('appointment').set('employee', employee);
+        var dayOfTheWeek = moment(self.get('selectedDate')).format('dddd');
+        self.get('store').query('company-preference', {
+          filter: {
+            employee_id: self.get('appointment.employee.id')
+          }
+        }).then(function(result) {
+          var arrayTime = [];
+          var employeeStart = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Open");
+          var employeeEnd = result.get('firstObject').get(dayOfTheWeek.toLowerCase() + "Close");
+          var employeeWorking = result.get('firstObject').get("work" + dayOfTheWeek);
+          var timeDiff = moment(employeeEnd,"h:mma").diff(moment(employeeStart,"h:mma"));
+          var time = employeeStart;
+
+          if(employeeWorking) {
+            for(var i = 0 ; i < timeDiff; i+=1800000){
+              arrayTime.push(moment(time, "h:mma").format("h:mma"));
+              time = moment(time, "h:mma").add(30, 'minutes');
+            }
+          }
+
+          self.set('availableTimes', arrayTime);
+          self.set('selectEmployee', true);
+        });
       }
     },
   }
