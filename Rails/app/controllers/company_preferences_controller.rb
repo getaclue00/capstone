@@ -13,7 +13,7 @@ class CompanyPreferencesController < ApplicationController
     if (company_preferences_array && !company_preferences_array.empty?)
           render json: company_preferences_array, status: :ok
     else
-        render json: { error: 'No company company_preferences exist' }, status: :bad_request
+        render json: { error: 'No company_preferences exist' }, status: :bad_request
     end
   end
 
