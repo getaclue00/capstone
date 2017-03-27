@@ -332,6 +332,19 @@ $breakpoint-alpha: 768px;
     .client-information{
       text-align: right;
     }
+
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      visibility: hidden;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      visibility: hidden;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      visibility: hidden;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      visibility: hidden;
+    }
   }
   .thank-you-message {
 
