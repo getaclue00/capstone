@@ -43,7 +43,9 @@ $breakpoint-alpha: 768px;
 //Styling for when on mobile
 
 @media (max-width: $breakpoint-alpha) {
-  input[readonly] {
-    display: none;
+  .my-work-availability {
+    input[readonly] {
+      display: none;
+    }
   }
 }
