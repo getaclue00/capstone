@@ -52,7 +52,7 @@ test('it renders administrator\' s navigation bar', function(assert) {
   this.render(hbs`{{navigation-bar session=this.session currentUser=currentUser }}`);
 
   // Number of clickable links
-  assert.equal(this.$('.nav-item').length, 11, 'should have 11 nav-item items');
+  assert.equal(this.$('.nav-item').length, 10, 'should have 11 nav-item items');
 
   // Name of main nav menu links
   assert.deepEqual(this.$('.nav-list-item')[0].text, ' Schedule');
