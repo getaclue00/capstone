@@ -42,6 +42,7 @@ test('#updateUser throws an error following a failed creation (passwords match)'
   let userStub = Ember.Object.create({
     confirm: 'password',
     password: 'password',
+    errors: {content: [{"attribute": "email","message":"is invalid"}]},
     save() {
       return RSVP.reject();
     }
@@ -54,7 +55,7 @@ test('#updateUser throws an error following a failed creation (passwords match)'
   ctrl.send('updateUser');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: email is invalid! ', 'danger flashMessages fired');
     done();
   }, 500);
 });
@@ -77,5 +78,5 @@ test('#updateUser throws an error following a failed creation (passwords do not 
 
   ctrl.send('updateUser');
   assert.ok(ctrl);
-  assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
+  assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: passwords do not match!', 'danger flashMessages fired');
 });

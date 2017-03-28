@@ -455,7 +455,7 @@ RSpec.describe UsersController, :type => :controller do
         patch :update, params: {id: user.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
+        expect(parsed_response['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/email"}, "detail"=>"is invalid"}])
         expect(response).to have_http_status(:bad_request)
       end
 
@@ -477,7 +477,7 @@ RSpec.describe UsersController, :type => :controller do
         patch :update, params: {id: user.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
+        expect(parsed_response['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/email"}, "detail"=>"is invalid"}])
         expect(response).to have_http_status(:bad_request)
       end
     end
