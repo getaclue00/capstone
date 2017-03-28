@@ -52,13 +52,29 @@ export default Ember.Component.extend({
           var time = employeeStart;
           self.get('store').query('appointment', {
             filter: {
-              date: moment(self.get('selectedDate'),'MMMM D, YYYY').format('YYYY-MM-DD')
+              date:        moment(self.get('selectedDate'),'MMMM D, YYYY').format('YYYY-MM-DD'),
+              employee_id: self.get('appointment.employee.id')
             }
-          }).then(function(result) {
+          }).then(function(results) {
             if(employeeWorking) {
+              var apptCounter=0;
               for(var i = 0 ; i < timeDiff; i+=1800000){
-                arrayTime.push(moment(time, "h:mma").format("h:mma"));
-                time = moment(time, "h:mma").add(30, 'minutes');
+                if(results.objectAt(apptCounter)){
+                  var apptStart = moment(results.objectAt(apptCounter).get('start')).format("h:mma");
+                  if(apptStart === time) {
+                    var apptEnd = moment(results.objectAt(apptCounter).get('end')).format("h:mma");
+                    var apptDiff = moment(apptEnd,"h:mma").diff(moment(apptStart,"h:mma"));
+                    time = moment(apptEnd,"h:mma");
+                    i+= apptDiff;
+                    apptCounter++;
+                  } else {
+                    arrayTime.push(moment(time, "h:mma").format("h:mma"));
+                    time = moment(time, "h:mma").add(30, 'minutes').format("h:mma");
+                  }
+                } else {
+                  arrayTime.push(moment(time, "h:mma").format("h:mma"));
+                  time = moment(time, "h:mma").add(30, 'minutes').format("h:mma");
+                }
               }
             }
             self.set('availableTimes', arrayTime);
