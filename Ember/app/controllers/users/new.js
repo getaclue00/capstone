@@ -15,15 +15,21 @@ export default Ember.Controller.extend({
         self.transitionToRoute('employees');
       }
 
-      function onError() {
+      // function onError() {
+      //   window.scrollTo(0,0);
+      //   var message = "";
+      //   var errors = self.get('model').get('errors.messages')[0];
+      //   for (var key in errors){
+      //       message+=(key+ " "+ errors[key]+"! ");
+      //   }
+      //   flashMessages.danger('Account was not successfully created');
+      //   flashMessages.danger(message);
+      // }
+
+      function onError(err) {
         window.scrollTo(0,0);
-        var message = "";
-        var errors = self.get('model').get('errors.messages')[0];
-        for (var key in errors){
-            message+=(key+ " "+ errors[key]+"! ");
-        }
         flashMessages.danger('Account was not successfully created');
-        flashMessages.danger(message);
+        flashMessages.danger(self.get('model').get('errors.messages')[0]);
       }
 
       if (self.get('model').get('confirm') === self.get('model').get('password')){
