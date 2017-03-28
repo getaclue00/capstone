@@ -17,10 +17,16 @@ export default Ember.Controller.extend({
 
       function onError() {
         window.scrollTo(0,0);
+        var message = "";
+        var errors = self.get('model').get('errors.messages')[0];
+        for (var key in errors){
+            message+=(key+ " "+ errors[key]+"! ");
+        }
         flashMessages.danger('Account was not successfully created');
+        flashMessages.danger(message);
       }
 
-      if (this.get('model').get('confirm') === this.get('model').get('password')){
+      if (self.get('model').get('confirm') === self.get('model').get('password')){
           user.save().then(onSuccessful).catch(onError);
 	    }else{
 	    	window.scrollTo(0,0);
