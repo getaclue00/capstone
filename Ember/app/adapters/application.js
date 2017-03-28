@@ -15,12 +15,6 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   //overriding the defalt behaviour which returns true is status is 422
   isInvalid(status) {
     return status === 400;
-  },
-  // handleResponse: function(status, headers, payload){
-  //   if(status === 400 && payload.errors){
-  //     return new DS.InvalidError(payload.errors);
-  //   }
-  //   return this._super(...arguments);
-  // }
+  }
 
 });

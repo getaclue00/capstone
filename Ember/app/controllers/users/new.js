@@ -21,8 +21,7 @@ export default Ember.Controller.extend({
         var errors = self.get('model').get('errors.content');
         for (var i=0; i<errors.length; ++i){
             message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
-        flashMessages.danger('Account was not successfully created');
-        flashMessages.danger(message);
+        flashMessages.danger('Error: '+ message);
       }
 
 
@@ -30,7 +29,7 @@ export default Ember.Controller.extend({
           user.save().then(onSuccessful).catch(onError);
 	    }else{
 	    	window.scrollTo(0,0);
-        flashMessages.danger('Passwords do not match!');
+        flashMessages.danger('Error: passwords do not match!');
 	    }
     }
   }
