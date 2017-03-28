@@ -45,14 +45,8 @@ class UsersController < ApplicationController
         rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
           render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
         rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-          #http://stackoverflow.com/questions/31918565/handling-errors-with-the-now-default-ember-data-json-api-adapter
-         render json: { "errors": [
-           {
-              "detail": user.errors.full_messages,
-              "source": {
-                   "pointer": "data/" #indicating primary data object http://emberjs.com/api/data/classes/DS.InvalidError.html
-               }
-           }]}, status: :bad_request
+         #https://github.com/rails-api/active_model_serializers/blob/master/docs/jsonapi/errors.md
+         render json: user, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
       end
     else
       render json: { error: 'Not Authorized' }, status: 401
