@@ -4,7 +4,12 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   def index
-    @companies = Company.all
+    companies_array = Company.all
+    if companies_array && !companies_array.empty?
+      render json: companies_array, status: :ok
+    else
+      render json: { error: 'No companies exist' }, status: :bad_request
+    end
   end
 
   # GET /companies/1
