@@ -7,25 +7,6 @@ export default Controller.extend({
   stringThatIsUsedForModalIdInTemplate: `myModal`,
 
   actions: {
-    deleteAppointment() {
-      var self = this;
-      var flashMessages = self.get('flashMessages');
-      let appointment = self.get('appointment');
-
-      function transitionToPost() {
-        self.transitionToRoute('my-calendar');
-      }
-
-      function failure() {
-        window.scrollTo(0,0);
-        flashMessages.danger('Appointment was not successfully deleted');
-      }
-
-      appointment.destroyRecord()
-        .then(transitionToPost)
-        .catch(failure);
-    },
-
     saveAppointment() {
       var self = this;
       let appointment = self.get('appointment');
