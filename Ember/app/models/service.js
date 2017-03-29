@@ -6,7 +6,7 @@ const { Model, attr, hasMany } = DS;
 const { computed } = Ember;
 
 export default Model.extend({
-  name:         attr('string', { defaultValue: '' }),
+  name:         attr('string'),
   duration:     attr('number', { defaultValue: '60.00' }),
   price:        attr('number', { defaultValue: '100.00' }),
   vehicleSize:  attr('string'),

@@ -38,6 +38,7 @@ test('#saveService throws an error following a failed creation', function(assert
 
   let done = assert.async();
   const serviceStub = Ember.Object.create({
+    errors: {content: [{"attribute": "name","message":"field missing"}]},
     save() {
       return RSVP.reject();
     }
@@ -49,7 +50,7 @@ test('#saveService throws an error following a failed creation', function(assert
   ctrl.send('saveService');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Service was not successfully created', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: name field missing! ', 'danger flashMessages fired');
     done();
   }, 500);
 

@@ -49,7 +49,7 @@ test('#saveService throws an error following a failed update', function(assert) 
   ctrl.send('updateService');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Service was not successfully updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: service was not successfully updated', 'danger flashMessages fired');
     done();
   }, 500);
 

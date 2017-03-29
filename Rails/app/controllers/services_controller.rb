@@ -45,7 +45,14 @@ class ServicesController < ApplicationController
       rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
         render json: { error: 'Service creation failed. No parameters sent.'}, status: :bad_request
       rescue ActiveRecord::StatementInvalid => e
-        render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
+        render json: { "errors": [
+          {
+            "detail": 'field missing',
+            "source": {
+              "pointer": "data/attributes/name" #indicating primary data object
+            }
+          }
+        ]}, status: :bad_request
        end
     else
       render json: { error: 'Not Authorized' }, status: 401

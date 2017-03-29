@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Service was not successfully updated');
+        flashMessages.danger('Error: service was not successfully updated');
       }
 
       this.get('model').save().then(onSuccessful).catch(onError);
