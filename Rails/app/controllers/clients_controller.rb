@@ -36,10 +36,17 @@ class ClientsController < ApplicationController
 	  		end
 	    rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
 	      render json: { error: 'Client creation failed. No parameters sent.'}, status: :bad_request
-	    rescue ActiveRecord::StatementInvalid => e
-	      render json: { error: 'Client creation failed. Check your data.'}, status: :bad_request
+	    rescue ActiveRecord::StatementInvalid => e # thrown when not all required fields are required
+	      render json: { "errors": [
+          {
+            "detail": 'incomplete mandatory fields',
+            "source": {
+              "pointer": "data" #indicating primary data object
+            }
+          }
+        ]}, status: :bad_request
 	    rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-	      render json: { error: client.errors.messages}, status: :bad_request
+	      render json: client, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
 		end
 	end
 
@@ -56,7 +63,7 @@ class ClientsController < ApplicationController
 		rescue ActiveRecord::RecordNotFound => e
 				render json: { error: 'No such client exists' }, status: :not_found
 		rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-	      render json: { error: client.errors.messages}, status: :bad_request
+	      render json: client, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
 		end
 	end
 

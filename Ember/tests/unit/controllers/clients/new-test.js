@@ -39,6 +39,7 @@ test('#saveClient throws an error following a failed creation', function(assert)
 
   let done=assert.async();
   const clientStub = Ember.Object.create({
+    errors: {content: [{"attribute": "email","message":"is invalid"}]},
     save() {
       return RSVP.reject();
     }
@@ -51,7 +52,7 @@ test('#saveClient throws an error following a failed creation', function(assert)
   ctrl.send('saveClient');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Client was not successfully created', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: email is invalid! ', 'danger flashMessages fired');
     done();
   }, 500);
 
