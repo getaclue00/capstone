@@ -82,7 +82,7 @@ class AppointmentsController < ApplicationController
     rescue ActiveRecord::StatementInvalid => e
       render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
     rescue ActiveRecord::RecordInvalid => e
-      render json: { error: @appointment.errors.messages}, status: :bad_request
+      render json: @appointment, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 

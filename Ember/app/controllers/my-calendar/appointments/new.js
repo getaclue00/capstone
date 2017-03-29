@@ -11,15 +11,19 @@ export default Ember.Controller.extend({
       var flashMessages = self.get('flashMessages');
       let appointment = self.get('appointment');
 
-      appointment.save().then(transitionToPost).catch(failure);
+      appointment.save().then(transitionToPost).catch(onError);
 
       function transitionToPost() {
         self.transitionToRoute('my-calendar');
       }
 
-      function failure() {
+      function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Appointment was not successfully created');
+        var message = "";
+        var errors = self.get('appointment').get('errors.content');
+        for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+        flashMessages.danger('Error: '+ message);
       }
 
     },
