@@ -1,11 +1,11 @@
 <div class="pos-f-t" id="navigation-menu">
-  <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" style="min-height: 3em;">
+  <nav class="navbar-main navbar navbar-toggleable-md navbar-inverse bg-inverse">
     <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="navbar-toggle-button-left-small-screen">
       <span class="navbar-toggler-icon"></span>
     </button>
     {{#if session.isAuthenticated}}
-      <button type="button" {{action 'openNav'}} data-target="#mySidenav" aria-controls="mySidenav" aria-expanded="false" aria-label="Toggle quick controls" style="font-color: white; align-self: flex-start; padding: 0.25rem 0.75rem; font-size: 1.25rem; line-height: 1; background: transparent; border: 1px solid transparent; border-radius: 0.25rem; ;position: absolute; right: 1rem;">
-        <span class="glyphicon glyphicon-plus" style="color: white; display: inline-block; width: 1.5em; height: 1.5em; vertical-align: middle;"></span>
+      <button type="button" {{action 'openNav'}} data-target="#mySidenav" aria-controls="mySidenav" aria-expanded="false" aria-label="Toggle quick controls" class="mySidenav">
+        <span class="glyphicon glyphicon-plus"></span>
       </button>
     {{/if}}
     <div class="navbar-brand">&nbsp;</div>
@@ -32,17 +32,15 @@
 {{#if session.isAuthenticated}}
   <aside id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick={{action 'closeNav'}}>&times;</a>
+    <p class="sidenav-p">
+      <span>Add a New:</span>
+    </p>
     <ul class="nav navbar-nav">
-      <li class="nav-item" style="max-width: 200px; width: 200px;">
-        <span class="nav-list-item navbar-text">
-          Add a new:
-        </span>
+      <li class="nav-item">
+        <button type='button' class='btn btn-lg nav-list-item' {{action 'handleAddNewAppointment'}}>&#x2b; Appointment</button>
       </li>
       <li class="nav-item">
-        <button type='button' class='btn btn-lg btn-outline-primary nav-list-item' {{action 'handleAddNewAppointment'}}>&#x2b; Appointment</button>
-      </li>
-      <li class="nav-item">
-        <button type='button' class='btn btn-lg btn-outline-primary nav-list-item' {{action 'handleAddNewClient'}}>&#x2b; Client</button>
+        <button type='button' class='btn btn-lg nav-list-item' {{action 'handleAddNewClient'}}>&#x2b; Client</button>
       </li>
     </ul>
   </aside>
