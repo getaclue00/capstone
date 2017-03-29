@@ -16,7 +16,11 @@ export default Ember.Controller.extend({
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Employee was not successfully created');
+        var message = "";
+        var errors = self.get('model').get('errors.content');
+        for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+        flashMessages.danger('Error: '+ message);
       }
 
       employee.save().then(transitionToPost).catch(onError);

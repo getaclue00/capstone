@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Employee was not successfully deleted');
+        flashMessages.danger('Error: employee was not successfully deleted');
       }
 
       if (employee) {
