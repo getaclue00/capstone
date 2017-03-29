@@ -3,41 +3,34 @@
 {{/each}}
 <div class="company-business-hours card text-center">
   <div class="card-header">
-    <div class="row">
-      <div class="col-2">
-        {{#link-to 'my-account'}}
-          <span class="glyphicon glyphicon-chevron-left"></span>
-        {{/link-to}}
-      </div>
-      <div class="col-10">
-        <span class="glyphicon glyphicon-calendar"></span>
-        Business Hours
-      </div>
+        <div class="col-12">
+      {{#link-to 'my-account'}}
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      {{/link-to}}
+      <span class="glyphicon glyphicon-calendar"></span> Business Hours
     </div>
   </div>
   <div class="card-block">
     <p class="card-text">
-      <div class="container-fluid">
-        <form {{action "saveCompanyPreference" on="submit"}}>
-          <div class="row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="monday" class="col-5 col-form-label font-weight-bold label-transform">Monday:</label>
-                <div class="admin-switch col-3" {{action 'toggleMonday' model}}>
-                  {{input type="checkbox" id="monday" class="checkbox" checked=model.workMonday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workMonday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+      <form {{action "saveCompanyPreference" on="submit"}}>
+        <div class="row col-12">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="monday" class="col-5 col-form-label font-weight-bold label-transform">Monday:</label>
+              <div class="admin-switch" {{action 'toggleMonday' model}}>
+                {{input type="checkbox" id="monday" class="checkbox" checked=model.workMonday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workMonday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workMonday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.mondayOpen id="monday-start" class="form-control"}}
@@ -46,26 +39,26 @@
                 {{input type="time" value=model.mondayClose id="monday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="tuesday" class="col-5 col-form-label font-weight-bold label-transform">Tuesday:</label>
-                <div class="admin-switch col-3" {{action 'toggleTuesday' model}}>
-                  {{input type="checkbox" id="tuesday" class="checkbox" checked=model.workTuesday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workTuesday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+          </div>
+        </div>
+        <div class="row col-12 add-padding-to-row">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="tuesday" class="col-5 col-form-label font-weight-bold label-transform">Tuesday:</label>
+              <div class="admin-switch" {{action 'toggleTuesday' model}}>
+                {{input type="checkbox" id="tuesday" class="checkbox" checked=model.workTuesday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workTuesday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workTuesday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.tuesdayOpen id="tuesday-start" class="form-control"}}
@@ -74,26 +67,26 @@
                 {{input type="time" value=model.tuesdayClose id="tuesday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="wednesday" class="col-5 col-form-label font-weight-bold label-transform">Wednesday:</label>
-                <div class="admin-switch col-3" {{action 'toggleWednesday' model}}>
-                  {{input type="checkbox" id="wednesday" class="checkbox" checked=model.workWednesday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workWednesday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+          </div>
+        </div>
+        <div class="row col-12 add-padding-to-row">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="wednesday" class="col-5 col-form-label font-weight-bold label-transform">Wednesday:</label>
+              <div class="admin-switch" {{action 'toggleWednesday' model}}>
+                {{input type="checkbox" id="wednesday" class="checkbox" checked=model.workWednesday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workWednesday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workWednesday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.wednesdayOpen id="wednesday-start" class="form-control"}}
@@ -102,26 +95,26 @@
                 {{input type="time" value=model.wednesdayClose id="wednesday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="thursday" class="col-5 col-form-label font-weight-bold label-transform">Thursday:</label>
-                <div class="admin-switch col-3" {{action 'toggleThursday' model}}>
-                  {{input type="checkbox" id="thursday" class="checkbox" checked=model.workThursday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workThursday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+          </div>
+        </div>
+        <div class="row col-12 add-padding-to-row">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="thursday" class="col-5 col-form-label font-weight-bold label-transform">Thursday:</label>
+              <div class="admin-switch" {{action 'toggleThursday' model}}>
+                {{input type="checkbox" id="thursday" class="checkbox" checked=model.workThursday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workThursday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workThursday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.thursdayOpen id="thursday-start" class="form-control"}}
@@ -130,26 +123,26 @@
                 {{input type="time" value=model.thursdayClose id="thursday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="friday" class="col-5 col-form-label font-weight-bold label-transform">Friday:</label>
-                <div class="admin-switch col-3" {{action 'toggleFriday' model}}>
-                  {{input type="checkbox" id="friday" class="checkbox" checked=model.workFriday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workFriday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+          </div>
+        </div>
+        <div class="row col-12 add-padding-to-row">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="friday" class="col-5 col-form-label font-weight-bold label-transform">Friday:</label>
+              <div class="admin-switch" {{action 'toggleFriday' model}}>
+                {{input type="checkbox" id="friday" class="checkbox" checked=model.workFriday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workFriday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workFriday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.fridayOpen id="friday-start" class="form-control"}}
@@ -158,26 +151,26 @@
                 {{input type="time" value=model.fridayClose id="friday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="saturday" class="col-5 col-form-label font-weight-bold label-transform">Saturday:</label>
-                <div class="admin-switch col-3" {{action 'toggleSaturday' model}}>
-                  {{input type="checkbox" id="saturday" class="checkbox" checked=model.workSaturday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workSaturday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+          </div>
+        </div>
+        <div class="row col-12 add-padding-to-row">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="saturday" class="col-5 col-form-label font-weight-bold label-transform">Saturday:</label>
+              <div class="admin-switch" {{action 'toggleSaturday' model}}>
+                {{input type="checkbox" id="saturday" class="checkbox" checked=model.workSaturday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workSaturday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workSaturday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.saturdayOpen id="saturday-start" class="form-control"}}
@@ -186,26 +179,26 @@
                 {{input type="time" value=model.saturdayClose id="saturday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-            <div class="col">
-              <div class="form-group row remove-left-and-right-margin">
-                <label for="sunday" class="col-5 col-form-label font-weight-bold label-transform">Sunday:</label>
-                <div class="admin-switch col-3" {{action 'toggleSunday' model}}>
-                  {{input type="checkbox" id="sunday" class="checkbox" checked=model.workSunday}}
-                  <div class="slider round"></div>
-                </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                  {{#if model.workSunday}}
-                    <strong class="badge badge-success">Available</strong>
-                  {{else}}
-                    <strong class="badge badge-danger">Not Available</strong>
-                  {{/if}}
-                </div>
+          </div>
+        </div>
+        <div class="row col-12 add-padding-to-row">
+          <div class="col-md-4 col-12">
+            <div class="form-group row">
+              <label for="sunday" class="col-5 col-form-label font-weight-bold label-transform">Sunday:</label>
+              <div class="admin-switch" {{action 'toggleSunday' model}}>
+                {{input type="checkbox" id="sunday" class="checkbox" checked=model.workSunday}}
+                <div class="slider round"></div>
+              </div>
+              <div class="col-2">
+                {{#if model.workSunday}}
+                  <strong class="badge badge-success">Available</strong>
+                {{else}}
+                  <strong class="badge badge-danger">Not Available</strong>
+                {{/if}}
               </div>
             </div>
           </div>
-          {{#if model.workSunday}}
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 {{input type="time" value=model.sundayOpen id="sunday-start" class="form-control"}}
@@ -214,19 +207,17 @@
                 {{input type="time" value=model.sundayClose id="sunday-finish" class="form-control"}}
               </div>
             </div>
-          {{/if}}
-          <div class="row add-padding-to-row">
-             <div class="btn-group full-width" role="group">
-               <div class="col-6">
-                 <button type="submit" class="btn btn-primary btn-block">Save</button>
-               </div>
-               <div class="col-6">
-                 <button type="button" {{action 'goBackToSettings'}} class="btn btn-secondary btn-block">Cancel</button>
-               </div>
-             </div>
-           </div>
-        </form>
-      </div>
+          </div>
+        </div>
+        <div class="btn-group col-12" role="group">
+          <div class="col-6">
+           <button type="submit" class="btn btn-primary btn-block">Save</button>
+          </div>
+          <div class="col-6">
+            <button type="button" {{action 'goBackToSettings'}} class="btn btn-secondary btn-block">Cancel</button>
+          </div>
+        </div>
+      </form>
     </p>
   </div>
 </div>
