@@ -111,21 +111,6 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  def destroy
-    if current_user && current_user.admin?
-      begin
-        appointment=Appointment.find params[:id]
-        appointment.destroy
-        head :no_content
-      rescue ActiveRecord::RecordNotFound => e
-        render json: { error: 'No such appointment exists' }, status: :not_found
-      end
-    else
-      render json: { error: 'Not Authorized' }, status: 401
-    end
-  end
-
-
   private
 
   def appointment_sanitized_params

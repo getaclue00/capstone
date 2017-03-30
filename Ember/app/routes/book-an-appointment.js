@@ -27,7 +27,10 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
           vehicle_size: "Large"
         }
       }),
-      employees: this.get('store').findAll('employee')
+      employees: this.get('store').findAll('employee'),
+      company: this.get('store').findAll('company').then(function(results) {
+        return results.get('firstObject');
+      })
     });
   },
 

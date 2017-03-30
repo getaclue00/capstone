@@ -493,33 +493,4 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
   end
-
-  describe 'DELETE Appointments#destroy' do
-
-    before :each do
-      user = FactoryGirl.create :user, email: 'test@test.com'
-
-      controller.request.headers['Authorization'] = "Token token=\"#{user.authentication_token}\", email=\"#{user.email}\""
-    end
-
-    context 'when there are no appointments by such an id' do
-      it 'returns an error' do
-        delete :destroy, params: { id: 999 }
-
-        result = JSON.parse(response.body)
-        expect(result['error']).to eq('No such appointment exists')
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context 'when the appointment exists' do
-      it 'should delete it' do
-        appointment = FactoryGirl.create :appointment
-
-        delete :destroy, params: { id: appointment.id }
-
-        expect(response).to have_http_status(:no_content)
-      end
-    end
-  end
 end

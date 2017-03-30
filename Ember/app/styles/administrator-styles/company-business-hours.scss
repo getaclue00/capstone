@@ -1,28 +1,49 @@
+$breakpoint-alpha: 768px;
+
 .company-business-hours.card.text-center {
   border-bottom-width: 0px;
 }
 .company-business-hours {
   .card-header {
     font-size: 2em;
+
+    .glyphicon-chevron-left {
+      float: left;
+      top: 0.15em;
+    }
+
+    .glyphicon-calendar {
+      top: 0.10em
+    }
   }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+  }
+
   .form-group.row {
     margin-left: 0px;
     margin-right: 0px;
     .label-transform {
       text-transform: uppercase;
-      padding-left: 0px;
+      padding: 0px;
     }
   }
   .card-text {
     .add-padding-to-row {
       padding-top: 1em;
-      .remove-left-and-right-margin {
-        margin-left: 0px;
-        margin-right: 0px;
-      }
-      .full-width {
-        width: 100%;
-      }
+    }
+  }
+  .btn-group {
+    margin-top: 2em;
+  }
+}
+
+@media (max-width: $breakpoint-alpha) {
+  .company-business-hours {
+    input[readonly] {
+      display: none;
     }
   }
 }
