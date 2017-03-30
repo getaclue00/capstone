@@ -17,6 +17,14 @@ moduleFor('controller:users/new', 'Unit | Controller | users/new', {
   // needs: ['controller:foo']
 });
 
+test('checking confirm password', function(assert) {
+  assert.expect(1);
+  const ctrl = this.subject();
+
+  assert.equal(ctrl.get('confirm'),
+    undefined,
+   'confirm properly set');
+});
 
 test('#createUser transitions to employees', function(assert) {
   var done = assert.async();
@@ -46,7 +54,6 @@ test('#createUser throws an error following a failed creation (passwords match)'
   let done = assert.async();
 
   let userStub = Ember.Object.create({
-    confirm: 'password',
     password: 'password',
     errors: {content: [{"attribute": "email","message":"is invalid"}]},
     save() {
@@ -55,7 +62,8 @@ test('#createUser throws an error following a failed creation (passwords match)'
   });
 
   let ctrl = this.subject({
-      model: userStub
+      model: userStub,
+      confirm: 'password'
   });
 
   ctrl.send('createUser');
@@ -71,7 +79,6 @@ test('#createUser throws an error following a failed creation (passwords do not 
   this.inject.service('flash-messages', { as: 'flashMessages' });
 
   let userStub = Ember.Object.create({
-    confirm: 'password1',
     password: 'password',
     save() {
       return RSVP.reject();
@@ -79,7 +86,8 @@ test('#createUser throws an error following a failed creation (passwords do not 
   });
 
   let ctrl = this.subject({
-      model: userStub
+      model: userStub,
+      confirm: 'password1'
   });
 
   ctrl.send('createUser');

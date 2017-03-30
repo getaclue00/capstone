@@ -25,12 +25,8 @@ export default Ember.Controller.extend({
         flashMessages.danger('Error: '+ message);
       }
 
-
-      console.log("from controller**********************");
-      console.log("confrirm is "+self.get('confirm'));
-      console.log("password is "+self.get('model').get('password') );
-      if (self.get('model').get('password') === self.get('confirm')){
-        self.get('model').save().then(onSuccessful).catch(onError);
+      if (user.get('password') === self.get('confirm')){
+        user.save().then(onSuccessful).catch(onError);
       }else{
         window.scrollTo(0,0);
         flashMessages.danger('Error: passwords do not match!');

@@ -12,6 +12,11 @@ export default Ember.Component.extend({
     if (model.get('hasDirtyAttributes')) {
       model.rollbackAttributes();
     }
+    this.get('model').set('password',undefined); //needed because even if successfully set, i dont want it to be popeulated next time
+    this.set('confirm',undefined); //needed to happen every time (touching confirm)
+    console.log("from route***************************");
+    console.log("confirm is "+this.get('confirm'));
+    console.log("password is "+this.get('model').get('password'));
     Ember.$('.modal').modal('hide');
   },
 
