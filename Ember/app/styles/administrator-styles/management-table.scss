@@ -12,7 +12,7 @@ $breakpoint-alpha: 660px;
 
     text-align: center;
     width: 100%;
-    font-size: 1.25vw;
+    font-size: 1vw;
 
     td:nth-child(1) {
       font-weight: bold;
@@ -59,6 +59,12 @@ $breakpoint-alpha: 660px;
 
   .toggle-operations {
     display: none;
+  }
+
+  .appointment-history {
+    details {
+      display: none;
+    }
   }
 
 }
@@ -122,6 +128,16 @@ $breakpoint-alpha: 660px;
     background-color: inherit;
   }
 
+  // Styling for appointment-history
+
+  .history-table-row {
+    display: block;
+
+  .history-column {
+    display: none;
+    margin: 0px;
+    }
+  }
 }
 
 // Styling for both mobile and computer

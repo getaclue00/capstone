@@ -1,16 +1,44 @@
-<div class="management-div">
+<div class="management-div appointment-history">
   <div class="management-title-div">
       <h4><span class="glyphicon glyphicon-book"></span>Appointment History</h4>
   </div>
   <br />
   <div>
-      {{
-        management-tables
-        model=model
-        headers=headers
-        attributes=attributes
-        operations=operations
-        collection=collection
-      }}
+    <table id="has-datatable" class="management-table" width="100%">
+      <thead>
+        <tr>
+          <th>
+            <h1>Service</h1>
+          </th>
+
+          {{#each headers as |header|}}
+            <th>
+              <h1>{{header}}</h1>
+            </th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody class="management-table-body">
+        {{#each model as |record|}}
+          <tr class="history-table-row {{record.id}}">
+            <td data-th="{{record.service}}">
+              {{record.service.name}}
+            </td>
+            {{#each-in attributes as |key value|}}
+              <td class="history-column" data-th="{{value}}">
+                {{get record key}}
+              </td>
+            {{/each-in}}
+          <details>
+            {{#each-in attributes as |key value|}}
+              <td class="" data-th="{{value}}">
+                {{get record key}}
+              </td>
+            {{/each-in}}
+          </details>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </div>
