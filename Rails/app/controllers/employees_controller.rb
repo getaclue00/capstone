@@ -32,7 +32,14 @@ class EmployeesController < ApplicationController
       rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
         render json: { error: 'Employee creation failed. No parameters sent.'}, status: :bad_request
       rescue ActiveRecord::StatementInvalid => e #thrown when violations in migrations are violated
-        render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
+        render json: { "errors": [
+          {
+            "detail": 'Employee creation failed. Check your data.',
+            "source": {
+              "pointer": "data" #indicating primary data object
+            }
+          }
+        ]}, status: :bad_request
       rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
         render json: employee, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
       end
