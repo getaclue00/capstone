@@ -5,9 +5,7 @@ export default Ember.Component.extend({
 
   availableTimes: null,
 
-  aSelectedEmployee: Ember.computed('appointment.employee', function(){
-    return this.get('appointment.employee');
-  }),
+  aSelectedEmployee: null,
 
  didInsertElement() {
     this._super(...arguments);
@@ -85,6 +83,7 @@ export default Ember.Component.extend({
             }
             self.set('availableTimes', arrayTime);
             self.set('selectEmployee', true);
+            self.set('aSelectedEmployee', employee);
           });
         });
       }

@@ -200,7 +200,7 @@ $breakpoint-alpha: 768px;
   }
 
   .error {
-    text-align: center;
+    margin:0 auto;
     color: #cc0000;
     font-size: 0.8em;
   }
@@ -212,6 +212,11 @@ $breakpoint-alpha: 768px;
 
     td {
       height: 2.5em;
+
+    }
+
+    .day:not(.disabled) {
+      color: #323232;
     }
   }
 
