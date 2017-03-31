@@ -13,6 +13,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     });
   },
 
+  beforeModel() {
+    this._super(...arguments);
+    let isAdmin = this.get('currentUser.user.admin');
+    if (!isAdmin) {
+      this.replaceWith('my-calendar');
+    }
+  },
+
   isReadOnly(isActiveDate, date) {
     if(isActiveDate){
       Ember.$(date + '-start').attr('readonly', false);
