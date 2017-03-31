@@ -14,10 +14,12 @@
         collection=collection
       }}
   </div>
-  <div class="col-12 text-center">
-     {{#link-to 'employees.new' class="btn btn-danger btn-lg" }}
-      <span class="glyphicon glyphicon-plus"></span> Add Employee
-     {{/link-to}}
-  </div>
+  {{#if currentUser.user.admin}}
+    <div class="col-12 text-center">
+       {{#link-to 'employees.new' class="btn btn-danger btn-lg" }}
+        <span class="glyphicon glyphicon-plus"></span> Add Employee
+       {{/link-to}}
+    </div>
+  {{/if}}
   <br />
 </div>
