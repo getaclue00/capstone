@@ -30,9 +30,13 @@ export default Controller.extend({
         'employees.delete':'glyphicon-remove'
       };
     } else {
-      return { };
+      return undefined;
     }
   }),
 
-  collection: 'employees'
+  collection: computed('currentUser.user.admin', function() {
+    let isAdmin = this.get('currentUser.user.admin');
+    if (isAdmin) { return 'employees'; }
+    else { return undefined; }
+  })
 });

@@ -26,11 +26,6 @@ export default Controller.extend({
     "formattedDisplayable": "Displayable"
   },
 
-  // operations: {
-  //   'services.show': 'glyphicon-pencil',
-  //   'services.delete': 'glyphicon-remove'
-  // },
-
   operations: computed('currentUser.user.admin', function () {
     let isAdmin = this.get('currentUser.user.admin');
     if (isAdmin) {
@@ -39,7 +34,7 @@ export default Controller.extend({
         'services.delete':'glyphicon-remove'
       };
     } else {
-      return { };
+      return undefined;
     }
   }),
 
