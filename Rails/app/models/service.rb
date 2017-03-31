@@ -1,6 +1,8 @@
 class Service < ApplicationRecord
 	before_destroy :get_associated_objects
 
+  validates :name, presence: true
+
 	#destroying a service shouldnt destroy associated appointments (only sets FK to id 0)
 	has_many :appointments, dependent: :nullify
 

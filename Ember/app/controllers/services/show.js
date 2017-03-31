@@ -14,7 +14,11 @@ export default Ember.Controller.extend({
 
       function onError() {
         Ember.$('.modal').scrollTop(0);
-        flashMessages.danger('Error: service was not successfully updated');
+        var message = "";
+        var errors = self.get('model').get('errors.content');
+        for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+        flashMessages.danger('Error: '+ message);
       }
 
       this.get('model').save().then(onSuccessful).catch(onError);

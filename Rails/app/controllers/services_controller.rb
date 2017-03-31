@@ -44,16 +44,11 @@ class ServicesController < ApplicationController
         end
       rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
         render json: { error: 'Service creation failed. No parameters sent.'}, status: :bad_request
-      rescue ActiveRecord::StatementInvalid => e
-        render json: { "errors": [
-          {
-            "detail": 'field missing',
-            "source": {
-              "pointer": "data/attributes/name" #indicating primary data object
-            }
-          }
-        ]}, status: :bad_request
-       end
+      rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction not met
+          render json: { error: 'Service creation failed. Check your data.'}, status: :bad_request
+      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
+        render json: service, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
+      end
     else
       render json: { error: 'Not Authorized' }, status: 401
     end
@@ -73,6 +68,8 @@ class ServicesController < ApplicationController
         render json: { error: 'Service update failed. No parameters sent.'}, status: :bad_request
       rescue ActiveRecord::RecordNotFound => e
         render json: { error: 'No such service exists' }, status: :not_found
+      rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
+        render json: service, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
       end
     else
       render json: { error: 'Not Authorized' }, status: 401

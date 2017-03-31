@@ -196,8 +196,8 @@ RSpec.describe ServicesController, :type => :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:bad_request)
-        expect(result['errors']).to eq([{"detail"=>"field missing",
-          "source"=>{"pointer"=>"data/attributes/name"}}])
+        expect(result['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/name"},
+         "detail"=>"can't be blank"}])
       end
     end
    end
