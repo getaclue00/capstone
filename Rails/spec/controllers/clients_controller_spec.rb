@@ -131,11 +131,13 @@ RSpec.describe ClientsController, :type => :controller do
 
         result = JSON.parse(response.body)
         expect(response).to have_http_status(:bad_request)
-        expect(result['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/phone_number"},
-        "detail"=>"is invalid (please use 000-000-0000)"},
-        {"source"=>{"pointer"=>"/data/attributes/postal_code"},
-        "detail"=>"is invalid (please use A1F 3E2)"},
-        {"source"=>{"pointer"=>"/data/attributes/email"}, "detail"=>"is invalid"}])
+        expect(result['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/last_name"},
+         "detail"=>"can't be blank"},
+         {"source"=>{"pointer"=>"/data/attributes/phone_number"},
+         "detail"=>"is invalid (please use 000-000-0000)"},
+         {"source"=>{"pointer"=>"/data/attributes/postal_code"},
+         "detail"=>"is invalid (please use A1F 3E2)"},
+         {"source"=>{"pointer"=>"/data/attributes/email"}, "detail"=>"is invalid"}])
       end
     end
    end
