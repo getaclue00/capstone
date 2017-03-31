@@ -18,7 +18,9 @@ export default Ember.Controller.extend({
       }
 
       function onError() {
-        window.scrollTo(0,0);
+        let modalId = self.get('stringThatIsUsedForModalIdInTemplate');
+        Ember.$(`#${modalId}`).scrollTop(0);
+
         var message = "";
         var errors = self.get('appointment').get('errors.content');
         for (var i=0; i<errors.length; ++i){

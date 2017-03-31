@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
       }
 
       function onError() {
-        window.scrollTo(0,0);
+        Ember.$('.modal').scrollTop(0);
         flashMessages.danger('Error: service was not successfully updated');
       }
 
