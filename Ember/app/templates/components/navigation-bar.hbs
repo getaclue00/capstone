@@ -15,13 +15,22 @@
           <img src="/assets/images/logo.png" class='logo' width="150px" height="40px">
         </li>
         {{#if session.isAuthenticated}}
-          <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
-          <li class="nav-item">{{#link-to 'booking-history' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-book"></span> Booking History{{/link-to}}</li>
-          <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
-          <li class="nav-item">{{#link-to 'employees' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Staff{{/link-to}}</li>
-          <li class="nav-item">{{#link-to 'services' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-tag"></span> Services{{/link-to}}</li>
-          <li class="nav-item">{{#link-to 'my-account' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-cog"></span> Settings{{/link-to}}</li>
-          <li class="nav-item"><button type="button" class="btn btn-outline-danger nav-list-item" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-off"></span> Logout</button></li>
+          {{#if currentUser.user.admin}}
+            <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'booking-history' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-book"></span> Booking History{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'employees' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Staff{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'services' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-tag"></span> Services{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'my-account' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-cog"></span> Settings{{/link-to}}</li>
+            <li class="nav-item"><button type="button" class="btn btn-outline-danger nav-list-item" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-off"></span> Logout</button></li>
+          {{else}}
+            <li class="nav-item">{{#link-to 'my-calendar' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-calendar"></span> Schedule{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'clients' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Customers{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'employees' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-user"></span> Staff{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'services' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-tag"></span> Services{{/link-to}}</li>
+            <li class="nav-item">{{#link-to 'my-account' class='nav-link nav-list-item'}}<span class="glyphicon glyphicon-cog"></span> Settings{{/link-to}}</li>
+            <li class="nav-item"><button type="button" class="btn btn-outline-danger nav-list-item" {{action 'invalidateSession'}}><span class="glyphicon glyphicon-off"></span> Logout</button></li>
+          {{/if}}
         {{else}}
           <li class="nav-item">{{#link-to 'login' class='nav-link nav-list-item'}}Login{{/link-to}}</li>
         {{/if}}
