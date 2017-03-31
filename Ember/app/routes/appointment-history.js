@@ -34,7 +34,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     didTransition() {
-      console.log("hi");
       Ember.run.schedule('afterRender', this, () => {
         Ember.$('#has-datatable').DataTable({
         });

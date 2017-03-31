@@ -10,7 +10,6 @@
           <th>
             <h1>Service</h1>
           </th>
-
           {{#each headers as |header|}}
             <th>
               <h1>{{header}}</h1>
@@ -18,22 +17,38 @@
           {{/each}}
         </tr>
       </thead>
-      <tbody class="management-table-body">
+      <tbody class="history-table-body">
         {{#each model as |record|}}
           <tr class="history-table-row {{record.id}}">
             <td data-th="{{record.service}}">
               {{record.service.name}}
             </td>
             {{#each-in attributes as |key value|}}
-              <td class="history-column" data-th="{{value}}">
-                {{get record key}}
+              <td class="history-column {{value}}">
+                {{#if (eq value "Client")}}
+                  {{get record "client.first_name"}}
+                  {{get record key}}
+                {{else if (eq value "Employee")}}
+                  {{get record "employee.first_name"}}
+                  {{get record key}}
+                {{else}}
+                  {{get record key}}
+                {{/if}}
               </td>
             {{/each-in}}
           <details>
             {{#each-in attributes as |key value|}}
-              <td class="" data-th="{{value}}">
-                {{get record key}}
-              </td>
+              <tr class="history-detail-row {{value}}" data-th="{{value}}: ">
+                {{#if (eq value "Client")}}
+                  {{get record "client.first_name"}}
+                  {{get record key}}
+                {{else if (eq value "Employee")}}
+                  {{get record "employee.first_name"}}
+                  {{get record key}}
+                {{else}}
+                  {{get record key}}
+                {{/if}}
+              </tr>
             {{/each-in}}
           </details>
           </tr>

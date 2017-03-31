@@ -133,9 +133,26 @@ $breakpoint-alpha: 660px;
   .history-table-row {
     display: block;
 
-  .history-column {
-    display: none;
-    margin: 0px;
+    .history-column {
+      display: none;
+      margin: 0px;
+    }
+
+    details {
+      margin: 0px 15px;
+      padding-bottom: 5px;
+    }
+
+    .history-detail-row {
+      display: block;
+      font-size: 1em;
+      width: 100%;
+      border-bottom: 1px solid black;
+
+      &:before {
+        content: attr(data-th);
+        font-weight: bold;
+      }
     }
   }
 }
