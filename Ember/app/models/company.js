@@ -5,6 +5,7 @@ const { Model, attr, hasMany } = DS;
 const { computed } = Ember;
 
 export default Model.extend({
+  name:           attr('string', { defaultValue: 'A Company' }),
   workMonday:     attr('boolean', { defaultValue: false }),
   mondayOpen:     attr('string', { defaultValue: '08:00:00' }),
   mondayClose:    attr('string', { defaultValue: '17:00:00' }),
