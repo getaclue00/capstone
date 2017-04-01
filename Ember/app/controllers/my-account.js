@@ -7,7 +7,8 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
 
   actions: {
     updateAccountInfo() {
-      var flashMessages = this.get('flashMessages');
+      var self = this;
+      var flashMessages = self.get('flashMessages');
 
       function onSuccessful() {
         window.scrollTo(0,0);
@@ -16,16 +17,24 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger("Account information was not saved");
+        var message = "";
+        self.get('model').get('employee').then((e) => {
+          var errors = e.get('errors.content');
+          for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+          flashMessages.danger('Error: '+ message);
+        });
+
       }
 
-      this.get('model').get('employee').then((e) => {
+      self.get('model').get('employee').then((e) => {
         e.save().then(onSuccessful).catch(onError);
        });
      },
 
     updateLoginInfo() {
-      var flashMessages = this.get('flashMessages');
+      var self=this;
+      var flashMessages = self.get('flashMessages');
 
       function onSuccessful() {
         window.scrollTo(0,0);
@@ -34,14 +43,18 @@ export default Ember.Controller.extend(AuthenticatedRouteMixin,{
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Password not successfully changed');
+        var message = "";
+        var errors = self.get('model').get('errors.content');
+        for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+        flashMessages.danger('Error: '+ message);
       }
 
-      if (this.get('model').get('confirm') === this.get('model').get('password')) {
-        this.get('model').save().then(onSuccessful).catch(onError);
+      if (self.get('model').get('confirm') === self.get('model').get('password')) {
+        self.get('model').save().then(onSuccessful).catch(onError);
       } else {
         window.scrollTo(0,0);
-        flashMessages.danger("Passwords do not match");
+        flashMessages.danger("Error: passwords do not match");
       }
     }
   }

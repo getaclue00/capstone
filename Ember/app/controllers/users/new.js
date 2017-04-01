@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   flashMessages: Ember.inject.service(),
+  confirm: undefined,
 
 	actions: {
     // Action for saving a new service
@@ -16,16 +17,20 @@ export default Ember.Controller.extend({
       }
 
       function onError() {
-        window.scrollTo(0,0);
-        flashMessages.danger('Account was not successfully created');
+        Ember.$('.modal').scrollTop(0);
+        var message = "";
+        var errors = self.get('model').get('errors.content');
+        for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+        flashMessages.danger('Error: '+ message);
       }
 
-      if (this.get('model').get('confirm') === this.get('model').get('password')){
-          user.save().then(onSuccessful).catch(onError);
-	    }else{
-	    	window.scrollTo(0,0);
-        flashMessages.danger('Passwords do not match!');
-	    }
+      if (user.get('password') === self.get('confirm')){
+        user.save().then(onSuccessful).catch(onError);
+      }else{
+         Ember.$('.modal').scrollTop(0);
+        flashMessages.danger('Error: passwords do not match!');
+      }
     }
   }
 });

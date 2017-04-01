@@ -31,10 +31,10 @@ class EmployeesController < ApplicationController
         end
       rescue ActiveModelSerializers::Adapter::JsonApi::Deserialization::InvalidDocument => e
         render json: { error: 'Employee creation failed. No parameters sent.'}, status: :bad_request
-      rescue ActiveRecord::StatementInvalid => e #thrown when violations in migrations are violated
-        render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
+      rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction not met
+          render json: { error: 'Employee creation failed. Check your data.'}, status: :bad_request
       rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-        render json: { error: employee.errors.messages}, status: :bad_request
+        render json: employee, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
       end
     else
       render json: { error: 'Not Authorized' }, status: 401
@@ -57,7 +57,7 @@ class EmployeesController < ApplicationController
         rescue ActiveRecord::RecordNotFound => e
           render json: { error: 'No such employee exists' }, status: :not_found
         rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-          render json: { error: employee.errors.messages}, status: :bad_request
+          render json: employee, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
         end
       else
         render json: { error: 'Not Authorized' }, status: 401

@@ -38,6 +38,7 @@ test('#saveAppointment throws as error following a failed creation', function(as
 
   let done = assert.async();
   const appointmentStub = Ember.Object.create({
+    errors: {content: [{"attribute": "client","message":"must exist"}]},
     save() {
       return RSVP.reject();
     }
@@ -49,7 +50,7 @@ test('#saveAppointment throws as error following a failed creation', function(as
   ctrl.send('saveAppointment');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Appointment was not successfully created', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: client must exist! ', 'danger flashMessages fired');
     done();
   }, 500);
 });

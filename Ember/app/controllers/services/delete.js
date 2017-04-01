@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
 
       function failure() {
         window.scrollTo(0,0);
-        flashMessages.danger('Service was not successfully deleted');
+        flashMessages.danger('Error: service was not successfully deleted');
       }
 
       service.destroyRecord()

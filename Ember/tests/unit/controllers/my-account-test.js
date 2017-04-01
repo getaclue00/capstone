@@ -61,6 +61,7 @@ test('#updateAccountInfo throws an error msg following a failed update', functio
       assert.deepEqual(property, 'employee', 'expected to be calling for an employee');
 
       let mockEmployee = Ember.Object.create({
+        errors: {content: [{"attribute": "postalCode","message":"is invalid (please use A1F 3E2)"}]},
         save() {
           return RSVP.reject();
         }
@@ -77,7 +78,7 @@ test('#updateAccountInfo throws an error msg following a failed update', functio
   controller.send('updateAccountInfo');
 
   setTimeout(function() {
-    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Account information was not saved', 'danger flashMessages fired');
+    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Error: postalCode is invalid (please use A1F 3E2)! ', 'danger flashMessages fired');
     done();
   }, 500);
 });
@@ -126,7 +127,7 @@ test('#updateLoginInfo does NOT transition away from my-account (passwords do no
   controller.send('updateLoginInfo');
   //setTimeout in not needed because the save is not trying to execute in the actual code
   assert.ok(controller);
-  assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Passwords do not match', 'danger flashMessages fired');
+  assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Error: passwords do not match', 'danger flashMessages fired');
 });
 
 test('#updateLoginInfo throws an error following a failed update', function(assert) {
@@ -138,6 +139,7 @@ test('#updateLoginInfo throws an error following a failed update', function(asse
   let userStub = Ember.Object.create({
     confirm: 'password',
     password: 'password',
+    errors: {content: [{"attribute": "password","message":"is too short (minimum is 6 characters)"}]},
 
     save() {
       return RSVP.reject();
@@ -151,7 +153,7 @@ test('#updateLoginInfo throws an error following a failed update', function(asse
   controller.send('updateLoginInfo');
   setTimeout(function() {
     assert.ok(controller);
-    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Password not successfully changed', 'danger flashMessages fired');
+    assert.deepEqual(controller.get('flashMessages.calledWithMessage'), 'Error: password is too short (minimum is 6 characters)! ', 'danger flashMessages fired');
     done();
   }, 500);
 });
