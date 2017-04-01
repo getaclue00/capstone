@@ -10,5 +10,11 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
   pathForType: function(type) {
     let underscored = underscore(type);
     return pluralize(underscored);
+  },
+
+  //overriding the defalt behaviour which returns true is status is 422
+  isInvalid(status) {
+    return status === 400;
   }
+
 });

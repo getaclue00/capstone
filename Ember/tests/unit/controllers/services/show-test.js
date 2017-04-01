@@ -38,6 +38,7 @@ test('#saveService throws an error following a failed update', function(assert) 
 
   let done = assert.async();
   const serviceStub = Ember.Object.create({
+    errors: {content: [{"attribute": "name","message":"cant be blank"}]},
     save() {
       return RSVP.reject();
     }
@@ -49,7 +50,7 @@ test('#saveService throws an error following a failed update', function(assert) 
   ctrl.send('updateService');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Service was not successfully updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: name cant be blank! ', 'danger flashMessages fired');
     done();
   }, 500);
 

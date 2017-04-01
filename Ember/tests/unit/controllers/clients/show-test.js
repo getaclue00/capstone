@@ -40,6 +40,7 @@ test('#updateClient throws an error following a failed update', function(assert)
 
   let done = assert.async();
   const clientStub = Ember.Object.create({
+    errors: {content: [{"attribute": "email","message":"is invalid"}]},
     save() {
       return RSVP.reject();
     }
@@ -52,7 +53,7 @@ test('#updateClient throws an error following a failed update', function(assert)
   ctrl.send('updateClient');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Client was not successfully updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: email is invalid! ', 'danger flashMessages fired');
     done();
   }, 500);
 });

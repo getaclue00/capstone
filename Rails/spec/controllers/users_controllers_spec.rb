@@ -194,7 +194,7 @@ RSpec.describe UsersController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq( {"password" => ["can't be blank"]}
+        expect(result['errors']).to eq( [{"source"=>{"pointer"=>"/data/attributes/password"}, "detail"=>"can't be blank"}]
 )
         expect(response).to have_http_status(:bad_request)
       end
@@ -219,7 +219,7 @@ RSpec.describe UsersController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq( {"employee" => ["must exist"]}
+        expect(result['errors']).to eq( [{"source"=>{"pointer"=>"/data/attributes/employee"}, "detail"=>"must exist"}]
 )
         expect(response).to have_http_status(:bad_request)
       end
@@ -248,7 +248,7 @@ RSpec.describe UsersController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq({"employee" => ["must exist"]})
+        expect(result['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/employee"}, "detail"=>"must exist"}])
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -455,7 +455,7 @@ RSpec.describe UsersController, :type => :controller do
         patch :update, params: {id: user.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
+        expect(parsed_response['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/email"}, "detail"=>"is invalid"}])
         expect(response).to have_http_status(:bad_request)
       end
 
@@ -477,7 +477,7 @@ RSpec.describe UsersController, :type => :controller do
         patch :update, params: {id: user.id, data: params['data']}
 
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['error']).to eq({"email"=>["is invalid"]})
+        expect(parsed_response['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/email"}, "detail"=>"is invalid"}])
         expect(response).to have_http_status(:bad_request)
       end
     end
