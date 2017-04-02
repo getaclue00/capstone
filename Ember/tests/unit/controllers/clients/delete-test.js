@@ -55,7 +55,7 @@ test('#deleteService throws an error following a failed deletion', function(asse
   ctrl.send('deleteClient');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Client was not successfully deleted', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: client was not successfully deleted', 'danger flashMessages fired');
     done();
   }, 500);
 });

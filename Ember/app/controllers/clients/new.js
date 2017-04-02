@@ -16,12 +16,16 @@ export default Ember.Controller.extend({
         self.transitionToRoute('clients');
       }
 
-      function failure() {
-        window.scrollTo(0,0);
-        flashMessages.danger("Client was not successfully created");
+      function onError() {
+        Ember.$('.modal').scrollTop(0);
+        var message = "";
+        var errors = self.get('model').get('errors.content');
+        for (var i=0; i<errors.length; ++i){
+            message +=(errors[i].attribute+" "+ errors[i].message+"! ");}
+        flashMessages.danger('Error: '+ message);
       }
 
-      client.save().then(transitionToPost).catch(failure);
+      client.save().then(transitionToPost).catch(onError);
     }
   }
 });

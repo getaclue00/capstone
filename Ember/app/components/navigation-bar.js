@@ -1,8 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+const { inject: { service }, Component } = Ember;
+
+export default Component.extend({
   // sliding actions done via
   // http://www.w3schools.com/howto/howto_js_sidenav.asp
+
+  session:        service(),
+  currentUser:    service('current-user'),
 
   click(event) {
     this._super(...arguments);

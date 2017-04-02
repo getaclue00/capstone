@@ -147,18 +147,17 @@ $breakpoint-alpha: 768px;
   }
 
   .time-button {
-    margin: 5px;
-    background-color: #e8e7e2;
-    font-weight: bold;
-    box-shadow: 5px 5px 5px #888888;
-    border: 1px #A9A9A9 solid;
-    color: #AD2A1A;
+    font-weight: 600;
+    background: #AD2A1A;
+    color: #e8e7e2;
+    box-shadow: 0 5px #888888;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
 
-    :hover {
-      background-color: #d3d3d3;
-      cursor: pointer;
-    }
-
+  .time-button:hover {
+    box-shadow: 0 4px #AD2A1A;
+    top: 2px;
   }
 
 
@@ -201,7 +200,7 @@ $breakpoint-alpha: 768px;
   }
 
   .error {
-    text-align: center;
+    margin:0 auto;
     color: #cc0000;
     font-size: 0.8em;
   }
@@ -213,6 +212,11 @@ $breakpoint-alpha: 768px;
 
     td {
       height: 2.5em;
+
+    }
+
+    .day:not(.disabled) {
+      color: #323232;
     }
   }
 

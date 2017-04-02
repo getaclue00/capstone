@@ -12,6 +12,8 @@ export default Ember.Component.extend({
     if (model.get('hasDirtyAttributes')) {
       model.rollbackAttributes();
     }
+    this.get('model').set('password',undefined);
+    this.set('confirm',undefined);
     Ember.$('.modal').modal('hide');
   },
 

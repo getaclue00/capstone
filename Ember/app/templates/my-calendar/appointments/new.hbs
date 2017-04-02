@@ -7,6 +7,9 @@
         </button>
         <h4 class="modal-title" id="{{stringThatIsUsedForModalIdInTemplate}}Label">Add Appointment</h4>
       </div>
+      {{#each flashMessages.queue as |flash|}}
+        {{flash-message flash=flash messageStyle='bootstrap'}}
+      {{/each}}
       <div class="modal-body">
         <div class="container-fluid">
           {{
