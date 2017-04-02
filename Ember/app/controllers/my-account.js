@@ -3,7 +3,9 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 
 export default Ember.Controller.extend(AuthenticatedRouteMixin,{
-  flashMessages: Ember.inject.service(),
+  flashMessages:  Ember.inject.service(),
+  session:        Ember.inject.service(),
+  currentUser:    Ember.inject.service('current-user'),
 
   actions: {
     updateAccountInfo() {

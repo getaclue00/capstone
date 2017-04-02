@@ -7,7 +7,13 @@ moduleFor('controller:clients/index', 'Unit | Controller | clients/index', {
 
 test('checking arrays and hash maps', function(assert) {
   assert.expect(4);
-  const ctrl = this.subject();
+  const ctrl = this.subject({
+    currentUser: {
+      user: {
+        admin: true
+      }
+    }
+  });
 
   assert.deepEqual(ctrl.get('headers'),
   	["Name", "Client ID", "Email",
