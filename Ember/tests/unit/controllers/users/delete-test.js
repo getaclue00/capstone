@@ -57,7 +57,7 @@ test('#deleteUser throws an error following a failed deletion', function(assert)
   ctrl.send('deleteUser');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not successfully deleted', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: account was not successfully deleted', 'danger flashMessages fired');
     done();
   }, 500);
 

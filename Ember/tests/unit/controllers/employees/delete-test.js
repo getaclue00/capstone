@@ -60,7 +60,7 @@ test('#deleteEmployee throws an error following a failed deletion', function(ass
   ctrl.send('deleteEmployee');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Employee was not successfully deleted', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: employee was not successfully deleted', 'danger flashMessages fired');
     done();
   }, 500);
 });

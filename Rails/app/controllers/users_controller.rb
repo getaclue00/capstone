@@ -45,7 +45,8 @@ class UsersController < ApplicationController
         rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
           render json: { error: 'User creation failed. Check your data.'}, status: :bad_request
         rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-          render json: { error: user.errors.messages}, status: :bad_request
+         #https://github.com/rails-api/active_model_serializers/blob/master/docs/jsonapi/errors.md
+         render json: user, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
       end
     else
       render json: { error: 'Not Authorized' }, status: 401
@@ -68,7 +69,7 @@ class UsersController < ApplicationController
         rescue ActiveRecord::RecordNotFound => e
           render json: { error: 'No such user exists' }, status: :not_found
         rescue ActiveRecord::RecordInvalid => e  #thrown when validations in model are violated
-          render json: { error: user.errors.messages}, status: :bad_request
+          render json: user, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
         rescue ActiveRecord::StatementInvalid => e #thrown when migration restriction or FK constraint not respected; if admin is null
           render json: { error: 'User update failed. Check your data.'}, status: :bad_request
         end
