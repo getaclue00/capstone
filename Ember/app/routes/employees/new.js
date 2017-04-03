@@ -8,7 +8,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
   	goBackToListOfEmployees() {
-  	    this.transitionTo('employees');
+      this.get('controller.model').destroyRecord();
+  	  this.transitionTo('employees');
   	}
   }
 });
