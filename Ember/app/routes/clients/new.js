@@ -8,6 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
 
   	actions: {
 	  	goBackToListOfClients() {
+          this.get('controller.model').destroyRecord();
 	  	    this.transitionTo('clients');
 	  	}
   	}
