@@ -110,13 +110,13 @@ class AppointmentsController < ApplicationController
 
       if appointment.update!(sanitized_params)
 
-        last_status = appointment.versions.last.changeset[:status][1]
+        new_status = appointment.versions.last.changeset[:status][1]
 
-        if last_status === "confirmed"
+        if new_status === "confirmed"
           AppointmentsMailer.appointment_confirmed(appointment).deliver_later
         end
 
-        if last_status === "cancelled"
+        if new_status === "cancelled"
           AppointmentsMailer.appointment_cancelled(appointment).deliver_later
         end
 
