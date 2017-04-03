@@ -1,0 +1,19 @@
+Your appointment has been confirmed!
+
+We’re looking forward to caring for your vehicle on <%= @appointment.start.getlocal.strftime("%A, %B %d, %Y") %> at <%= @appointment.start.getlocal.strftime("%I:%M%p") %>.
+<%= @appointment.employee.first_name %> will be performing the <%= @appointment.service.name %> service package and will take approximately <%= @appointment.service.duration %> minutes to complete.
+
+Things to keep in mind:
+- We will arrive within the first hour of the time slot reserved and complete the services within the timeframe
+
+-  Should you need to cancel your appointment, please do so within 24 hours of the reserved time slot
+
+-  If your vehicle has recently experienced a very big mess that requires more time and effort to care for, we may have to charge you an extra fee – to be determined with you before we start detailing your car
+
+If you have any questions or concerns, please contact us at <%= @user.email %>.
+
+Thanks for booking and have a great day!
+
+R & A Detailing
+613-676-3RAD (723)
+www.radetailing.ca

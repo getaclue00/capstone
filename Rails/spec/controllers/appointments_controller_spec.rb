@@ -385,7 +385,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     end
 
     context 'when the appointment exists and the correct params were sent' do
-      it "responds successfully" do
+      it "responds successfully", :versioning => true do
         appointment = FactoryGirl.create :appointment
         client = FactoryGirl.create :client
         service = FactoryGirl.create :service
