@@ -4,7 +4,7 @@ import moment from 'moment';
 import RSVP from 'rsvp';
 
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
-  model(params) {
+  model() {
     let id = 1;
     let time = moment().format('YYYY-MM-DDTHH:mm');
 
@@ -76,4 +76,3 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     }
   }
 });
-

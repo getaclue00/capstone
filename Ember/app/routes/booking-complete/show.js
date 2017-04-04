@@ -25,7 +25,7 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     },
 
     goToBookingPage(id) {
-      this.transitionTo('book-an-appointment.show', id);
+      this.transitionTo('book-an-appointment.show');
     }
   }
 });
