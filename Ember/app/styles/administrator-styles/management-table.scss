@@ -12,7 +12,7 @@ $breakpoint-alpha: 660px;
 
     text-align: center;
     width: 100%;
-    font-size: 1.25vw;
+    font-size: 1vw;
 
     td:nth-child(1) {
       font-weight: bold;
@@ -61,6 +61,12 @@ $breakpoint-alpha: 660px;
     display: none;
   }
 
+  .appointment-history {
+    details {
+      display: none;
+    }
+  }
+
 }
 
 //Styling for when on mobile device
@@ -86,7 +92,7 @@ $breakpoint-alpha: 660px;
     margin: 0px;
   }
 
-  #has-datatable_wrapper {
+  #has-datatable_wrapper, #history-table_wrapper{
     thead {
       display: none;
     }
@@ -122,6 +128,33 @@ $breakpoint-alpha: 660px;
     background-color: inherit;
   }
 
+  // Styling for appointment-history
+
+  .history-table-row {
+    display: block;
+
+    .history-column {
+      display: none;
+      margin: 0px;
+    }
+
+    details {
+      margin: 0px 15px;
+      padding-bottom: 5px;
+    }
+
+    .history-detail-row {
+      display: block;
+      font-size: 1em;
+      width: 100%;
+      border-bottom: 1px solid black;
+
+      &:before {
+        content: attr(data-th);
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 // Styling for both mobile and computer

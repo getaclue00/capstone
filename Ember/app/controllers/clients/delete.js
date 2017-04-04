@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger("Client was not successfully deleted");
+        flashMessages.danger("Error: client was not successfully deleted");
       }
 
       if (client) {

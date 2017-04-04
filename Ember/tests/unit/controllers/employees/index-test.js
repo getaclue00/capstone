@@ -7,23 +7,29 @@ moduleFor('controller:employees/index', 'Unit | Controller | employees/index', {
 
 test('checking arrays and hash maps', function(assert) {
   assert.expect(4);
-  const ctrl = this.subject();
+  const ctrl = this.subject({
+    currentUser: {
+      user: {
+        admin: true
+      }
+    }
+  });
 
-  assert.deepEqual(ctrl.get('headers'), 
+  assert.deepEqual(ctrl.get('headers'),
   	["Name", "Employee ID", "Phone",
             "Start Date", "End Date"],
   	'header properly set');
 
-  assert.deepEqual(ctrl.get('attributes'), 
+  assert.deepEqual(ctrl.get('attributes'),
   	{"fullName": "Name", "id" : "Employee ID:", "phoneNumber" : "Phone",
                 "startDate": "Start Date", "endDate": "End Date"},
     'attributes properly set');
 
-  assert.deepEqual(ctrl.get('operations'), 
+  assert.deepEqual(ctrl.get('operations'),
   	{'employees.show': 'glyphicon-pencil', 'employees.delete': 'glyphicon-remove'},
    'operations properly set');
 
-  assert.equal(ctrl.get('collection'), 
+  assert.equal(ctrl.get('collection'),
   	'employees',
    'operations properly set');
 });

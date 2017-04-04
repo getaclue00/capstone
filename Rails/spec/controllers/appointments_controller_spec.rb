@@ -303,8 +303,12 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq({"status"=>["Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"], "service"=>["must exist"], "employee"=>["must exist"], "client"=>["must exist"]}
-)
+        expect(result['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/status"},
+         "detail"=>
+          "Please enter a valid status: pending, confirmed, new time proposed, completed or cancelled"},
+        {"source"=>{"pointer"=>"/data/attributes/service"}, "detail"=>"must exist"},
+        {"source"=>{"pointer"=>"/data/attributes/employee"}, "detail"=>"must exist"},
+        {"source"=>{"pointer"=>"/data/attributes/client"}, "detail"=>"must exist"}])
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -337,8 +341,9 @@ RSpec.describe AppointmentsController, :type => :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['error']).to eq({"service"=>["must exist"], "employee"=>["must exist"], "client"=>["must exist"]}
-)
+        expect(result['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/service"}, "detail"=>"must exist"},
+         {"source"=>{"pointer"=>"/data/attributes/employee"}, "detail"=>"must exist"},
+         {"source"=>{"pointer"=>"/data/attributes/client"}, "detail"=>"must exist"}])
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -380,7 +385,7 @@ RSpec.describe AppointmentsController, :type => :controller do
     end
 
     context 'when the appointment exists and the correct params were sent' do
-      it "responds successfully" do
+      it "responds successfully", :versioning => true do
         appointment = FactoryGirl.create :appointment
         client = FactoryGirl.create :client
         service = FactoryGirl.create :service

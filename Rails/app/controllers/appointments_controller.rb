@@ -7,10 +7,23 @@ class AppointmentsController < ApplicationController
 
         select_week_year = params[:filter].present? && params[:filter][:week].present? && params[:filter][:year].present?
         get_versions = params[:version].present? && params[:version][:id].present?
+        date_filter = params[:filter].present? && params[:filter][:date].present?
+        employee_fitler = params[:filter].present? && params[:filter][:employee_id].present?
 
         # regardless of whether admin or not
         if select_week_year
           appointments_array=Appointment.where('week_number = ?', params[:filter][:week]).all
+          if appointments_array && !appointments_array.empty?
+            render json: appointments_array, status: :ok
+          else
+            render json: [], status: :ok
+          end
+
+        elsif date_filter && employee_fitler
+          date = params[:filter][:date].split('-')
+          start_time = DateTime.new(date[0].to_i, date[1].to_i, date[2].to_i).beginning_of_day
+          end_time = DateTime.new(date[0].to_i, date[1].to_i, date[2].to_i).end_of_day
+          appointments_array=Appointment.order(:start).where('(start BETWEEN ? AND ?) AND employee_id = ?', start_time, end_time, params[:filter][:employee_id]).all
           if appointments_array && !appointments_array.empty?
             render json: appointments_array, status: :ok
           else
@@ -82,7 +95,7 @@ class AppointmentsController < ApplicationController
     rescue ActiveRecord::StatementInvalid => e
       render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
     rescue ActiveRecord::RecordInvalid => e
-      render json: { error: @appointment.errors.messages}, status: :bad_request
+      render json: @appointment, status: 400, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -96,6 +109,17 @@ class AppointmentsController < ApplicationController
       end
 
       if appointment.update!(sanitized_params)
+
+        new_status = appointment.versions.last.changeset[:status][1]
+
+        if new_status === "confirmed"
+          AppointmentsMailer.appointment_confirmed(appointment).deliver_later
+        end
+
+        if new_status === "cancelled"
+          AppointmentsMailer.appointment_cancelled(appointment).deliver_later
+        end
+
         render json: appointment, status: :ok
       else
         render json: { error: 'Appointment update failed'}, status: :bad_request

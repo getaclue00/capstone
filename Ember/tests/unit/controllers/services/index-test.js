@@ -7,7 +7,13 @@ moduleFor('controller:services/index', 'Unit | Controller | services/index', {
 
 test('checking arrays and hash maps', function(assert) {
   assert.expect(3);
-  const ctrl = this.subject();
+  const ctrl = this.subject({
+    currentUser: {
+      user: {
+        admin: true
+      }
+    }
+  });
 
   assert.deepEqual(ctrl.get('headers'),
 	[

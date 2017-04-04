@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
 
       function onError() {
         window.scrollTo(0,0);
-        flashMessages.danger('Account was not successfully deleted');
+        flashMessages.danger('Error: account was not successfully deleted');
       }
 
       if (user) {

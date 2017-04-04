@@ -38,6 +38,7 @@ test('#updateEmployee throws as error following a failed update', function(asser
 
   let done = assert.async();
   const employeeStub = Ember.Object.create({
+    errors: {content: [{"attribute": "phoneNumber","message":"is invalid (please use 000-000-0000)"}]},
     save() {
       return RSVP.reject();
     }
@@ -49,7 +50,7 @@ test('#updateEmployee throws as error following a failed update', function(asser
   ctrl.send('updateEmployee');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Employee was not successfully updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: phoneNumber is invalid (please use 000-000-0000)! ', 'danger flashMessages fired');
     done();
   }, 500);
 });

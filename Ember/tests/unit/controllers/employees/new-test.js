@@ -38,6 +38,7 @@ test('#saveEmployee throws as error following a failed creation', function(asser
 
   let done = assert.async();
   const employeeStub = Ember.Object.create({
+    errors: {content: [{"attribute": "postalCode","message":"is invalid (please use A1F 3E2)"}]},
     save() {
       return RSVP.reject();
     }
@@ -49,7 +50,7 @@ test('#saveEmployee throws as error following a failed creation', function(asser
   ctrl.send('saveEmployee');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Employee was not successfully created', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: postalCode is invalid (please use A1F 3E2)! ', 'danger flashMessages fired');
     done();
   }, 500);
 });

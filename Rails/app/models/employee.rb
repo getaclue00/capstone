@@ -10,9 +10,9 @@ class Employee < ApplicationRecord
 
     validates :company, presence: true
     validates :phone_number, format: { with: /\d{3}-\d{3}-\d{4}/,
-    message: "Please enter a valid phone number 000-000-0000" }, :allow_blank => true
+    message: "is invalid (please use 000-000-0000)" }, :allow_blank => true
     validates :postal_code, format: { with: /[A-Z][0-9][A-Z](\s|)[0-9][A-Z][0-9]/,
-    message: "Please enter a valid postal code G5G 6T6" }, :allow_blank => true
+    message: "is invalid (please use A1F 3E2)" }, :allow_blank => true
 
     def get_associated_objects
         apts_array = Employee.find(self[:id]).appointment_ids

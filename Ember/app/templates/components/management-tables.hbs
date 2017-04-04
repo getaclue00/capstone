@@ -40,19 +40,23 @@
         </td>
       {{/if}}
 
-      {{#each-in operations as |key value|}}
-        <td class="operation-div">
-          <div class="management-operation">
-            {{#link-to key  collection.id class="management-icon"}}
-            <span class="glyphicon {{value}}"></span>
-           {{/link-to}}
-         </div>
-        </td >
-     {{/each-in}}
+      {{#if operations}}
+        {{#each-in operations as |key value|}}
+          <td class="operation-div">
+            <div class="management-operation">
+              {{#link-to key  collection.id class="management-icon"}}
+              <span class="glyphicon {{value}}"></span>
+             {{/link-to}}
+           </div>
+          </td >
+       {{/each-in}}
+      {{/if}}
 
-      <button type="button" class="btn toggle-operations"{{action 'viewOperations' collection.id}}>
-        <span class="glyphicon glyphicon-option-vertical"></span>
-      </button>
+      {{#if operations}}
+        <button type="button" class="btn toggle-operations"{{action 'viewOperations' collection.id}}>
+          <span class="glyphicon glyphicon-option-vertical"></span>
+        </button>
+      {{/if}}
     </tr>
     <br />
     {{/each}}

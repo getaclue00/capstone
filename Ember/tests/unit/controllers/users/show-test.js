@@ -13,6 +13,15 @@ moduleFor('controller:users/show', 'Unit | Controller | users/show', {
   // needs: ['controller:foo']
 });
 
+test('checking confirm password', function(assert) {
+  assert.expect(1);
+  const ctrl = this.subject();
+
+  assert.equal(ctrl.get('confirm'),
+    undefined,
+   'confirm properly set');
+});
+
 test('#updateUser transitions to employees', function(assert) {
   var done = assert.async();
   let userStub = Ember.Object.create({
@@ -40,21 +49,22 @@ test('#updateUser throws an error following a failed creation (passwords match)'
   let done = assert.async();
 
   let userStub = Ember.Object.create({
-    confirm: 'password',
     password: 'password',
+    errors: {content: [{"attribute": "email","message":"is invalid"}]},
     save() {
       return RSVP.reject();
     }
   });
 
   let ctrl = this.subject({
-      model: userStub
+      model: userStub,
+      confirm: 'password'
   });
 
   ctrl.send('updateUser');
   setTimeout(function() {
     assert.ok(ctrl);
-    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Account was not updated', 'danger flashMessages fired');
+    assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: email is invalid! ', 'danger flashMessages fired');
     done();
   }, 500);
 });
@@ -64,7 +74,6 @@ test('#updateUser throws an error following a failed creation (passwords do not 
   this.inject.service('flash-messages', { as: 'flashMessages' });
 
   let userStub = Ember.Object.create({
-    confirm: 'password1',
     password: 'password',
     save() {
       return RSVP.reject();
@@ -72,10 +81,11 @@ test('#updateUser throws an error following a failed creation (passwords do not 
   });
 
   let ctrl = this.subject({
-      model: userStub
+      model: userStub,
+      confirm: 'password1'
   });
 
   ctrl.send('updateUser');
   assert.ok(ctrl);
-  assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Passwords do not match!', 'danger flashMessages fired');
+  assert.deepEqual(ctrl.get('flashMessages.calledWithMessage'), 'Error: passwords do not match!', 'danger flashMessages fired');
 });

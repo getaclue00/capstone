@@ -20,8 +20,7 @@ const UserStub = Ember.Object.extend({
 let user = UserStub.create({
   email: 'test@test.com',
   password: 'blabla',
-  admin: true,
-  confirm: 'blabla'
+  admin: true
 });
 
 moduleForComponent('user-account-editor-editor', 'Integration | Component | user account editor', {
@@ -34,10 +33,11 @@ test('it renders a view with a model', function(assert) {
   this.set('model', user);
 
   assert.expect(7);
-
+  this.set('confirm', '');
   this.render(hbs`{{
     user-account-editor
     model=model
+    confirm=confirm
   }}`);
 
   // // Test in correct inputs bar are present
@@ -49,7 +49,7 @@ test('it renders a view with a model', function(assert) {
   assert.deepEqual(this.$('input[type="text"]')[1].value, this.get('model.email'), 'names should match');
   assert.deepEqual(this.$('input[id="user-admin"]').is(":checked"), this.get('model.admin'), 'Whether a user is admin should match');
   assert.deepEqual(this.$('input[type="password"]')[0].value, this.get('model.password').toString(), 'password should match');
-  assert.deepEqual(this.$('input[type="password"]')[1].value, this.get('model.confirm').toString(), 'password should match');
+  assert.deepEqual(this.$('input[type="password"]')[1].value, this.get('confirm'), '');
 });
 
 test('should update user admin on click', function(assert) {
