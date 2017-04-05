@@ -110,14 +110,15 @@ class AppointmentsController < ApplicationController
 
       if appointment.update!(sanitized_params)
 
-        new_status = appointment.versions.last.changeset[:status][1]
+        if change_set = appointment.versions.last.changeset[:status]
+          new_status = change_set[1]
+          if new_status === "confirmed"
+            AppointmentsMailer.appointment_confirmed(appointment).deliver_later
+          end
 
-        if new_status === "confirmed"
-          AppointmentsMailer.appointment_confirmed(appointment).deliver_later
-        end
-
-        if new_status === "cancelled"
-          AppointmentsMailer.appointment_cancelled(appointment).deliver_later
+          if new_status === "cancelled"
+            AppointmentsMailer.appointment_cancelled(appointment).deliver_later
+          end
         end
 
         render json: appointment, status: :ok
