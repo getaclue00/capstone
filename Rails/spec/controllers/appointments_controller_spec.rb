@@ -434,6 +434,55 @@ RSpec.describe AppointmentsController, :type => :controller do
       end
     end
 
+    context 'when the appointment exists and the correct params were sent (status not updated)' do
+      it "responds successfully", :versioning => true do
+        appointment = FactoryGirl.create :appointment
+        client = FactoryGirl.create :client
+        service = FactoryGirl.create :service
+        employee = FactoryGirl.create :employee
+        appointment.color = "#A022FF"
+        appointment.text_color = "#c1111F"
+        appointment.title = "Updated title"
+        appointment.start = "2017-12-08T00:00:00.000Z"
+        appointment.end = "2019-02-04T00:00:00.000Z"
+        appointment.notes = "Updated note"
+        appointment.client_id = client.id
+        appointment.service_id = service.id
+        appointment.employee_id = employee.id
+
+        # Create a serializer instance
+        serializer = AppointmentSerializer.new(appointment)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: appointment.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['data']['id'].to_i).to eq(appointment.id)
+        attr = parsed_response['data']['attributes']
+        expect(attr["color"]).to eq(appointment.color)
+        expect(attr["text_color"]).to eq(appointment.text_color)
+        expect(attr["title"]).to eq(appointment.title)
+        expect(attr["start"]).to eq("2017-12-08T00:00:00.000Z")
+        expect(attr["end"]).to eq("2019-02-04T00:00:00.000Z")
+        expect(attr["notes"]).to eq(appointment.notes)
+        expect(attr["status"]).to eq("pending")
+        #VERIFYING APPOINTMENT POINTS TO OBJECTS
+        expect(parsed_response["data"]["relationships"]["client"]["data"]["id"].to_i).to eq(appointment.client_id)
+        expect(parsed_response["data"]["relationships"]["service"]["data"]["id"].to_i).to eq(appointment.service_id)
+        expect(parsed_response["data"]["relationships"]["employee"]["data"]["id"].to_i).to eq(appointment.employee_id)
+        # #VERIFYING THAT OBJECTS POINT TO APPOINTMENT
+        expect(Client.find(appointment.client_id).appointments[0].id).to eq (appointment.id)
+        expect(Service.find(appointment.service_id).appointments[0].id).to eq (appointment.id)
+        expect(Employee.find(appointment.employee_id).appointments[0].id).to eq (appointment.id)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
     context 'when the appointment exists and the incorrect params were sent' do
       it "responds successfully" do
         appointment = FactoryGirl.create :appointment
