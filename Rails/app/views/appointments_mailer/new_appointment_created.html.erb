@@ -9,8 +9,8 @@
 </div>
 <h1>Your appointment has been booked!</h1>
 
-<p>We’re looking forward to caring for your vehicle at <%= @appointment.start %>.
-<%= @appointment.employee.first_name %> will be performing the <%= @appointment.service.name %> service package and will take approximately <%= @appointment.service.duration %> minutes to complete.
+<p>We’re looking forward to caring for your vehicle at <mark><%= @appointment.start %></mark>.
+<mark><%= @appointment.employee.first_name %><%= @appointment.employee.last_name%></mark> will be performing the <mark><%= @appointment.service.name %></mark> service package and will take approximately <mark><%= @appointment.service.duration %></mark> minutes to complete.
 Things to keep in mind:
 
 <ul>
@@ -21,7 +21,8 @@ Things to keep in mind:
 <li>If your vehicle has recently experienced a very big mess that requires more time and effort to care for, we may have to charge you an extra fee – to be determined with you before we start detailing your car</li>
 </ul>
 
-If you have any questions or concerns, please contact us at info@radetailing.ca.
+If you have any questions or concerns, please contact us at
+<a href="mailto:info@radetailing.ca" target="_top">info@radetailing.ca</a>.
 Thanks for booking and have a great day!
 
 </br>
