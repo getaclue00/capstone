@@ -1,0 +1,35 @@
+<style type="text/css" media="screen">
+  h1 { text-align: center; }
+  .logo { text-align: center; }
+  body { font-family: sans-serif; }
+</style>
+
+<div class="logo">
+  <%= email_image_tag("logo.png") %>
+</div>
+<h1>Your appointment has been confirmed!</h1>
+
+<p>We’re looking forward to caring for your vehicle at <mark><%= @appointment.start %></mark>.
+<mark><%= @appointment.employee.first_name %><%= @appointment.employee.last_name%></mark> will be performing the <mark><%= @appointment.service.name %></mark> service package and will take approximately <mark><%= @appointment.service.duration %></mark> minutes to complete.
+Things to keep in mind:
+
+<ul>
+<li>We will arrive within the first hour of the time slot reserved and complete the services within the timeframe</li>
+
+<li>Should you need to cancel your appointment, please do so within 24 hours of the reserved time slot</li>
+
+<li>If your vehicle has recently experienced a very big mess that requires more time and effort to care for, we may have to charge you an extra fee – to be determined with you before we start detailing your car</li>
+</ul>
+
+If you have any questions or concerns, please contact us at
+<a href="mailto:info@radetailing.ca" target="_top">info@radetailing.ca</a>.
+Thanks for booking and have a great day!
+
+</br>
+</br>
+
+<b>R & A Detailing</b>
+</br>
+613-676-3RAD (723)
+</br>
+<a href="http://www.radetailing.ca">www.radetailing.ca</a> </p>
