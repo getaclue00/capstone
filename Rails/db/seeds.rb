@@ -35,3 +35,7 @@ Service.create({name: 'Engine Degreasing', price: '99', vehicle_size: 'Large', d
 Service.create({name: 'Platinum', price: '179', vehicle_size: 'Large', duration: '150', description: '...', active: true, displayable: true})
 Service.create({name: 'Silver', price: '79', vehicle_size: 'Large', description: '...', active: true, displayable: true, buffer_time: '60'})
 Service.create({name: 'Shampoo for Tough Stains and Spills', price: '130', vehicle_size: 'Large', duration: '90', description: '...', active: true, displayable: true, buffer_time: '60'})
+
+#resetting PK on tables to account for ids seeded
+ActiveRecord::Base.connection.reset_pk_sequence!('employees')
+ActiveRecord::Base.connection.reset_pk_sequence!('clients')
