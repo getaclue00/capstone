@@ -1,15 +1,25 @@
-<%= email_image_tag("logo.png") %>
-<h1>Your appointment has been created!</h1>
+<style type="text/css" media="screen">
+  h1 { text-align: center; }
+  .logo { text-align: center; }
+  body { font-family: sans-serif; }
+</style>
+
+<div class="logo">
+  <%= email_image_tag("logo.png") %>
+</div>
+<h1>Your appointment has been booked!</h1>
 
 <p>We’re looking forward to caring for your vehicle at <%= @appointment.start %>.
 <%= @appointment.employee.first_name %> will be performing the <%= @appointment.service.name %> service package and will take approximately <%= @appointment.service.duration %> minutes to complete.
 Things to keep in mind:
 
-<ul>We will arrive within the first hour of the time slot reserved and complete the services within the timeframe</ul>
+<ul>
+<li>We will arrive within the first hour of the time slot reserved and complete the services within the timeframe</li>
 
-<ul>Should you need to cancel your appointment, please do so within 24 hours of the reserved time slot</ul>
+<li>Should you need to cancel your appointment, please do so within 24 hours of the reserved time slot</li>
 
-<ul>If your vehicle has recently experienced a very big mess that requires more time and effort to care for, we may have to charge you an extra fee – to be determined with you before we start detailing your car</ul>
+<li>If your vehicle has recently experienced a very big mess that requires more time and effort to care for, we may have to charge you an extra fee – to be determined with you before we start detailing your car</li>
+</ul>
 
 If you have any questions or concerns, please contact us at info@radetailing.ca.
 Thanks for booking and have a great day!
