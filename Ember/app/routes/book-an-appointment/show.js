@@ -4,8 +4,8 @@ import moment from 'moment';
 import RSVP from 'rsvp';
 
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
-  model(params) {
-    let id = params.company_id;
+  model() {
+    let id = 1;
     let time = moment().format('YYYY-MM-DDTHH:mm');
 
     return RSVP.hash({
@@ -76,4 +76,3 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
     }
   }
 });
-
