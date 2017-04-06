@@ -1,5 +1,5 @@
-<img src="/assets/images/logo.png">
-<h1>Your appointment has been confirmed!</h1>
+<%= email_image_tag("logo.png") %>
+<h1>Your appointment has been created!</h1>
 
 <p>We’re looking forward to caring for your vehicle at <%= @appointment.start %>.
 <%= @appointment.employee.first_name %> will be performing the <%= @appointment.service.name %> service package and will take approximately <%= @appointment.service.duration %> minutes to complete.
