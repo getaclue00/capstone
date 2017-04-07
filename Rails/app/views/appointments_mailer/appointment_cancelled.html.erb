@@ -1,0 +1,28 @@
+<style type="text/css" media="screen">
+  h1 { text-align: center; }
+  .logo { text-align: center; }
+  body { font-family: sans-serif; }
+</style>
+
+<div class="logo">
+  <%= email_image_tag("logo.png") %>
+</div>
+<h1>Did you mean to cancel your appointment?</h1>
+
+<p>We are very sorry to notice that you cancelled your car detailing appointment scheduled for <mark><%= @appointment.start %></mark>.
+</br>
+What date and time suits you best to reschedule?
+</br>
+If you have any questions or concerns, please contact us at
+<a href="mailto:info@radetailing.ca" target="_top">info@radetailing.ca</a>.
+
+</br>
+</br>
+
+Looking forward to hearing from you,
+</br>
+<b>R & A Detailing</b>
+</br>
+613-676-3RAD (723)
+</br>
+<a href="http://www.radetailing.ca">www.radetailing.ca</a> </p>

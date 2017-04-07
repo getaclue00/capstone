@@ -22,6 +22,10 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
           Ember.$('#booking-complete-style').toggle();
         }
       });
+    },
+
+    goToBookingPage() {
+      this.transitionTo('book-an-appointment.show');
     }
   }
 });
