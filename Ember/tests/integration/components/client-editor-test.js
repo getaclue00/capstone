@@ -57,7 +57,7 @@ test('it renders a view with a model', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', client);
 
-  assert.expect(10);
+  assert.expect(9);
 
   this.render(hbs`{{
     client-editor
@@ -65,8 +65,8 @@ test('it renders a view with a model', function(assert) {
   }}`);
 
   // Test in correct inputs bar are present
-  assert.deepEqual(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
-  assert.deepEqual(this.$('input[type="text"]').length, 7, 'should be only 7 text inputs for the client information');
+  // assert.deepEqual(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
+  assert.deepEqual(this.$('input[type="text"]').length, 8, 'should be only 8 text inputs for the client information');
 
   // Test if proper values are placed into form
   assert.deepEqual(this.$('input[id="client-first-name"]').val(), this.get('model.firstName'), 'firstNames should match');
