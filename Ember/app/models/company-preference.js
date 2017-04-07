@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 const { Model, attr, belongsTo } = DS;
 
 export default Model.extend({
@@ -24,5 +25,16 @@ export default Model.extend({
   workSunday:     attr('boolean', { defaultValue: false }),
   sundayOpen:     attr('string', { defaultValue: '08:00:00' }),
   sundayClose:    attr('string', { defaultValue: '17:00:00' }),
-  employee:       belongsTo('employee')
+  employee:       belongsTo('employee'),
+  daysOfWeekWorking:   Ember.computed('workMonday', 'workTuesday', 'workWednesday', 'workThursday', 'workFriday', 'workSaturday', 'workSunday', function() {
+    let result = [];
+    if (this.get('workSunday'))    { result.push(' Sunday'); }
+    if (this.get('workMonday'))    { result.push(' Monday'); }
+    if (this.get('workTuesday'))   { result.push(' Tuesday'); }
+    if (this.get('workWednesday')) { result.push(' Wednesday'); }
+    if (this.get('workThursday'))  { result.push(' Thursday'); }
+    if (this.get('workFriday'))    { result.push(' Friday'); }
+    if (this.get('workSaturday'))  { result.push(' Saturday'); }
+    return result.toString();
+  })
 });
