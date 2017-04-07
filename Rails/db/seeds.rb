@@ -29,8 +29,11 @@ today = Date.today
   })
 end
 
-Employee.create({ id: '1', last_name: 'Inistrator', first_name: 'Admin', phone_number: '613-737-1111', street_number: '933', street_name: 'Bank St.', postal_code: 'K1S 3W5', company: company})
-Employee.create({ id: '2', last_name: 'Employee', first_name: 'Regular', phone_number: '000-000-0000', street_number: '2515', street_name: 'Bank St.', postal_code: 'K1V 0Y5', company: company})
+super_administrator = Employee.create({ id: '1', last_name: 'Inistrator', first_name: 'Admin', phone_number: '613-737-1111', street_number: '933', street_name: 'Bank St.', postal_code: 'K1S 3W5', company: company})
+CompanyPreference.where(employee:super_administrator).update_all(work_sunday: false, work_monday: true, work_tuesday: true, work_wednesday: true, work_thursday: true, work_friday: true, work_saturday: false)
+
+super_employee = Employee.create({ id: '2', last_name: 'Employee', first_name: 'Regular', phone_number: '000-000-0000', street_number: '2515', street_name: 'Bank St.', postal_code: 'K1V 0Y5', company: company})
+CompanyPreference.where(employee:super_employee).update_all(work_sunday: false, work_monday: true, work_tuesday: true, work_wednesday: true, work_thursday: true, work_friday: true, work_saturday: false)
 
 User.create({email: 'admin@user.com', password: 'password', admin: true, employee_id: '1'})
 User.create({email: 'employee@user.com', password: 'password', admin: false, employee_id: '2'})
