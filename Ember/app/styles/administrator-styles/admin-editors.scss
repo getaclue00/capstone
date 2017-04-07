@@ -80,3 +80,26 @@ http://www.w3schools.com/howto/howto_css_switch.asp
   }
 
 }
+
+.modal-content {
+  .datepicker.datepicker-inline {
+    width: 100%;
+    .datepicker-days table{
+      width: 100%;
+    }
+  }
+
+  .time-button {
+    font-weight: 600;
+    background: #AD2A1A;
+    color: #e8e7e2;
+    box-shadow: 0 5px #888888;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .time-button:hover {
+    box-shadow: 0 4px #AD2A1A;
+    top: 2px;
+  }
+}
