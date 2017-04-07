@@ -73,6 +73,10 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       Ember.run.schedule('afterRender', this, () => {
         Ember.$('#navigation-menu').hide();
       });
+    },
+
+    newAppointment() {
+      location.reload();
     }
   }
 });
