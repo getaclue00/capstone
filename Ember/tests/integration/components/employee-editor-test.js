@@ -74,7 +74,7 @@ test('it renders a view with a model', function(assert) {
   // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', employee);
 
-  assert.expect(14);
+  assert.expect(13);
 
   this.render(hbs`{{
     employee-editor
@@ -83,7 +83,7 @@ test('it renders a view with a model', function(assert) {
 
   // Test in correct inputs bar are present
   assert.deepEqual(this.$('input[type="number"]').length, 1, 'should be only 1 input number field for streetNumber');
-  assert.deepEqual(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
+  // assert.deepEqual(this.$('input[type="tel"]').length, 1, 'should be only 1 input tel field for phoneNumber');
   assert.deepEqual(this.$('textarea').length, 1, 'should be only 1 text area for the notes');
 
   // Test if proper values are placed into form
@@ -99,4 +99,3 @@ test('it renders a view with a model', function(assert) {
   assert.deepEqual(this.$('input[id="employee-end-date"]').val(), this.get('model.endDate'), 'endDate should match');
   assert.deepEqual(this.$('textarea').val(), this.get('model.notes'), 'the textarea should be filled in with the employee notes');
 });
-
