@@ -6,6 +6,7 @@ class User < ApplicationRecord
   before_save :ensure_authentication_token
 
   belongs_to :employee
+  validate :ensure_one_admin_remains, on: :update
 
   def ensure_authentication_token
     if authentication_token.blank?
@@ -18,6 +19,12 @@ class User < ApplicationRecord
       loop do
        token = Devise.friendly_token
        break token unless User.where(authentication_token: token).first
+      end
+    end
+
+    def ensure_one_admin_remains
+      unless !self.admin? && User.where(admin: true).count > 1
+        errors.add(:admin, "need at least 1 administrator")
       end
     end
 end
