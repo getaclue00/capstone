@@ -11,4 +11,8 @@ class Appointment < ApplicationRecord
     self.employee != nil && self.service.id != 0
   end
 
+  def completed?
+    status == "completed"
+  end
+
 end

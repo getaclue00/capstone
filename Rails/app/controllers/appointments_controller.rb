@@ -85,7 +85,7 @@ class AppointmentsController < ApplicationController
       @appointment = Appointment.new(sanitized_params)
 
       if @appointment.save!
-        AppointmentsMailer.new_appointment_created(@appointment).deliver_later
+        AppointmentsMailer.new_appointment_created(@appointment).deliver_later unless @appointment.completed?
         render json: @appointment, status: :created
       else
         render json: { error: 'Appointment creation failed. Check your data.'}, status: :bad_request
