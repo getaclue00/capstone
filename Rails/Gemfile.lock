@@ -65,6 +65,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -170,6 +171,11 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.2, >= 3.2.1)
+    simplecov (0.14.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.1)
     slop (3.6.0)
     spring (2.0.0)
       activesupport (>= 4.2)
@@ -220,6 +226,7 @@ DEPENDENCIES
   rails-erd
   rspec-rails (~> 3.5)
   sidekiq
+  simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
