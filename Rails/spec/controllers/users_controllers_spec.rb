@@ -305,6 +305,8 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it 'responds with not found, returns an error, and user is not the user and not an admin'  do
+        ensure_one_admin_remains = FactoryGirl.create :user, admin: true
+
         @user.admin = false
         @user.save
 
@@ -378,10 +380,30 @@ RSpec.describe UsersController, :type => :controller do
         expect(attr["admin"]).to eq(user.admin)
         expect(response).to have_http_status(:ok)
       end
+
+      it "responds with an error" do
+        @user.admin = false
+
+        # Create a serializer instance
+        serializer = UserSerializer.new(@user)
+        # Create a serialization based on the configured adapter
+        serialization = ActiveModelSerializers::Adapter.create(serializer)
+        #converts to JSON API format
+        params = JSON.parse(serialization.to_json)
+
+        patch :update, params: {id: @user.id, data: params['data']}
+
+        parsed_response = JSON.parse(response.body)
+
+        expect(parsed_response['errors']).to eq([{"source"=>{"pointer"=>"/data/attributes/admin"}, "detail"=>"need at least 1 administrator"}])
+        expect(response).to have_http_status(:bad_request)
+      end
     end
 
      context 'when the user exists and the correct params were sent (and user is not the user nor an admin)' do
       it "responds with unauthorized" do
+        ensure_one_admin_remains = FactoryGirl.create :user, admin: true
+
         @user.admin = false
         @user.save
 
