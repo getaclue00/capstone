@@ -71,37 +71,20 @@
           <label for="appointment-location" class="col-form-label font-weight-bold text-uppercase">Location:</label>
           {{input type="text" class="form-control" id="appointment-location" value=model.location placeholder="ex: 174 Bank St, Ottawa, On"}}
         </div>
-        {{#if aSelectedEmployee}}
-          <details><summary><label for="appointment-start-time" class="col-form-label font-weight-bold text-uppercase">Date Selection:</label></summary>
-            <p class="col-form-label font-weight-bold text-uppercase">Working on:</p>
-            <p class="text-center">{{model.employee.companyPreference.daysOfWeekWorking}}</p>
-            <hr />
-            <div class="form-group">
-              {{bootstrap-datepicker-inline value=expiresAt todayHighlight=true startDate=currentDate changeDate="selectAppointmentTime"}}
-            </div>
-            {{#if selectTime}}
-            <label for="appointment-time" class="col-xs-12 col-form-label font-weight-bold appointment-time-label">Available Times:</label>
-              <div class="available-time-choices" style="text-align: center">
-              {{#if availableTimes}}
-                {{#each availableTimes as |time|}}
-                  <button type="button" class="btn col-3 time-button" {{action 'confirmSelection' time}}>{{time}}</button>
-                {{/each}}
-              {{else}}
-                <p>No appointment times available</p>
-              {{/if}}
-              </div>
-            {{/if}}
-          </details>
+        {{#if (and aSelectedEmployee model.employee.companyPreference.daysOfWeekWorking)}}
+          <p class="col-form-label font-weight-bold text-uppercase">Scheduled days:</p>
+          <p class="text-center">{{model.employee.companyPreference.daysOfWeekWorking}}</p>
         {{else}}
-          <p class="font-weight-bold text-uppercase">Please Select an employee to begin date Selection</p>
+          <p class="col-form-label font-weight-bold text-uppercase">Scheduled days:</p>
+          <p class="text-center">No availability</p>
         {{/if}}
         <div class="form-group">
           <label for="appointment-start-time" class="col-form-label font-weight-bold text-uppercase">Starts:</label>
-          {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart readonly=true}}
+          {{input type="datetime-local" class="form-control" id="appointment-start-time" value=model.formattedStart}}
         </div>
         <div class="form-group">
           <label for="appointment-end-time" class="col-form-label font-weight-bold text-uppercase">Ends:</label>
-          {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd readonly=true}}
+          {{input type="datetime-local" class="form-control" id="appointment-end-time" value=model.formattedEnd}}
         </div>
         <div class="form-group">
             <label for="appointment-status" class="col-xs-12 col-form-label font-weight-bold text-uppercase">Status:</label>
