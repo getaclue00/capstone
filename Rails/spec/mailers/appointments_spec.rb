@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe AppointmentsMailer, type: :mailer do
+
+  AUTO_EMAIL_ADDRESS = 'info@radetailing.ca'
+  DEV_EMAIL_ADDRESS = 'seg-radetailing-capstone-team@gmail.com'
+
   it "sends email to sidekiq mailer queue" do
     expect {
       AppointmentsMailer.new_appointment_created.deliver_later
@@ -33,10 +37,10 @@ RSpec.describe AppointmentsMailer, type: :mailer do
     bcc2 = ActionMailer::Base.deliveries.last.bcc[1]
     from = ActionMailer::Base.deliveries.last.from[0]
 
-    expect(to).to eq("info@radetailing.ca")
+    expect(to).to eq(AUTO_EMAIL_ADDRESS)
     expect(bcc1).to eq(user.email)
     expect(bcc2).to eq('client@client.com')
-    expect(from).to eq("no-reply@radetailing.ca")
+    expect(from).to eq(AUTO_EMAIL_ADDRESS)
   end
 
   it "new_appointment_created is sent to radetailing" do
@@ -57,9 +61,9 @@ RSpec.describe AppointmentsMailer, type: :mailer do
     bcc = ActionMailer::Base.deliveries.last.bcc[0]
     from = ActionMailer::Base.deliveries.last.from[0]
 
-    expect(to).to eq("info@radetailing.ca")
+    expect(to).to eq(AUTO_EMAIL_ADDRESS)
     expect(bcc).to eq('client@client.com')
-    expect(from).to eq("no-reply@radetailing.ca")
+    expect(from).to eq(AUTO_EMAIL_ADDRESS)
   end
 
   it "new_appointment_created is sent to capstone team" do
@@ -80,8 +84,8 @@ RSpec.describe AppointmentsMailer, type: :mailer do
     to = ActionMailer::Base.deliveries.last.to[0]
     from = ActionMailer::Base.deliveries.last.from[0]
 
-    expect(to).to eq("seg-radetailing-capstone-team@gmail.com")
-    expect(from).to eq("no-reply@radetailing.ca")
+    expect(to).to eq(DEV_EMAIL_ADDRESS)
+    expect(from).to eq(AUTO_EMAIL_ADDRESS)
     expect(ActionMailer::Base.deliveries.last.subject).to eq("New RADetailing Appointment Created - FAILURE #{appointment.id}")
   end
 end
