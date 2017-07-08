@@ -4,7 +4,7 @@ class AppointmentsMailer < ApplicationMailer
   DEV_EMAIL_ADDRESS = 'seg-radetailing-capstone-team@gmail.com'
 
   def new_appointment_created(appointment)
-    @user = User.create(email: AUTO_EMAIL_ADDRESS)
+    @user = User.find_by(email: AUTO_EMAIL_ADDRESS)
     @appointment = appointment
     @employee_user = User.where('employee_id = ?', appointment.employee.id).first
 
@@ -28,7 +28,7 @@ class AppointmentsMailer < ApplicationMailer
   end
 
   def appointment_confirmed(appointment)
-    @user = User.create(email: AUTO_EMAIL_ADDRESS)
+    @user = User.find_by(email: AUTO_EMAIL_ADDRESS)
     @appointment = appointment
     @employee_user = User.where('employee_id = ?', appointment.employee.id).first
 
@@ -52,7 +52,7 @@ class AppointmentsMailer < ApplicationMailer
   end
 
   def appointment_cancelled(appointment)
-    @user = User.create(email: AUTO_EMAIL_ADDRESS)
+    @user = User.find_by(email: AUTO_EMAIL_ADDRESS)
     @appointment = appointment
     @employee_user = User.where('employee_id = ?', appointment.employee.id).first
 

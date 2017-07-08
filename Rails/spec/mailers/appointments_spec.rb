@@ -5,6 +5,10 @@ RSpec.describe AppointmentsMailer, type: :mailer do
   AUTO_EMAIL_ADDRESS = 'info@radetailing.ca'
   DEV_EMAIL_ADDRESS = 'seg-radetailing-capstone-team@gmail.com'
 
+  before :each do
+    user = FactoryGirl.create :user, email: AUTO_EMAIL_ADDRESS
+  end
+
   it "sends email to sidekiq mailer queue" do
     expect {
       AppointmentsMailer.new_appointment_created.deliver_later
