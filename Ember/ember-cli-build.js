@@ -24,9 +24,9 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('bower_components/glyphicons/styles/glyphicons.css');
-  app.import('bower_components/datatables.net/js/jquery.dataTables.js');
+  app.import('bower_components/datatables.net/js/jquery.dataTables.min.js');
   app.import('bower_components/datatables.net-dt/css/jquery.dataTables.min.css');
-  app.import('bower_components/smartwizard/css/smart_wizard.css');
-  app.import('bower_components/smartwizard/js/jquery.smartWizard.js');
+  app.import('bower_components/smartwizard/dist/css/smart_wizard.min.css');
+  app.import('bower_components/smartwizard/dist/js/jquery.smartWizard.min.js');
   return app.toTree();
 };

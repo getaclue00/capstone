@@ -217,6 +217,8 @@ RSpec.describe EmployeesController, :type => :controller do
       end
 
       it 'responds with unauthorized, returns an error, and employee is the employee but not an admin' do
+        make_sure_admin_exists = FactoryGirl.create :user, admin: true
+
         @user.admin = false
 
         employee = FactoryGirl.create :employee_with_appointment
@@ -311,6 +313,8 @@ RSpec.describe EmployeesController, :type => :controller do
 
     context 'when the employee exists and the correct params were sent (and user is NOT an admin OR the employee that wants to update their data)' do
       it "responds with unauthorized" do
+        make_sure_admin_exists = FactoryGirl.create :user, admin: true
+
         @user.admin = false
         @user.save
 

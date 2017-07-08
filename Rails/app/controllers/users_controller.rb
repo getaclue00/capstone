@@ -101,5 +101,3 @@ class UsersController < ApplicationController
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password, :admin, :employee] )
   end
 end
-
-

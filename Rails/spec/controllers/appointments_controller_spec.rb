@@ -47,6 +47,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
     context 'when there are appointments but no filter (user not admin)' do
       it "returns authorization failed" do
+        make_sure_admin_exists = FactoryGirl.create :user, admin: true
         @user.admin=false
         @user.save
 
@@ -140,6 +141,7 @@ RSpec.describe AppointmentsController, :type => :controller do
 
     context 'when versions of an appointment is requested and appointment present and has versions (user not admin)' do
       it "returns authorization failed", :versioning => true do
+        make_sure_admin_exists = FactoryGirl.create :user, admin: true
         @user.admin=false
         @user.save
 
